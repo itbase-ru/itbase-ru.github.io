@@ -3,57 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Загрузка… — IT·База</title>
-  <meta name="description" content="">
-  <meta property="og:type" content="article">
-  <meta property="og:title" content="">
-  <meta property="og:description" content="">
-  <meta property="og:image" content="">
-  <meta property="og:url" content="">
-  <meta name="twitter:card" content="summary_large_image">
+  <title>Переход к статье — IT·База</title>
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://itbase-ru.github.io/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <script src="/data/index.js"></script>
   <script>
+    /* Старые ссылки вида article.html?a=... ведут на новые адреса статей */
     (function(){
-      try{
-        var t = localStorage.getItem('itbase_theme');
-        if (t) document.documentElement.setAttribute('data-theme', t);
-      }catch(e){}
+      var slug = new URLSearchParams(location.search).get('a');
+      var found = null;
+      for (var i = 0; i < ARTICLES.length; i++) {
+        if (ARTICLES[i].slug === slug) { found = ARTICLES[i]; break; }
+      }
+      location.replace(found ? '/' + found.url : '/');
     })();
   </script>
-  <link rel="icon" href="favicon.ico" sizes="any">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <div id="progress"></div>
-
-  <header class="site-header">
-    <div class="site-header__inner">
-      <a href="index.html" class="logo">IT<span>·</span>База</a>
-      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
-    </div>
-  </header>
-
-  <main>
-    <div id="article-view" class="wrap"></div>
-  </main>
-
-  <footer class="site-footer">
-  <div class="site-footer__inner">
-    <span>© <span id="year"></span> IT·База</span>
-    <a href="about.html">О сайте</a>
-    <a href="contacts.html">Контакты</a>
-    <a href="privacy.html">Политика</a>
-    <a href="terms.html">Условия</a>
-    <a href="bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
-  </div>
-</footer>
-
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
-  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
-
-  <script src="data/articles.js"></script>
-  <script src="app.js"></script>
+  <p>Переходим к статье… Если ничего не произошло, <a href="/">откройте главную страницу</a>.</p>
 </body>
 </html>
