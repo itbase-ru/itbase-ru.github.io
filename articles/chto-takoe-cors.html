@@ -306,22 +306,9 @@ app.use(cors({
       <div class="donate-block__title">Поддержи проект</div>
       <p class="donate-block__text">Сайт живёт на энтузиазме. Если статья оказалась полезной — поблагодари автора. Любая сумма идёт на хостинг, домен и новые статьи.</p>
       <div class="donate-block__buttons">
-        <a href="https://boosty.to/itbase" target="_blank" rel="noopener nofollow" class="donate-btn donate-boosty">☕ Boosty</a><a href="https://t.me/itbase_bot" target="_blank" rel="noopener nofollow" class="donate-btn donate-tg">✈️ Telegram</a>
+        <a href="https://t.me/itbase_bot" target="_blank" rel="noopener nofollow" class="donate-btn donate-tg">✈️ Telegram</a>
       </div>
       <p class="donate-block__hint">Также можно подписаться на <a href="https://t.me/itbase" target="_blank" rel="noopener">Telegram-канал</a> — там анонсы новых статей.</p>
-    </aside>
-    
-
-      
-    <aside class="more-from-topic" aria-label="Ещё по теме">
-      <h2 class="more-from-topic__title">Ещё по теме</h2>
-      <ul class="more-from-topic__list">
-    <li><a href="/articles/chto-takoe-jwt-avtorizaciya.html">Что такое JWT и как работает авторизация</a><span class="dot">•</span><span class="more-from-topic__meta">10 мин · Веб, Безопасность</span></li>
-    <li><a href="/articles/kak-rabotaet-https.html">Как работает HTTPS: шифрование простыми словами</a><span class="dot">•</span><span class="more-from-topic__meta">8 мин · Безопасность, Веб</span></li>
-    <li><a href="/articles/chto-takoe-rest-i-graphql.html">REST и GraphQL — в чём разница</a><span class="dot">•</span><span class="more-from-topic__meta">10 мин · Веб, API</span></li>
-    <li><a href="/articles/http-metody-i-status-kody.html">HTTP-методы и статус-коды — шпаргалка с примерами</a><span class="dot">•</span><span class="more-from-topic__meta">10 мин · Веб, API</span></li>
-    <li><a href="/articles/xss-csrf-sql-inekcii.html">XSS, CSRF, SQL-инъекции — три главные атаки на веб</a><span class="dot">•</span><span class="more-from-topic__meta">12 мин · Безопасность, Веб</span></li>
-      </ul>
     </aside>
     
 
@@ -343,14 +330,50 @@ app.use(cors({
   </div>
 </article>
 <article class="card">
-  <a class="card__cover" href="/articles/paginaciya-i-versirovanie-api.html"><img src="/img/api-versioning.svg" alt="Пагинация и версионирование API — как не сломать клиентов" loading="lazy"></a>
+  <a class="card__cover" href="/articles/kak-rabotaet-https.html"><img src="/img/https-cover.svg" alt="Как работает HTTPS: шифрование простыми словами" loading="lazy"></a>
   <div class="card__body">
-    <div class="card__tags"><span class="tag">API</span><span class="tag">Веб</span><span class="tag">Разработка</span></div>
-    <a href="/articles/paginaciya-i-versirovanie-api.html"><h2 class="card__title">Пагинация и версионирование API — как не сломать клиентов</h2></a>
-    <p class="card__excerpt">Как отдавать тысячи записей постранично и что делать, когда API меняется. Разбираем offset/limit, cursor-пагинацию и версионирование.</p>
+    <div class="card__tags"><span class="tag">Безопасность</span><span class="tag">Веб</span></div>
+    <a href="/articles/kak-rabotaet-https.html"><h2 class="card__title">Как работает HTTPS: шифрование простыми словами</h2></a>
+    <p class="card__excerpt">Почему сайты без HTTPS уже вне закона, что такое TLS, сертификат и почему замок в адресной строке — это не просто иконка.</p>
     <div class="card__meta">
-      <span>27 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
-      <button class="card__bm" data-slug="paginaciya-i-versirovanie-api" title="В закладки" aria-label="В закладки">★</button>
+      <span>28 февраля 2026</span><span class="dot">•</span><span>8 мин</span>
+      <button class="card__bm" data-slug="kak-rabotaet-https" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/chto-takoe-rest-i-graphql.html"><img src="/img/rest-graphql.svg" alt="REST и GraphQL — в чём разница" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Веб</span><span class="tag">API</span><span class="tag">Теория</span></div>
+    <a href="/articles/chto-takoe-rest-i-graphql.html"><h2 class="card__title">REST и GraphQL — в чём разница</h2></a>
+    <p class="card__excerpt">Два главных подхода к построению API. Разбираем на примерах: когда REST удобнее, а когда GraphQL решает проблемы, которые REST создаёт.</p>
+    <div class="card__meta">
+      <span>30 марта 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="chto-takoe-rest-i-graphql" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/http-metody-i-status-kody.html"><img src="/img/http.svg" alt="HTTP-методы и статус-коды — шпаргалка с примерами" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Веб</span><span class="tag">API</span><span class="tag">Теория</span></div>
+    <a href="/articles/http-metody-i-status-kody.html"><h2 class="card__title">HTTP-методы и статус-коды — шпаргалка с примерами</h2></a>
+    <p class="card__excerpt">GET, POST, PUT, PATCH, DELETE и что значат все эти 200, 301, 404, 500. Разбираем HTTP по-человечески, с примерами запросов и ответов.</p>
+    <div class="card__meta">
+      <span>4 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="http-metody-i-status-kody" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/xss-csrf-sql-inekcii.html"><img src="/img/security.svg" alt="XSS, CSRF, SQL-инъекции — три главные атаки на веб" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Безопасность</span><span class="tag">Веб</span><span class="tag">Разработка</span></div>
+    <a href="/articles/xss-csrf-sql-inekcii.html"><h2 class="card__title">XSS, CSRF, SQL-инъекции — три главные атаки на веб</h2></a>
+    <p class="card__excerpt">Разбираем три самых частых уязвимости в веб-приложениях: как работают, чем опасны и как защититься. С примерами атак и защиты.</p>
+    <div class="card__meta">
+      <span>15 апреля 2026</span><span class="dot">•</span><span>12 мин</span>
+      <button class="card__bm" data-slug="xss-csrf-sql-inekcii" title="В закладки" aria-label="В закладки">★</button>
     </div>
   </div>
 </article>

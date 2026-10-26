@@ -5,7 +5,7 @@
     <link>https://itbase-ru.github.io/tags/api.html</link>
     <description>Статьи с тегом API на IT·База</description>
     <language>ru-ru</language>
-    <lastBuildDate>Mon, 26 Oct 2026 18:05:50 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 26 Oct 2026 18:36:43 GMT</lastBuildDate>
     <atom:link href="https://itbase-ru.github.io/rss/api.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>Пагинация и версионирование API — как не сломать клиентов</title>

@@ -37,7 +37,7 @@ FORCE_OG = False                       # True = перерисовать все 
 YANDEX_METRIKA_ID = os.environ.get("YANDEX_METRIKA_ID", "")  # например "12345678"
 GOOGLE_ANALYTICS_ID = os.environ.get("GOOGLE_ANALYTICS_ID", "")  # например "G-XXXXXXX"
 YANDEX_RSY_BLOCK_ID = os.environ.get("YANDEX_RSY_BLOCK_ID", "")  # ID блока РСЯ, напр. "R-A-123456-1"
-DONATE_BOOSTY_URL  = os.environ.get("DONATE_BOOSTY_URL", "https://boosty.to/itbase")  # Replace на свой
+DONATE_BOOSTY_URL  = os.environ.get("DONATE_BOOSTY_URL", "")  # пусто — кнопка не показывается
 DONATE_TG_URL      = os.environ.get("DONATE_TG_URL", "https://t.me/itbase_bot")
 DONATE_YOOMONEY    = os.environ.get("DONATE_YOOMONEY", "")  # напр. "https://yoomoney.ru/to/4100123456789"
 TG_CHANNEL_URL     = os.environ.get("TG_CHANNEL_URL", "https://t.me/itbase")  # для кнопки в шапке/футере
@@ -138,7 +138,8 @@ def ad_slot_html(block_id=YANDEX_RSY_BLOCK_ID, slot_name="inline"):
 
 # ─── Кнопка «Поддержать» для вставки в статьи ─────────────────────────────
 def donate_block_html():
-    """Блок поддержки проекта — Boosty/Telegram/ЮMoney. Вставляется в конец статьи."""
+    """Блок поддержки проекта — Telegram/ЮMoney (Boosty отключён по умолчанию).
+    Вставляется в конец статьи."""
     buttons = []
     if DONATE_BOOSTY_URL:
         buttons.append(f'<a href="{DONATE_BOOSTY_URL}" target="_blank" rel="noopener nofollow" class="donate-btn donate-boosty">☕ Boosty</a>')
@@ -441,15 +442,22 @@ def fmt_date(iso):
 
 
 def related(a, arts):
+    """Похожие статьи — сначала по общим тегам, потом добираем свежими.
+    Возвращает 6 статей (раньше было 3)."""
     scored = [(len(set(x["tags"]) & set(a["tags"])), x)
               for x in arts if x["slug"] != a["slug"]]
     scored = [s for s in scored if s[0] > 0]
-    scored = sorted(scored, key=lambda s: -s[0])  # arts уже по дате, порядок сохраняется
-    res = [x for _, x in scored[:3]]
-    if len(res) < 3:
+    # Сортировка: больший overlap сверху, при равенстве — более свежая дата
+    scored.sort(key=lambda s: (-s[0], s[1]["date"]), reverse=False)
+    # reverse=False значит по возрастанию, но -overlap даёт нужный порядок
+    # На самом деле нужно явно: больший overlap и более поздняя дата наверху
+    scored.sort(key=lambda s: (-s[0], s[1]["date"]))
+    # arts уже отсортированы по дате — берём первые 6
+    res = [x for _, x in scored[:6]]
+    if len(res) < 6:
         used = {x["slug"] for x in res} | {a["slug"]}
         for x in arts:
-            if len(res) < 3 and x["slug"] not in used:
+            if len(res) < 6 and x["slug"] not in used:
                 res.append(x)
                 used.add(x["slug"])
     return res
@@ -493,7 +501,6 @@ def build_article_page(a, arts):
     ad_inline = ad_slot_html(slot_name="ad-inline")
     ad_bottom = ad_slot_html(slot_name="ad-bottom")
     analytics = analytics_snippet()
-    more_topic = more_from_topic_block(a, arts)
 
     toc = ""
     if len(a["heads"]) >= 2:
@@ -575,8 +582,6 @@ def build_article_page(a, arts):
       </div>
 
       {donate_html}
-
-      {more_topic}
 
       {ad_bottom}
 
@@ -979,7 +984,7 @@ def write_sitemap_images(arts):
 
 
 def write_support_page(arts):
-    """Страница /support.html с кнопками Boosty/Telegram/ЮMoney."""
+    """Страница /support.html с кнопками Telegram/ЮMoney."""
     donate_html = donate_block_html()
     n_articles = len(arts)
     html_out = f'''<!DOCTYPE html>
@@ -988,13 +993,13 @@ def write_support_page(arts):
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Поддержать проект — {esc(SITE_NAME)}</title>
-  <meta name="description" content="Поддержка проекта IT·База: Boosty, Telegram, ЮMoney. Любая сумма идёт на хостинг, домен и создание новых статей.">
+  <meta name="description" content="Поддержка проекта IT·База: Telegram, ЮMoney. Любая сумма идёт на хостинг, домен и создание новых статей.">
   <link rel="canonical" href="{SITE}/support.html">
   <meta name="robots" content="index, follow">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="{esc(SITE_NAME)}">
   <meta property="og:title" content="Поддержать проект — {esc(SITE_NAME)}">
-  <meta property="og:description" content="Поддержка проекта IT·База: Boosty, Telegram, ЮMoney.">
+  <meta property="og:description" content="Поддержка проекта IT·База: Telegram, ЮMoney.">
   <meta property="og:url" content="{SITE}/support.html">
   <meta property="og:image" content="{default_og()}">
   {ICONS}
@@ -1075,15 +1080,15 @@ def write_support_page(arts):
         </details>
         <details>
           <summary>Какие способы оплаты есть?</summary>
-          <p>Boosty (карты РФ и мира, подписка разовая или ежемесячная), Telegram-оплата
-          (карты, крипта), ЮMoney (только для РФ). Все способы — внешние сервисы, данные
-          карты нигде на сайте не сохраняются.</p>
+          <p>Telegram-оплата (карты РФ и мира, крипта), ЮMoney (для РФ).
+          Все способы — внешние сервисы, данные карты нигде на сайте не сохраняются.
+          Если подключу Boosty позже — добавлю сюда.</p>
         </details>
         <details>
           <summary>Можно ли подписаться на регулярную поддержку?</summary>
-          <p>Да, через Boosty есть тарифы от 100 ₽/мес. Подписчики получают доступ к
-          закрытому Telegram-каналу, где я делюсь прогрессом по новым статьям и
-          отвечаю на вопросы.</p>
+          <p>Пока регулярной подписки нет. Можно поддержать разово через Telegram-бота
+          или ЮMoney. Когда подключу Boosty — там будут тарифы от 100 ₽/мес с
+          доступом к закрытому Telegram-каналу и ранним доступом к новым статьям.</p>
         </details>
         <details>
           <summary>Что если я не могу финансово помочь?</summary>
@@ -1456,40 +1461,6 @@ def write_tag_rss(arts):
             '</rss>\n'
         )
         (rss_dir / f"{slug}.xml").write_text(xml, encoding="utf-8")
-
-
-# ----------------------------- УЛУЧШЕННАЯ ПЕРЕЛИНКОВКА ----------------------
-def more_from_topic_block(article, arts):
-    """Блок «Ещё по теме» — 5 статей с теми же тегами, отсортированы по overlap."""
-    other = [a for a in arts if a["slug"] != article["slug"]]
-    scored = []
-    for a in other:
-        overlap = len(set(a["tags"]) & set(article["tags"]))
-        scored.append((overlap, a))
-    scored = [(o, a) for o, a in scored if o > 0]
-    scored.sort(key=lambda x: (-x[0], x[1]["date"]))
-    picked = [a for _, a in scored[:5]]
-    if len(picked) < 5:
-        used = {a["slug"] for a in picked} | {article["slug"]}
-        for a in sorted(other, key=lambda x: x["date"], reverse=True):
-            if len(picked) >= 5: break
-            if a["slug"] not in used:
-                picked.append(a); used.add(a["slug"])
-    if not picked:
-        return ''
-    items = "\n".join(
-        f'    <li><a href="/{a["url"]}">{esc(a["title"])}</a>'
-        f'<span class="dot">•</span><span class="more-from-topic__meta">{a["readTime"]} мин · {esc(", ".join(a["tags"][:2]))}</span></li>'
-        for a in picked
-    )
-    return f'''
-    <aside class="more-from-topic" aria-label="Ещё по теме">
-      <h2 class="more-from-topic__title">Ещё по теме</h2>
-      <ul class="more-from-topic__list">
-{items}
-      </ul>
-    </aside>
-    '''
 
 
 # ----------------------------- ЗАПУСК ----------------------------------------
