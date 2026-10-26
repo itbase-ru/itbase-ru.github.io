@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Алгоритмы и структуры данных — с чего начать — IT·База</title>
+  <meta name="description" content="Зачем программисту знать про массивы, списки, деревья и хеш-таблицы. Разбираем базовые структуры и алгоритмы на понятных примерах.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/algoritmy-i-struktury-dannyh.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Алгоритмы и структуры данных — с чего начать">
+  <meta property="og:description" content="Зачем программисту знать про массивы, списки, деревья и хеш-таблицы. Разбираем базовые структуры и алгоритмы на понятных примерах.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/algoritmy-i-struktury-dannyh.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/algoritmy-i-struktury-dannyh.html">
+  <meta property="article:published_time" content="2026-03-31">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Алгоритмы и структуры данных — с чего начать">
+  <meta name="twitter:description" content="Зачем программисту знать про массивы, списки, деревья и хеш-таблицы. Разбираем базовые структуры и алгоритмы на понятных примерах.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/algoritmy-i-struktury-dannyh.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Алгоритмы и структуры данных — с чего начать", "description": "Зачем программисту знать про массивы, списки, деревья и хеш-таблицы. Разбираем базовые структуры и алгоритмы на понятных примерах.", "image": ["https://itbase-ru.github.io/img/og/algoritmy-i-struktury-dannyh.png"], "datePublished": "2026-03-31", "dateModified": "2026-03-31", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/algoritmy-i-struktury-dannyh.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Разработка", "item": "https://itbase-ru.github.io/?tag=Разработка"}, {"@type": "ListItem", "position": 3, "name": "Алгоритмы и структуры данных — с чего начать", "item": "https://itbase-ru.github.io/articles/algoritmy-i-struktury-dannyh.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="algoritmy-i-struktury-dannyh">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Разработка">Разработка</a>
+        <span class="sep">/</span>
+        <span>Алгоритмы и структуры данных — с чего начать</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Разработка</span><span class="tag">Теория</span><span class="tag">Карьера</span></div>
+        <h1>Алгоритмы и структуры данных — с чего начать</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-03-31">31 марта 2026</time>
+          <span class="dot">•</span>
+          <span>11 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/algoritmy.svg" alt="Алгоритмы и структуры данных — с чего начать">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+      <p>«Учить ли алгоритмы?» — вопрос, который рано или поздно задаёт себе каждый программист. И ответ всегда один: да, но не так, как на собеседованиях в FAANG. Разберёмся, что реально нужно.</p>
+
+      <h2 id="section-0">Зачем программисту алгоритмы</h2>
+
+      <p>Многие думают, что алгоритмы — это что-то из университета, что не пригодится в реальной работе. Это миф. Просто на практике ты не пишешь сортировку сам — её уже написали. Но ты выбираешь, <strong>как хранить данные</strong>, и этот выбор влияет на скорость и удобство всей программы.</p>
+
+      <blockquote>Алгоритмы — это не про то, как писать сортировку. Это про то, как понимать, почему один код работает за миллисекунду, а другой — за минуту.</blockquote>
+
+      <h2 id="section-1">Сложность алгоритмов: O-большое</h2>
+
+      <p>Когда говорят «этот алгоритм O(n²)» — это про то, как растёт время работы при росте данных. Читается «о-большое от эн-квадрат».</p>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Нотация</th><th>Название</th><th>Наглядно</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>O(1)</td><td>Константная</td><td>Взять элемент по индексу</td></tr>
+          <tr><td>O(log n)</td><td>Логарифмическая</td><td>Бинарный поиск</td></tr>
+          <tr><td>O(n)</td><td>Линейная</td><td>Пройти по массиву один раз</td></tr>
+          <tr><td>O(n log n)</td><td>Линеарифмическая</td><td>Быстрая сортировка</td></tr>
+          <tr><td>O(n²)</td><td>Квадратичная</td><td>Сортировка пузырьком</td></tr>
+          <tr><td>O(2ⁿ)</td><td>Экспоненциальная</td><td>Перебор всех подмножеств</td></tr>
+        </tbody>
+      </table></div>
+
+      <p>Пример: если поиск по массиву из 1000 элементов занимает 1 мс, то O(n²)-алгоритм на 1 000 000 элементов — это уже минуты. А O(log n) на тех же данных — доли миллисекунды.</p>
+
+      <h2 id="section-2">Базовые структуры данных</h2>
+
+      <h3 id="section-3">Массив (Array)</h3>
+
+      <p>Непрерывный блок памяти, элементы лежат по порядку. Быстрый доступ по индексу — O(1). Но вставка в середину — O(n), потому что нужно сдвинуть остальные.</p>
+
+      <pre><code class="language-python">numbers = [1, 2, 3, 4, 5]
+print(numbers[2])  # 3, за константное время
+numbers.insert(0, 0)  # вставка в начало — O(n)</code></pre>
+
+      <p>В Python список — это динамический массив. В JavaScript — тоже (там ещё есть типизированные массивы).</p>
+
+      <h3 id="section-4">Связный список (Linked List)</h3>
+
+      <p>Элементы не лежат подряд, а ссылаются друг на друга. Вставка и удаление — быстро, поиск — медленно, потому что нужно идти по цепочке.</p>
+
+      <pre><code class="language-python">class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+head = Node(1)
+head.next = Node(2)
+head.next.next = Node(3)</code></pre>
+
+      <p>Используется редко, но важно знать как основу для более сложных структур — стеков, очередей.</p>
+
+      <h3 id="section-5">Хеш-таблица (Hash Table)</h3>
+
+      <p>Структура «ключ → значение». В Python — <code>dict</code>, в JavaScript — <code>Object</code> и <code>Map</code>, в Java — <code>HashMap</code>.</p>
+
+      <pre><code class="language-python">user = {'name': 'Кирилл', 'age': 30}
+print(user['name'])  # доступ за O(1)</code></pre>
+
+      <p>Это <strong>самая используемая структура в реальной работе</strong>. Кэши, счётчики, индекс — всё это хеш-таблицы. Знай её досконально.</p>
+
+      <h3 id="section-6">Стек и очередь</h3>
+
+      <p><strong>Стек</strong> — LIFO (Last In, First Out). Как стопка тарелок: последняя положенная — первая берётся.</p>
+
+      <p><strong>Очередь</strong> — FIFO (First In, First Out). Как очередь в магазине: первый пришёл — первый вышел.</p>
+
+      <pre><code class="language-python">from collections import deque
+
+stack = []
+stack.append(1)
+stack.append(2)
+stack.pop()  # 2 — LIFO
+
+queue = deque()
+queue.append(1)
+queue.append(2)
+queue.popleft()  # 1 — FIFO</code></pre>
+
+      <h3 id="section-7">Дерево (Tree)</h3>
+
+      <p>Иерархическая структура. Классика — бинарное дерево поиска, где левый потомок меньше родителя, правый — больше.</p>
+
+      <p>Используется в файловых системах, базах данных (B-tree для индексов), DOM в браузере. Поиск — O(log n), если дерево сбалансировано.</p>
+
+      <h3 id="section-8">Граф (Graph)</h3>
+
+      <p>Набор вершин и связей между ними. Соцсети, карты дорог, зависимости пакетов, рекомендации — всё это графы.</p>
+
+      <p>Основные алгоритмы: обход в ширину (BFS), обход в глубину (DFS), поиск кратчайшего пути (Дейкстра).</p>
+
+      <h2 id="section-9">Базовые алгоритмы</h2>
+
+      <h3 id="section-10">Бинарный поиск</h3>
+
+      <p>Ищет элемент в <strong>отсортированном</strong> массиве за O(log n). Делит диапазон пополам и сравнивает середину с искомым:</p>
+
+      <pre><code class="language-python">def binary_search(arr, target):
+    left, right = 0, len(arr) - 1
+    while left &lt;= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] &lt; target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1</code></pre>
+
+      <p>На 1 000 000 элементов нужно всего 20 сравнений. Наглядно? Очень.</p>
+
+      <h3 id="section-11">Сортировка</h3>
+
+      <p>Писать свою не нужно — в стандартной библиотеке уже есть оптимизированные. Но полезно знать:</p>
+
+      <ul>
+        <li><strong>Пузырьком</strong> — учебная, O(n²), на практике не используется.</li>
+        <li><strong>QuickSort</strong> — O(n log n) в среднем, но O(n²) в худшем.</li>
+        <li><strong>MergeSort</strong> — стабильные O(n log n), используется для внешней сортировки.</li>
+        <li><strong>Timsort</strong> — гибрид, встроен в Python и Java.</li>
+      </ul>
+
+      <h3 id="section-12">Рекурсия и динамическое программирование</h3>
+
+      <p>Рекурсия — когда функция вызывает саму себя. Пример: факториал.</p>
+
+      <pre><code class="language-python">def factorial(n):
+    if n &lt;= 1:
+        return 1
+    return n * factorial(n - 1)</code></pre>
+
+      <p><strong>Динамическое программирование</strong> (DP) — это когда ты решаешь сложную задачу через подзадачи и <strong>запоминаешь</strong> их результаты, чтобы не считать заново. Классика — числа Фибоначчи, задача о рюкзаке, редакционное расстояние.</p>
+
+      <h2 id="section-13">Что учить в первую очередь</h2>
+
+      <ol>
+        <li><strong>Big O</strong> — чтобы понимать, какой код быстрый, а какой нет.</li>
+        <li><strong>Массив, хеш-таблица, стек, очередь</strong> — покрывают 80% практических задач.</li>
+        <li><strong>Бинарный поиск и сортировки</strong> — база для собеседований.</li>
+        <li><strong>Деревья и графы</strong> — когда освоишь базу.</li>
+        <li><strong>Динамическое программирование</strong> — для подготовки к серьёзным собеседованиям.</li>
+      </ol>
+
+      <h2 id="section-14">Как тренироваться</h2>
+
+      <p>Лучшие ресурсы:</p>
+
+      <ul>
+        <li><strong>LeetCode</strong> — стандарт для собеседований. Начни с Easy, иди по тегам.</li>
+        <li><strong>Codewars</strong> — более игровой подход, задачи разной сложности.</li>
+        <li><strong>Stepik / Coursera</strong> — курсы по алгоритмам с теорией.</li>
+        <li><strong>Книга «Грокаем алгоритмы»</strong> — с картинками, для новичков.</li>
+        <li><strong>Книга «Алгоритмы. Построение и анализ»</strong> (Кормен) — уже для серьёзного уровня.</li>
+      </ul>
+
+      <blockquote>Не пытайся выучить все структуры сразу. Возьми одну, разберись, реши 5–10 задач — и только потом переходи к следующей.</blockquote>
+
+      <h2 id="section-15">Нужно ли это в реальной работе</h2>
+
+      <p>В веб-разработке ты не будешь писать сбалансированное дерево вручную. Но:</p>
+
+      <ul>
+        <li>понимание Big O поможет выбрать между циклом и хеш-таблицей;</li>
+        <li>знание очередей пригодится в фоновых задачах и обработке событий;</li>
+        <li>графы нужны для построения зависимостей, маршрутов, рекомендаций;</li>
+        <li>на собеседованиях в крупные компании спросят обязательно.</li>
+      </ul>
+
+      <p>Итого: учить стоит. Не как самоцель, а как инструмент мышления.</p>
+
+      <h2 id="section-16">Итог</h2>
+
+      <p>Алгоритмы и структуры данных — фундамент. Начни с Big O и базовых структур: массива, хеш-таблицы, стека, очереди. Потом добавь деревья, графы и базовые алгоритмы. Тренируйся на задачах — без практики теория не закрепляется.</p>
+    </article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Зачем программисту алгоритмы</a><a href="#section-1" class="lvl-2">Сложность алгоритмов: O-большое</a><a href="#section-2" class="lvl-2">Базовые структуры данных</a><a href="#section-3" class="lvl-3">Массив (Array)</a><a href="#section-4" class="lvl-3">Связный список (Linked List)</a><a href="#section-5" class="lvl-3">Хеш-таблица (Hash Table)</a><a href="#section-6" class="lvl-3">Стек и очередь</a><a href="#section-7" class="lvl-3">Дерево (Tree)</a><a href="#section-8" class="lvl-3">Граф (Graph)</a><a href="#section-9" class="lvl-2">Базовые алгоритмы</a><a href="#section-10" class="lvl-3">Бинарный поиск</a><a href="#section-11" class="lvl-3">Сортировка</a><a href="#section-12" class="lvl-3">Рекурсия и динамическое программирование</a><a href="#section-13" class="lvl-2">Что учить в первую очередь</a><a href="#section-14" class="lvl-2">Как тренироваться</a><a href="#section-15" class="lvl-2">Нужно ли это в реальной работе</a><a href="#section-16" class="lvl-2">Итог</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/kak-vybrat-pervyy-yazyk-programmirovaniya.html"><img src="/img/kak-vybrat-pervyy-yazyk-programmirovaniya.svg" alt="Как выбрать первый язык программирования" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Карьера</span><span class="tag">Теория</span><span class="tag">Разработка</span></div>
+    <a href="/articles/kak-vybrat-pervyy-yazyk-programmirovaniya.html"><h2 class="card__title">Как выбрать первый язык программирования</h2></a>
+    <p class="card__excerpt">Python, JavaScript, Java или Go? Разбираем без холиваров: как выбрать первый язык под свою цель, что важно и что вообще не имеет значения.</p>
+    <div class="card__meta">
+      <span>23 марта 2026</span><span class="dot">•</span><span>9 мин</span>
+      <button class="card__bm" data-slug="kak-vybrat-pervyy-yazyk-programmirovaniya" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/obrabotka-isklyucheniy-v-python.html"><img src="/img/python-errors.svg" alt="Обработка исключений в Python — try, except, finally" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/obrabotka-isklyucheniy-v-python.html"><h2 class="card__title">Обработка исключений в Python — try, except, finally</h2></a>
+    <p class="card__excerpt">Как ловить ошибки и не давать программе падать. Разбираем try/except, собственные исключения и контекстные менеджеры с примерами.</p>
+    <div class="card__meta">
+      <span>24 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="obrabotka-isklyucheniy-v-python" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/dizayn-patterns-singleton-factory-observer.html"><img src="/img/patterns.svg" alt="Дизайн-паттерны — Singleton, Factory, Observer" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Разработка</span><span class="tag">Архитектура</span><span class="tag">Теория</span></div>
+    <a href="/articles/dizayn-patterns-singleton-factory-observer.html"><h2 class="card__title">Дизайн-паттерны — Singleton, Factory, Observer</h2></a>
+    <p class="card__excerpt">Три самых частых паттерна проектирования. Разбираем на примерах: зачем нужны, как устроены и где применяются в реальном коде.</p>
+    <div class="card__meta">
+      <span>23 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="dizayn-patterns-singleton-factory-observer" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

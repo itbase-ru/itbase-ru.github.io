@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Асинхронность в JavaScript: промисы и async/await — IT·База</title>
+  <meta name="description" content="Почему JavaScript не может просто подождать, что такое промисы, как работает async/await и почему fetch — асинхронный.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/asinhronnost-v-javascript.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Асинхронность в JavaScript: промисы и async/await">
+  <meta property="og:description" content="Почему JavaScript не может просто подождать, что такое промисы, как работает async/await и почему fetch — асинхронный.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/asinhronnost-v-javascript.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/asinhronnost-v-javascript.html">
+  <meta property="article:published_time" content="2026-03-11">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Асинхронность в JavaScript: промисы и async/await">
+  <meta name="twitter:description" content="Почему JavaScript не может просто подождать, что такое промисы, как работает async/await и почему fetch — асинхронный.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/asinhronnost-v-javascript.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Асинхронность в JavaScript: промисы и async/await", "description": "Почему JavaScript не может просто подождать, что такое промисы, как работает async/await и почему fetch — асинхронный.", "image": ["https://itbase-ru.github.io/img/og/asinhronnost-v-javascript.png"], "datePublished": "2026-03-11", "dateModified": "2026-03-11", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/asinhronnost-v-javascript.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "JavaScript", "item": "https://itbase-ru.github.io/?tag=JavaScript"}, {"@type": "ListItem", "position": 3, "name": "Асинхронность в JavaScript: промисы и async/await", "item": "https://itbase-ru.github.io/articles/asinhronnost-v-javascript.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="asinhronnost-v-javascript">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=JavaScript">JavaScript</a>
+        <span class="sep">/</span>
+        <span>Асинхронность в JavaScript: промисы и async/await</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">JavaScript</span><span class="tag">Веб</span></div>
+        <h1>Асинхронность в JavaScript: промисы и async/await</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-03-11">11 марта 2026</time>
+          <span class="dot">•</span>
+          <span>11 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/async-cover.svg" alt="Асинхронность в JavaScript: промисы и async/await">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+<p>JavaScript — <strong>однопоточный</strong> язык. Это значит: в один момент выполняется ровно одна инструкция. Никаких «параллельных» задач. Если бы код умел просто «ждать» ответа от сервера, весь сайт завис бы. Поэтому придумали асинхронность.</p>
+
+<h2 id="section-0">Проблема</h2>
+<p>Представь, что ты запрашиваешь данные с сервера. Ответ может прийти через 10 миллисекунд, а может — через 10 секунд. Синхронный код остановил бы всё и ждал. Кнопки не реагировали бы, анимации замерли бы. Это неприемлемо.</p>
+<p>Решение — <strong>асинхронный код</strong>. Он говорит браузеру: «Начни этот запрос, но не блокируй меня. Когда ответит — сообщи, и я продолжу».</p>
+
+<h2 id="section-1">Как это выглядело до промисов: колбэки</h2>
+<p>Раньше результат асинхронной операции передавали через <em>функцию-колбэк</em> — она вызывается, когда результат готов.</p>
+
+<pre><code class="language-javascript">// Три вложенных запроса, каждый зависит от предыдущего
+getUser(userId, function(user) {
+  getOrders(user.id, function(orders) {
+    getOrderDetails(orders[0].id, function(details) {
+      console.log(details);
+      // а если надо ещё один шаг — ещё глубже
+    });
+  });
+});
+</code></pre>
+
+<p>Это называют <strong>callback hell</strong> — «ад колбэков». Читать невозможно, ошибки обрабатывать сложно.</p>
+
+<h2 id="section-2">Промис — обещание результата</h2>
+<p>Промис — это объект, который представляет <em>будущий результат</em>. Он в трёх состояниях:</p>
+<ul>
+  <li><strong>pending</strong> — ожидание. Результата ещё нет.</li>
+  <li><strong>fulfilled</strong> — успех. Есть значение.</li>
+  <li><strong>rejected</strong> — ошибка. Есть причина.</li>
+</ul>
+<p>Состояние меняется только один раз. Обратно — нельзя.</p>
+
+<pre><code class="language-javascript">const promise = new Promise((resolve, reject) =&gt; {
+  const success = true;
+  if (success) {
+    resolve("Данные получены");
+  } else {
+    reject("Что-то пошло не так");
+  }
+});
+
+promise
+  .then(result =&gt; console.log("Успех:", result))
+  .catch(error =&gt; console.error("Ошибка:", error));
+</code></pre>
+
+<h2 id="section-3">then / catch / finally</h2>
+<ul>
+  <li><code>.then(fn)</code> — что сделать, когда промис успешно завершился.</li>
+  <li><code>.catch(fn)</code> — что сделать при ошибке.</li>
+  <li><code>.finally(fn)</code> — что сделать в любом случае.</li>
+</ul>
+
+<pre><code class="language-javascript">fetch('https://api.github.com/users/torvalds')
+  .then(response =&gt; response.json())
+  .then(data =&gt; {
+    console.log('Имя:', data.name);
+    console.log('Подписчиков:', data.followers);
+  })
+  .catch(error =&gt; console.error('Ошибка:', error))
+  .finally(() =&gt; console.log('Запрос завершён'));
+</code></pre>
+
+<p>Цепочка читается сверху вниз — уже лучше колбэков. Но при сложной логике всё равно громоздко.</p>
+
+<h2 id="section-4">async / await — синтаксис, который выглядит синхронным</h2>
+<p>Это сахар над промисами. Код <em>выглядит</em> как обычный, но работает асинхронно. Два ключевых слова:</p>
+<ul>
+  <li><strong><code>async</code></strong> перед функцией — говорит, что внутри будет асинхронный код.</li>
+  <li><strong><code>await</code></strong> перед промисом — ждёт его результата, но не блокирует весь сайт.</li>
+</ul>
+
+<pre><code class="language-javascript">async function showUser() {
+  try {
+    const response = await fetch('https://api.github.com/users/torvalds');
+    const data = await response.json();
+
+    console.log('Имя:', data.name);
+    console.log('Подписчиков:', data.followers);
+  } catch (error) {
+    console.error('Ошибка:', error);
+  } finally {
+    console.log('Запрос завершён');
+  }
+}
+
+showUser();
+</code></pre>
+
+<p>Читается почти как обычный код: получили ответ, превратили в объект, показали. Всё понятно. Но при этом браузер не зависает.</p>
+
+<blockquote>Правило: <code>await</code> можно использовать только <strong>внутри</strong> <code>async</code>-функции. За её пределами — синтаксическая ошибка.</blockquote>
+
+<h2 id="section-5">Обработка ошибок</h2>
+<p>При работе с <code>await</code> ошибки ловятся обычным <code>try / catch</code> — как в синхронном коде.</p>
+
+<pre><code class="language-javascript">async function getUser(id) {
+  try {
+    const response = await fetch('/api/users/' + id);
+
+    if (!response.ok) {
+      throw new Error('HTTP ' + response.status);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Не удалось получить пользователя:', error);
+    return null;
+  }
+}
+</code></pre>
+
+<h2 id="section-6">Параллельно: Promise.all и Promise.allSettled</h2>
+<p>Когда несколько запросов <em>не зависят</em> друг от друга — их можно запустить одновременно.</p>
+
+<pre><code class="language-javascript">// Последовательно — медленно (суммарное время всех запросов)
+const user = await fetch('/api/user').then(r =&gt; r.json());
+const posts = await fetch('/api/posts').then(r =&gt; r.json());
+const comments = await fetch('/api/comments').then(r =&gt; r.json());
+
+// Параллельно — быстро (время самого долгого)
+const [user, posts, comments] = await Promise.all([
+  fetch('/api/user').then(r =&gt; r.json()),
+  fetch('/api/posts').then(r =&gt; r.json()),
+  fetch('/api/comments').then(r =&gt; r.json())
+]);
+</code></pre>
+
+<div class="table-scroll"><table>
+  <thead><tr><th>Метод</th><th>Поведение</th></tr></thead>
+  <tbody>
+    <tr><td><code>Promise.all</code></td><td>Ждёт всех. Если хоть один упал — общая ошибка</td></tr>
+    <tr><td><code>Promise.allSettled</code></td><td>Ждёт всех. Возвращает и успехи, и ошибки</td></tr>
+    <tr><td><code>Promise.race</code></td><td>Возвращает первый завершившийся (успех или ошибка)</td></tr>
+    <tr><td><code>Promise.any</code></td><td>Возвращает первый успешный</td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="section-7">Практический пример: загрузка данных с обработкой</h2>
+<pre><code class="language-javascript">async function loadUsers(ids) {
+  const button = document.querySelector('#loadBtn');
+  button.disabled = true;
+
+  try {
+    const requests = ids.map(id =&gt;
+      fetch('/api/users/' + id).then(r =&gt; r.json())
+    );
+
+    const users = await Promise.all(requests);
+    console.log('Загружено пользователей:', users.length);
+    return users;
+  } catch (error) {
+    console.error('Не удалось загрузить:', error);
+    return [];
+  } finally {
+    button.disabled = false;
+  }
+}
+
+loadUsers([1, 2, 3, 4, 5]);
+</code></pre>
+
+<p>Обрати внимание: кнопка блокируется на время загрузки и всегда разблокируется в <code>finally</code> — даже если произошла ошибка.</p>
+
+<h2 id="section-8">Что важно запомнить</h2>
+<ul>
+  <li>JavaScript <strong>однопоточный</strong>. Асинхронность — способ не блокировать браузер.</li>
+  <li><strong>Промис</strong> — объект-обещание будущего результата.</li>
+  <li><strong>async/await</strong> — самый удобный синтаксис. Используй по умолчанию.</li>
+  <li>Ошибки ловятся через <code>try / catch</code>.</li>
+  <li>Независимые запросы запускай через <strong><code>Promise.all</code></strong> — быстрее в разы.</li>
+  <li>Никогда не забывай <code>await</code> перед <code>fetch</code> — без него получишь промис вместо данных.</li>
+</ul>
+</article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Проблема</a><a href="#section-1" class="lvl-2">Как это выглядело до промисов: колбэки</a><a href="#section-2" class="lvl-2">Промис — обещание результата</a><a href="#section-3" class="lvl-2">then / catch / finally</a><a href="#section-4" class="lvl-2">async / await — синтаксис, который выглядит синхронным</a><a href="#section-5" class="lvl-2">Обработка ошибок</a><a href="#section-6" class="lvl-2">Параллельно: Promise.all и Promise.allSettled</a><a href="#section-7" class="lvl-2">Практический пример: загрузка данных с обработкой</a><a href="#section-8" class="lvl-2">Что важно запомнить</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/cookie-localstorage-sessionstorage.html"><img src="/img/storage.svg" alt="Cookie, localStorage и sessionStorage — что выбрать" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Веб</span><span class="tag">JavaScript</span><span class="tag">Безопасность</span></div>
+    <a href="/articles/cookie-localstorage-sessionstorage.html"><h2 class="card__title">Cookie, localStorage и sessionStorage — что выбрать</h2></a>
+    <p class="card__excerpt">Три способа хранить данные в браузере. Разбираем разницу, лимиты, безопасность и когда что использовать — на конкретных примерах.</p>
+    <div class="card__meta">
+      <span>22 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="cookie-localstorage-sessionstorage" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/javascript-massivy-i-obekty.html"><img src="/img/arrays-cover.svg" alt="Массивы и объекты в JavaScript: полный разбор с примерами" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">JavaScript</span><span class="tag">Веб</span></div>
+    <a href="/articles/javascript-massivy-i-obekty.html"><h2 class="card__title">Массивы и объекты в JavaScript: полный разбор с примерами</h2></a>
+    <p class="card__excerpt">Как хранить списки и структурированные данные, какие методы массивов нужны в реальной работе и чем объект отличается от массива.</p>
+    <div class="card__meta">
+      <span>9 марта 2026</span><span class="dot">•</span><span>12 мин</span>
+      <button class="card__bm" data-slug="javascript-massivy-i-obekty" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/javascript-peremennye-i-tipy.html"><img src="/img/js-cover.svg" alt="JavaScript: переменные и типы данных простыми словами" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Веб</span><span class="tag">JavaScript</span></div>
+    <a href="/articles/javascript-peremennye-i-tipy.html"><h2 class="card__title">JavaScript: переменные и типы данных простыми словами</h2></a>
+    <p class="card__excerpt">Чем отличается let от const, какие в JS бывают типы данных, зачем нужны строки, числа и объекты — с примерами и разбором ошибок.</p>
+    <div class="card__meta">
+      <span>24 февраля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="javascript-peremennye-i-tipy" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

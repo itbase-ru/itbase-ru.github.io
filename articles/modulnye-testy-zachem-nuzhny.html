@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Модульные тесты: зачем они нужны и как их писать — IT·База</title>
+  <meta name="description" content="Почему программисты пишут код, который проверяет код. Разбираю на примерах: что такое юнит-тесты, зачем они нужны и как начать без боли.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/modulnye-testy-zachem-nuzhny.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Модульные тесты: зачем они нужны и как их писать">
+  <meta property="og:description" content="Почему программисты пишут код, который проверяет код. Разбираю на примерах: что такое юнит-тесты, зачем они нужны и как начать без боли.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/modulnye-testy-zachem-nuzhny.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/modulnye-testy-zachem-nuzhny.html">
+  <meta property="article:published_time" content="2026-03-17">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Модульные тесты: зачем они нужны и как их писать">
+  <meta name="twitter:description" content="Почему программисты пишут код, который проверяет код. Разбираю на примерах: что такое юнит-тесты, зачем они нужны и как начать без боли.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/modulnye-testy-zachem-nuzhny.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Модульные тесты: зачем они нужны и как их писать", "description": "Почему программисты пишут код, который проверяет код. Разбираю на примерах: что такое юнит-тесты, зачем они нужны и как начать без боли.", "image": ["https://itbase-ru.github.io/img/og/modulnye-testy-zachem-nuzhny.png"], "datePublished": "2026-03-17", "dateModified": "2026-03-17", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/modulnye-testy-zachem-nuzhny.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Разработка", "item": "https://itbase-ru.github.io/?tag=Разработка"}, {"@type": "ListItem", "position": 3, "name": "Модульные тесты: зачем они нужны и как их писать", "item": "https://itbase-ru.github.io/articles/modulnye-testy-zachem-nuzhny.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="modulnye-testy-zachem-nuzhny">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Разработка">Разработка</a>
+        <span class="sep">/</span>
+        <span>Модульные тесты: зачем они нужны и как их писать</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Разработка</span><span class="tag">Тестирование</span></div>
+        <h1>Модульные тесты: зачем они нужны и как их писать</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-03-17">17 марта 2026</time>
+          <span class="dot">•</span>
+          <span>10 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/tests-cover.svg" alt="Модульные тесты: зачем они нужны и как их писать">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+<p>Начинающий программист пишет функцию, запускает — работает. Через месяц что-то правит — функция ломается, но узнаёт об этом только когда пользователь жалуется. <strong>Модульные тесты</strong> решают эту проблему: код сам себя проверяет.</p>
+
+<h2 id="section-0">Что такое модульный тест</h2>
+<p>Это маленькая программа, которая проверяет <em>одну функцию</em>. Ты пишешь: «функция сложения двух чисел с аргументами 2 и 3 должна вернуть 5». Запускаешь тест — он либо проходит, либо падает. Всё.</p>
+
+<p>Если ты что-то поменял в коде и сломал эту функцию — тест сразу скажет об этом. Не через месяц на проде, а <strong>через 2 секунды после сохранения</strong>.</p>
+
+<h2 id="section-1">Зачем это нужно</h2>
+<ul>
+  <li><strong>Ловишь баги мгновенно.</strong> Сломал — узнал сразу.</li>
+  <li><strong>Уверенно рефакторишь.</strong> Меняешь внутренности, запускаешь тесты — если зелёные, всё ок.</li>
+  <li><strong>Документирует код.</strong> Читая тест, видно, что функция должна делать.</li>
+  <li><strong>Без тестов в профессию не берут.</strong> На собеседованиях спрашивают, на работе требуют.</li>
+</ul>
+
+<h2 id="section-2">Первый тест на JavaScript</h2>
+<p>Самый популярный инструмент — <strong>Jest</strong>. Пишем функцию и её тест:</p>
+
+<pre><code class="language-javascript">// math.js — тестируемая функция
+function add(a, b) {
+  return a + b;
+}
+
+module.exports = { add };
+</code></pre>
+
+<pre><code class="language-javascript">// math.test.js — тест
+const { add } = require('./math');
+
+test('2 + 3 = 5', () =&gt; {
+  expect(add(2, 3)).toBe(5);
+});
+
+test('работает с отрицательными', () =&gt; {
+  expect(add(-2, -3)).toBe(-5);
+});
+
+test('работает с нулём', () =&gt; {
+  expect(add(0, 7)).toBe(7);
+});
+</code></pre>
+
+<p>Что тут происходит:</p>
+<ul>
+  <li><code>test('название', ...)</code> — объявляет один тест с понятным названием.</li>
+  <li><code>expect(значение).toBe(ожидаемое)</code> — проверка. Если не совпало — тест падает с ошибкой.</li>
+  <li>Таких тестов пишут несколько — на разные случаи.</li>
+</ul>
+
+<h2 id="section-3">Ключевые функции для проверок</h2>
+<div class="table-scroll"><table>
+  <thead><tr><th>Метод</th><th>Что проверяет</th><th>Пример</th></tr></thead>
+  <tbody>
+    <tr><td><code>.toBe(x)</code></td><td>Точное равенство</td><td><code>expect(2+2).toBe(4)</code></td></tr>
+    <tr><td><code>.toEqual(x)</code></td><td>Равенство по содержимому</td><td>Объекты и массивы</td></tr>
+    <tr><td><code>.toBeTruthy()</code></td><td>Значение «правдиво»</td><td>Не 0, не "", не null</td></tr>
+    <tr><td><code>.toBeFalsy()</code></td><td>Значение «ложно»</td><td>0, "", null, undefined</td></tr>
+    <tr><td><code>.toContain(x)</code></td><td>Содержит элемент</td><td>Массив или строка</td></tr>
+    <tr><td><code>.toThrow()</code></td><td>Функция бросает ошибку</td><td><code>expect(fn).toThrow()</code></td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="section-4">Что тестировать в первую очередь</h2>
+<ol>
+  <li><strong>Чистые функции.</strong> Те, которые принимают данные и возвращают результат — без побочек. Тестировать легко.</li>
+  <li><strong>Граничные случаи.</strong> Ноль, отрицательные числа, пустая строка, очень большое число.</li>
+  <li><strong>Ошибки.</strong> Что функция делает, если пришло не то, что ожидалось.</li>
+  <li><strong>Основную логику бизнеса.</strong> Расчёт цены со скидкой, проверка пароля и т.п.</li>
+</ol>
+
+<h2 id="section-5">Что НЕ надо тестировать</h2>
+<ul>
+  <li><strong>Чужой код.</strong> Не пиши тесты на библиотеки — их уже протестировали авторы.</li>
+  <li><strong>Простые геттеры и сеттеры.</strong> <code>getName() { return this.name; }</code> — тут нечего проверять.</li>
+  <li><strong>Всё подряд.</strong> Не надо 100% покрытия. 70-80% — хороший уровень, 100% часто бессмысленно.</li>
+</ul>
+
+<h2 id="section-6">Главные принципы</h2>
+<blockquote>Один тест = одна проверка. Название теста описывает, что проверяем — и оно должно быть понятно через год.</blockquote>
+
+<ul>
+  <li><strong>AAA-структура.</strong> Arrange (подготовь), Act (выполни), Assert (проверь).</li>
+  <li><strong>Тест не должен зависеть от других тестов.</strong> Каждый работает сам по себе.</li>
+  <li><strong>Тесты запускаются быстро.</strong> Секунды, не минуты. Иначе ты их перестанешь запускать.</li>
+</ul>
+
+<h2 id="section-7">Что важно запомнить</h2>
+<ul>
+  <li>Тест — <strong>маленькая программа, которая проверяет функцию</strong>.</li>
+  <li>Пишутся до или вместе с кодом, не после.</li>
+  <li>Главный фреймворк в JS — <strong>Jest</strong>, в Python — <strong>pytest</strong>.</li>
+  <li><code>expect(результат).toBe(ожидаемое)</code> — база для проверок.</li>
+  <li>Не гонись за 100% покрытием. 70% — уже отлично.</li>
+  <li>Без тестов код работает только «пока никто не трогал».</li>
+</ul>
+</article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Что такое модульный тест</a><a href="#section-1" class="lvl-2">Зачем это нужно</a><a href="#section-2" class="lvl-2">Первый тест на JavaScript</a><a href="#section-3" class="lvl-2">Ключевые функции для проверок</a><a href="#section-4" class="lvl-2">Что тестировать в первую очередь</a><a href="#section-5" class="lvl-2">Что НЕ надо тестировать</a><a href="#section-6" class="lvl-2">Главные принципы</a><a href="#section-7" class="lvl-2">Что важно запомнить</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/paginaciya-i-versirovanie-api.html"><img src="/img/api-versioning.svg" alt="Пагинация и версионирование API — как не сломать клиентов" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">API</span><span class="tag">Веб</span><span class="tag">Разработка</span></div>
+    <a href="/articles/paginaciya-i-versirovanie-api.html"><h2 class="card__title">Пагинация и версионирование API — как не сломать клиентов</h2></a>
+    <p class="card__excerpt">Как отдавать тысячи записей постранично и что делать, когда API меняется. Разбираем offset/limit, cursor-пагинацию и версионирование.</p>
+    <div class="card__meta">
+      <span>27 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="paginaciya-i-versirovanie-api" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/bash-skripty-dlya-novichka.html"><img src="/img/bash.svg" alt="Bash-скрипты для новичка — автоматизация на Linux" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Инструменты</span><span class="tag">DevOps</span><span class="tag">Разработка</span></div>
+    <a href="/articles/bash-skripty-dlya-novichka.html"><h2 class="card__title">Bash-скрипты для новичка — автоматизация на Linux</h2></a>
+    <p class="card__excerpt">Как написать первый скрипт, который автоматизирует рутину: переменные, условия, циклы, функции, аргументы командной строки.</p>
+    <div class="card__meta">
+      <span>25 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="bash-skripty-dlya-novichka" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/obrabotka-isklyucheniy-v-python.html"><img src="/img/python-errors.svg" alt="Обработка исключений в Python — try, except, finally" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/obrabotka-isklyucheniy-v-python.html"><h2 class="card__title">Обработка исключений в Python — try, except, finally</h2></a>
+    <p class="card__excerpt">Как ловить ошибки и не давать программе падать. Разбираем try/except, собственные исключения и контекстные менеджеры с примерами.</p>
+    <div class="card__meta">
+      <span>24 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="obrabotka-isklyucheniy-v-python" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Что такое CORS и почему браузер блокирует запросы — IT·База</title>
+  <meta name="description" content="Почему fetch с одного сайта на другой падает с ошибкой, что такое Same-Origin Policy и как правильно настроить CORS на сервере.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/chto-takoe-cors.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Что такое CORS и почему браузер блокирует запросы">
+  <meta property="og:description" content="Почему fetch с одного сайта на другой падает с ошибкой, что такое Same-Origin Policy и как правильно настроить CORS на сервере.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/chto-takoe-cors.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/chto-takoe-cors.html">
+  <meta property="article:published_time" content="2026-04-17">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Что такое CORS и почему браузер блокирует запросы">
+  <meta name="twitter:description" content="Почему fetch с одного сайта на другой падает с ошибкой, что такое Same-Origin Policy и как правильно настроить CORS на сервере.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/chto-takoe-cors.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Что такое CORS и почему браузер блокирует запросы", "description": "Почему fetch с одного сайта на другой падает с ошибкой, что такое Same-Origin Policy и как правильно настроить CORS на сервере.", "image": ["https://itbase-ru.github.io/img/og/chto-takoe-cors.png"], "datePublished": "2026-04-17", "dateModified": "2026-04-17", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/chto-takoe-cors.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Веб", "item": "https://itbase-ru.github.io/?tag=Веб"}, {"@type": "ListItem", "position": 3, "name": "Что такое CORS и почему браузер блокирует запросы", "item": "https://itbase-ru.github.io/articles/chto-takoe-cors.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="chto-takoe-cors">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Веб">Веб</a>
+        <span class="sep">/</span>
+        <span>Что такое CORS и почему браузер блокирует запросы</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Веб</span><span class="tag">Безопасность</span><span class="tag">API</span></div>
+        <h1>Что такое CORS и почему браузер блокирует запросы</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-04-17">17 апреля 2026</time>
+          <span class="dot">•</span>
+          <span>10 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/cors.svg" alt="Что такое CORS и почему браузер блокирует запросы">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+      <p>Классическая ошибка, которую видел каждый веб-разработчик: запрос не проходит, в консоли красное «has been blocked by CORS policy». Что это и почему браузер так делает — разбираем по шагам.</p>
+
+      <h2 id="section-0">Откуда взялась проблема</h2>
+
+      <p>Представь, что ты залогинен в свой банк. Открываешь другую вкладку — на фишинговом сайте. Тот сайт выполняет в фоне запрос:</p>
+
+      <pre><code class="language-javascript">fetch('https://bank.com/api/transfer', {
+  method: 'POST',
+  body: JSON.stringify({ to: 'attacker', amount: 100000 }),
+  credentials: 'include'   // приложить куки банка
+});</code></pre>
+
+      <p>Если браузер не защищён, куки банка автоматически прикладываются к запросу. Банк считает его «легальным» и выполняет перевод. Ты ничего не заметил.</p>
+
+      <p>Именно от этого защищает браузер. Правило называется <strong>Same-Origin Policy</strong> (политика одного источника).</p>
+
+      <h2 id="section-1">Что такое «один источник»</h2>
+
+      <p>Origin (источник) — это комбинация трёх вещей:</p>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Часть</th><th>Пример</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Протокол</td><td>https://</td></tr>
+          <tr><td>Домен</td><td>example.com</td></tr>
+          <tr><td>Порт</td><td>443 (по умолчанию)</td></tr>
+        </tbody>
+      </table></div>
+
+      <p>Два URL — «один источник», если у них совпадают все три части. Если хоть одна отличается — источники разные.</p>
+
+      <ul>
+        <li><code>https://site.com</code> и <code>https://site.com/api</code> — <strong>один источник</strong>.</li>
+        <li><code>http://site.com</code> и <code>https://site.com</code> — <strong>разные</strong> (протокол отличается).</li>
+        <li><code>site.com</code> и <code>api.site.com</code> — <strong>разные</strong> (домен отличается).</li>
+        <li><code>site.com</code> и <code>site.com:8080</code> — <strong>разные</strong> (порт отличается).</li>
+      </ul>
+
+      <p>Если запрос идёт на другой origin — браузер по умолчанию его <strong>блокирует</strong>. Если сервер явно не разрешит — то есть не отправит заголовки CORS.</p>
+
+      <h2 id="section-2">Что такое CORS</h2>
+
+      <p>CORS (Cross-Origin Resource Sharing) — механизм, при котором сервер <strong>явно разрешает</strong> запросы с определённых доменов.</p>
+
+      <p>Работает так: браузер перед запросом или вместе с ним отправляет заголовок <code>Origin</code> с адресом сайта-источника. Сервер может ответить:</p>
+
+      <pre><code class="language-bash">Access-Control-Allow-Origin: https://example.com</code></pre>
+
+      <p>Это значит: «разрешаю запросы с этого домена». Если в ответе такого заголовка нет — браузер блокирует ответ.</p>
+
+      <h2 id="section-3">Простой и предварительный запросы</h2>
+
+      <p>Есть два вида CORS-запросов.</p>
+
+      <h3 id="section-4">Простой запрос</h3>
+
+      <p>Отправляется сразу, без дополнительной проверки. Условия:</p>
+
+      <ul>
+        <li>Метод — GET, POST или HEAD.</li>
+        <li>Заголовки только «простые» (без <code>Authorization</code>, <code>Content-Type: application/json</code> и др.).</li>
+        <li>Content-Type — только <code>text/plain</code>, <code>multipart/form-data</code> или <code>application/x-www-form-urlencoded</code>.</li>
+      </ul>
+
+      <p>Всё, что сложнее — уже не «простой» запрос.</p>
+
+      <h3 id="section-5">Предварительный запрос (preflight)</h3>
+
+      <p>Если запрос «сложный» — метод PUT или DELETE, или заголовок <code>Content-Type: application/json</code> — браузер сначала отправляет <strong>OPTIONS-запрос</strong>, чтобы узнать, разрешён ли основной.</p>
+
+      <pre><code class="language-bash">OPTIONS /api/users HTTP/1.1
+Origin: https://example.com
+Access-Control-Request-Method: POST
+Access-Control-Request-Headers: content-type, authorization</code></pre>
+
+      <p>Сервер отвечает:</p>
+
+      <pre><code class="language-bash">HTTP/1.1 204 No Content
+Access-Control-Allow-Origin: https://example.com
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE
+Access-Control-Allow-Headers: content-type, authorization
+Access-Control-Max-Age: 86400</code></pre>
+
+      <p>Только после этого браузер отправит основной POST. Если preflight провалился — запрос вообще не уйдёт.</p>
+
+      <p><code>Access-Control-Max-Age: 86400</code> — кэшируем это разрешение на сутки. Следующие запросы в этот период не будут вызывать preflight.</p>
+
+      <h2 id="section-6">Как настроить CORS на сервере</h2>
+
+      <h3 id="section-7">Node.js (Express)</h3>
+
+      <pre><code class="language-javascript">const express = require('express');
+const cors = require('cors');
+const app = express();
+
+// Разрешить запросы только с одного домена
+app.use(cors({
+  origin: 'https://example.com',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true   // разрешить куки
+}));
+
+app.get('/api/users', function(req, res) {
+  res.json([{ id: 1, name: 'Кирилл' }]);
+});
+
+app.listen(3000);</code></pre>
+
+      <h3 id="section-8">Python (FastAPI)</h3>
+
+      <pre><code class="language-python">from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['https://example.com'],
+    allow_methods=['GET', 'POST', 'PUT', 'DELETE'],
+    allow_headers=['Content-Type', 'Authorization'],
+    allow_credentials=True,
+)
+
+@app.get('/api/users')
+def get_users():
+    return [{'id': 1, 'name': 'Кирилл'}]</code></pre>
+
+      <h3 id="section-9">Просто через заголовки</h3>
+
+      <p>Если у тебя не фреймворк, а голый сервер — просто добавь заголовки к ответу:</p>
+
+      <pre><code class="language-python">from http.server import HTTPServer, BaseHTTPRequestHandler
+
+class Handler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        # Разрешаем запросы с любого домена (для теста!)
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Content-Type', 'application/json')
+        self.end_headers()
+        self.wfile.write(b'{"message": "ok"}')
+
+HTTPServer(('localhost', 8000), Handler).serve_forever()</code></pre>
+
+      <h2 id="section-10">Опасность звёздочки</h2>
+
+      <p>Видел <code>Access-Control-Allow-Origin: *</code>? Это «разрешить всем». Удобно для отладки, но опасно в проде:</p>
+
+      <ul>
+        <li><strong>Любой сайт может дёргать твой API.</strong> В том числе недружественный.</li>
+        <li><strong>Куки не передаются.</strong> С звёздочкой параметр <code>credentials</code> запрещён по спецификации.</li>
+      </ul>
+
+      <p>Правильный подход — явный список разрешённых доменов:</p>
+
+      <pre><code class="language-javascript">const allowedOrigins = [
+  'https://example.com',
+  'https://www.example.com',
+  'https://admin.example.com'
+];
+
+app.use(cors({
+  origin: function(origin, callback) {
+    // Запросы без origin (curl, мобильные приложения) пропускаем
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);   // разрешаем
+    } else {
+      callback(new Error('CORS запрещён'));   // блокируем
+    }
+  }
+}));</code></pre>
+
+      <h2 id="section-11">Почему это только браузерная защита</h2>
+
+      <p>Важно понимать: CORS работает <strong>только в браузере</strong>. Если запрос делает не браузер, а:</p>
+
+      <ul>
+        <li>Postman</li>
+        <li>curl</li>
+        <li>мобильное приложение</li>
+        <li>серверный скрипт</li>
+      </ul>
+
+      <p>— CORS вообще не проверяется. Эти клиенты спокойно делают любые запросы. CORS защищает только пользователя за браузером от других сайтов, которые могли бы действовать от его имени.</p>
+
+      <blockquote>CORS — не защита API от чужих. Это защита браузера пользователя от скриптов на чужих сайтах.</blockquote>
+
+      <h2 id="section-12">Частые ошибки и решения</h2>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Ошибка в консоли</th><th>Причина</th><th>Что делать</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>No Access-Control-Allow-Origin</td><td>Сервер не отправил заголовок</td><td>Настроить CORS на сервере</td></tr>
+          <tr><td>Credentials flag is true, but Access-Control-Allow-Origin is *</td><td>С звёздочкой нельзя куки</td><td>Указать конкретный домен</td></tr>
+          <tr><td>Method PUT is not allowed</td><td>Метод не разрешён в preflight</td><td>Добавить метод в allow_methods</td></tr>
+          <tr><td>Request header field authorization is not allowed</td><td>Заголовок не разрешён</td><td>Добавить его в allow_headers</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2 id="section-13">Что делать при разработке</h2>
+
+      <p>Когда фронт на <code>localhost:3000</code>, а бэк на <code>localhost:8000</code> — это разные origin. Браузер блокирует. Три решения:</p>
+
+      <ol>
+        <li><strong>Настроить CORS на бэке</strong> — правильный путь.</li>
+        <li><strong>Проксировать запросы через dev-сервер.</strong> Фронт и бэк оказываются на одном origin.</li>
+        <li><strong>Отключить проверку в браузере.</strong> Работает только для отладки, не для прода. Просто не делай так.</li>
+      </ol>
+
+      <h2 id="section-14">Итог</h2>
+
+      <p>CORS — механизм, который защищает пользователя от скриптов с чужих сайтов. Работает только в браузере. Сервер явно указывает, каким доменам разрешены запросы — через заголовки <code>Access-Control-Allow-*</code>. Звёздочка удобна для отладки, но не для продакшена. Если видишь «blocked by CORS» — проблема на сервере, а не в браузере.</p>
+    </article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Откуда взялась проблема</a><a href="#section-1" class="lvl-2">Что такое «один источник»</a><a href="#section-2" class="lvl-2">Что такое CORS</a><a href="#section-3" class="lvl-2">Простой и предварительный запросы</a><a href="#section-4" class="lvl-3">Простой запрос</a><a href="#section-5" class="lvl-3">Предварительный запрос (preflight)</a><a href="#section-6" class="lvl-2">Как настроить CORS на сервере</a><a href="#section-7" class="lvl-3">Node.js (Express)</a><a href="#section-8" class="lvl-3">Python (FastAPI)</a><a href="#section-9" class="lvl-3">Просто через заголовки</a><a href="#section-10" class="lvl-2">Опасность звёздочки</a><a href="#section-11" class="lvl-2">Почему это только браузерная защита</a><a href="#section-12" class="lvl-2">Частые ошибки и решения</a><a href="#section-13" class="lvl-2">Что делать при разработке</a><a href="#section-14" class="lvl-2">Итог</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/chto-takoe-jwt-avtorizaciya.html"><img src="/img/jwt.svg" alt="Что такое JWT и как работает авторизация" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Веб</span><span class="tag">Безопасность</span><span class="tag">API</span></div>
+    <a href="/articles/chto-takoe-jwt-avtorizaciya.html"><h2 class="card__title">Что такое JWT и как работает авторизация</h2></a>
+    <p class="card__excerpt">JWT — это токен, который заменяет куки-сессии. Разбираем структуру, подпись, срок жизни и типичные ошибки при работе с токенами.</p>
+    <div class="card__meta">
+      <span>3 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="chto-takoe-jwt-avtorizaciya" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/paginaciya-i-versirovanie-api.html"><img src="/img/api-versioning.svg" alt="Пагинация и версионирование API — как не сломать клиентов" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">API</span><span class="tag">Веб</span><span class="tag">Разработка</span></div>
+    <a href="/articles/paginaciya-i-versirovanie-api.html"><h2 class="card__title">Пагинация и версионирование API — как не сломать клиентов</h2></a>
+    <p class="card__excerpt">Как отдавать тысячи записей постранично и что делать, когда API меняется. Разбираем offset/limit, cursor-пагинацию и версионирование.</p>
+    <div class="card__meta">
+      <span>27 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="paginaciya-i-versirovanie-api" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/cookie-localstorage-sessionstorage.html"><img src="/img/storage.svg" alt="Cookie, localStorage и sessionStorage — что выбрать" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Веб</span><span class="tag">JavaScript</span><span class="tag">Безопасность</span></div>
+    <a href="/articles/cookie-localstorage-sessionstorage.html"><h2 class="card__title">Cookie, localStorage и sessionStorage — что выбрать</h2></a>
+    <p class="card__excerpt">Три способа хранить данные в браузере. Разбираем разницу, лимиты, безопасность и когда что использовать — на конкретных примерах.</p>
+    <div class="card__meta">
+      <span>22 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="cookie-localstorage-sessionstorage" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

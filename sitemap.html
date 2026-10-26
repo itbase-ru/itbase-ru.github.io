@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Карта сайта — IT·База</title>
+  <meta name="description" content="Полная карта сайта IT·База: все статьи по тегам, служебные страницы, RSS-фид и sitemap.xml для поисковых систем.">
+  <link rel="canonical" href="https://itbase-ru.github.io/sitemap.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:title" content="Карта сайта — IT·База">
+  <meta property="og:description" content="Все статьи IT·База по тегам, RSS-фид и sitemap.xml.">
+  <meta property="og:url" content="https://itbase-ru.github.io/sitemap.html">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og-default.png">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0d1117">
+  <link rel="alternate" type="application/rss+xml" title="IT·База — новые статьи" href="https://itbase-ru.github.io/rss.xml">
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .sitemap-wrap{max-width:1100px;margin:0 auto;padding:30px 20px 80px;}
+    .sitemap-intro{margin:20px 0 30px;color:var(--muted);font-size:15px;line-height:1.6;}
+    .sitemap-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px;}
+    .sitemap-tag{margin-bottom:50px;}
+    .sitemap-tag h2{font-family:Georgia,serif;font-size:24px;color:var(--accent);margin:0 0 18px;border-bottom:1px solid var(--border);padding-bottom:10px;}
+    .sitemap-count{color:var(--muted);font-size:14px;font-weight:normal;}
+    .sitemap-list{list-style:none;padding:0;margin:0;display:grid;gap:18px;}
+    .sitemap-list li{padding:14px 18px;border:1px solid var(--border);border-radius:8px;background:var(--card);transition:border-color .15s;}
+    .sitemap-list li:hover{border-color:var(--accent);}
+    .sitemap-list a{text-decoration:none;}
+    .sitemap-list a strong{font-size:17px;display:block;margin-bottom:6px;}
+    .sitemap-date{color:var(--muted);font-size:13px;}
+    .sitemap-list p{margin:8px 0 0;color:var(--muted);font-size:14px;line-height:1.5;}
+    .sitemap-static{margin-top:60px;padding-top:30px;border-top:2px solid var(--border);}
+    .sitemap-static h2{font-family:Georgia,serif;font-size:22px;margin:0 0 16px;}
+    .sitemap-static ul{list-style:none;padding:0;margin:0;display:grid;gap:8px;}
+    .sitemap-static li a{color:var(--accent);text-decoration:none;font-size:15px;}
+    .sitemap-static li a:hover{text-decoration:underline;}
+    .chip{display:inline-block;padding:6px 14px;border:1px solid var(--border);border-radius:16px;background:var(--card);color:var(--text);text-decoration:none;font-size:14px;}
+    .chip:hover{border-color:var(--accent);color:var(--accent);}
+  </style>
+</head>
+<body>
+  <div id="progress"></div>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+  <main>
+    <section class="hero wrap">
+      <h1>Карта сайта</h1>
+      <p>Все статьи IT·База, сгруппированные по тегам. Обновлено: 2026-10-26.</p>
+    </section>
+    <div class="sitemap-wrap">
+      <p class="sitemap-intro">
+        На этой странице собраны все 57 статей сайта, разбитые по тегам.
+        Это удобно и для людей, и для поисковых систем — краулеры Яндекса и Google
+        обходят эту страницу по ссылкам и быстрее находят все материалы сайта.
+        Для автоматической обработки есть <a href="/sitemap.xml" style="color:var(--accent)">sitemap.xml</a>
+        и <a href="/rss.xml" style="color:var(--accent)">RSS-фид</a>.
+      </p>
+      <div class="sitemap-tags">
+        <a href="#tag-API" class="chip">API</a> <a href="#tag-CSS" class="chip">CSS</a> <a href="#tag-Cloud" class="chip">Cloud</a> <a href="#tag-DevOps" class="chip">DevOps</a> <a href="#tag-Git" class="chip">Git</a> <a href="#tag-HTML" class="chip">HTML</a> <a href="#tag-JavaScript" class="chip">JavaScript</a> <a href="#tag-Python" class="chip">Python</a> <a href="#tag-SEO" class="chip">SEO</a> <a href="#tag-SQL" class="chip">SQL</a> <a href="#tag-TypeScript" class="chip">TypeScript</a> <a href="#tag-Архитектура" class="chip">Архитектура</a> <a href="#tag-Базы данных" class="chip">Базы данных</a> <a href="#tag-Безопасность" class="chip">Безопасность</a> <a href="#tag-Веб" class="chip">Веб</a> <a href="#tag-ИИ" class="chip">ИИ</a> <a href="#tag-Инструменты" class="chip">Инструменты</a> <a href="#tag-Карьера" class="chip">Карьера</a> <a href="#tag-Разработка" class="chip">Разработка</a> <a href="#tag-Сети" class="chip">Сети</a> <a href="#tag-Теория" class="chip">Теория</a> <a href="#tag-Тестирование" class="chip">Тестирование</a>
+      </div>
+    <section class="sitemap-tag">
+      <h2 id="tag-API">API <span class="sitemap-count">(5)</span></h2>
+      <ul class="sitemap-list">
+        <li>
+          <a href="/articles/paginaciya-i-versirovanie-api.html"><strong>Пагинация и версионирование API — как не сломать клиентов</strong></a>
+          <span class="sitemap-date">27 апреля 2026</span>
+          <p>Как отдавать тысячи записей постранично и что делать, когда API меняется. Разбираем offset/limit, cursor-пагинацию и версионирование.</p>
+        </li>
+        <li>
+          <a href="/articles/chto-takoe-cors.html"><strong>Что такое CORS и почему браузер блокирует запросы</strong></a>
+          <span class="sitemap-date">17 апреля 2026</span>
+          <p>Почему fetch с одного сайта на другой падает с ошибкой, что такое Same-Origin Policy и как правильно настроить CORS на сервере.</p>
+        </li>
+        <li>
+          <a href="/articles/http-metody-i-status-kody.html"><strong>HTTP-методы и статус-коды — шпаргалка с примерами</strong></a>
+          <span class="sitemap-date">4 апреля 2026</span>
+          <p>GET, POST, PUT, PATCH, DELETE и что значат все эти 200, 301, 404, 500. Разбираем HTTP по-человечески, с примерами запросов и ответов.</p>
+        </li>
+        <li>
+          <a href="/articles/chto-takoe-jwt-avtorizaciya.html"><strong>Что такое JWT и как работает авторизация</strong></a>
+          <span class="sitemap-date">3 апреля 2026</span>
+          <p>JWT — это токен, который заменяет куки-сессии. Разбираем структуру, подпись, срок жизни и типичные ошибки при работе с токенами.</p>
+        </li>
+        <li>
+          <a href="/articles/chto-takoe-rest-i-graphql.html"><strong>REST и GraphQL — в чём разница</strong></a>
+          <span class="sitemap-date">30 марта 2026</span>
+          <p>Два главных подхода к построению API. Разбираем на примерах: когда REST удобнее, а когда GraphQL решает проблемы, которые REST создаёт.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="sitemap-tag">
+      <h2 id="tag-CSS">CSS <span class="sitemap-count">(1)</span></h2>
+      <ul class="sitemap-list">
+        <li>
+          <a href="/articles/css-flexbox-vs-grid.html"><strong>CSS: Flexbox против Grid — когда что использовать</strong></a>
+          <span class="sitemap-date">22 февраля 2026</span>
+          <p>Два инструмента для раскладки элементов. Объясняю разницу, показываю примеры и говорю прямо: бери это, а не то.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="sitemap-tag">
+      <h2 id="tag-Cloud">Cloud <span class="sitemap-count">(1)</span></h2>
+      <ul class="sitemap-list">
+        <li>
+          <a href="/articles/chto-takoe-oblako.html"><strong>Что такое облако: IaaS, PaaS, SaaS и почему это удобно</strong></a>
+          <span class="sitemap-date">5 марта 2026</span>
+          <p>Разбираю на пальцах: чем облако отличается от обычного хостинга, что такое AWS S3 и Lambda, и когда выгоднее арендовать, а не покупать.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="sitemap-tag">
+      <h2 id="tag-DevOps">DevOps <span class="sitemap-count">(9)</span></h2>
+      <ul class="sitemap-list">
+        <li>
+          <a href="/articles/chto-takoe-nginx.html"><strong>Что такое Nginx и зачем он нужен на сервере</strong></a>
+          <span class="sitemap-date">26 апреля 2026</span>
+          <p>Почему почти все сайты работают через Nginx. Разбираем: веб-сервер, reverse proxy, балансировка нагрузки, статика и конфиги.</p>
+        </li>
+        <li>
+          <a href="/articles/bash-skripty-dlya-novichka.html"><strong>Bash-скрипты для новичка — автоматизация на Linux</strong></a>
+          <span class="sitemap-date">25 апреля 2026</span>
+          <p>Как написать первый скрипт, который автоматизирует рутину: переменные, условия, циклы, функции, аргументы командной строки.</p>
+        </li>
+        <li>
+          <a href="/articles/docker-compose-dlya-proekta.html"><strong>Docker Compose — несколько контейнеров одной командой</strong></a>
+          <span class="sitemap-date">18 апреля 2026</span>
+          <p>Когда одного Dockerfile мало: как описать приложение, базу и кэш в одном файле и запускать всё одной командой docker compose up.</p>
+        </li>
+        <li>
+          <a href="/articles/osnovy-linux-dlya-razrabotchika.html"><strong>Основы Linux для разработчика — базовые команды</strong></a>
+          <span class="sitemap-date">6 апреля 2026</span>
+          <p>Что нужно знать про Linux, чтобы работать на сервере. Разбираем навигацию по файлам, права доступа, процессы, SSH и полезные команды с примерами.</p>
+        </li>
+        <li>
+          <a href="/articles/monolit-i-mikroservisy.html"><strong>Монолит и микросервисы — когда что выбирать</strong></a>
+          <span class="sitemap-date">5 апреля 2026</span>
+          <p>Разбираем без хайпа: что такое монолит, микросервисы, зачем они нужны, какие проблемы решают и какие создают. Спойлер: микросервисы — не всегда лучше.</p>
+        </li>
+        <li>
+          <a href="/articles/chto-takoe-keshirovanie.html"><strong>Что такое кэширование и зачем оно нужно</strong></a>
+          <span class="sitemap-date">2 апреля 2026</span>
+          <p>Кэш — одна из главных идей в IT. Разбираем, какие бывают уровни кэша, что такое TTL, инвалидация, и почему кэш может всё сломать.</p>
+        </li>
+        <li>
+          <a href="/articles/chto-takoe-devops-ci-cd-deploy.html"><strong>Что такое DevOps — CI/CD и деплой простыми словами</strong></a>
+          <span class="sitemap-date">25 марта 2026</span>
+          <p>Разбираем по-человечески: что такое DevOps, зачем нужны CI и CD, как выглядит pipeline и какие бывают способы деплоя.</p>
+        </li>
+        <li>
+          <a href="/articles/chto-takoe-oblako.html"><strong>Что такое облако: IaaS, PaaS, SaaS и почему это удобно</strong></a>
+          <span class="sitemap-date">5 марта 2026</span>
+          <p>Разбираю на пальцах: чем облако отличается от обычного хостинга, что такое AWS S3 и Lambda, и когда выгоднее арендовать, а не покупать.</p>
+        </li>
+        <li>
+          <a href="/articles/docker-za-10-minut.html"><strong>Docker за 10 минут: зачем нужны контейнеры</strong></a>
+          <span class="sitemap-date">1 марта 2026</span>
+          <p>Проблема «у меня работает, а у тебя нет» и как Docker её решает. Образ, контейнер, Dockerfile — на пальцах.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="sitemap-tag">
+      <h2 id="tag-Git">Git <span class="sitemap-count">(2)</span></h2>
+      <ul class="sitemap-list">
+        <li>
+          <a href="/articles/git-vetki-i-sliyanie.html"><strong>Git ветки и слияния — branch, merge, rebase</strong></a>
+          <span class="sitemap-date">8 апреля 2026</span>
+          <p>Как работать с ветками в Git: создавать, переключаться, сливать, разрешать конфликты. Разбираем merge и rebase — когда что использовать.</p>
+        </li>
+        <li>
+          <a href="/articles/git-dlya-novichkov.html"><strong>Git для новичков: 10 команд, которых хватит в 90% случаев</strong></a>
+          <span class="sitemap-date">5 февраля 2026</span>
+          <p>Что такое система контроля версий, зачем она нужна и какой минимум команд нужно выучить, чтобы не бояться сломать проект.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="sitemap-tag">
+      <h2 id="tag-HTML">HTML <span class="sitemap-count">(1)</span></h2>
+      <ul class="sitemap-list">
+        <li>
+          <a href="/articles/html-s-nulya.html"><strong>HTML с нуля: как устроена любая веб-страница</strong></a>
+          <span class="sitemap-date">20 февраля 2026</span>
+          <p>Что такое HTML, зачем нужны теги, что означает семантическая разметка и как собрать первую страницу с нуля.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="sitemap-tag">
+      <h2 id="tag-JavaScript">JavaScript <span class="sitemap-count">(5)</span></h2>
+      <ul class="sitemap-list">
+        <li>
+          <a href="/articles/cookie-localstorage-sessionstorage.html"><strong>Cookie, localStorage и sessionStorage — что выбрать</strong></a>
+          <span class="sitemap-date">22 апреля 2026</span>
+          <p>Три способа хранить данные в браузере. Разбираем разницу, лимиты, безопасность и когда что использовать — на конкретных примерах.</p>
+        </li>
+        <li>
+          <a href="/articles/zachem-nuzhen-typescript.html"><strong>Зачем нужен TypeScript, если есть JavaScript</strong></a>
+          <span class="sitemap-date">11 апреля 2026</span>
+          <p>Типы, интерфейсы, компиляция — разбираем, что даёт TypeScript, кому он нужен и почему крупные проекты уходят на него.</p>
+        </li>
+        <li>
+          <a href="/articles/asinhronnost-v-javascript.html"><strong>Асинхронность в JavaScript: промисы и async/await</strong></a>
+          <span class="sitemap-date">11 марта 2026</span>
+          <p>Почему JavaScript не может просто подождать, что такое промисы, как работает async/await и почему fetch — асинхронный.</p>
+        </li>
+        <li>
+          <a href="/articles/javascript-massivy-i-obekty.html"><strong>Массивы и объекты в JavaScript: полный разбор с примерами</strong></a>
+          <span class="sitemap-date">9 марта 2026</span>
+          <p>Как хранить списки и структурированные данные, какие методы массивов нужны в реальной работе и чем объект отличается от массива.</p>
+        </li>
+        <li>
+          <a href="/articles/javascript-peremennye-i-tipy.html"><strong>JavaScript: переменные и типы данных простыми словами</strong></a>
+          <span class="sitemap-date">24 февраля 2026</span>
+          <p>Чем отличается let от const, какие в JS бывают типы данных, зачем нужны строки, числа и объекты — с примерами и разбором ошибок.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="sitemap-tag">
+      <h2 id="tag-Python">Python <span class="sitemap-count">(7)</span></h2>
+      <ul class="sitemap-list">
+        <li>
+          <a href="/articles/obrabotka-isklyucheniy-v-python.html"><strong>Обработка исключений в Python — try, except, finally</strong></a>
+          <span class="sitemap-date">24 апреля 2026</span>
+          <p>Как ловить ошибки и не давать программе падать. Разбираем try/except, собственные исключения и контекстные менеджеры с примерами.</p>
+        </li>
+        <li>
+          <a href="/articles/python-s-nulya.html"><strong>Python с нуля — базовый синтаксис за 15 минут</strong></a>
+          <span class="sitemap-date">20 апреля 2026</span>
+          <p>Переменные, типы, условия, циклы, функции и списки. Минимальный набор, с которого начинается любой Python-проект.</p>
+        </li>
+        <li>
+          <a href="/articles/dekoratory-v-python.html"><strong>Декораторы в Python — что это и зачем нужны</strong></a>
+          <span class="sitemap-date">19 апреля 2026</span>
+          <p>Функции, которые оборачивают другие функции. Разбираем декораторы с нуля: синтаксис, как работают, где применяются на практике.</p>
+        </li>
+        <li>
+          <a href="/articles/chto-takoe-orm.html"><strong>Что такое ORM — работа с базой через объекты</strong></a>
+          <span class="sitemap-date">13 апреля 2026</span>
+          <p>Зачем писать SQL, если можно работать с базой как с обычными объектами. Разбираем ORM: как работает, плюсы и минусы, примеры на SQLAlchemy.</p>
+        </li>
+        <li>
+          <a href="/articles/mnogopotochnost-v-python-gil.html"><strong>Многопоточность в Python — GIL и потоки</strong></a>
+          <span class="sitemap-date">12 апреля 2026</span>
+          <p>Почему потоки в Python не ускоряют вычисления, что такое GIL и когда всё-таки стоит использовать threading, multiprocessing или asyncio.</p>
+        </li>
+        <li>
+          <a href="/articles/asinhronnost-v-python.html"><strong>Асинхронность в Python — asyncio простыми словами</strong></a>
+          <span class="sitemap-date">10 апреля 2026</span>
+          <p>async, await, event loop, задачи и корутины. Разбираем, зачем нужна асинхронность в Python, где она помогает и где только мешает.</p>
+        </li>
+        <li>
+          <a href="/articles/kak-sozdat-telegram-bota.html"><strong>Как создать Telegram-бота с кодом</strong></a>
+          <span class="sitemap-date">26 марта 2026</span>
+          <p>Пошагово: от BotFather и токена до рабочего бота на Python с командами, кнопками и запуском на сервере.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="sitemap-tag">
+      <h2 id="tag-SEO">SEO <span class="sitemap-count">(1)</span></h2>
+      <ul class="sitemap-list">
+        <li>
+          <a href="/articles/kak-rabotaet-poisk-v-google.html"><strong>Как работает поиск в Google: краулеры, индекс и ранжирование</strong></a>
+          <span class="sitemap-date">3 марта 2026</span>
+          <p>Что происходит за миллисекунды между нажатием Enter и списком результатов: как роботы обходят сайты, как строится индекс и почему одни страницы выше других.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="sitemap-tag">
+      <h2 id="tag-SQL">SQL <span class="sitemap-count">(3)</span></h2>
+      <ul class="sitemap-list">
+        <li>
+          <a href="/articles/tranzakcii-i-acid.html"><strong>Транзакции в базах данных — ACID простыми словами</strong></a>
+          <span class="sitemap-date">21 апреля 2026</span>
+          <p>Почему при переводе денег нельзя потерять ни копейки. Разбираем транзакции и четыре их свойства: атомарность, согласованность, изоляцию, надёжность.</p>
+        </li>
+        <li>
+          <a href="/articles/indeksy-v-bazah-dannyh.html"><strong>Индексы в базах данных — зачем и как работают</strong></a>
+          <span class="sitemap-date">9 апреля 2026</span>
+          <p>Почему один и тот же SQL-запрос может выполняться 10 мс или 10 секунд. Разбираем индексы: B-tree, составные, покрывающие и когда они вредят.</p>
+        </li>
+        <li>
+          <a href="/articles/sql-zaprosy-s-nulya.html"><strong>SQL-запросы с нуля — SELECT, WHERE, JOIN</strong></a>
+          <span class="sitemap-date">7 апреля 2026</span>
+          <p>Разбираем SQL на практике: как выбрать данные, отфильтровать, отсортировать, соединить таблицы. С примерами на реальных задачах интернет-магазина.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="sitemap-tag">
+      <h2 id="tag-TypeScript">TypeScript <span class="sitemap-count">(1)</span></h2>
+      <ul class="sitemap-list">
+        <li>
+          <a href="/articles/zachem-nuzhen-typescript.html"><strong>Зачем нужен TypeScript, если есть JavaScript</strong></a>
+          <span class="sitemap-date">11 апреля 2026</span>
+          <p>Типы, интерфейсы, компиляция — разбираем, что даёт TypeScript, кому он нужен и почему крупные проекты уходят на него.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="sitemap-tag">
+      <h2 id="tag-Архитектура">Архитектура <span class="sitemap-count">(2)</span></h2>
+      <ul class="sitemap-list">
+        <li>
+          <a href="/articles/dizayn-patterns-singleton-factory-observer.html"><strong>Дизайн-паттерны — Singleton, Factory, Observer</strong></a>
+          <span class="sitemap-date">23 апреля 2026</span>
+          <p>Три самых частых паттерна проектирования. Разбираем на примерах: зачем нужны, как устроены и где применяются в реальном коде.</p>
+        </li>
+        <li>
+          <a href="/articles/monolit-i-mikroservisy.html"><strong>Монолит и микросервисы — когда что выбирать</strong></a>
+          <span class="sitemap-date">5 апреля 2026</span>
+          <p>Разбираем без хайпа: что такое монолит, микросервисы, зачем они нужны, какие проблемы решают и какие создают. Спойлер: микросервисы — не всегда лучше.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="sitemap-tag">
+      <h2 id="tag-Базы данных">Базы данных <span class="sitemap-count">(5)</span></h2>
+      <ul class="sitemap-list">
+        <li>
+          <a href="/articles/tranzakcii-i-acid.html"><strong>Транзакции в базах данных — ACID простыми словами</strong></a>
+          <span class="sitemap-date">21 апреля 2026</span>
+          <p>Почему при переводе денег нельзя потерять ни копейки. Разбираем транзакции и четыре их свойства: атомарность, согласованность, изоляцию, надёжность.</p>
+        </li>
+        <li>
+          <a href="/articles/chto-takoe-orm.html"><strong>Что такое ORM — работа с базой через объекты</strong></a>
+          <span class="sitemap-date">13 апреля 2026</span>
+          <p>Зачем писать SQL, если можно работать с базой как с обычными объектами. Разбираем ORM: как работает, плюсы и минусы, примеры на SQLAlchemy.</p>
+        </li>
+        <li>
+          <a href="/articles/indeksy-v-bazah-dannyh.html"><strong>Индексы в базах данных — зачем и как работают</strong></a>
+          <span class="sitemap-date">9 апреля 2026</span>
+          <p>Почему один и тот же SQL-запрос может выполняться 10 мс или 10 секунд. Разбираем индексы: B-tree, составные, покрывающие и когда они вредят.</p>
+        </li>
+        <li>
+          <a href="/articles/sql-zaprosy-s-nulya.html"><strong>SQL-запросы с нуля — SELECT, WHERE, JOIN</strong></a>
+          <span class="sitemap-date">7 апреля 2026</span>
+          <p>Разбираем SQL на практике: как выбрать данные, отфильтровать, отсортировать, соединить таблицы. С примерами на реальных задачах интернет-магазина.</p>
+        </li>
+        <li>
+          <a href="/articles/sql-vs-nosql.html"><strong>SQL vs NoSQL: какую базу данных выбрать</strong></a>
+          <span class="sitemap-date">26 февраля 2026</span>
+          <p>Разница между реляционными и нереляционными базами, где какие применяются и как не прогадать с выбором под свой проект.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="sitemap-tag">
+      <h2 id="tag-Безопасность">Безопасность <span class="sitemap-count">(8)</span></h2>
+      <ul class="sitemap-list">
+        <li>
+          <a href="/articles/cookie-localstorage-sessionstorage.html"><strong>Cookie, localStorage и sessionStorage — что выбрать</strong></a>
+          <span class="sitemap-date">22 апреля 2026</span>
+          <p>Три способа хранить данные в браузере. Разбираем разницу, лимиты, безопасность и когда что использовать — на конкретных примерах.</p>
+        </li>
+        <li>
+          <a href="/articles/chto-takoe-cors.html"><strong>Что такое CORS и почему браузер блокирует запросы</strong></a>
+          <span class="sitemap-date">17 апреля 2026</span>
+          <p>Почему fetch с одного сайта на другой падает с ошибкой, что такое Same-Origin Policy и как правильно настроить CORS на сервере.</p>
+        </li>
+        <li>
+          <a href="/articles/heshirovanie-paroley.html"><strong>Как правильно хранить пароли — хеширование и соль</strong></a>
+          <span class="sitemap-date">16 апреля 2026</span>
+          <p>Почему нельзя хранить пароли в открытом виде, чем MD5 хуже bcrypt и что такое соль. Разбираем на примерах кода.</p>
+        </li>
+        <li>
+          <a href="/articles/xss-csrf-sql-inekcii.html"><strong>XSS, CSRF, SQL-инъекции — три главные атаки на веб</strong></a>
+          <span class="sitemap-date">15 апреля 2026</span>
+          <p>Разбираем три самых частых уязвимости в веб-приложениях: как работают, чем опасны и как защититься. С примерами атак и защиты.</p>
+        </li>
+        <li>
+          <a href="/articles/chto-takoe-jwt-avtorizaciya.html"><strong>Что такое JWT и как работает авторизация</strong></a>
+          <span class="sitemap-date">3 апреля 2026</span>
+          <p>JWT — это токен, который заменяет куки-сессии. Разбираем структуру, подпись, срок жизни и типичные ошибки при работе с токенами.</p>
+        </li>
+        <li>
+          <a href="/articles/chto-takoe-vpn.html"><strong>Что такое VPN и как он работает</strong></a>
+          <span class="sitemap-date">29 марта 2026</span>
+          <p>VPN — это не только «обход блокировок». Разбираем, как устроен туннель, что видит провайдер, какие бывают протоколы и где VPN не поможет.</p>
+        </li>
+        <li>
+          <a href="/articles/api-klyuch-kak-ne-slit.html"><strong>API-ключ: что это и как не слить его в GitHub</strong></a>
+          <span class="sitemap-date">13 марта 2026</span>
+          <p>Что такое токены, чем они опасны и почему одна строка в публичном репозитории может стоить тысячи долларов. Правила, которые спасают.</p>
+        </li>
+        <li>
+          <a href="/articles/kak-rabotaet-https.html"><strong>Как работает HTTPS: шифрование простыми словами</strong></a>
+          <span class="sitemap-date">28 февраля 2026</span>
+          <p>Почему сайты без HTTPS уже вне закона, что такое TLS, сертификат и почему замок в адресной строке — это не просто иконка.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="sitemap-tag">
+      <h2 id="tag-Веб">Веб <span class="sitemap-count">(20)</span></h2>
+      <ul class="sitemap-list">
+        <li>
+          <a href="/articles/paginaciya-i-versirovanie-api.html"><strong>Пагинация и версионирование API — как не сломать клиентов</strong></a>
+          <span class="sitemap-date">27 апреля 2026</span>
+          <p>Как отдавать тысячи записей постранично и что делать, когда API меняется. Разбираем offset/limit, cursor-пагинацию и версионирование.</p>
+        </li>
+        <li>
+          <a href="/articles/chto-takoe-nginx.html"><strong>Что такое Nginx и зачем он нужен на сервере</strong></a>
+          <span class="sitemap-date">26 апреля 2026</span>
+          <p>Почему почти все сайты работают через Nginx. Разбираем: веб-сервер, reverse proxy, балансировка нагрузки, статика и конфиги.</p>
+        </li>
+        <li>
+          <a href="/articles/cookie-localstorage-sessionstorage.html"><strong>Cookie, localStorage и sessionStorage — что выбрать</strong></a>
+          <span class="sitemap-date">22 апреля 2026</span>
+          <p>Три способа хранить данные в браузере. Разбираем разницу, лимиты, безопасность и когда что использовать — на конкретных примерах.</p>
+        </li>
+        <li>
+          <a href="/articles/chto-takoe-cors.html"><strong>Что такое CORS и почему браузер блокирует запросы</strong></a>
+          <span class="sitemap-date">17 апреля 2026</span>
+          <p>Почему fetch с одного сайта на другой падает с ошибкой, что такое Same-Origin Policy и как правильно настроить CORS на сервере.</p>
+        </li>
+        <li>
+          <a href="/articles/xss-csrf-sql-inekcii.html"><strong>XSS, CSRF, SQL-инъекции — три главные атаки на веб</strong></a>
+          <span class="sitemap-date">15 апреля 2026</span>
+          <p>Разбираем три самых частых уязвимости в веб-приложениях: как работают, чем опасны и как защититься. С примерами атак и защиты.</p>
+        </li>
+        <li>
+          <a href="/articles/kak-rabotaet-websocket.html"><strong>Как работает WebSocket — real-time связь между браузером и сервером</strong></a>
+          <span class="sitemap-date">14 апреля 2026</span>
+          <p>Почему обычный HTTP плохо подходит для чатов, игр и бирж. Разбираем WebSocket: handshake, кадры, когда нужен и какие есть альтернативы.</p>
+        </li>
+        <li>
+          <a href="/articles/http-metody-i-status-kody.html"><strong>HTTP-методы и статус-коды — шпаргалка с примерами</strong></a>
+          <span class="sitemap-date">4 апреля 2026</span>
+          <p>GET, POST, PUT, PATCH, DELETE и что значат все эти 200, 301, 404, 500. Разбираем HTTP по-человечески, с примерами запросов и ответов.</p>
+        </li>
+        <li>
+          <a href="/articles/chto-takoe-jwt-avtorizaciya.html"><strong>Что такое JWT и как работает авторизация</strong></a>
+          <span class="sitemap-date">3 апреля 2026</span>
+          <p>JWT — это токен, который заменяет куки-сессии. Разбираем структуру, подпись, срок жизни и типичные ошибки при работе с токенами.</p>
+        </li>
+        <li>
+          <a href="/articles/chto-takoe-keshirovanie.html"><strong>Что такое кэширование и зачем оно нужно</strong></a>
+          <span class="sitemap-date">2 апреля 2026</span>
+          <p>Кэш — одна из главных идей в IT. Разбираем, какие бывают уровни кэша, что такое TTL, инвалидация, и почему кэш может всё сломать.</p>
+        </li>
+        <li>
+          <a href="/articles/chto-takoe-rest-i-graphql.html"><strong>REST и GraphQL — в чём разница</strong></a>
+          <span class="sitemap-date">30 марта 2026</span>
+          <p>Два главных подхода к построению API. Разбираем на примерах: когда REST удобнее, а когда GraphQL решает проблемы, которые REST создаёт.</p>
+        </li>
+        <li>
+          <a href="/articles/kak-rabotaet-dns.html"><strong>Как работает DNS — простыми словами</strong></a>
+          <span class="sitemap-date">27 марта 2026</span>
+          <p>Что происходит за секунду между вводом адреса в браузере и загрузкой сайта. Разбираем DNS: корневые серверы, зоны, кэш и типы записей.</p>
+        </li>
+        <li>
+          <a href="/articles/kak-rabotaet-brauzer.html"><strong>Как работает браузер: DOM, парсинг и рендеринг</strong></a>
+          <span class="sitemap-date">19 марта 2026</span>
+          <p>Что происходит между нажатием Enter и появлением страницы. Разбираю путь: HTML → DOM → CSSOM → рендер-дерево → пиксели.</p>
+        </li>
+        <li>
+          <a href="/articles/asinhronnost-v-javascript.html"><strong>Асинхронность в JavaScript: промисы и async/await</strong></a>
+          <span class="sitemap-date">11 марта 2026</span>
+          <p>Почему JavaScript не может просто подождать, что такое промисы, как работает async/await и почему fetch — асинхронный.</p>
+        </li>
+        <li>
+          <a href="/articles/javascript-massivy-i-obekty.html"><strong>Массивы и объекты в JavaScript: полный разбор с примерами</strong></a>
+          <span class="sitemap-date">9 марта 2026</span>
+          <p>Как хранить списки и структурированные данные, какие методы массивов нужны в реальной работе и чем объект отличается от массива.</p>
+        </li>
+        <li>
+          <a href="/articles/kak-rabotaet-poisk-v-google.html"><strong>Как работает поиск в Google: краулеры, индекс и ранжирование</strong></a>
+          <span class="sitemap-date">3 марта 2026</span>
+          <p>Что происходит за миллисекунды между нажатием Enter и списком результатов: как роботы обходят сайты, как строится индекс и почему одни страницы выше других.</p>
+        </li>
+        <li>
+          <a href="/articles/kak-rabotaet-https.html"><strong>Как работает HTTPS: шифрование простыми словами</strong></a>
+          <span class="sitemap-date">28 февраля 2026</span>
+          <p>Почему сайты без HTTPS уже вне закона, что такое TLS, сертификат и почему замок в адресной строке — это не просто иконка.</p>
+        </li>
+        <li>
+          <a href="/articles/javascript-peremennye-i-tipy.html"><strong>JavaScript: переменные и типы данных простыми словами</strong></a>
+          <span class="sitemap-date">24 февраля 2026</span>
+          <p>Чем отличается let от const, какие в JS бывают типы данных, зачем нужны строки, числа и объекты — с примерами и разбором ошибок.</p>
+        </li>
+        <li>
+          <a href="/articles/css-flexbox-vs-grid.html"><strong>CSS: Flexbox против Grid — когда что использовать</strong></a>
+          <span class="sitemap-date">22 февраля 2026</span>
+          <p>Два инструмента для раскладки элементов. Объясняю разницу, показываю примеры и говорю прямо: бери это, а не то.</p>
+        </li>
+        <li>
+          <a href="/articles/html-s-nulya.html"><strong>HTML с нуля: как устроена любая веб-страница</strong></a>
+          <span class="sitemap-date">20 февраля 2026</span>
+          <p>Что такое HTML, зачем нужны теги, что означает семантическая разметка и как собрать первую страницу с нуля.</p>
+        </li>
+        <li>
+          <a href="/articles/chto-takoe-api.html"><strong>Что такое API за 5 минут: понятное объяснение с примерами</strong></a>
+          <span class="sitemap-date">16 февраля 2026</span>
+          <p>API — это способ одной программы попросить что-то у другой. Разбираю на примере официанта в кафе и показываю рабочие примеры запросов.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="sitemap-tag">
+      <h2 id="tag-ИИ">ИИ <span class="sitemap-count">(2)</span></h2>
+      <ul class="sitemap-list">
+        <li>
+          <a href="/articles/chto-takoe-neyroset-posloyam.html"><strong>Что такое нейросеть: разбор по слоям без формул</strong></a>
+          <span class="sitemap-date">15 марта 2026</span>
+          <p>Как устроен искусственный нейрон, зачем нужны слои, веса и функции активации. Разбираю архитектуру на пальцах и показываю мини-сеть на Python.</p>
+        </li>
+        <li>
+          <a href="/articles/chto-takoe-iskusstvennyy-intellekt.html"><strong>Что такое искусственный интеллект: разбор с нуля</strong></a>
+          <span class="sitemap-date">10 февраля 2026</span>
+          <p>Объясняю простыми словами, чем ИИ отличается от обычной программы, какие бывают типы ИИ и как он реально работает — без магии и заумных терминов.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="sitemap-tag">
+      <h2 id="tag-Инструменты">Инструменты <span class="sitemap-count">(12)</span></h2>
+      <ul class="sitemap-list">
+        <li>
+          <a href="/articles/chto-takoe-nginx.html"><strong>Что такое Nginx и зачем он нужен на сервере</strong></a>
+          <span class="sitemap-date">26 апреля 2026</span>
+          <p>Почему почти все сайты работают через Nginx. Разбираем: веб-сервер, reverse proxy, балансировка нагрузки, статика и конфиги.</p>
+        </li>
+        <li>
+          <a href="/articles/bash-skripty-dlya-novichka.html"><strong>Bash-скрипты для новичка — автоматизация на Linux</strong></a>
+          <span class="sitemap-date">25 апреля 2026</span>
+          <p>Как написать первый скрипт, который автоматизирует рутину: переменные, условия, циклы, функции, аргументы командной строки.</p>
+        </li>
+        <li>
+          <a href="/articles/docker-compose-dlya-proekta.html"><strong>Docker Compose — несколько контейнеров одной командой</strong></a>
+          <span class="sitemap-date">18 апреля 2026</span>
+          <p>Когда одного Dockerfile мало: как описать приложение, базу и кэш в одном файле и запускать всё одной командой docker compose up.</p>
+        </li>
+        <li>
+          <a href="/articles/git-vetki-i-sliyanie.html"><strong>Git ветки и слияния — branch, merge, rebase</strong></a>
+          <span class="sitemap-date">8 апреля 2026</span>
+          <p>Как работать с ветками в Git: создавать, переключаться, сливать, разрешать конфликты. Разбираем merge и rebase — когда что использовать.</p>
+        </li>
+        <li>
+          <a href="/articles/osnovy-linux-dlya-razrabotchika.html"><strong>Основы Linux для разработчика — базовые команды</strong></a>
+          <span class="sitemap-date">6 апреля 2026</span>
+          <p>Что нужно знать про Linux, чтобы работать на сервере. Разбираем навигацию по файлам, права доступа, процессы, SSH и полезные команды с примерами.</p>
+        </li>
+        <li>
+          <a href="/articles/kak-rabotaet-kompilyator-i-interpretator.html"><strong>Как работает компилятор и интерпретатор</strong></a>
+          <span class="sitemap-date">1 апреля 2026</span>
+          <p>Почему Python медленнее C, а JavaScript работает в браузере, хотя он интерпретируемый. Разбираем компиляцию, интерпретацию и JIT.</p>
+        </li>
+        <li>
+          <a href="/articles/kak-sozdat-telegram-bota.html"><strong>Как создать Telegram-бота с кодом</strong></a>
+          <span class="sitemap-date">26 марта 2026</span>
+          <p>Пошагово: от BotFather и токена до рабочего бота на Python с командами, кнопками и запуском на сервере.</p>
+        </li>
+        <li>
+          <a href="/articles/chto-takoe-devops-ci-cd-deploy.html"><strong>Что такое DevOps — CI/CD и деплой простыми словами</strong></a>
+          <span class="sitemap-date">25 марта 2026</span>
+          <p>Разбираем по-человечески: что такое DevOps, зачем нужны CI и CD, как выглядит pipeline и какие бывают способы деплоя.</p>
+        </li>
+        <li>
+          <a href="/articles/regulyarnye-vyrazheniya-na-praktike.html"><strong>Регулярные выражения: практический разбор с примерами</strong></a>
+          <span class="sitemap-date">21 марта 2026</span>
+          <p>Что это такое, зачем они нужны, как читать «страшные» строки вроде ^\d{3}-\d{2}$ и применять в реальных задачах.</p>
+        </li>
+        <li>
+          <a href="/articles/docker-za-10-minut.html"><strong>Docker за 10 минут: зачем нужны контейнеры</strong></a>
+          <span class="sitemap-date">1 марта 2026</span>
+          <p>Проблема «у меня работает, а у тебя нет» и как Docker её решает. Образ, контейнер, Dockerfile — на пальцах.</p>
+        </li>
+        <li>
+          <a href="/articles/terminal-dlya-novichka.html"><strong>Терминал для новичка: 20 команд, которые нужны каждый день</strong></a>
+          <span class="sitemap-date">18 февраля 2026</span>
+          <p>Почему программисты работают в чёрном окне с текстом и какие команды нужно знать, чтобы не бояться командной строки.</p>
+        </li>
+        <li>
+          <a href="/articles/git-dlya-novichkov.html"><strong>Git для новичков: 10 команд, которых хватит в 90% случаев</strong></a>
+          <span class="sitemap-date">5 февраля 2026</span>
+          <p>Что такое система контроля версий, зачем она нужна и какой минимум команд нужно выучить, чтобы не бояться сломать проект.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="sitemap-tag">
+      <h2 id="tag-Карьера">Карьера <span class="sitemap-count">(3)</span></h2>
+      <ul class="sitemap-list">
+        <li>
+          <a href="/articles/algoritmy-i-struktury-dannyh.html"><strong>Алгоритмы и структуры данных — с чего начать</strong></a>
+          <span class="sitemap-date">31 марта 2026</span>
+          <p>Зачем программисту знать про массивы, списки, деревья и хеш-таблицы. Разбираем базовые структуры и алгоритмы на понятных примерах.</p>
+        </li>
+        <li>
+          <a href="/articles/kak-vybrat-pervyy-yazyk-programmirovaniya.html"><strong>Как выбрать первый язык программирования</strong></a>
+          <span class="sitemap-date">23 марта 2026</span>
+          <p>Python, JavaScript, Java или Go? Разбираем без холиваров: как выбрать первый язык под свою цель, что важно и что вообще не имеет значения.</p>
+        </li>
+        <li>
+          <a href="/articles/kak-uchitsya-programmirovaniyu-s-nulya.html"><strong>Как учиться программированию с нуля в 2026 году</strong></a>
+          <span class="sitemap-date">14 февраля 2026</span>
+          <p>Пошаговый план: с чего начать, сколько времени нужно, какие ошибки совершают почти все и как не бросить на полпути.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="sitemap-tag">
+      <h2 id="tag-Разработка">Разработка <span class="sitemap-count">(29)</span></h2>
+      <ul class="sitemap-list">
+        <li>
+          <a href="/articles/paginaciya-i-versirovanie-api.html"><strong>Пагинация и версионирование API — как не сломать клиентов</strong></a>
+          <span class="sitemap-date">27 апреля 2026</span>
+          <p>Как отдавать тысячи записей постранично и что делать, когда API меняется. Разбираем offset/limit, cursor-пагинацию и версионирование.</p>
+        </li>
+        <li>
+          <a href="/articles/bash-skripty-dlya-novichka.html"><strong>Bash-скрипты для новичка — автоматизация на Linux</strong></a>
+          <span class="sitemap-date">25 апреля 2026</span>
+          <p>Как написать первый скрипт, который автоматизирует рутину: переменные, условия, циклы, функции, аргументы командной строки.</p>
+        </li>
+        <li>
+          <a href="/articles/obrabotka-isklyucheniy-v-python.html"><strong>Обработка исключений в Python — try, except, finally</strong></a>
+          <span class="sitemap-date">24 апреля 2026</span>
+          <p>Как ловить ошибки и не давать программе падать. Разбираем try/except, собственные исключения и контекстные менеджеры с примерами.</p>
+        </li>
+        <li>
+          <a href="/articles/dizayn-patterns-singleton-factory-observer.html"><strong>Дизайн-паттерны — Singleton, Factory, Observer</strong></a>
+          <span class="sitemap-date">23 апреля 2026</span>
+          <p>Три самых частых паттерна проектирования. Разбираем на примерах: зачем нужны, как устроены и где применяются в реальном коде.</p>
+        </li>
+        <li>
+          <a href="/articles/python-s-nulya.html"><strong>Python с нуля — базовый синтаксис за 15 минут</strong></a>
+          <span class="sitemap-date">20 апреля 2026</span>
+          <p>Переменные, типы, условия, циклы, функции и списки. Минимальный набор, с которого начинается любой Python-проект.</p>
+        </li>
+        <li>
+          <a href="/articles/dekoratory-v-python.html"><strong>Декораторы в Python — что это и зачем нужны</strong></a>
+          <span class="sitemap-date">19 апреля 2026</span>
+          <p>Функции, которые оборачивают другие функции. Разбираем декораторы с нуля: синтаксис, как работают, где применяются на практике.</p>
+        </li>
+        <li>
+          <a href="/articles/docker-compose-dlya-proekta.html"><strong>Docker Compose — несколько контейнеров одной командой</strong></a>
+          <span class="sitemap-date">18 апреля 2026</span>
+          <p>Когда одного Dockerfile мало: как описать приложение, базу и кэш в одном файле и запускать всё одной командой docker compose up.</p>
+        </li>
+        <li>
+          <a href="/articles/heshirovanie-paroley.html"><strong>Как правильно хранить пароли — хеширование и соль</strong></a>
+          <span class="sitemap-date">16 апреля 2026</span>
+          <p>Почему нельзя хранить пароли в открытом виде, чем MD5 хуже bcrypt и что такое соль. Разбираем на примерах кода.</p>
+        </li>
+        <li>
+          <a href="/articles/xss-csrf-sql-inekcii.html"><strong>XSS, CSRF, SQL-инъекции — три главные атаки на веб</strong></a>
+          <span class="sitemap-date">15 апреля 2026</span>
+          <p>Разбираем три самых частых уязвимости в веб-приложениях: как работают, чем опасны и как защититься. С примерами атак и защиты.</p>
+        </li>
+        <li>
+          <a href="/articles/kak-rabotaet-websocket.html"><strong>Как работает WebSocket — real-time связь между браузером и сервером</strong></a>
+          <span class="sitemap-date">14 апреля 2026</span>
+          <p>Почему обычный HTTP плохо подходит для чатов, игр и бирж. Разбираем WebSocket: handshake, кадры, когда нужен и какие есть альтернативы.</p>
+        </li>
+        <li>
+          <a href="/articles/chto-takoe-orm.html"><strong>Что такое ORM — работа с базой через объекты</strong></a>
+          <span class="sitemap-date">13 апреля 2026</span>
+          <p>Зачем писать SQL, если можно работать с базой как с обычными объектами. Разбираем ORM: как работает, плюсы и минусы, примеры на SQLAlchemy.</p>
+        </li>
+        <li>
+          <a href="/articles/mnogopotochnost-v-python-gil.html"><strong>Многопоточность в Python — GIL и потоки</strong></a>
+          <span class="sitemap-date">12 апреля 2026</span>
+          <p>Почему потоки в Python не ускоряют вычисления, что такое GIL и когда всё-таки стоит использовать threading, multiprocessing или asyncio.</p>
+        </li>
+        <li>
+          <a href="/articles/zachem-nuzhen-typescript.html"><strong>Зачем нужен TypeScript, если есть JavaScript</strong></a>
+          <span class="sitemap-date">11 апреля 2026</span>
+          <p>Типы, интерфейсы, компиляция — разбираем, что даёт TypeScript, кому он нужен и почему крупные проекты уходят на него.</p>
+        </li>
+        <li>
+          <a href="/articles/asinhronnost-v-python.html"><strong>Асинхронность в Python — asyncio простыми словами</strong></a>
+          <span class="sitemap-date">10 апреля 2026</span>
+          <p>async, await, event loop, задачи и корутины. Разбираем, зачем нужна асинхронность в Python, где она помогает и где только мешает.</p>
+        </li>
+        <li>
+          <a href="/articles/indeksy-v-bazah-dannyh.html"><strong>Индексы в базах данных — зачем и как работают</strong></a>
+          <span class="sitemap-date">9 апреля 2026</span>
+          <p>Почему один и тот же SQL-запрос может выполняться 10 мс или 10 секунд. Разбираем индексы: B-tree, составные, покрывающие и когда они вредят.</p>
+        </li>
+        <li>
+          <a href="/articles/git-vetki-i-sliyanie.html"><strong>Git ветки и слияния — branch, merge, rebase</strong></a>
+          <span class="sitemap-date">8 апреля 2026</span>
+          <p>Как работать с ветками в Git: создавать, переключаться, сливать, разрешать конфликты. Разбираем merge и rebase — когда что использовать.</p>
+        </li>
+        <li>
+          <a href="/articles/sql-zaprosy-s-nulya.html"><strong>SQL-запросы с нуля — SELECT, WHERE, JOIN</strong></a>
+          <span class="sitemap-date">7 апреля 2026</span>
+          <p>Разбираем SQL на практике: как выбрать данные, отфильтровать, отсортировать, соединить таблицы. С примерами на реальных задачах интернет-магазина.</p>
+        </li>
+        <li>
+          <a href="/articles/monolit-i-mikroservisy.html"><strong>Монолит и микросервисы — когда что выбирать</strong></a>
+          <span class="sitemap-date">5 апреля 2026</span>
+          <p>Разбираем без хайпа: что такое монолит, микросервисы, зачем они нужны, какие проблемы решают и какие создают. Спойлер: микросервисы — не всегда лучше.</p>
+        </li>
+        <li>
+          <a href="/articles/chto-takoe-keshirovanie.html"><strong>Что такое кэширование и зачем оно нужно</strong></a>
+          <span class="sitemap-date">2 апреля 2026</span>
+          <p>Кэш — одна из главных идей в IT. Разбираем, какие бывают уровни кэша, что такое TTL, инвалидация, и почему кэш может всё сломать.</p>
+        </li>
+        <li>
+          <a href="/articles/kak-rabotaet-kompilyator-i-interpretator.html"><strong>Как работает компилятор и интерпретатор</strong></a>
+          <span class="sitemap-date">1 апреля 2026</span>
+          <p>Почему Python медленнее C, а JavaScript работает в браузере, хотя он интерпретируемый. Разбираем компиляцию, интерпретацию и JIT.</p>
+        </li>
+        <li>
+          <a href="/articles/algoritmy-i-struktury-dannyh.html"><strong>Алгоритмы и структуры данных — с чего начать</strong></a>
+          <span class="sitemap-date">31 марта 2026</span>
+          <p>Зачем программисту знать про массивы, списки, деревья и хеш-таблицы. Разбираем базовые структуры и алгоритмы на понятных примерах.</p>
+        </li>
+        <li>
+          <a href="/articles/oop-prostymi-slovami.html"><strong>ООП простыми словами — классы, объекты, наследование</strong></a>
+          <span class="sitemap-date">28 марта 2026</span>
+          <p>Инкапсуляция, наследование, полиморфизм и абстракция — четыре слова, которые пугают новичков. Разбираем на понятных примерах без умных терминов.</p>
+        </li>
+        <li>
+          <a href="/articles/kak-sozdat-telegram-bota.html"><strong>Как создать Telegram-бота с кодом</strong></a>
+          <span class="sitemap-date">26 марта 2026</span>
+          <p>Пошагово: от BotFather и токена до рабочего бота на Python с командами, кнопками и запуском на сервере.</p>
+        </li>
+        <li>
+          <a href="/articles/scrum-i-agile-prostymi-slovami.html"><strong>Scrum и Agile простыми словами</strong></a>
+          <span class="sitemap-date">24 марта 2026</span>
+          <p>Agile, Scrum, спринт, стендап, Kanban — разбираем, что за этими словами стоит на самом деле, без корпоративного тумана и коучей.</p>
+        </li>
+        <li>
+          <a href="/articles/kak-vybrat-pervyy-yazyk-programmirovaniya.html"><strong>Как выбрать первый язык программирования</strong></a>
+          <span class="sitemap-date">23 марта 2026</span>
+          <p>Python, JavaScript, Java или Go? Разбираем без холиваров: как выбрать первый язык под свою цель, что важно и что вообще не имеет значения.</p>
+        </li>
+        <li>
+          <a href="/articles/regulyarnye-vyrazheniya-na-praktike.html"><strong>Регулярные выражения: практический разбор с примерами</strong></a>
+          <span class="sitemap-date">21 марта 2026</span>
+          <p>Что это такое, зачем они нужны, как читать «страшные» строки вроде ^\d{3}-\d{2}$ и применять в реальных задачах.</p>
+        </li>
+        <li>
+          <a href="/articles/modulnye-testy-zachem-nuzhny.html"><strong>Модульные тесты: зачем они нужны и как их писать</strong></a>
+          <span class="sitemap-date">17 марта 2026</span>
+          <p>Почему программисты пишут код, который проверяет код. Разбираю на примерах: что такое юнит-тесты, зачем они нужны и как начать без боли.</p>
+        </li>
+        <li>
+          <a href="/articles/api-klyuch-kak-ne-slit.html"><strong>API-ключ: что это и как не слить его в GitHub</strong></a>
+          <span class="sitemap-date">13 марта 2026</span>
+          <p>Что такое токены, чем они опасны и почему одна строка в публичном репозитории может стоить тысячи долларов. Правила, которые спасают.</p>
+        </li>
+        <li>
+          <a href="/articles/kak-pisat-chistyy-kod.html"><strong>Как писать чистый код: 8 принципов, которые отличают новичка</strong></a>
+          <span class="sitemap-date">7 марта 2026</span>
+          <p>Разбор на примерах: почему код пишут для людей, а не для машин, что такое DRY, KISS, YAGNI и как одна маленькая привычка экономит часы.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="sitemap-tag">
+      <h2 id="tag-Сети">Сети <span class="sitemap-count">(3)</span></h2>
+      <ul class="sitemap-list">
+        <li>
+          <a href="/articles/kak-rabotaet-websocket.html"><strong>Как работает WebSocket — real-time связь между браузером и сервером</strong></a>
+          <span class="sitemap-date">14 апреля 2026</span>
+          <p>Почему обычный HTTP плохо подходит для чатов, игр и бирж. Разбираем WebSocket: handshake, кадры, когда нужен и какие есть альтернативы.</p>
+        </li>
+        <li>
+          <a href="/articles/chto-takoe-vpn.html"><strong>Что такое VPN и как он работает</strong></a>
+          <span class="sitemap-date">29 марта 2026</span>
+          <p>VPN — это не только «обход блокировок». Разбираем, как устроен туннель, что видит провайдер, какие бывают протоколы и где VPN не поможет.</p>
+        </li>
+        <li>
+          <a href="/articles/kak-rabotaet-dns.html"><strong>Как работает DNS — простыми словами</strong></a>
+          <span class="sitemap-date">27 марта 2026</span>
+          <p>Что происходит за секунду между вводом адреса в браузере и загрузкой сайта. Разбираем DNS: корневые серверы, зоны, кэш и типы записей.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="sitemap-tag">
+      <h2 id="tag-Теория">Теория <span class="sitemap-count">(27)</span></h2>
+      <ul class="sitemap-list">
+        <li>
+          <a href="/articles/obrabotka-isklyucheniy-v-python.html"><strong>Обработка исключений в Python — try, except, finally</strong></a>
+          <span class="sitemap-date">24 апреля 2026</span>
+          <p>Как ловить ошибки и не давать программе падать. Разбираем try/except, собственные исключения и контекстные менеджеры с примерами.</p>
+        </li>
+        <li>
+          <a href="/articles/dizayn-patterns-singleton-factory-observer.html"><strong>Дизайн-паттерны — Singleton, Factory, Observer</strong></a>
+          <span class="sitemap-date">23 апреля 2026</span>
+          <p>Три самых частых паттерна проектирования. Разбираем на примерах: зачем нужны, как устроены и где применяются в реальном коде.</p>
+        </li>
+        <li>
+          <a href="/articles/tranzakcii-i-acid.html"><strong>Транзакции в базах данных — ACID простыми словами</strong></a>
+          <span class="sitemap-date">21 апреля 2026</span>
+          <p>Почему при переводе денег нельзя потерять ни копейки. Разбираем транзакции и четыре их свойства: атомарность, согласованность, изоляцию, надёжность.</p>
+        </li>
+        <li>
+          <a href="/articles/python-s-nulya.html"><strong>Python с нуля — базовый синтаксис за 15 минут</strong></a>
+          <span class="sitemap-date">20 апреля 2026</span>
+          <p>Переменные, типы, условия, циклы, функции и списки. Минимальный набор, с которого начинается любой Python-проект.</p>
+        </li>
+        <li>
+          <a href="/articles/dekoratory-v-python.html"><strong>Декораторы в Python — что это и зачем нужны</strong></a>
+          <span class="sitemap-date">19 апреля 2026</span>
+          <p>Функции, которые оборачивают другие функции. Разбираем декораторы с нуля: синтаксис, как работают, где применяются на практике.</p>
+        </li>
+        <li>
+          <a href="/articles/heshirovanie-paroley.html"><strong>Как правильно хранить пароли — хеширование и соль</strong></a>
+          <span class="sitemap-date">16 апреля 2026</span>
+          <p>Почему нельзя хранить пароли в открытом виде, чем MD5 хуже bcrypt и что такое соль. Разбираем на примерах кода.</p>
+        </li>
+        <li>
+          <a href="/articles/mnogopotochnost-v-python-gil.html"><strong>Многопоточность в Python — GIL и потоки</strong></a>
+          <span class="sitemap-date">12 апреля 2026</span>
+          <p>Почему потоки в Python не ускоряют вычисления, что такое GIL и когда всё-таки стоит использовать threading, multiprocessing или asyncio.</p>
+        </li>
+        <li>
+          <a href="/articles/asinhronnost-v-python.html"><strong>Асинхронность в Python — asyncio простыми словами</strong></a>
+          <span class="sitemap-date">10 апреля 2026</span>
+          <p>async, await, event loop, задачи и корутины. Разбираем, зачем нужна асинхронность в Python, где она помогает и где только мешает.</p>
+        </li>
+        <li>
+          <a href="/articles/osnovy-linux-dlya-razrabotchika.html"><strong>Основы Linux для разработчика — базовые команды</strong></a>
+          <span class="sitemap-date">6 апреля 2026</span>
+          <p>Что нужно знать про Linux, чтобы работать на сервере. Разбираем навигацию по файлам, права доступа, процессы, SSH и полезные команды с примерами.</p>
+        </li>
+        <li>
+          <a href="/articles/http-metody-i-status-kody.html"><strong>HTTP-методы и статус-коды — шпаргалка с примерами</strong></a>
+          <span class="sitemap-date">4 апреля 2026</span>
+          <p>GET, POST, PUT, PATCH, DELETE и что значат все эти 200, 301, 404, 500. Разбираем HTTP по-человечески, с примерами запросов и ответов.</p>
+        </li>
+        <li>
+          <a href="/articles/kak-rabotaet-kompilyator-i-interpretator.html"><strong>Как работает компилятор и интерпретатор</strong></a>
+          <span class="sitemap-date">1 апреля 2026</span>
+          <p>Почему Python медленнее C, а JavaScript работает в браузере, хотя он интерпретируемый. Разбираем компиляцию, интерпретацию и JIT.</p>
+        </li>
+        <li>
+          <a href="/articles/algoritmy-i-struktury-dannyh.html"><strong>Алгоритмы и структуры данных — с чего начать</strong></a>
+          <span class="sitemap-date">31 марта 2026</span>
+          <p>Зачем программисту знать про массивы, списки, деревья и хеш-таблицы. Разбираем базовые структуры и алгоритмы на понятных примерах.</p>
+        </li>
+        <li>
+          <a href="/articles/chto-takoe-rest-i-graphql.html"><strong>REST и GraphQL — в чём разница</strong></a>
+          <span class="sitemap-date">30 марта 2026</span>
+          <p>Два главных подхода к построению API. Разбираем на примерах: когда REST удобнее, а когда GraphQL решает проблемы, которые REST создаёт.</p>
+        </li>
+        <li>
+          <a href="/articles/chto-takoe-vpn.html"><strong>Что такое VPN и как он работает</strong></a>
+          <span class="sitemap-date">29 марта 2026</span>
+          <p>VPN — это не только «обход блокировок». Разбираем, как устроен туннель, что видит провайдер, какие бывают протоколы и где VPN не поможет.</p>
+        </li>
+        <li>
+          <a href="/articles/oop-prostymi-slovami.html"><strong>ООП простыми словами — классы, объекты, наследование</strong></a>
+          <span class="sitemap-date">28 марта 2026</span>
+          <p>Инкапсуляция, наследование, полиморфизм и абстракция — четыре слова, которые пугают новичков. Разбираем на понятных примерах без умных терминов.</p>
+        </li>
+        <li>
+          <a href="/articles/kak-rabotaet-dns.html"><strong>Как работает DNS — простыми словами</strong></a>
+          <span class="sitemap-date">27 марта 2026</span>
+          <p>Что происходит за секунду между вводом адреса в браузере и загрузкой сайта. Разбираем DNS: корневые серверы, зоны, кэш и типы записей.</p>
+        </li>
+        <li>
+          <a href="/articles/chto-takoe-devops-ci-cd-deploy.html"><strong>Что такое DevOps — CI/CD и деплой простыми словами</strong></a>
+          <span class="sitemap-date">25 марта 2026</span>
+          <p>Разбираем по-человечески: что такое DevOps, зачем нужны CI и CD, как выглядит pipeline и какие бывают способы деплоя.</p>
+        </li>
+        <li>
+          <a href="/articles/scrum-i-agile-prostymi-slovami.html"><strong>Scrum и Agile простыми словами</strong></a>
+          <span class="sitemap-date">24 марта 2026</span>
+          <p>Agile, Scrum, спринт, стендап, Kanban — разбираем, что за этими словами стоит на самом деле, без корпоративного тумана и коучей.</p>
+        </li>
+        <li>
+          <a href="/articles/kak-vybrat-pervyy-yazyk-programmirovaniya.html"><strong>Как выбрать первый язык программирования</strong></a>
+          <span class="sitemap-date">23 марта 2026</span>
+          <p>Python, JavaScript, Java или Go? Разбираем без холиваров: как выбрать первый язык под свою цель, что важно и что вообще не имеет значения.</p>
+        </li>
+        <li>
+          <a href="/articles/kak-rabotaet-brauzer.html"><strong>Как работает браузер: DOM, парсинг и рендеринг</strong></a>
+          <span class="sitemap-date">19 марта 2026</span>
+          <p>Что происходит между нажатием Enter и появлением страницы. Разбираю путь: HTML → DOM → CSSOM → рендер-дерево → пиксели.</p>
+        </li>
+        <li>
+          <a href="/articles/chto-takoe-neyroset-posloyam.html"><strong>Что такое нейросеть: разбор по слоям без формул</strong></a>
+          <span class="sitemap-date">15 марта 2026</span>
+          <p>Как устроен искусственный нейрон, зачем нужны слои, веса и функции активации. Разбираю архитектуру на пальцах и показываю мини-сеть на Python.</p>
+        </li>
+        <li>
+          <a href="/articles/kak-pisat-chistyy-kod.html"><strong>Как писать чистый код: 8 принципов, которые отличают новичка</strong></a>
+          <span class="sitemap-date">7 марта 2026</span>
+          <p>Разбор на примерах: почему код пишут для людей, а не для машин, что такое DRY, KISS, YAGNI и как одна маленькая привычка экономит часы.</p>
+        </li>
+        <li>
+          <a href="/articles/sql-vs-nosql.html"><strong>SQL vs NoSQL: какую базу данных выбрать</strong></a>
+          <span class="sitemap-date">26 февраля 2026</span>
+          <p>Разница между реляционными и нереляционными базами, где какие применяются и как не прогадать с выбором под свой проект.</p>
+        </li>
+        <li>
+          <a href="/articles/terminal-dlya-novichka.html"><strong>Терминал для новичка: 20 команд, которые нужны каждый день</strong></a>
+          <span class="sitemap-date">18 февраля 2026</span>
+          <p>Почему программисты работают в чёрном окне с текстом и какие команды нужно знать, чтобы не бояться командной строки.</p>
+        </li>
+        <li>
+          <a href="/articles/chto-takoe-api.html"><strong>Что такое API за 5 минут: понятное объяснение с примерами</strong></a>
+          <span class="sitemap-date">16 февраля 2026</span>
+          <p>API — это способ одной программы попросить что-то у другой. Разбираю на примере официанта в кафе и показываю рабочие примеры запросов.</p>
+        </li>
+        <li>
+          <a href="/articles/kak-uchitsya-programmirovaniyu-s-nulya.html"><strong>Как учиться программированию с нуля в 2026 году</strong></a>
+          <span class="sitemap-date">14 февраля 2026</span>
+          <p>Пошаговый план: с чего начать, сколько времени нужно, какие ошибки совершают почти все и как не бросить на полпути.</p>
+        </li>
+        <li>
+          <a href="/articles/chto-takoe-iskusstvennyy-intellekt.html"><strong>Что такое искусственный интеллект: разбор с нуля</strong></a>
+          <span class="sitemap-date">10 февраля 2026</span>
+          <p>Объясняю простыми словами, чем ИИ отличается от обычной программы, какие бывают типы ИИ и как он реально работает — без магии и заумных терминов.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="sitemap-tag">
+      <h2 id="tag-Тестирование">Тестирование <span class="sitemap-count">(1)</span></h2>
+      <ul class="sitemap-list">
+        <li>
+          <a href="/articles/modulnye-testy-zachem-nuzhny.html"><strong>Модульные тесты: зачем они нужны и как их писать</strong></a>
+          <span class="sitemap-date">17 марта 2026</span>
+          <p>Почему программисты пишут код, который проверяет код. Разбираю на примерах: что такое юнит-тесты, зачем они нужны и как начать без боли.</p>
+        </li>
+      </ul>
+    </section>
+      <section class="sitemap-static">
+        <h2>Служебные страницы</h2>
+        <ul>
+          <li><a href="/">Главная</a></li>
+          <li><a href="/about.html">О сайте</a></li>
+          <li><a href="/contacts.html">Контакты</a></li>
+          <li><a href="/privacy.html">Политика конфиденциальности</a></li>
+          <li><a href="/terms.html">Условия использования</a></li>
+          <li><a href="/sitemap.xml">Карта сайта (XML)</a></li>
+          <li><a href="/rss.xml">RSS-фид</a></li>
+        </ul>
+      </section>
+    </div>
+  </main>
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+  <script src="/app.js"></script>
+</body>
+</html>

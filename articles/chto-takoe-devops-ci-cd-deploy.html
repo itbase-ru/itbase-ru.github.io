@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Что такое DevOps — CI/CD и деплой простыми словами — IT·База</title>
+  <meta name="description" content="Разбираем по-человечески: что такое DevOps, зачем нужны CI и CD, как выглядит pipeline и какие бывают способы деплоя.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/chto-takoe-devops-ci-cd-deploy.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Что такое DevOps — CI/CD и деплой простыми словами">
+  <meta property="og:description" content="Разбираем по-человечески: что такое DevOps, зачем нужны CI и CD, как выглядит pipeline и какие бывают способы деплоя.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/chto-takoe-devops-ci-cd-deploy.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/chto-takoe-devops-ci-cd-deploy.html">
+  <meta property="article:published_time" content="2026-03-25">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Что такое DevOps — CI/CD и деплой простыми словами">
+  <meta name="twitter:description" content="Разбираем по-человечески: что такое DevOps, зачем нужны CI и CD, как выглядит pipeline и какие бывают способы деплоя.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/chto-takoe-devops-ci-cd-deploy.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Что такое DevOps — CI/CD и деплой простыми словами", "description": "Разбираем по-человечески: что такое DevOps, зачем нужны CI и CD, как выглядит pipeline и какие бывают способы деплоя.", "image": ["https://itbase-ru.github.io/img/og/chto-takoe-devops-ci-cd-deploy.png"], "datePublished": "2026-03-25", "dateModified": "2026-03-25", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/chto-takoe-devops-ci-cd-deploy.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "DevOps", "item": "https://itbase-ru.github.io/?tag=DevOps"}, {"@type": "ListItem", "position": 3, "name": "Что такое DevOps — CI/CD и деплой простыми словами", "item": "https://itbase-ru.github.io/articles/chto-takoe-devops-ci-cd-deploy.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="chto-takoe-devops-ci-cd-deploy">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=DevOps">DevOps</a>
+        <span class="sep">/</span>
+        <span>Что такое DevOps — CI/CD и деплой простыми словами</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">DevOps</span><span class="tag">Теория</span><span class="tag">Инструменты</span></div>
+        <h1>Что такое DevOps — CI/CD и деплой простыми словами</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-03-25">25 марта 2026</time>
+          <span class="dot">•</span>
+          <span>10 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/chto-takoe-devops-ci-cd-deploy.svg" alt="Что такое DevOps — CI/CD и деплой простыми словами">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+      <p>«DevOps», «CI/CD», «пайплайн», «деплой» — это слова из вакансий, тимлидов на планёрках и статей на Хабре. Разберём их по-человечески: что это, зачем и как выглядит на практике.</p>
+
+      <h2 id="section-0">Что такое DevOps</h2>
+
+      <p>DevOps — это не инструмент и не должность. Это <strong>культура и подход</strong>, при котором разработка (Dev) и эксплуатация (Ops) работают вместе, а не через стену.</p>
+
+      <p>Раньше было так: разработчики пишут код и «кидают через забор» админам, чтобы те развернули. Админы разворачивают, что-то падает, начинается переписка «это ваш код» — «нет, это ваша инфраструктура». Виноватых нет, продукт страдает.</p>
+
+      <blockquote>DevOps — это когда человек, написавший код, отвечает за то, как этот код работает в проде. А тот, кто держит инфраструктуру, помогает ему это делать быстро и безопасно.</blockquote>
+
+      <h2 id="section-1">Из чего состоит DevOps</h2>
+
+      <p>Три кита, на которых всё держится:</p>
+
+      <ol>
+        <li><strong>CI — Continuous Integration</strong> (непрерывная интеграция).</li>
+        <li><strong>CD — Continuous Delivery / Deployment</strong> (непрерывная доставка или развёртывание).</li>
+        <li><strong>Infrastructure as Code</strong> (инфраструктура как код) — про это отдельно, но упомянем.</li>
+      </ol>
+
+      <h2 id="section-2">CI — непрерывная интеграция</h2>
+
+      <p>Раньше разработчики могли неделями писать код в своих ветках, а потом «в пятницу вечером» сливать всё в основную. И всё ломалось — конфликты, ошибки, «а у меня локально работало».</p>
+
+      <p>CI решает это просто: <strong>каждое изменение автоматически собирается и тестируется</strong>. Запушил код — через пять минут знаешь, что что-то пошло не так.</p>
+
+      <p>Что обычно делает CI:</p>
+
+      <ul>
+        <li>запускает линтеры и проверку стиля;</li>
+        <li>прогоняет unit-тесты;</li>
+        <li>собирает проект (если это компилируемый язык);</li>
+        <li>запускает интеграционные тесты;</li>
+        <li>сообщает результат в PR.</li>
+      </ul>
+
+      <p>Если CI красный — PR не мержится. Простое правило, которое спасает проекты.</p>
+
+      <h2 id="section-3">CD — непрерывная доставка и развёртывание</h2>
+
+      <p>Тут есть путаница из-за одинаковой аббревиатуры. Различай:</p>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Термин</th><th>Что делает</th><th>Что решает человек</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Continuous Delivery</td><td>Готовит релиз, но не выкатывает</td><td>Когда нажать «выкатить»</td></tr>
+          <tr><td>Continuous Deployment</td><td>Выкатывает автоматически</td><td>Ничего, всё само</td></tr>
+        </tbody>
+      </table></div>
+
+      <p>Continuous Delivery — это когда после каждого успешного CI собирается готовый к релизу артефакт. Осталось нажать кнопку. Continuous Deployment идёт дальше — вообще без кнопки: прошли тесты, значит в прод.</p>
+
+      <p>Второй вариант страшнее для новичка, но именно к нему стремятся зрелые команды. Главное — иметь быстрый откат, если что-то пошло не так.</p>
+
+      <h2 id="section-4">Как это выглядит на практике</h2>
+
+      <p>Всё вместе называется <strong>pipeline</strong> — конвейер. Схематично:</p>
+
+      <pre><code class="language-bash">git push → lint → test → build → deploy to staging → deploy to prod</code></pre>
+
+      <p>Каждый шаг — это скрипт, который запускается автоматически. Если на любом шаге падает — следующие не запускаются, приходит уведомление.</p>
+
+      <p>Пример простого CI-конфига для GitHub Actions (<code>.github/workflows/ci.yml</code>):</p>
+
+      <pre><code class="language-bash">name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - run: npm test</code></pre>
+
+      <p>Читается буквально: «на каждый пуш и PR в main запусти на Ubuntu: скачай код, поставь Node 20, установи зависимости, прогони тесты».</p>
+
+      <h2 id="section-5">Что такое деплой</h2>
+
+      <p>Деплой (deploy) — это выкладка готовой версии приложения туда, где ей пользуются люди. Может быть:</p>
+
+      <ul>
+        <li><strong>Прод</strong> — сервер, куда ходят реальные пользователи.</li>
+        <li><strong>Staging</strong> — копия прода, чтобы проверить перед выкаткой.</li>
+        <li><strong>Dev</strong> — среда для разработки.</li>
+      </ul>
+
+      <p>Способы деплоя различаются:</p>
+
+      <ol>
+        <li><strong>Простой.</strong> Остановили сервер, залили новую версию, включили. Есть простой — пользователи видят ошибку.</li>
+        <li><strong>Blue-green.</strong> Есть две среды: blue (текущая) и green (новая). Переключаем трафик на green — если всё ок, blue становится новой green.</li>
+        <li><strong>Canary.</strong> Сначала отправляем 5% трафика на новую версию. Если метрики в норме — катим дальше.</li>
+        <li><strong>Rolling.</strong> Обновляем серверы по одному, не выключая весь сервис.</li>
+      </ol>
+
+      <p>Чем больше нагрузка и чем критичнее сервис, тем хитрее схема деплоя.</p>
+
+      <h2 id="section-6">Инструменты, которые ты услышишь</h2>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Категория</th><th>Инструменты</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>CI/CD</td><td>GitHub Actions, GitLab CI, Jenkins, CircleCI</td></tr>
+          <tr><td>Контейнеры</td><td>Docker, Podman</td></tr>
+          <tr><td>Оркестрация</td><td>Kubernetes, Nomad</td></tr>
+          <tr><td>IaC</td><td>Terraform, Ansible, Pulumi</td></tr>
+          <tr><td>Мониторинг</td><td>Prometheus, Grafana, Datadog</td></tr>
+          <tr><td>Логи</td><td>ELK, Loki, Splunk</td></tr>
+        </tbody>
+      </table></div>
+
+      <p>Не пытайся выучить всё сразу. Начни с Docker и одного CI-сервиса — например, GitHub Actions, он бесплатный для публичных репозиториев.</p>
+
+      <h2 id="section-7">DevOps для одного человека</h2>
+
+      <p>DevOps-подход полезен даже если ты один делаешь пет-проект:</p>
+
+      <ul>
+        <li><strong>GitHub Actions</strong> запускает тесты на каждый PR — десять минут настройки, экономит часы.</li>
+        <li><strong>Docker</strong> упаковывает приложение — «работает у меня, работает у всех».</li>
+        <li><strong>Автоматический деплой</strong> из main-ветки — не нужно руками заливать файлы по FTP.</li>
+        <li><strong>Мониторинг</strong> — хотя бы простой аптайм-чек через UptimeRobot.</li>
+      </ul>
+
+      <blockquote>DevOps — это не «админ, который умеет в Docker». Это способ убрать трение между «я написал код» и «люди этим пользуются».</blockquote>
+
+      <h2 id="section-8">Что почитать дальше</h2>
+
+      <p>Если хочешь вкатиться в DevOps — начни с Docker, потом Git и GitHub Actions, потом уже Kubernetes. Забегать в оркестрацию без контейнеров и CI не имеет смысла.</p>
+
+      <p>А про смежные вещи можно почитать у нас: <a href="/articles/docker-za-10-minut.html">Docker за 10 минут</a> и <a href="/articles/chto-takoe-oblako.html">что такое облако</a>.</p>
+    </article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Что такое DevOps</a><a href="#section-1" class="lvl-2">Из чего состоит DevOps</a><a href="#section-2" class="lvl-2">CI — непрерывная интеграция</a><a href="#section-3" class="lvl-2">CD — непрерывная доставка и развёртывание</a><a href="#section-4" class="lvl-2">Как это выглядит на практике</a><a href="#section-5" class="lvl-2">Что такое деплой</a><a href="#section-6" class="lvl-2">Инструменты, которые ты услышишь</a><a href="#section-7" class="lvl-2">DevOps для одного человека</a><a href="#section-8" class="lvl-2">Что почитать дальше</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/osnovy-linux-dlya-razrabotchika.html"><img src="/img/linux.svg" alt="Основы Linux для разработчика — базовые команды" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Инструменты</span><span class="tag">DevOps</span><span class="tag">Теория</span></div>
+    <a href="/articles/osnovy-linux-dlya-razrabotchika.html"><h2 class="card__title">Основы Linux для разработчика — базовые команды</h2></a>
+    <p class="card__excerpt">Что нужно знать про Linux, чтобы работать на сервере. Разбираем навигацию по файлам, права доступа, процессы, SSH и полезные команды с примерами.</p>
+    <div class="card__meta">
+      <span>6 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="osnovy-linux-dlya-razrabotchika" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/chto-takoe-nginx.html"><img src="/img/nginx.svg" alt="Что такое Nginx и зачем он нужен на сервере" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">DevOps</span><span class="tag">Веб</span><span class="tag">Инструменты</span></div>
+    <a href="/articles/chto-takoe-nginx.html"><h2 class="card__title">Что такое Nginx и зачем он нужен на сервере</h2></a>
+    <p class="card__excerpt">Почему почти все сайты работают через Nginx. Разбираем: веб-сервер, reverse proxy, балансировка нагрузки, статика и конфиги.</p>
+    <div class="card__meta">
+      <span>26 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="chto-takoe-nginx" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/bash-skripty-dlya-novichka.html"><img src="/img/bash.svg" alt="Bash-скрипты для новичка — автоматизация на Linux" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Инструменты</span><span class="tag">DevOps</span><span class="tag">Разработка</span></div>
+    <a href="/articles/bash-skripty-dlya-novichka.html"><h2 class="card__title">Bash-скрипты для новичка — автоматизация на Linux</h2></a>
+    <p class="card__excerpt">Как написать первый скрипт, который автоматизирует рутину: переменные, условия, циклы, функции, аргументы командной строки.</p>
+    <div class="card__meta">
+      <span>25 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="bash-skripty-dlya-novichka" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

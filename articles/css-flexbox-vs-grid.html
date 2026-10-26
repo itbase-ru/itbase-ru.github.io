@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CSS: Flexbox против Grid — когда что использовать — IT·База</title>
+  <meta name="description" content="Два инструмента для раскладки элементов. Объясняю разницу, показываю примеры и говорю прямо: бери это, а не то.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/css-flexbox-vs-grid.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="CSS: Flexbox против Grid — когда что использовать">
+  <meta property="og:description" content="Два инструмента для раскладки элементов. Объясняю разницу, показываю примеры и говорю прямо: бери это, а не то.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/css-flexbox-vs-grid.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/css-flexbox-vs-grid.html">
+  <meta property="article:published_time" content="2026-02-22">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CSS: Flexbox против Grid — когда что использовать">
+  <meta name="twitter:description" content="Два инструмента для раскладки элементов. Объясняю разницу, показываю примеры и говорю прямо: бери это, а не то.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/css-flexbox-vs-grid.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "CSS: Flexbox против Grid — когда что использовать", "description": "Два инструмента для раскладки элементов. Объясняю разницу, показываю примеры и говорю прямо: бери это, а не то.", "image": ["https://itbase-ru.github.io/img/og/css-flexbox-vs-grid.png"], "datePublished": "2026-02-22", "dateModified": "2026-02-22", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/css-flexbox-vs-grid.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Веб", "item": "https://itbase-ru.github.io/?tag=Веб"}, {"@type": "ListItem", "position": 3, "name": "CSS: Flexbox против Grid — когда что использовать", "item": "https://itbase-ru.github.io/articles/css-flexbox-vs-grid.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="css-flexbox-vs-grid">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Веб">Веб</a>
+        <span class="sep">/</span>
+        <span>CSS: Flexbox против Grid — когда что использовать</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Веб</span><span class="tag">CSS</span></div>
+        <h1>CSS: Flexbox против Grid — когда что использовать</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-02-22">22 февраля 2026</time>
+          <span class="dot">•</span>
+          <span>8 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/css-cover.svg" alt="CSS: Flexbox против Grid — когда что использовать">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+<p>Раньше верстали таблицами, потом — плавающими блоками (<code>float</code>), а теперь есть два нормальных инструмента: <strong>Flexbox</strong> и <strong>Grid</strong>. Оба входят в CSS, оба поддерживаются всеми современными браузерами. Вопрос — когда какой.</p>
+
+<h2 id="section-0">Одной фразой</h2>
+<blockquote>Flexbox — для раскладки <em>в одном направлении</em> (строка или колонка). Grid — для раскладки <em>в двух направлениях</em> (строки и колонки одновременно).</blockquote>
+
+<h2 id="section-1">Flexbox: одна ось</h2>
+<p>Идеален, когда надо расположить кнопки в ряд, центрировать что-то, распределить пункты меню. Ты работаешь с одной осью — горизонтальной или вертикальной, но только одной.</p>
+
+<pre><code class="language-css">.menu {
+  display: flex;
+  gap: 16px;               /* отступ между пунктами */
+  align-items: center;     /* выравнивание по поперечной оси */
+  justify-content: space-between; /* распределение по основной оси */
+}</code></pre>
+
+<p>Как это читается:</p>
+<ul>
+  <li><code>display: flex</code> — включаем flexbox. Дети этого элемента встают в ряд.</li>
+  <li><code>gap: 16px</code> — отступ между детьми. Не надо никаких margin.</li>
+  <li><code>align-items: center</code> — выровнять по вертикали по центру.</li>
+  <li><code>justify-content: space-between</code> — раскидать по горизонтали: первый влево, последний вправо.</li>
+</ul>
+
+<h2 id="section-2">Grid: две оси</h2>
+<p>Grid — это <strong>таблица</strong> на стероидах. Ты задаёшь строки и колонки, а элементы занимают нужные клетки. Идеален для галерей, дашбордов, макетов «сайдбар + контент».</p>
+
+<pre><code class="language-css">.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}</code></pre>
+
+<p>Что тут происходит:</p>
+<ul>
+  <li><code>repeat(auto-fill, ...)</code> — создай столько колонок, сколько влезет.</li>
+  <li><code>minmax(220px, 1fr)</code> — каждая колонка минимум 220 пикселей, максимум — равная доля свободного места.</li>
+  <li>Строки создаются автоматически. Медиазапросы не нужны.</li>
+</ul>
+<p>Именно на этой строчке построена сетка карточек в этом сайте — посмотри в <code>style.css</code>, класс <code>.grid</code>.</p>
+
+<h2 id="section-3">Сравнение</h2>
+<div class="table-scroll"><table>
+  <thead><tr><th>Критерий</th><th>Flexbox</th><th>Grid</th></tr></thead>
+  <tbody>
+    <tr><td>Направление</td><td>Одна ось</td><td>Две оси сразу</td></tr>
+    <tr><td>Когда использовать</td><td>Меню, кнопки, центрирование</td><td>Сетки, макеты, галереи</td></tr>
+    <tr><td>Размеры</td><td>Элементы решают свой размер</td><td>Сетка задаёт рамки</td></tr>
+    <tr><td>Сложность</td><td>Проще</td><td>Мощнее, но требует понимания</td></tr>
+    <tr><td>Типичный кейс</td><td>Шапка сайта</td><td>Каталог товаров</td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="section-4">Как не ошибиться</h2>
+<ol>
+  <li><strong>Раскладка в линию?</strong> Flexbox. Пример: панель кнопок.</li>
+  <li><strong>Нужна сетка вроде «3 колонки, 4 строки»?</strong> Grid.</li>
+  <li><strong>Не знаешь?</strong> Начни с Flexbox. Если через 10 минут понял, что нужны обе оси — переключайся на Grid.</li>
+  <li><strong>Хочешь сетку, которая сама адаптируется?</strong> Grid с <code>auto-fill</code> — самый чистый способ.</li>
+</ol>
+
+<p>Их можно комбинировать: <code>display: grid</code> на контейнере и <code>display: flex</code> на каждой карточке. Ничего не мешает.</p>
+
+<h2 id="section-5">Что важно запомнить</h2>
+<ul>
+  <li>Flexbox — <strong>линия</strong>. Grid — <strong>плоскость</strong>.</li>
+  <li>Свойство <code>gap</code> работает в обоих и заменяет геморрой с margin.</li>
+  <li><code>minmax(auto-fill, ...)</code> в Grid = адаптив <strong>без медиазапросов</strong>.</li>
+  <li>Не бойся смешивать. Они не конкуренты.</li>
+</ul>
+</article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Одной фразой</a><a href="#section-1" class="lvl-2">Flexbox: одна ось</a><a href="#section-2" class="lvl-2">Grid: две оси</a><a href="#section-3" class="lvl-2">Сравнение</a><a href="#section-4" class="lvl-2">Как не ошибиться</a><a href="#section-5" class="lvl-2">Что важно запомнить</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/paginaciya-i-versirovanie-api.html"><img src="/img/api-versioning.svg" alt="Пагинация и версионирование API — как не сломать клиентов" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">API</span><span class="tag">Веб</span><span class="tag">Разработка</span></div>
+    <a href="/articles/paginaciya-i-versirovanie-api.html"><h2 class="card__title">Пагинация и версионирование API — как не сломать клиентов</h2></a>
+    <p class="card__excerpt">Как отдавать тысячи записей постранично и что делать, когда API меняется. Разбираем offset/limit, cursor-пагинацию и версионирование.</p>
+    <div class="card__meta">
+      <span>27 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="paginaciya-i-versirovanie-api" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/chto-takoe-nginx.html"><img src="/img/nginx.svg" alt="Что такое Nginx и зачем он нужен на сервере" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">DevOps</span><span class="tag">Веб</span><span class="tag">Инструменты</span></div>
+    <a href="/articles/chto-takoe-nginx.html"><h2 class="card__title">Что такое Nginx и зачем он нужен на сервере</h2></a>
+    <p class="card__excerpt">Почему почти все сайты работают через Nginx. Разбираем: веб-сервер, reverse proxy, балансировка нагрузки, статика и конфиги.</p>
+    <div class="card__meta">
+      <span>26 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="chto-takoe-nginx" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/cookie-localstorage-sessionstorage.html"><img src="/img/storage.svg" alt="Cookie, localStorage и sessionStorage — что выбрать" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Веб</span><span class="tag">JavaScript</span><span class="tag">Безопасность</span></div>
+    <a href="/articles/cookie-localstorage-sessionstorage.html"><h2 class="card__title">Cookie, localStorage и sessionStorage — что выбрать</h2></a>
+    <p class="card__excerpt">Три способа хранить данные в браузере. Разбираем разницу, лимиты, безопасность и когда что использовать — на конкретных примерах.</p>
+    <div class="card__meta">
+      <span>22 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="cookie-localstorage-sessionstorage" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

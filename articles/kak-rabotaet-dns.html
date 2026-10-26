@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Как работает DNS — простыми словами — IT·База</title>
+  <meta name="description" content="Что происходит за секунду между вводом адреса в браузере и загрузкой сайта. Разбираем DNS: корневые серверы, зоны, кэш и типы записей.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/kak-rabotaet-dns.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Как работает DNS — простыми словами">
+  <meta property="og:description" content="Что происходит за секунду между вводом адреса в браузере и загрузкой сайта. Разбираем DNS: корневые серверы, зоны, кэш и типы записей.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/kak-rabotaet-dns.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/kak-rabotaet-dns.html">
+  <meta property="article:published_time" content="2026-03-27">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Как работает DNS — простыми словами">
+  <meta name="twitter:description" content="Что происходит за секунду между вводом адреса в браузере и загрузкой сайта. Разбираем DNS: корневые серверы, зоны, кэш и типы записей.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/kak-rabotaet-dns.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Как работает DNS — простыми словами", "description": "Что происходит за секунду между вводом адреса в браузере и загрузкой сайта. Разбираем DNS: корневые серверы, зоны, кэш и типы записей.", "image": ["https://itbase-ru.github.io/img/og/kak-rabotaet-dns.png"], "datePublished": "2026-03-27", "dateModified": "2026-03-27", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/kak-rabotaet-dns.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Веб", "item": "https://itbase-ru.github.io/?tag=Веб"}, {"@type": "ListItem", "position": 3, "name": "Как работает DNS — простыми словами", "item": "https://itbase-ru.github.io/articles/kak-rabotaet-dns.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="kak-rabotaet-dns">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Веб">Веб</a>
+        <span class="sep">/</span>
+        <span>Как работает DNS — простыми словами</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Веб</span><span class="tag">Сети</span><span class="tag">Теория</span></div>
+        <h1>Как работает DNS — простыми словами</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-03-27">27 марта 2026</time>
+          <span class="dot">•</span>
+          <span>9 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/dns.svg" alt="Как работает DNS — простыми словами">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+      <p>Ты вводишь в браузере <code>itbase-ru.github.io</code>, нажимаешь Enter — и через долю секунды видишь страницу. Но компьютеры не понимают имён. Они понимают только IP-адреса. Между «человеческим» именем сайта и «машинным» IP стоит <strong>DNS</strong>.</p>
+
+      <p>Разберём, как это работает, без магии.</p>
+
+      <h2 id="section-0">Что такое DNS</h2>
+
+      <p>DNS (Domain Name System) — это <strong>распределённая база данных</strong>, которая переводит доменные имена в IP-адреса. Никакого одного «главного сервера DNS» не существует — это миллионы серверов по всему миру, работающих согласованно.</p>
+
+      <blockquote>DNS — это телефонная книга интернета. Ты помнишь имя, а система находит номер.</blockquote>
+
+      <h2 id="section-1">Что происходит за одну секунду</h2>
+
+      <p>Допустим, ты открываешь <code>example.com</code> впервые за долгое время. Пошагово:</p>
+
+      <ol>
+        <li><strong>Проверка кэша браузера.</strong> Браузер смотрит, не открывал ли ты этот сайт недавно.</li>
+        <li><strong>Проверка кэша ОС.</strong> Если в браузере нет — смотрит система.</li>
+        <li><strong>Запрос к resolver'у.</strong> Обычно это DNS-сервер твоего провайдера или публичный (Google 8.8.8.8, Cloudflare 1.1.1.1).</li>
+        <li><strong>Рекурсивный поиск.</strong> Если у resolver'а нет ответа — он спрашивает по цепочке.</li>
+        <li><strong>Ответ возвращается.</strong> IP-адрес отдаётся браузеру, тот соединяется с сервером.</li>
+      </ol>
+
+      <p>Всё это занимает обычно 10–50 миллисекунд. Если бы кэша не было — было бы медленнее в разы.</p>
+
+      <h2 id="section-2">Рекурсивный поиск: четыре шага</h2>
+
+      <p>Когда resolver не знает ответ, он идёт по иерархии DNS:</p>
+
+      <h3 id="section-3">Шаг 1. Корневые серверы</h3>
+
+      <p>Их всего 13 «логических» адресов по всему миру (физически — сотни машин). Корневой сервер не знает IP конкретного сайта, но знает, кто отвечает за зоны <code>.com</code>, <code>.ru</code>, <code>.org</code> и так далее.</p>
+
+      <h3 id="section-4">Шаг 2. Серверы зоны верхнего уровня (TLD)</h3>
+
+      <p>Сервер зоны <code>.com</code> не знает IP <code>example.com</code>, но знает, какой сервер отвечает за этот домен — то есть куда идти дальше.</p>
+
+      <h3 id="section-5">Шаг 3. Авторитативные серверы домена</h3>
+
+      <p>Это серверы, которые держит владелец домена (или его хостинг). Вот они уже знают точный IP и отдают его.</p>
+
+      <h3 id="section-6">Шаг 4. Ответ по цепочке назад</h3>
+
+      <p>Ответ возвращается resolver'у, тот кэширует его на время (обычно на TTL записи) и отдаёт браузеру.</p>
+
+      <h2 id="section-7">Типы DNS-записей</h2>
+
+      <p>Домен — это не просто «имя → IP». Есть разные типы записей под разные задачи.</p>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Тип</th><th>За что отвечает</th><th>Пример</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>A</td><td>Домен → IPv4-адрес</td><td>example.com → 93.184.216.34</td></tr>
+          <tr><td>AAAA</td><td>Домен → IPv6-адрес</td><td>example.com → 2606:2800:...</td></tr>
+          <tr><td>CNAME</td><td>Псевдоним домена</td><td>www → example.com</td></tr>
+          <tr><td>MX</td><td>Почтовые серверы</td><td>mail.example.com</td></tr>
+          <tr><td>TXT</td><td>Произвольный текст</td><td>проверка владения, SPF</td></tr>
+          <tr><td>NS</td><td>Авторитативные серверы</td><td>ns1.hosting.com</td></tr>
+        </tbody>
+      </table></div>
+
+      <p>Если ты подключаешь свой домен к GitHub Pages — как раз настраиваешь A-записи (на IP GitHub) и CNAME (для <code>www</code>).</p>
+
+      <h2 id="section-8">Кэширование и TTL</h2>
+
+      <p>У каждой DNS-записи есть <strong>TTL</strong> (Time To Live) — сколько секунд её можно держать в кэше. Обычно от 300 секунд (5 минут) до 86400 (сутки).</p>
+
+      <p>Это важно при смене хостинга: если TTL был 24 часа, то после смены IP старый адрес может «висеть» в кэшах провайдеров ещё сутки. Поэтому перед переездом TTL обычно уменьшают заранее — часов до 5 минут.</p>
+
+      <h2 id="section-9">Что такое DNS-провайдеры</h2>
+
+      <p>Обычно DNS-сервер предоставляет провайдер или хостинг. Но можно использовать публичные:</p>
+
+      <ul>
+        <li><strong>Google DNS</strong> — 8.8.8.8 и 8.8.4.4.</li>
+        <li><strong>Cloudflare</strong> — 1.1.1.1 и 1.0.0.1. Часто самый быстрый.</li>
+        <li><strong>Quad9</strong> — 9.9.9.9. Блокирует вредоносные домены.</li>
+      </ul>
+
+      <p>Смена DNS-сервера может ускорить открытие сайтов и обойти некоторые блокировки провайдера.</p>
+
+      <h2 id="section-10">Почему DNS не шифруется по умолчанию</h2>
+
+      <p>Классический DNS работает поверх UDP и <strong>не шифруется</strong>. Это значит, что провайдер или любой в сети может видеть, какие домены ты запрашиваешь, даже если ты ходишь по HTTPS.</p>
+
+      <p>Чтобы это исправить, придумали:</p>
+
+      <ul>
+        <li><strong>DoH (DNS over HTTPS)</strong> — DNS-запросы идут внутри HTTPS.</li>
+        <li><strong>DoT (DNS over TLS)</strong> — то же, но через отдельный TLS-канал.</li>
+      </ul>
+
+      <p>Современные браузеры (Firefox, Chrome) умеют использовать DoH. Cloudflare и Google поддерживают его.</p>
+
+      <h2 id="section-11">Как посмотреть DNS-записи</h2>
+
+      <p>Через терминал:</p>
+
+      <pre><code class="language-bash">nslookup example.com
+dig example.com
+dig +short example.com</code></pre>
+
+      <p>Или в браузере — есть онлайн-сервисы вроде <code>dnschecker.org</code>, где видно, как домен резолвится в разных странах.</p>
+
+      <h2 id="section-12">Итог</h2>
+
+      <p>DNS — невидимый слой интернета, который превращает имена в адреса. Работает быстро за счёт кэширования, надёжно — за счёт распределённости, но изначально не шифрован. Хочешь приватности — включай DoH в браузере.</p>
+    </article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Что такое DNS</a><a href="#section-1" class="lvl-2">Что происходит за одну секунду</a><a href="#section-2" class="lvl-2">Рекурсивный поиск: четыре шага</a><a href="#section-3" class="lvl-3">Шаг 1. Корневые серверы</a><a href="#section-4" class="lvl-3">Шаг 2. Серверы зоны верхнего уровня (TLD)</a><a href="#section-5" class="lvl-3">Шаг 3. Авторитативные серверы домена</a><a href="#section-6" class="lvl-3">Шаг 4. Ответ по цепочке назад</a><a href="#section-7" class="lvl-2">Типы DNS-записей</a><a href="#section-8" class="lvl-2">Кэширование и TTL</a><a href="#section-9" class="lvl-2">Что такое DNS-провайдеры</a><a href="#section-10" class="lvl-2">Почему DNS не шифруется по умолчанию</a><a href="#section-11" class="lvl-2">Как посмотреть DNS-записи</a><a href="#section-12" class="lvl-2">Итог</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/kak-rabotaet-websocket.html"><img src="/img/websocket.svg" alt="Как работает WebSocket — real-time связь между браузером и сервером" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Веб</span><span class="tag">Сети</span><span class="tag">Разработка</span></div>
+    <a href="/articles/kak-rabotaet-websocket.html"><h2 class="card__title">Как работает WebSocket — real-time связь между браузером и сервером</h2></a>
+    <p class="card__excerpt">Почему обычный HTTP плохо подходит для чатов, игр и бирж. Разбираем WebSocket: handshake, кадры, когда нужен и какие есть альтернативы.</p>
+    <div class="card__meta">
+      <span>14 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="kak-rabotaet-websocket" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/http-metody-i-status-kody.html"><img src="/img/http.svg" alt="HTTP-методы и статус-коды — шпаргалка с примерами" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Веб</span><span class="tag">API</span><span class="tag">Теория</span></div>
+    <a href="/articles/http-metody-i-status-kody.html"><h2 class="card__title">HTTP-методы и статус-коды — шпаргалка с примерами</h2></a>
+    <p class="card__excerpt">GET, POST, PUT, PATCH, DELETE и что значат все эти 200, 301, 404, 500. Разбираем HTTP по-человечески, с примерами запросов и ответов.</p>
+    <div class="card__meta">
+      <span>4 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="http-metody-i-status-kody" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/chto-takoe-rest-i-graphql.html"><img src="/img/rest-graphql.svg" alt="REST и GraphQL — в чём разница" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Веб</span><span class="tag">API</span><span class="tag">Теория</span></div>
+    <a href="/articles/chto-takoe-rest-i-graphql.html"><h2 class="card__title">REST и GraphQL — в чём разница</h2></a>
+    <p class="card__excerpt">Два главных подхода к построению API. Разбираем на примерах: когда REST удобнее, а когда GraphQL решает проблемы, которые REST создаёт.</p>
+    <div class="card__meta">
+      <span>30 марта 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="chto-takoe-rest-i-graphql" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

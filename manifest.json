@@ -1,0 +1,44 @@
+{
+  "name": "IT·База — статьи про программирование",
+  "short_name": "IT·База",
+  "description": "Понятные статьи про ИИ, программирование и IT простыми словами",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0d1117",
+  "theme_color": "#0d1117",
+  "lang": "ru",
+  "dir": "ltr",
+  "categories": [
+    "education",
+    "news",
+    "books"
+  ],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "16x16 32x32 48x48",
+      "type": "image/x-icon",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Все статьи",
+      "url": "/",
+      "description": "Открыть главную страницу со всеми статьями"
+    },
+    {
+      "name": "Карта сайта",
+      "url": "/sitemap.html",
+      "description": "Список всех статей по тегам"
+    }
+  ]
+}

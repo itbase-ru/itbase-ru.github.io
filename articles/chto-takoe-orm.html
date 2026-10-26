@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Что такое ORM — работа с базой через объекты — IT·База</title>
+  <meta name="description" content="Зачем писать SQL, если можно работать с базой как с обычными объектами. Разбираем ORM: как работает, плюсы и минусы, примеры на SQLAlchemy.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/chto-takoe-orm.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Что такое ORM — работа с базой через объекты">
+  <meta property="og:description" content="Зачем писать SQL, если можно работать с базой как с обычными объектами. Разбираем ORM: как работает, плюсы и минусы, примеры на SQLAlchemy.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/chto-takoe-orm.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/chto-takoe-orm.html">
+  <meta property="article:published_time" content="2026-04-13">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Что такое ORM — работа с базой через объекты">
+  <meta name="twitter:description" content="Зачем писать SQL, если можно работать с базой как с обычными объектами. Разбираем ORM: как работает, плюсы и минусы, примеры на SQLAlchemy.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/chto-takoe-orm.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Что такое ORM — работа с базой через объекты", "description": "Зачем писать SQL, если можно работать с базой как с обычными объектами. Разбираем ORM: как работает, плюсы и минусы, примеры на SQLAlchemy.", "image": ["https://itbase-ru.github.io/img/og/chto-takoe-orm.png"], "datePublished": "2026-04-13", "dateModified": "2026-04-13", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/chto-takoe-orm.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Базы данных", "item": "https://itbase-ru.github.io/?tag=Базы данных"}, {"@type": "ListItem", "position": 3, "name": "Что такое ORM — работа с базой через объекты", "item": "https://itbase-ru.github.io/articles/chto-takoe-orm.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="chto-takoe-orm">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Базы данных">Базы данных</a>
+        <span class="sep">/</span>
+        <span>Что такое ORM — работа с базой через объекты</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Базы данных</span><span class="tag">Разработка</span><span class="tag">Python</span></div>
+        <h1>Что такое ORM — работа с базой через объекты</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-04-13">13 апреля 2026</time>
+          <span class="dot">•</span>
+          <span>10 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/orm.svg" alt="Что такое ORM — работа с базой через объекты">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+      <p>Когда пишешь код, работать с базой через SQL не всегда удобно. Строки запросов, ручное превращение данных в объекты, повторяющийся код. ORM решает это, позволяя общаться с базой как с обычными объектами Python или JavaScript.</p>
+
+      <h2 id="section-0">Что такое ORM</h2>
+
+      <p>ORM (Object-Relational Mapping) — это библиотека, которая <strong>превращает таблицы базы данных в классы, а строки — в объекты</strong>. Ты работаешь с объектами, а ORM сама генерирует SQL под капотом.</p>
+
+      <p>Пример сравнения. Одна и та же задача: найти пользователя по email.</p>
+
+      <h3 id="section-1">Без ORM — чистый SQL</h3>
+
+      <pre><code class="language-python">import sqlite3
+
+conn = sqlite3.connect('app.db')
+cursor = conn.cursor()
+cursor.execute(
+    'SELECT id, name, email FROM users WHERE email = ?',
+    ('kirill@mail.ru',)
+)
+row = cursor.fetchone()
+# row — это кортеж: (1, 'Кирилл', 'kirill@mail.ru')
+# приходится вручную делать user = {'id': row[0], 'name': row[1], ...}</code></pre>
+
+      <h3 id="section-2">С ORM — обычные объекты</h3>
+
+      <pre><code class="language-python">from sqlalchemy.orm import Session
+
+user = session.query(User).filter(User.email == 'kirill@mail.ru').first()
+# user — это объект класса User
+print(user.name)   # обращаемся как к обычному атрибуту</code></pre>
+
+      <p>Во втором случае ORM сама сгенерировала SQL, выполнила его и превратила результат в объект. Тебе остаётся работать с данными как с обычными Python-объектами.</p>
+
+      <h2 id="section-3">Как это выглядит с моделями</h2>
+
+      <p>В ORM ты описываешь таблицы через классы — они называются <strong>модели</strong>.</p>
+
+      <pre><code class="language-python">from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import declarative_base
+
+Base = declarative_base()
+
+class User(Base):
+    __tablename__ = 'users'   # имя таблицы в базе
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(100), nullable=False)
+    email = Column(String(200), unique=True, nullable=False)</code></pre>
+
+      <p>Этот класс описывает таблицу. По нему ORM поймёт, как создавать таблицу и как маппить строки в объекты.</p>
+
+      <h2 id="section-4">Основные операции</h2>
+
+      <h3 id="section-5">Создать</h3>
+
+      <pre><code class="language-python">user = User(name='Кирилл', email='kirill@mail.ru')
+session.add(user)
+session.commit()   # сохраняем в базу
+print(user.id)     # ORM сама подставила id после вставки</code></pre>
+
+      <h3 id="section-6">Прочитать</h3>
+
+      <pre><code class="language-python"># Все пользователи
+users = session.query(User).all()
+
+# Первый с таким email
+user = session.query(User).filter(User.email == 'kirill@mail.ru').first()
+
+# С сортировкой и ограничением
+top = session.query(User).order_by(User.name).limit(10).all()</code></pre>
+
+      <h3 id="section-7">Обновить</h3>
+
+      <pre><code class="language-python">user = session.query(User).get(1)
+user.name = 'Кирилл Петрович'   # просто меняем атрибут
+session.commit()                # ORM сама сделает UPDATE</code></pre>
+
+      <h3 id="section-8">Удалить</h3>
+
+      <pre><code class="language-python">user = session.query(User).get(1)
+session.delete(user)
+session.commit()</code></pre>
+
+      <h2 id="section-9">Связи между таблицами</h2>
+
+      <p>Одно из главных удобств ORM — связи. Вместо JOIN ты используешь обычные атрибуты.</p>
+
+      <pre><code class="language-python">from sqlalchemy import ForeignKey
+from sqlalchemy.orm import relationship
+
+class Order(Base):
+    __tablename__ = 'orders'
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('users.id'))
+    total = Column(Integer)
+
+    # ORM понимает: заказ принадлежит одному пользователю
+    user = relationship('User', back_populates='orders')
+
+class User(Base):
+    __tablename__ = 'users'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(100))
+    email = Column(String(200))
+
+    # А у пользователя много заказов
+    orders = relationship('Order', back_populates='user')</code></pre>
+
+      <p>Теперь можно работать так:</p>
+
+      <pre><code class="language-python"># Получить все заказы пользователя — без SQL, через атрибут
+user = session.query(User).get(1)
+for order in user.orders:
+    print(order.total)
+
+# Или наоборот — от заказа к пользователю
+order = session.query(Order).get(10)
+print(order.user.name)</code></pre>
+
+      <p>ORM сама сделает JOIN и подгрузит нужные данные.</p>
+
+      <h2 id="section-10">Популярные ORM</h2>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Язык</th><th>ORM</th><th>Особенность</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Python</td><td>SQLAlchemy</td><td>Мощная, гибкая, но сложнее старт</td></tr>
+          <tr><td>Python</td><td>Django ORM</td><td>Встроена в Django, простая</td></tr>
+          <tr><td>Python</td><td>Peewee</td><td>Минималистичная, для маленьких проектов</td></tr>
+          <tr><td>JavaScript</td><td>Prisma</td><td>Современная, типы из коробки</td></tr>
+          <tr><td>JavaScript</td><td>Sequelize</td><td>Классика для Node.js</td></tr>
+          <tr><td>Java</td><td>Hibernate</td><td>Стандарт индустрии</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2 id="section-11">Плюсы ORM</h2>
+
+      <ul>
+        <li><strong>Меньше кода.</strong> Не пишешь SQL руками — просто работаешь с объектами.</li>
+        <li><strong>Защита от инъекций.</strong> ORM экранирует значения автоматически.</li>
+        <li><strong>Не зависишь от СУБД.</strong> Один и тот же код работает с Postgres, MySQL, SQLite. Меняешь базу — код остаётся.</li>
+        <li><strong>Типы и автодополнение.</strong> В редакторе видно поля модели.</li>
+        <li><strong>Миграции.</strong> Многие ORM умеют обновлять схему базы автоматически.</li>
+      </ul>
+
+      <h2 id="section-12">Минусы ORM</h2>
+
+      <ul>
+        <li><strong>Сложные запросы — боль.</strong> Аналитика с десятком JOIN на ORM превращается в кашу.</li>
+        <li><strong>Проблема N+1.</strong> Если наивно пройтись по списку и обратиться к связанным объектам, ORM сделает отдельный запрос на каждого — сотни SQL-запросов вместо двух.</li>
+        <li><strong>Скрытая магия.</strong> Не всегда понятно, какой SQL уходит в базу. Приходится включать логи.</li>
+        <li><strong>Производительность.</strong> Иногда ORM-запрос в разы медленнее написанного вручную.</li>
+        <li><strong>Порог входа.</strong> SQLAlchemy с её сессиями и relationships пугает новичков.</li>
+      </ul>
+
+      <h2 id="section-13">Проблема N+1</h2>
+
+      <p>Классическая ловушка ORM. Показываю на примере.</p>
+
+      <pre><code class="language-python"># Наивно: получаем 100 заказов, потом у каждого спрашиваем пользователя
+orders = session.query(Order).limit(100).all()
+for order in orders:
+    print(order.user.name)   # на каждой итерации — отдельный SQL-запрос
+# Итого: 101 запрос к базе вместо 2</code></pre>
+
+      <p>Решение — <strong>жадная загрузка</strong>. Заранее указываешь ORM, что нужно подгрузить связанные данные одним запросом:</p>
+
+      <pre><code class="language-python">from sqlalchemy.orm import joinedload
+
+# Один JOIN вместо 101 запроса
+orders = session.query(Order).options(
+    joinedload(Order.user)
+).limit(100).all()
+
+for order in orders:
+    print(order.user.name)   # уже загружено, никаких лишних запросов</code></pre>
+
+      <h2 id="section-14">Когда ORM не подходит</h2>
+
+      <ul>
+        <li><strong>Сложные аналитические запросы.</strong> Если у тебя десяток JOIN и оконные функции — пиши SQL руками.</li>
+        <li><strong>Высоконагруженные системы.</strong> ORM добавляет оверхед, и в hot-path это критично.</li>
+        <li><strong>Задачи на миллионы строк.</strong> Тут важна каждая миллисекунда, ORM только мешает.</li>
+        <li><strong>Скрипты на 20 строк.</strong> Проще сделать пару запросов через <code>sqlite3</code>, чем ставить SQLAlchemy.</li>
+      </ul>
+
+      <blockquote>ORM — инструмент, а не религия. В одном проекте можно использовать и ORM для CRUD, и чистый SQL для отчётов. Это нормально.</blockquote>
+
+      <h2 id="section-15">Итог</h2>
+
+      <p>ORM превращает таблицы в классы и позволяет работать с базой как с обычными объектами. Убирает повторяющийся код, защищает от инъекций, даёт единый интерфейс к разным СУБД. Но у неё есть свои проблемы — N+1, скрытые запросы, сложности с аналитикой. Используй там, где она облегчает, и не бойся спускаться на уровень SQL, когда нужно.</p>
+    </article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Что такое ORM</a><a href="#section-1" class="lvl-3">Без ORM — чистый SQL</a><a href="#section-2" class="lvl-3">С ORM — обычные объекты</a><a href="#section-3" class="lvl-2">Как это выглядит с моделями</a><a href="#section-4" class="lvl-2">Основные операции</a><a href="#section-5" class="lvl-3">Создать</a><a href="#section-6" class="lvl-3">Прочитать</a><a href="#section-7" class="lvl-3">Обновить</a><a href="#section-8" class="lvl-3">Удалить</a><a href="#section-9" class="lvl-2">Связи между таблицами</a><a href="#section-10" class="lvl-2">Популярные ORM</a><a href="#section-11" class="lvl-2">Плюсы ORM</a><a href="#section-12" class="lvl-2">Минусы ORM</a><a href="#section-13" class="lvl-2">Проблема N+1</a><a href="#section-14" class="lvl-2">Когда ORM не подходит</a><a href="#section-15" class="lvl-2">Итог</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/obrabotka-isklyucheniy-v-python.html"><img src="/img/python-errors.svg" alt="Обработка исключений в Python — try, except, finally" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/obrabotka-isklyucheniy-v-python.html"><h2 class="card__title">Обработка исключений в Python — try, except, finally</h2></a>
+    <p class="card__excerpt">Как ловить ошибки и не давать программе падать. Разбираем try/except, собственные исключения и контекстные менеджеры с примерами.</p>
+    <div class="card__meta">
+      <span>24 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="obrabotka-isklyucheniy-v-python" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/python-s-nulya.html"><img src="/img/python.svg" alt="Python с нуля — базовый синтаксис за 15 минут" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/python-s-nulya.html"><h2 class="card__title">Python с нуля — базовый синтаксис за 15 минут</h2></a>
+    <p class="card__excerpt">Переменные, типы, условия, циклы, функции и списки. Минимальный набор, с которого начинается любой Python-проект.</p>
+    <div class="card__meta">
+      <span>20 апреля 2026</span><span class="dot">•</span><span>12 мин</span>
+      <button class="card__bm" data-slug="python-s-nulya" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/dekoratory-v-python.html"><img src="/img/decorators.svg" alt="Декораторы в Python — что это и зачем нужны" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/dekoratory-v-python.html"><h2 class="card__title">Декораторы в Python — что это и зачем нужны</h2></a>
+    <p class="card__excerpt">Функции, которые оборачивают другие функции. Разбираем декораторы с нуля: синтаксис, как работают, где применяются на практике.</p>
+    <div class="card__meta">
+      <span>19 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="dekoratory-v-python" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

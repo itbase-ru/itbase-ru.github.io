@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Многопоточность в Python — GIL и потоки — IT·База</title>
+  <meta name="description" content="Почему потоки в Python не ускоряют вычисления, что такое GIL и когда всё-таки стоит использовать threading, multiprocessing или asyncio.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/mnogopotochnost-v-python-gil.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Многопоточность в Python — GIL и потоки">
+  <meta property="og:description" content="Почему потоки в Python не ускоряют вычисления, что такое GIL и когда всё-таки стоит использовать threading, multiprocessing или asyncio.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/mnogopotochnost-v-python-gil.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/mnogopotochnost-v-python-gil.html">
+  <meta property="article:published_time" content="2026-04-12">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Многопоточность в Python — GIL и потоки">
+  <meta name="twitter:description" content="Почему потоки в Python не ускоряют вычисления, что такое GIL и когда всё-таки стоит использовать threading, multiprocessing или asyncio.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/mnogopotochnost-v-python-gil.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Многопоточность в Python — GIL и потоки", "description": "Почему потоки в Python не ускоряют вычисления, что такое GIL и когда всё-таки стоит использовать threading, multiprocessing или asyncio.", "image": ["https://itbase-ru.github.io/img/og/mnogopotochnost-v-python-gil.png"], "datePublished": "2026-04-12", "dateModified": "2026-04-12", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/mnogopotochnost-v-python-gil.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Python", "item": "https://itbase-ru.github.io/?tag=Python"}, {"@type": "ListItem", "position": 3, "name": "Многопоточность в Python — GIL и потоки", "item": "https://itbase-ru.github.io/articles/mnogopotochnost-v-python-gil.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="mnogopotochnost-v-python-gil">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Python">Python</a>
+        <span class="sep">/</span>
+        <span>Многопоточность в Python — GIL и потоки</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+        <h1>Многопоточность в Python — GIL и потоки</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-04-12">12 апреля 2026</time>
+          <span class="dot">•</span>
+          <span>11 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/threading.svg" alt="Многопоточность в Python — GIL и потоки">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+      <p>У Python репутация «медленного языка для потоков». Правда — сложнее. В этой статье разберём, что такое GIL, почему threading часто не ускоряет код и в каких случаях потоки всё-таки полезны.</p>
+
+      <h2 id="section-0">Потоки и процессы — в чём разница</h2>
+
+      <p>Прежде чем говорить про GIL, надо понять разницу между двумя способами параллельного выполнения.</p>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Критерий</th><th>Потоки (threads)</th><th>Процессы (processes)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Общая память</td><td>Да</td><td>Нет, каждый со своей</td></tr>
+          <tr><td>Запуск</td><td>Быстро</td><td>Медленнее</td></tr>
+          <tr><td>Обмен данными</td><td>Просто (общие переменные)</td><td>Через очереди и файлы</td></tr>
+          <tr><td>Ускорение CPU-задач</td><td>В Python — нет</td><td>Да</td></tr>
+        </tbody>
+      </table></div>
+
+      <p>Потоки живут внутри одного процесса и делят память. Процессы изолированы друг от друга и работают действительно параллельно.</p>
+
+      <h2 id="section-1">Что такое GIL</h2>
+
+      <p>GIL (Global Interpreter Lock) — глобальная блокировка интерпретатора Python. Она означает простое правило: <strong>в один момент времени только один поток может выполнять Python-код</strong>.</p>
+
+      <p>Представь комнату с одним микрофоном. Даже если в комнате десять человек, говорить может только тот, у кого микрофон. Остальные ждут своей очереди.</p>
+
+      <blockquote>GIL — не баг, а осознанный выбор разработчиков CPython. Он делает работу с памятью простой и безопасной, но лишает потоки возможности ускорять вычисления.</blockquote>
+
+      <h2 id="section-2">Проверим на практике</h2>
+
+      <p>Напишем код, который считает сумму чисел в цикле — это чистая работа процессора. Запустим его последовательно и в потоках.</p>
+
+      <pre><code class="language-python">import threading
+import time
+
+def count_sum(n):
+    # Просто крутим цикл и считаем сумму — тяжёлая работа для процессора
+    total = 0
+    for i in range(n):
+        total += i
+    return total
+
+# Последовательно: сначала первая задача, потом вторая
+start = time.time()
+count_sum(10_000_000)
+count_sum(10_000_000)
+print('Последовательно:', round(time.time() - start, 2), 'сек')
+
+# В потоках: запускаем обе одновременно
+start = time.time()
+t1 = threading.Thread(target=count_sum, args=(10_000_000,))
+t2 = threading.Thread(target=count_sum, args=(10_000_000,))
+t1.start()
+t2.start()
+t1.join()   # ждём завершения первого потока
+t2.join()   # и второго
+print('В потоках:', round(time.time() - start, 2), 'сек')</code></pre>
+
+      <p>Если запустишь — увидишь одно и то же время. Потоки не помогли, потому что GIL не давал им работать одновременно.</p>
+
+      <h2 id="section-3">А теперь — задача на ожидание</h2>
+
+      <p>Возьмём другую задачу: имитируем скачивание файлов. Тут мы не работаем процессором, а ждём ответа от сети.</p>
+
+      <pre><code class="language-python">import threading
+import time
+
+def download(name, seconds):
+    print(name, 'начал скачивание')
+    # Имитируем ожидание ответа от сети
+    time.sleep(seconds)
+    print(name, 'завершил')
+
+# Последовательно
+start = time.time()
+download('file1', 1)
+download('file2', 1)
+download('file3', 1)
+print('Последовательно:', round(time.time() - start, 2), 'сек')   # ~3 сек
+
+# В потоках
+start = time.time()
+threads = []
+for i in range(1, 4):
+    t = threading.Thread(target=download, args=('file' + str(i), 1))
+    threads.append(t)
+    t.start()
+
+for t in threads:
+    t.join()
+
+print('В потоках:', round(time.time() - start, 2), 'сек')   # ~1 сек</code></pre>
+
+      <p>Тут потоки дают <strong>трёхкратное ускорение</strong>. Потому что во время ожидания сети GIL освобождается — и другие потоки могут работать.</p>
+
+      <blockquote>GIL не мешает ожиданию. Он мешает только вычислениям.</blockquote>
+
+      <h2 id="section-4">Когда использовать threading</h2>
+
+      <p>Threading полезен для задач ввода-вывода (I/O):</p>
+
+      <ul>
+        <li>Скачивание файлов из сети.</li>
+        <li>Работа с API нескольких сервисов параллельно.</li>
+        <li>Чтение и запись множества файлов.</li>
+        <li>Работа с базой данных, где запросы долгие.</li>
+      </ul>
+
+      <p>Во всех этих задачах программа большую часть времени ждёт — и потоки успевают делать работу друг друга.</p>
+
+      <h2 id="section-5">Когда нужны процессы</h2>
+
+      <p>Для вычислений — обработки изображений, математики, ML — нужен модуль <code>multiprocessing</code>. Он запускает <strong>отдельные процессы</strong> Python, каждый со своим GIL. Это работает по-настоящему параллельно.</p>
+
+      <pre><code class="language-python">from multiprocessing import Pool
+
+def count_sum(n):
+    total = 0
+    for i in range(n):
+        total += i
+    return total
+
+if __name__ == '__main__':
+    # Запускаем 4 процесса одновременно
+    with Pool(4) as pool:
+        results = pool.map(count_sum, [10_000_000] * 4)
+    print('Готово, результатов:', len(results))</code></pre>
+
+      <p>Важно: <code>if __name__ == '__main__':</code> — обязательная защита. Без неё процессы начнут запускаться заново и создадут бесконечный цикл.</p>
+
+      <h2 id="section-6">Когда нужен asyncio</h2>
+
+      <p>Третий путь — асинхронность через <code>asyncio</code>. Она тоже хорошо работает с I/O, но по-другому: не запускает новые потоки, а переключает задачи внутри одного потока.</p>
+
+      <pre><code class="language-python">import asyncio
+
+async def download(name, seconds):
+    print(name, 'начал')
+    await asyncio.sleep(seconds)   # не блокирует другие задачи
+    print(name, 'готов')
+
+async def main():
+    # Запускаем три задачи одновременно
+    await asyncio.gather(
+        download('file1', 1),
+        download('file2', 1),
+        download('file3', 1),
+    )
+
+asyncio.run(main())   # займёт ~1 секунду</code></pre>
+
+      <p>Asyncio легче потоков: нет накладных расходов на переключение контекста. Но требует асинхронных библиотек — обычный <code>requests</code> там не работает.</p>
+
+      <h2 id="section-7">Что выбрать</h2>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Задача</th><th>Инструмент</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Много вычислений</td><td>multiprocessing</td></tr>
+          <tr><td>Много сетевых запросов</td><td>asyncio или threading</td></tr>
+          <tr><td>Работа с файлами</td><td>threading</td></tr>
+          <tr><td>Простые скрипты</td><td>без параллельности</td></tr>
+        </tbody>
+      </table></div>
+
+      <p>Не пытайся всё распараллелить. Часто последовательный код быстрее и проще — а выгода от параллельности не окупает сложности.</p>
+
+      <h2 id="section-8">Важно про Python 3.13</h2>
+
+      <p>В новых версиях Python (3.13+) появился экспериментальный режим без GIL. Его можно включить отдельной сборкой. Это большой шаг — но пока он нестабилен и не для продакшена. Следи за развитием, но пиши код так, будто GIL всё ещё есть.</p>
+
+      <h2 id="section-9">Итог</h2>
+
+      <p>GIL мешает потокам ускорять вычисления, но не мешает при ожидании. Для I/O — <code>threading</code> или <code>asyncio</code>. Для CPU — <code>multiprocessing</code>. Понимание GIL спасает от классической ошибки новичка: «запущу вычисления в потоках и станет быстрее».</p>
+    </article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Потоки и процессы — в чём разница</a><a href="#section-1" class="lvl-2">Что такое GIL</a><a href="#section-2" class="lvl-2">Проверим на практике</a><a href="#section-3" class="lvl-2">А теперь — задача на ожидание</a><a href="#section-4" class="lvl-2">Когда использовать threading</a><a href="#section-5" class="lvl-2">Когда нужны процессы</a><a href="#section-6" class="lvl-2">Когда нужен asyncio</a><a href="#section-7" class="lvl-2">Что выбрать</a><a href="#section-8" class="lvl-2">Важно про Python 3.13</a><a href="#section-9" class="lvl-2">Итог</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/obrabotka-isklyucheniy-v-python.html"><img src="/img/python-errors.svg" alt="Обработка исключений в Python — try, except, finally" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/obrabotka-isklyucheniy-v-python.html"><h2 class="card__title">Обработка исключений в Python — try, except, finally</h2></a>
+    <p class="card__excerpt">Как ловить ошибки и не давать программе падать. Разбираем try/except, собственные исключения и контекстные менеджеры с примерами.</p>
+    <div class="card__meta">
+      <span>24 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="obrabotka-isklyucheniy-v-python" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/python-s-nulya.html"><img src="/img/python.svg" alt="Python с нуля — базовый синтаксис за 15 минут" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/python-s-nulya.html"><h2 class="card__title">Python с нуля — базовый синтаксис за 15 минут</h2></a>
+    <p class="card__excerpt">Переменные, типы, условия, циклы, функции и списки. Минимальный набор, с которого начинается любой Python-проект.</p>
+    <div class="card__meta">
+      <span>20 апреля 2026</span><span class="dot">•</span><span>12 мин</span>
+      <button class="card__bm" data-slug="python-s-nulya" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/dekoratory-v-python.html"><img src="/img/decorators.svg" alt="Декораторы в Python — что это и зачем нужны" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/dekoratory-v-python.html"><h2 class="card__title">Декораторы в Python — что это и зачем нужны</h2></a>
+    <p class="card__excerpt">Функции, которые оборачивают другие функции. Разбираем декораторы с нуля: синтаксис, как работают, где применяются на практике.</p>
+    <div class="card__meta">
+      <span>19 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="dekoratory-v-python" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

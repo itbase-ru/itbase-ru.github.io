@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Что такое нейросеть: разбор по слоям без формул — IT·База</title>
+  <meta name="description" content="Как устроен искусственный нейрон, зачем нужны слои, веса и функции активации. Разбираю архитектуру на пальцах и показываю мини-сеть на Python.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/chto-takoe-neyroset-posloyam.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Что такое нейросеть: разбор по слоям без формул">
+  <meta property="og:description" content="Как устроен искусственный нейрон, зачем нужны слои, веса и функции активации. Разбираю архитектуру на пальцах и показываю мини-сеть на Python.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/chto-takoe-neyroset-posloyam.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/chto-takoe-neyroset-posloyam.html">
+  <meta property="article:published_time" content="2026-03-15">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Что такое нейросеть: разбор по слоям без формул">
+  <meta name="twitter:description" content="Как устроен искусственный нейрон, зачем нужны слои, веса и функции активации. Разбираю архитектуру на пальцах и показываю мини-сеть на Python.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/chto-takoe-neyroset-posloyam.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Что такое нейросеть: разбор по слоям без формул", "description": "Как устроен искусственный нейрон, зачем нужны слои, веса и функции активации. Разбираю архитектуру на пальцах и показываю мини-сеть на Python.", "image": ["https://itbase-ru.github.io/img/og/chto-takoe-neyroset-posloyam.png"], "datePublished": "2026-03-15", "dateModified": "2026-03-15", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/chto-takoe-neyroset-posloyam.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "ИИ", "item": "https://itbase-ru.github.io/?tag=ИИ"}, {"@type": "ListItem", "position": 3, "name": "Что такое нейросеть: разбор по слоям без формул", "item": "https://itbase-ru.github.io/articles/chto-takoe-neyroset-posloyam.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="chto-takoe-neyroset-posloyam">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=ИИ">ИИ</a>
+        <span class="sep">/</span>
+        <span>Что такое нейросеть: разбор по слоям без формул</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">ИИ</span><span class="tag">Теория</span></div>
+        <h1>Что такое нейросеть: разбор по слоям без формул</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-03-15">15 марта 2026</time>
+          <span class="dot">•</span>
+          <span>12 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/neural-cover.svg" alt="Что такое нейросеть: разбор по слоям без формул">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+<p>Про нейросети говорят все, но редко кто объясняет, что там внутри. Спойлер: <strong>ничего магического</strong>. Только числа, умножения и сложения — просто очень много. Разберём по слоям: от одного нейрона до полной сети.</p>
+
+<h2 id="section-0">Искусственный нейрон — основа всего</h2>
+<p>Биологический нейрон получает сигналы, обрабатывает и передаёт дальше. Искусственный делает то же самое, но в виде формулы:</p>
+<ol>
+  <li>На вход приходит несколько чисел: <code>x₁, x₂, x₃</code>.</li>
+  <li>Каждое умножается на свой <strong>вес</strong>: <code>w₁, w₂, w₃</code>.</li>
+  <li>Результаты складываются, плюс добавляется <strong>смещение</strong> <code>b</code>.</li>
+  <li>Полученное число прогоняется через <strong>функцию активации</strong>.</li>
+  <li>Результат передаётся дальше.</li>
+</ol>
+
+<pre><code class="language-python"># Один искусственный нейрон
+def neuron(x1, x2, x3, w1, w2, w3, b):
+    total = x1*w1 + x2*w2 + x3*w3 + b
+    return activation(total)
+
+# Функция активации: превращает любое число в диапазон 0..1
+def activation(x):
+    # Сигмоида — классический пример
+    import math
+    return 1 / (1 + math.exp(-x))</code></pre>
+
+<p>Всё. Один нейрон — это буквально одна формула. Сеть состоит из тысяч и миллионов таких нейронов, соединённых в слои.</p>
+
+<h2 id="section-1">Что такое веса и смещение</h2>
+<ul>
+  <li><strong>Вес</strong> — «важность» конкретного входа. Если вес большой, сигнал с этого входа сильно повлияет на результат. Если ноль — вообще не повлияет.</li>
+  <li><strong>Смещение</strong> — сдвиг. Позволяет нейрону срабатывать, даже когда все входы нули.</li>
+</ul>
+<p>Обучение нейросети — это <strong>подбор правильных весов и смещений</strong>. Всё, что происходит «внутри магии» — это миллионы подстроек этих чисел.</p>
+
+<h2 id="section-2">Три типа слоёв</h2>
+<div class="table-scroll"><table>
+  <thead><tr><th>Слой</th><th>Назначение</th><th>Сколько нейронов</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Входной</strong></td><td>Принимает данные</td><td>Столько, сколько признаков</td></tr>
+    <tr><td><strong>Скрытый</strong></td><td>Находит закономерности</td><td>От десятков до тысяч</td></tr>
+    <tr><td><strong>Выходной</strong></td><td>Выдаёт результат</td><td>Столько, сколько классов</td></tr>
+  </tbody>
+</table></div>
+<p><strong>Глубокая</strong> сеть — та, у которой больше одного скрытого слоя. Отсюда «глубокое обучение». Современные модели вроде GPT имеют <strong>сотни</strong> слоёв.</p>
+
+<h2 id="section-3">Прямой проход — как сеть получает ответ</h2>
+<p>Данные идут от входа к выходу по слоям. Каждый слой принимает числа из предыдущего, обрабатывает, передаёт дальше. На выходе — итоговый ответ.</p>
+
+<pre><code class="language-python"># Один слой: принимает список чисел, выдаёт список чисел
+def layer(inputs, weights, biases):
+    outputs = []
+    for i in range(len(biases)):
+        total = biases[i]
+        for j in range(len(inputs)):
+            total += inputs[j] * weights[i][j]
+        outputs.append(activation(total))
+    return outputs
+
+# Два слоя подряд — уже мини-сеть
+def mini_network(x, w1, b1, w2, b2):
+    hidden = layer(x, w1, b1)   # первый слой
+    output = layer(hidden, w2, b2)  # второй слой
+    return output</code></pre>
+
+<p>Прямой проход — это просто проход по слоям. Пока ничего обучающегося, просто вычисления.</p>
+
+<h2 id="section-4">Функции активации — зачем они</h2>
+<p>Без активации вся сеть сводилась бы к одному умножению — сколько слоёв ни добавляй. Активация <strong>добавляет нелинейность</strong> — без неё сеть не сможет выучить сложные зависимости.</p>
+
+<div class="table-scroll"><table>
+  <thead><tr><th>Функция</th><th>Диапазон</th><th>Где применяется</th></tr></thead>
+  <tbody>
+    <tr><td>Sigmoid</td><td>0 до 1</td><td>Вероятности</td></tr>
+    <tr><td>Tanh</td><td>-1 до 1</td><td>Скрытые слои (старое)</td></tr>
+    <tr><td>ReLU</td><td>0 и выше</td><td>Скрытые слои (стандарт)</td></tr>
+    <tr><td>Softmax</td><td>0 до 1, сумма = 1</td><td>Многоклассовая классификация</td></tr>
+  </tbody>
+</table></div>
+
+<pre><code class="language-python"># ReLU — самая популярная: если отрицательное, то 0
+def relu(x):
+    return max(0, x)
+
+# Softmax — превращает список чисел в вероятности
+def softmax(values):
+    import math
+    exp_values = [math.exp(v) for v in values]
+    total = sum(exp_values)
+    return [v / total for v in exp_values]
+
+print(softmax([1, 2, 3]))
+# [0.09, 0.24, 0.67] — сумма всех = 1</code></pre>
+
+<h2 id="section-5">Обратное распространение — как сеть учится</h2>
+<p>Это самая сложная часть, но идея проста. По шагам:</p>
+<ol>
+  <li>Сеть получает пример и выдаёт прогноз.</li>
+  <li>Сравниваем прогноз с правильным ответом — получаем <strong>ошибку</strong>.</li>
+  <li>Смотрим, какой вес сколько внёс в эту ошибку.</li>
+  <li>Чуть-чуть подстраиваем каждый вес в сторону уменьшения ошибки.</li>
+  <li>Повторяем для следующего примера.</li>
+</ol>
+<p>Миллион примеров — миллион подстроек. Постепенно ошибка уменьшается, а сеть «учится». Никакого осознания внутри нет — только числа.</p>
+
+<blockquote>«Обучение» нейросети — это не запоминание фактов, а <strong>подгонка миллиона чисел</strong> под закономерности в данных.</blockquote>
+
+<h2 id="section-6">Мини-сеть на Python: узнаём XOR</h2>
+<p>Задача XOR — знаменитая проверка: сеть должна выучить правило, где результат 1, если входы разные, и 0, если одинаковые. Одним слоем это невозможно, нужно минимум два.</p>
+
+<pre><code class="language-python">import numpy as np
+
+# Данные: 4 примера (XOR)
+X = np.array([[0,0], [0,1], [1,0], [1,1]])
+Y = np.array([[0], [1], [1], [0]])
+
+# Инициализируем веса случайно
+np.random.seed(1)
+W1 = np.random.randn(2, 4)   # вход (2) → скрытый слой (4)
+W2 = np.random.randn(4, 1)   # скрытый (4) → выход (1)
+
+learning_rate = 0.5
+
+# Сигмоида
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
+
+def sigmoid_deriv(x):
+    s = sigmoid(x)
+    return s * (1 - s)
+
+# 10000 циклов обучения
+for epoch in range(10000):
+    # --- Прямой проход ---
+    h_in = X.dot(W1)          # вход скрытого слоя
+    h_out = sigmoid(h_in)     # выход скрытого слоя
+    o_in = h_out.dot(W2)      # вход выходного нейрона
+    o_out = sigmoid(o_in)     # финальный прогноз
+
+    # --- Ошибка ---
+    error = Y - o_out
+
+    # --- Обратный проход ---
+    d_output = error * sigmoid_deriv(o_in)
+    d_hidden = d_output.dot(W2.T) * sigmoid_deriv(h_in)
+
+    # --- Обновление весов ---
+    W2 += h_out.T.dot(d_output) * learning_rate
+    W1 += X.T.dot(d_hidden) * learning_rate
+
+# Проверка
+print("Прогнозы:")
+print(o_out.round(3))
+print("Правильные ответы:")
+print(Y)
+</code></pre>
+
+<p>После обучения прогнозы сети будут близки к <code>[0, 1, 1, 0]</code>. Формулу XOR никто не вписывал — сеть нашла её сама из данных. Ровно так же, только в миллионы раз сложнее, работают GPT и распознавание лиц.</p>
+
+<h2 id="section-7">Что дальше: типы сетей</h2>
+<ul>
+  <li><strong>Свёрточные (CNN)</strong> — для картинок. Ищут узоры: контуры, формы, лица.</li>
+  <li><strong>Рекуррентные (RNN, LSTM)</strong> — для последовательностей: текст, звук, временные ряды.</li>
+  <li><strong>Трансформеры</strong> — современный стандарт. Лежат в основе GPT, BERT и почти всех LLM.</li>
+  <li><strong>Генеративные (GAN, диффузионные)</strong> — для создания картинок: Midjourney, DALL-E, Stable Diffusion.</li>
+</ul>
+
+<h2 id="section-8">Что важно запомнить</h2>
+<ul>
+  <li>Нейрон — это <strong>умножение + сложение + активация</strong>. Всё.</li>
+  <li><strong>Веса</strong> — то, что подстраивается при обучении.</li>
+  <li><strong>Слои</strong> — для сложных зависимостей. Один слой = слишком просто.</li>
+  <li><strong>Активация</strong> добавляет нелинейность. Без неё сеть бессмысленна.</li>
+  <li><strong>Обратное распространение</strong> — механизм подстройки весов. Вся «магия» обучения.</li>
+  <li>Никакого понимания внутри нет — только <strong>закономерности в числах</strong>.</li>
+</ul>
+</article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Искусственный нейрон — основа всего</a><a href="#section-1" class="lvl-2">Что такое веса и смещение</a><a href="#section-2" class="lvl-2">Три типа слоёв</a><a href="#section-3" class="lvl-2">Прямой проход — как сеть получает ответ</a><a href="#section-4" class="lvl-2">Функции активации — зачем они</a><a href="#section-5" class="lvl-2">Обратное распространение — как сеть учится</a><a href="#section-6" class="lvl-2">Мини-сеть на Python: узнаём XOR</a><a href="#section-7" class="lvl-2">Что дальше: типы сетей</a><a href="#section-8" class="lvl-2">Что важно запомнить</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/chto-takoe-iskusstvennyy-intellekt.html"><img src="/img/ai-cover.svg" alt="Что такое искусственный интеллект: разбор с нуля" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">ИИ</span><span class="tag">Теория</span></div>
+    <a href="/articles/chto-takoe-iskusstvennyy-intellekt.html"><h2 class="card__title">Что такое искусственный интеллект: разбор с нуля</h2></a>
+    <p class="card__excerpt">Объясняю простыми словами, чем ИИ отличается от обычной программы, какие бывают типы ИИ и как он реально работает — без магии и заумных терминов.</p>
+    <div class="card__meta">
+      <span>10 февраля 2026</span><span class="dot">•</span><span>8 мин</span>
+      <button class="card__bm" data-slug="chto-takoe-iskusstvennyy-intellekt" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/obrabotka-isklyucheniy-v-python.html"><img src="/img/python-errors.svg" alt="Обработка исключений в Python — try, except, finally" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/obrabotka-isklyucheniy-v-python.html"><h2 class="card__title">Обработка исключений в Python — try, except, finally</h2></a>
+    <p class="card__excerpt">Как ловить ошибки и не давать программе падать. Разбираем try/except, собственные исключения и контекстные менеджеры с примерами.</p>
+    <div class="card__meta">
+      <span>24 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="obrabotka-isklyucheniy-v-python" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/dizayn-patterns-singleton-factory-observer.html"><img src="/img/patterns.svg" alt="Дизайн-паттерны — Singleton, Factory, Observer" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Разработка</span><span class="tag">Архитектура</span><span class="tag">Теория</span></div>
+    <a href="/articles/dizayn-patterns-singleton-factory-observer.html"><h2 class="card__title">Дизайн-паттерны — Singleton, Factory, Observer</h2></a>
+    <p class="card__excerpt">Три самых частых паттерна проектирования. Разбираем на примерах: зачем нужны, как устроены и где применяются в реальном коде.</p>
+    <div class="card__meta">
+      <span>23 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="dizayn-patterns-singleton-factory-observer" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

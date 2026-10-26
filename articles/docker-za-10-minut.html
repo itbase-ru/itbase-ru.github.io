@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Docker за 10 минут: зачем нужны контейнеры — IT·База</title>
+  <meta name="description" content="Проблема «у меня работает, а у тебя нет» и как Docker её решает. Образ, контейнер, Dockerfile — на пальцах.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/docker-za-10-minut.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Docker за 10 минут: зачем нужны контейнеры">
+  <meta property="og:description" content="Проблема «у меня работает, а у тебя нет» и как Docker её решает. Образ, контейнер, Dockerfile — на пальцах.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/docker-za-10-minut.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/docker-za-10-minut.html">
+  <meta property="article:published_time" content="2026-03-01">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Docker за 10 минут: зачем нужны контейнеры">
+  <meta name="twitter:description" content="Проблема «у меня работает, а у тебя нет» и как Docker её решает. Образ, контейнер, Dockerfile — на пальцах.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/docker-za-10-minut.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Docker за 10 минут: зачем нужны контейнеры", "description": "Проблема «у меня работает, а у тебя нет» и как Docker её решает. Образ, контейнер, Dockerfile — на пальцах.", "image": ["https://itbase-ru.github.io/img/og/docker-za-10-minut.png"], "datePublished": "2026-03-01", "dateModified": "2026-03-01", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/docker-za-10-minut.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Инструменты", "item": "https://itbase-ru.github.io/?tag=Инструменты"}, {"@type": "ListItem", "position": 3, "name": "Docker за 10 минут: зачем нужны контейнеры", "item": "https://itbase-ru.github.io/articles/docker-za-10-minut.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="docker-za-10-minut">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Инструменты">Инструменты</a>
+        <span class="sep">/</span>
+        <span>Docker за 10 минут: зачем нужны контейнеры</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Инструменты</span><span class="tag">DevOps</span></div>
+        <h1>Docker за 10 минут: зачем нужны контейнеры</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-03-01">1 марта 2026</time>
+          <span class="dot">•</span>
+          <span>9 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/docker-cover.svg" alt="Docker за 10 минут: зачем нужны контейнеры">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+<p>Классическая беда любого программиста: код <strong>работает на его компьютере</strong>, но у коллеги или на сервере — падает. Разные версии Python, разные библиотеки, разные настройки системы. Docker решает эту проблему раз и навсегда.</p>
+
+<h2 id="section-0">Идея за 10 секунд</h2>
+<p>Docker упаковывает приложение вместе со <strong>всем, что ему нужно</strong> — библиотеками, настройками, даже операционной системой (точнее, её минимальной копией) — в один <em>контейнер</em>. Этот контейнер можно запустить где угодно, и он будет работать одинаково.</p>
+<blockquote>Контейнер — это лёгкая коробка, внутри которой уже упаковано всё для работы приложения.</blockquote>
+
+<h2 id="section-1">Контейнер vs виртуальная машина</h2>
+<div class="table-scroll"><table>
+  <thead><tr><th>Критерий</th><th>Виртуальная машина</th><th>Docker-контейнер</th></tr></thead>
+  <tbody>
+    <tr><td>Что внутри</td><td>Полная ОС</td><td>Только приложение и его зависимости</td></tr>
+    <tr><td>Размер</td><td>Гигабайты</td><td>Мегабайты</td></tr>
+    <tr><td>Запуск</td><td>Минуты</td><td>Секунды</td></tr>
+    <tr><td>Потребление</td><td>Много RAM и CPU</td><td>Мало — делят ядро хоста</td></tr>
+    <tr><td>Изоляция</td><td>Полная</td><td>Достаточная для большинства задач</td></tr>
+  </tbody>
+</table></div>
+<p>Docker не заменяет виртуалки полностью, но в 90% случаев он легче, быстрее и удобнее.</p>
+
+<h2 id="section-2">Три главных понятия</h2>
+<ol>
+  <li><strong>Образ (image)</strong> — шаблон, из которого создаются контейнеры. Как чертёж.</li>
+  <li><strong>Контейнер (container)</strong> — запущенный экземпляр образа. Как изделие по чертежу.</li>
+  <li><strong>Dockerfile</strong> — текстовый файл с инструкцией, как собрать образ.</li>
+</ol>
+
+<h2 id="section-3">Dockerfile для Python-приложения</h2>
+<pre><code class="language-bash"># Берём готовый образ Python 3.12 как базу
+FROM python:3.12-slim
+
+# Указываем рабочую папку внутри контейнера
+WORKDIR /app
+
+# Копируем файл со списком зависимостей
+COPY requirements.txt .
+
+# Устанавливаем зависимости
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Копируем остальные файлы проекта
+COPY . .
+
+# Команда, которая выполнится при старте контейнера
+CMD ["python", "main.py"]
+</code></pre>
+<p>Построчно: берём готовую среду → переходим в папку → копируем зависимости → устанавливаем их → копируем код → говорим, что запускать. Всё.</p>
+
+<h2 id="section-4">Главные команды</h2>
+<div class="table-scroll"><table>
+  <thead><tr><th>Команда</th><th>Что делает</th></tr></thead>
+  <tbody>
+    <tr><td><code>docker build -t myapp .</code></td><td>Собрать образ из Dockerfile в текущей папке</td></tr>
+    <tr><td><code>docker run myapp</code></td><td>Запустить контейнер из образа</td></tr>
+    <tr><td><code>docker run -p 8080:80 myapp</code></td><td>Запустить и пробросить порт 80 наружу как 8080</td></tr>
+    <tr><td><code>docker ps</code></td><td>Список запущенных контейнеров</td></tr>
+    <tr><td><code>docker ps -a</code></td><td>Список всех, включая остановленные</td></tr>
+    <tr><td><code>docker stop имя</code></td><td>Остановить контейнер</td></tr>
+    <tr><td><code>docker rm имя</code></td><td>Удалить остановленный контейнер</td></tr>
+    <tr><td><code>docker images</code></td><td>Список локальных образов</td></tr>
+    <tr><td><code>docker logs имя</code></td><td>Логи контейнера</td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="section-5">Зачем это нужно на практике</h2>
+<ul>
+  <li><strong>Единая среда.</strong> Все разработчики запускают одно и то же. Никаких «у меня работает».</li>
+  <li><strong>Быстрый деплой.</strong> Локально собрал образ → отправил на сервер → запустил. Всё.</li>
+  <li><strong>Изоляция.</strong> Приложение не сломает систему хоста.</li>
+  <li><strong>Легко масштабировать.</strong> Нужно больше мощности — запусти ещё контейнеров.</li>
+</ul>
+
+<h2 id="section-6">Что важно запомнить</h2>
+<ul>
+  <li>Docker = <strong>упаковка приложения со всем его окружением</strong>.</li>
+  <li><strong>Образ</strong> — шаблон, <strong>контейнер</strong> — запущенный экземпляр.</li>
+  <li><strong>Dockerfile</strong> описывает, как собрать образ.</li>
+  <li>Работает <strong>на любой ОС</strong> одинаково — главный плюс.</li>
+  <li>Начать изучать: <code>docker build</code>, <code>docker run</code>, <code>docker ps</code>. Остальное придёт с практикой.</li>
+</ul>
+
+<div class="affiliate">
+  <div class="affiliate__icon">🐳</div>
+  <div class="affiliate__body">
+    <div class="affiliate__label">Рекомендую</div>
+    <div class="affiliate__title">Docker Desktop</div>
+    <div class="affiliate__desc">Официальная программа для работы с контейнерами. Windows, Mac, Linux.</div>
+  </div>
+  <a class="affiliate__btn" href="https://www.docker.com/products/docker-desktop/" target="_blank" rel="nofollow sponsored">Скачать</a>
+</div>
+</article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Идея за 10 секунд</a><a href="#section-1" class="lvl-2">Контейнер vs виртуальная машина</a><a href="#section-2" class="lvl-2">Три главных понятия</a><a href="#section-3" class="lvl-2">Dockerfile для Python-приложения</a><a href="#section-4" class="lvl-2">Главные команды</a><a href="#section-5" class="lvl-2">Зачем это нужно на практике</a><a href="#section-6" class="lvl-2">Что важно запомнить</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/chto-takoe-nginx.html"><img src="/img/nginx.svg" alt="Что такое Nginx и зачем он нужен на сервере" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">DevOps</span><span class="tag">Веб</span><span class="tag">Инструменты</span></div>
+    <a href="/articles/chto-takoe-nginx.html"><h2 class="card__title">Что такое Nginx и зачем он нужен на сервере</h2></a>
+    <p class="card__excerpt">Почему почти все сайты работают через Nginx. Разбираем: веб-сервер, reverse proxy, балансировка нагрузки, статика и конфиги.</p>
+    <div class="card__meta">
+      <span>26 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="chto-takoe-nginx" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/bash-skripty-dlya-novichka.html"><img src="/img/bash.svg" alt="Bash-скрипты для новичка — автоматизация на Linux" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Инструменты</span><span class="tag">DevOps</span><span class="tag">Разработка</span></div>
+    <a href="/articles/bash-skripty-dlya-novichka.html"><h2 class="card__title">Bash-скрипты для новичка — автоматизация на Linux</h2></a>
+    <p class="card__excerpt">Как написать первый скрипт, который автоматизирует рутину: переменные, условия, циклы, функции, аргументы командной строки.</p>
+    <div class="card__meta">
+      <span>25 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="bash-skripty-dlya-novichka" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/docker-compose-dlya-proekta.html"><img src="/img/compose.svg" alt="Docker Compose — несколько контейнеров одной командой" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">DevOps</span><span class="tag">Инструменты</span><span class="tag">Разработка</span></div>
+    <a href="/articles/docker-compose-dlya-proekta.html"><h2 class="card__title">Docker Compose — несколько контейнеров одной командой</h2></a>
+    <p class="card__excerpt">Когда одного Dockerfile мало: как описать приложение, базу и кэш в одном файле и запускать всё одной командой docker compose up.</p>
+    <div class="card__meta">
+      <span>18 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="docker-compose-dlya-proekta" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

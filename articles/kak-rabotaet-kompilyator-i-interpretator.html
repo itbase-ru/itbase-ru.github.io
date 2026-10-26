@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Как работает компилятор и интерпретатор — IT·База</title>
+  <meta name="description" content="Почему Python медленнее C, а JavaScript работает в браузере, хотя он интерпретируемый. Разбираем компиляцию, интерпретацию и JIT.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/kak-rabotaet-kompilyator-i-interpretator.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Как работает компилятор и интерпретатор">
+  <meta property="og:description" content="Почему Python медленнее C, а JavaScript работает в браузере, хотя он интерпретируемый. Разбираем компиляцию, интерпретацию и JIT.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/kak-rabotaet-kompilyator-i-interpretator.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/kak-rabotaet-kompilyator-i-interpretator.html">
+  <meta property="article:published_time" content="2026-04-01">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Как работает компилятор и интерпретатор">
+  <meta name="twitter:description" content="Почему Python медленнее C, а JavaScript работает в браузере, хотя он интерпретируемый. Разбираем компиляцию, интерпретацию и JIT.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/kak-rabotaet-kompilyator-i-interpretator.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Как работает компилятор и интерпретатор", "description": "Почему Python медленнее C, а JavaScript работает в браузере, хотя он интерпретируемый. Разбираем компиляцию, интерпретацию и JIT.", "image": ["https://itbase-ru.github.io/img/og/kak-rabotaet-kompilyator-i-interpretator.png"], "datePublished": "2026-04-01", "dateModified": "2026-04-01", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/kak-rabotaet-kompilyator-i-interpretator.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Разработка", "item": "https://itbase-ru.github.io/?tag=Разработка"}, {"@type": "ListItem", "position": 3, "name": "Как работает компилятор и интерпретатор", "item": "https://itbase-ru.github.io/articles/kak-rabotaet-kompilyator-i-interpretator.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="kak-rabotaet-kompilyator-i-interpretator">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Разработка">Разработка</a>
+        <span class="sep">/</span>
+        <span>Как работает компилятор и интерпретатор</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Разработка</span><span class="tag">Теория</span><span class="tag">Инструменты</span></div>
+        <h1>Как работает компилятор и интерпретатор</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-04-01">1 апреля 2026</time>
+          <span class="dot">•</span>
+          <span>10 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/kompilyator.svg" alt="Как работает компилятор и интерпретатор">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+      <p>Ты пишешь код на Python или JavaScript, запускаешь — и он работает. А почему он работает? Кто превращает текст в действия? На этом уровне программисты делятся на тех, кто знает, и тех, кто «просто запускает». Разберёмся.</p>
+
+      <h2 id="section-0">Что такое компилятор и интерпретатор</h2>
+
+      <p><strong>Компилятор</strong> — программа, которая переводит код с одного языка на другой (обычно — в машинный код или байт-код) <em>целиком</em>, заранее.</p>
+
+      <p><strong>Интерпретатор</strong> — программа, которая выполняет код <em>построчно</em>, без предварительного перевода в машинный вид.</p>
+
+      <p>Разница простая:</p>
+
+      <ul>
+        <li>Компилятор: «Прочитаю всё, переведу, потом запустим».</li>
+        <li>Интерпретатор: «Читаю строку — выполняю, читаю следующую — выполняю».</li>
+      </ul>
+
+      <blockquote>Компиляция — это перевод книги целиком. Интерпретация — это синхронный переводчик, который переводит по фразе.</blockquote>
+
+      <h2 id="section-1">Компилируемые языки</h2>
+
+      <p>Примеры: C, C++, Rust, Go, Swift.</p>
+
+      <p>Процесс такой:</p>
+
+      <ol>
+        <li><strong>Препроцессинг</strong> — обрабатываются директивы типа <code>#include</code>.</li>
+        <li><strong>Компиляция в объектный файл</strong> — код превращается в машинные инструкции.</li>
+        <li><strong>Линковка</strong> — несколько объектных файлов собираются в один исполняемый.</li>
+        <li><strong>Запуск</strong> — готовая программа исполняется процессором напрямую.</li>
+      </ol>
+
+      <p>Плюсы:</p>
+
+      <ul>
+        <li>Быстрый запуск и выполнение.</li>
+        <li>Ошибки ловятся на этапе компиляции, а не в рантайме.</li>
+        <li>Можно оптимизировать код на уровне процессора.</li>
+      </ul>
+
+      <p>Минусы:</p>
+
+      <ul>
+        <li>Нужно компилировать под каждую платформу (Windows, Linux, macOS).</li>
+        <li>Медленный цикл разработки: изменил код — перекомпилировал.</li>
+      </ul>
+
+      <h2 id="section-2">Интерпретируемые языки</h2>
+
+      <p>Классический пример — Python, Ruby, JavaScript (в начале своей истории).</p>
+
+      <p>Процесс простой:</p>
+
+      <ol>
+        <li>Интерпретатор читает исходный код.</li>
+        <li>Переводит его в промежуточное представление (байт-код).</li>
+        <li>Выполняет байт-код построчно.</li>
+      </ol>
+
+      <p>Плюсы:</p>
+
+      <ul>
+        <li>Один и тот же код работает везде, где есть интерпретатор.</li>
+        <li>Быстрый цикл разработки: сохранил — запустил.</li>
+        <li>Легче писать динамический код.</li>
+      </ul>
+
+      <p>Минусы:</p>
+
+      <ul>
+        <li>Медленнее компилируемых языков.</li>
+        <li>Ошибки в редких ветках кода видны только в рантайме.</li>
+      </ul>
+
+      <h2 id="section-3">Промежуточный этап: байт-код</h2>
+
+      <p>На самом деле большинство «интерпретируемых» языков сегодня не интерпретируют исходник напрямую. Сначала они компилируют его в <strong>байт-код</strong> — низкоуровневое представление, которое понимает виртуальная машина.</p>
+
+      <p>Python так и делает: <code>.py</code> → <code>.pyc</code> (байт-код) → исполнение в CPython VM. Именно поэтому в папке с проектом появляется <code>__pycache__</code>.</p>
+
+      <p>Java идёт дальше: <code>.java</code> → <code>.class</code> (байт-код) → исполнение в JVM. Это позволяет «написать один раз, запустить везде» — где есть JVM.</p>
+
+      <h2 id="section-4">JIT-компиляция — гибрид</h2>
+
+      <p>JIT (Just-In-Time, компиляция «на лету») — это когда код сначала работает через интерпретатор, но «горячие» участки (которые выполняются часто) компилируются в машинный код прямо во время работы.</p>
+
+      <p>Так работают:</p>
+
+      <ul>
+        <li><strong>V8</strong> — движок JavaScript в Chrome и Node.js.</li>
+        <li><strong>PyPy</strong> — альтернативный интерпретатор Python, в разы быстрее CPython.</li>
+        <li><strong>.NET CLR</strong> — среда исполнения для C#.</li>
+        <li><strong>JVM HotSpot</strong> — виртуальная машина Java.</li>
+      </ul>
+
+      <p>Идея: медленный старт, но высокая скорость на длинной дистанции.</p>
+
+      <h2 id="section-5">Сравнение</h2>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Критерий</th><th>Компиляция</th><th>Интерпретация</th><th>JIT</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Скорость запуска</td><td>Мгновенно</td><td>Быстро</td><td>Медленнее</td></tr>
+          <tr><td>Скорость выполнения</td><td>Быстро</td><td>Медленно</td><td>Быстро</td></tr>
+          <tr><td>Кроссплатформенность</td><td>Нужна отдельная сборка</td><td>Везде, где есть VM</td><td>Везде, где есть VM</td></tr>
+          <tr><td>Ошибки</td><td>На этапе компиляции</td><td>В рантайме</td><td>Смешанно</td></tr>
+          <tr><td>Примеры</td><td>C, C++, Rust, Go</td><td>Shell, Ruby</td><td>JS, Java, C#</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2 id="section-6">Что такое AST</h2>
+
+      <p>И компилятор, и интерпретатор сначала строят <strong>AST</strong> — Abstract Syntax Tree, абстрактное синтаксическое дерево. Это представление кода в виде дерева.</p>
+
+      <p>Например, выражение <code>2 + 3 * 4</code> превратится в:</p>
+
+      <pre><code class="language-bash">    +
+   / \
+  2   *
+     / \
+    3   4</code></pre>
+
+      <p>AST полезен не только компиляторам. Линтеры (ESLint, Pylint), форматтеры (Prettier, Black) и транспайлеры (Babel, TypeScript) работают через AST. Если хочешь написать свой инструмент для кода — тебе тоже придётся его строить.</p>
+
+      <h2 id="section-7">Типы ошибок: компиляция vs рантайм</h2>
+
+      <p>Компилируемые языки:</p>
+
+      <ul>
+        <li><strong>Ошибки компиляции</strong> — синтаксис, несоответствие типов. Программа вообще не собирается.</li>
+        <li><strong>Ошибки рантайма</strong> — деление на ноль, выход за границы массива. Уже после запуска.</li>
+      </ul>
+
+      <p>Интерпретируемые языки:</p>
+
+      <ul>
+        <li><strong>Ошибки парсинга</strong> — программа не запустится.</li>
+        <li><strong>Ошибки рантайма</strong> — всплывают только когда до строки дойдёт выполнение. Тот самый «а код вообще-то валидный».</li>
+      </ul>
+
+      <p>Именно поэтому в Python можно целый год держать в коде функцию с опечаткой — если её никто не вызывает, ошибка не вылезет. В C++ такое не пройдёт.</p>
+
+      <h2 id="section-8">Почему это важно понимать</h2>
+
+      <p>Понимание компиляции и интерпретации помогает:</p>
+
+      <ul>
+        <li>выбирать язык под задачу (скрипт для автоматизации vs высоконагруженный сервис);</li>
+        <li>понимать, почему Python медленнее C, но удобнее;</li>
+        <li>быстрее разбираться с ошибками — ты понимаешь, откуда они берутся;</li>
+        <li>лучше писать на TypeScript и знать, зачем нужен транспайлер.</li>
+      </ul>
+
+      <blockquote>Компилятор и интерпретатор — это не «противники». Современные языки берут лучшее от обоих: компилируют в байт-код, интерпретируют на старте, JIT'ят горячие участки.</blockquote>
+
+      <h2 id="section-9">Итог</h2>
+
+      <p>Компилятор переводит код целиком, интерпретатор выполняет построчно, JIT комбинирует оба подхода. Понимание этих механизмов — не академика ради, а чтобы лучше ориентироваться в языках, инструментах и ошибках.</p>
+    </article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Что такое компилятор и интерпретатор</a><a href="#section-1" class="lvl-2">Компилируемые языки</a><a href="#section-2" class="lvl-2">Интерпретируемые языки</a><a href="#section-3" class="lvl-2">Промежуточный этап: байт-код</a><a href="#section-4" class="lvl-2">JIT-компиляция — гибрид</a><a href="#section-5" class="lvl-2">Сравнение</a><a href="#section-6" class="lvl-2">Что такое AST</a><a href="#section-7" class="lvl-2">Типы ошибок: компиляция vs рантайм</a><a href="#section-8" class="lvl-2">Почему это важно понимать</a><a href="#section-9" class="lvl-2">Итог</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/bash-skripty-dlya-novichka.html"><img src="/img/bash.svg" alt="Bash-скрипты для новичка — автоматизация на Linux" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Инструменты</span><span class="tag">DevOps</span><span class="tag">Разработка</span></div>
+    <a href="/articles/bash-skripty-dlya-novichka.html"><h2 class="card__title">Bash-скрипты для новичка — автоматизация на Linux</h2></a>
+    <p class="card__excerpt">Как написать первый скрипт, который автоматизирует рутину: переменные, условия, циклы, функции, аргументы командной строки.</p>
+    <div class="card__meta">
+      <span>25 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="bash-skripty-dlya-novichka" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/obrabotka-isklyucheniy-v-python.html"><img src="/img/python-errors.svg" alt="Обработка исключений в Python — try, except, finally" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/obrabotka-isklyucheniy-v-python.html"><h2 class="card__title">Обработка исключений в Python — try, except, finally</h2></a>
+    <p class="card__excerpt">Как ловить ошибки и не давать программе падать. Разбираем try/except, собственные исключения и контекстные менеджеры с примерами.</p>
+    <div class="card__meta">
+      <span>24 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="obrabotka-isklyucheniy-v-python" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/dizayn-patterns-singleton-factory-observer.html"><img src="/img/patterns.svg" alt="Дизайн-паттерны — Singleton, Factory, Observer" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Разработка</span><span class="tag">Архитектура</span><span class="tag">Теория</span></div>
+    <a href="/articles/dizayn-patterns-singleton-factory-observer.html"><h2 class="card__title">Дизайн-паттерны — Singleton, Factory, Observer</h2></a>
+    <p class="card__excerpt">Три самых частых паттерна проектирования. Разбираем на примерах: зачем нужны, как устроены и где применяются в реальном коде.</p>
+    <div class="card__meta">
+      <span>23 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="dizayn-patterns-singleton-factory-observer" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

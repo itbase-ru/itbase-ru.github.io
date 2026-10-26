@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Что такое кэширование и зачем оно нужно — IT·База</title>
+  <meta name="description" content="Кэш — одна из главных идей в IT. Разбираем, какие бывают уровни кэша, что такое TTL, инвалидация, и почему кэш может всё сломать.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/chto-takoe-keshirovanie.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Что такое кэширование и зачем оно нужно">
+  <meta property="og:description" content="Кэш — одна из главных идей в IT. Разбираем, какие бывают уровни кэша, что такое TTL, инвалидация, и почему кэш может всё сломать.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/chto-takoe-keshirovanie.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/chto-takoe-keshirovanie.html">
+  <meta property="article:published_time" content="2026-04-02">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Что такое кэширование и зачем оно нужно">
+  <meta name="twitter:description" content="Кэш — одна из главных идей в IT. Разбираем, какие бывают уровни кэша, что такое TTL, инвалидация, и почему кэш может всё сломать.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/chto-takoe-keshirovanie.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Что такое кэширование и зачем оно нужно", "description": "Кэш — одна из главных идей в IT. Разбираем, какие бывают уровни кэша, что такое TTL, инвалидация, и почему кэш может всё сломать.", "image": ["https://itbase-ru.github.io/img/og/chto-takoe-keshirovanie.png"], "datePublished": "2026-04-02", "dateModified": "2026-04-02", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/chto-takoe-keshirovanie.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Разработка", "item": "https://itbase-ru.github.io/?tag=Разработка"}, {"@type": "ListItem", "position": 3, "name": "Что такое кэширование и зачем оно нужно", "item": "https://itbase-ru.github.io/articles/chto-takoe-keshirovanie.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="chto-takoe-keshirovanie">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Разработка">Разработка</a>
+        <span class="sep">/</span>
+        <span>Что такое кэширование и зачем оно нужно</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Разработка</span><span class="tag">Веб</span><span class="tag">DevOps</span></div>
+        <h1>Что такое кэширование и зачем оно нужно</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-04-02">2 апреля 2026</time>
+          <span class="dot">•</span>
+          <span>10 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/cache.svg" alt="Что такое кэширование и зачем оно нужно">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+      <p>Кэширование — одна из тех идей, которая кажется простой, пока не начнёшь делать это в реальном проекте. Здесь легко и ускорить систему в 100 раз, и положить её полностью. Разберёмся.</p>
+
+      <h2 id="section-0">Зачем вообще кэш</h2>
+
+      <p>Задача проста: если данные уже считались один раз, зачем считать их снова?</p>
+
+      <p>Пример: главная страница сайта показывает топ-10 популярных статей. Эта информация обновляется раз в сутки. Логично: посчитать один раз и <strong>сохранить результат</strong>, вместо того чтобы дёргать базу на каждый запрос от каждого пользователя.</p>
+
+      <blockquote>Кэш — это компромисс: жертвуем актуальностью ради скорости.</blockquote>
+
+      <h2 id="section-1">Уровни кэширования</h2>
+
+      <p>Кэш бывает на каждом уровне системы. Вот по порядку — от пользователя до базы данных.</p>
+
+      <h3 id="section-2">1. Браузерный кэш</h3>
+
+      <p>Браузер сохраняет CSS, JS, картинки и не запрашивает их заново при повторном открытии сайта. Управляется HTTP-заголовками:</p>
+
+      <pre><code class="language-bash">Cache-Control: max-age=86400
+ETag: "abc123"</code></pre>
+
+      <p><code>max-age=86400</code> значит: держи в кэше 24 часа. <code>ETag</code> — это версия файла, чтобы проверить, изменился ли он.</p>
+
+      <h3 id="section-3">2. CDN-кэш</h3>
+
+      <p>CDN (Content Delivery Network) — сеть серверов по всему миру. Она хранит копии статики (картинки, видео, JS) ближе к пользователю. Пользователь из Новосибирска получает картинку с сервера в Новосибирске, а не с сервера в США.</p>
+
+      <p>Cloudflare, Fastly, CloudFront — популярные CDN.</p>
+
+      <h3 id="section-4">3. Кэш приложения</h3>
+
+      <p>Самый хитрый уровень. Внутри твоего бэкенда можно кэшировать результаты тяжёлых вычислений, ответы внешних API, готовые HTML-страницы.</p>
+
+      <p>Способы:</p>
+
+      <ul>
+        <li><strong>In-memory</strong> — прямо в переменных процесса.</li>
+        <li><strong>Redis / Memcached</strong> — отдельный сервер, кэш общий для всех инстансов приложения.</li>
+        <li><strong>Локальный файл</strong> — для простых случаев.</li>
+      </ul>
+
+      <h3 id="section-5">4. Кэш базы данных</h3>
+
+      <p>Современные СУБД сами кэшируют часто используемые данные в памяти. Postgres, MySQL, MongoDB — у всех есть внутренние буферы.</p>
+
+      <p>Часто этого достаточно, и дополнительный кэш на уровне приложения не нужен. Прежде чем тащить Redis, проверь, не решит ли вопрос индекс или правильный запрос.</p>
+
+      <h2 id="section-6">Что кэшировать: паттерны</h2>
+
+      <p>Два самых популярных паттерна использования кэша.</p>
+
+      <h3 id="section-7">Cache-aside (lazy loading)</h3>
+
+      <p>Приложение само решает, что кэшировать. Алгоритм:</p>
+
+      <ol>
+        <li>Проверяем данные в кэше.</li>
+        <li>Если есть — отдаём (попадание, cache hit).</li>
+        <li>Если нет — идём в источник, сохраняем в кэш, отдаём (промах, cache miss).</li>
+      </ol>
+
+      <pre><code class="language-python">def get_user(user_id):
+    cached = redis.get(f'user:{user_id}')
+    if cached:
+        return json.loads(cached)
+    user = db.query('SELECT * FROM users WHERE id = ?', user_id)
+    redis.setex(f'user:{user_id}', 3600, json.dumps(user))
+    return user</code></pre>
+
+      <p>Плюс: кэшируется только то, что реально запрашивают. Минус: первый запрос всегда медленный.</p>
+
+      <h3 id="section-8">Write-through</h3>
+
+      <p>При записи данных в базу <strong>одновременно</strong> пишем и в кэш. Данные всегда актуальны, но пишем чаще.</p>
+
+      <p>Используется, когда данные часто читают сразу после записи.</p>
+
+      <h2 id="section-9">Что такое TTL</h2>
+
+      <p>TTL (Time To Live) — время жизни записи в кэше. Через TTL данные автоматически удаляются, и при следующем запросе подтягиваются свежие.</p>
+
+      <p>Выбор TTL — компромисс:</p>
+
+      <ul>
+        <li><strong>Долгий TTL</strong> — меньше нагрузки, но данные могут быть устаревшими.</li>
+        <li><strong>Короткий TTL</strong> — актуально, но нагрузка возвращается.</li>
+      </ul>
+
+      <p>Ориентиры:</p>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Данные</th><th>Разумный TTL</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Курсы валют</td><td>5–15 минут</td></tr>
+          <tr><td>Топ статей на главной</td><td>1 час</td></tr>
+          <tr><td>Профиль пользователя</td><td>5–30 минут</td></tr>
+          <tr><td>Настройки приложения</td><td>Сутки</td></tr>
+          <tr><td>Справочник стран</td><td>Дни или недели</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2 id="section-10">Инвалидация — самая сложная часть</h2>
+
+      <p>Инвалидация — это удаление или обновление устаревших записей в кэше. Звучит просто, но на практике именно тут всё ломается.</p>
+
+      <p>Пример проблемы: пользователь сменил имя. Ты обновил запись в базе, но в кэше старые данные. Сайт показывает старое имя час — пока не истечёт TTL.</p>
+
+      <p>Варианты решения:</p>
+
+      <ul>
+        <li><strong>TTL.</strong> Рано или поздно кэш сам обновится. Работает, если небольшая задержка допустима.</li>
+        <li><strong>Ручное удаление.</strong> После обновления данных в базе — удалить ключ из кэша.</li>
+        <li><strong>Версионирование ключей.</strong> Вместо <code>user:42</code> использовать <code>user:42:v5</code>. Смена версии — все старые ключи «протухают».</li>
+      </ul>
+
+      <blockquote>В программировании две сложные вещи: инвалидация кэша, придумывание имён и ошибки на единицу. — шутка, но с долей правды.</blockquote>
+
+      <h2 id="section-11">Проблема «пробоя кэша» (cache stampede)</h2>
+
+      <p>Ещё одна классическая проблема. Популярный ключ с TTL истекает, и в этот момент <strong>сотни запросов одновременно</strong> идут в базу, чтобы его пересчитать. База падает.</p>
+
+      <p>Решения:</p>
+
+      <ul>
+        <li><strong>Локи.</strong> Только один процесс обновляет значение, остальные ждут.</li>
+        <li><strong>Early refresh.</strong> Обновлять кэш заранее, до истечения TTL.</li>
+        <li><strong>Джиттер.</strong> Не давать всем ключам истекать в одну секунду — добавлять случайную задержку.</li>
+      </ul>
+
+      <h2 id="section-12">Что НЕ надо кэшировать</h2>
+
+      <ul>
+        <li><strong>Персональные данные</strong> без разбора — можно случайно отдать чужому пользователю.</li>
+        <li><strong>Пароли и токены</strong> в открытом виде — утечка.</li>
+        <li><strong>Данные, которые обновляются чаще, чем читаются</strong> — кэш только мешает.</li>
+        <li><strong>Результаты, чувствительные ко времени</strong> — если данные устаревают за секунду, кэш бессмысленен.</li>
+      </ul>
+
+      <h2 id="section-13">Инструменты</h2>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Инструмент</th><th>Особенность</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Redis</td><td>Самый популярный. Много структур данных, персистентность.</td></tr>
+          <tr><td>Memcached</td><td>Проще и быстрее, но только key-value.</td></tr>
+          <tr><td>Varnish</td><td>Кэш для HTTP на уровне прокси.</td></tr>
+          <tr><td>Nginx proxy_cache</td><td>Простой HTTP-кэш на уровне веб-сервера.</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2 id="section-14">Итог</h2>
+
+      <p>Кэширование — один из самых мощных инструментов ускорения. Оно есть на всех уровнях: браузер, CDN, приложение, база. Главное — правильно выбрать TTL и стратегию инвалидации, чтобы не отдавать пользователям устаревшее. И помнить: кэш — не бесплатный — он добавляет сложности, за которые нужно платить вниманием.</p>
+    </article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Зачем вообще кэш</a><a href="#section-1" class="lvl-2">Уровни кэширования</a><a href="#section-2" class="lvl-3">1. Браузерный кэш</a><a href="#section-3" class="lvl-3">2. CDN-кэш</a><a href="#section-4" class="lvl-3">3. Кэш приложения</a><a href="#section-5" class="lvl-3">4. Кэш базы данных</a><a href="#section-6" class="lvl-2">Что кэшировать: паттерны</a><a href="#section-7" class="lvl-3">Cache-aside (lazy loading)</a><a href="#section-8" class="lvl-3">Write-through</a><a href="#section-9" class="lvl-2">Что такое TTL</a><a href="#section-10" class="lvl-2">Инвалидация — самая сложная часть</a><a href="#section-11" class="lvl-2">Проблема «пробоя кэша» (cache stampede)</a><a href="#section-12" class="lvl-2">Что НЕ надо кэшировать</a><a href="#section-13" class="lvl-2">Инструменты</a><a href="#section-14" class="lvl-2">Итог</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/paginaciya-i-versirovanie-api.html"><img src="/img/api-versioning.svg" alt="Пагинация и версионирование API — как не сломать клиентов" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">API</span><span class="tag">Веб</span><span class="tag">Разработка</span></div>
+    <a href="/articles/paginaciya-i-versirovanie-api.html"><h2 class="card__title">Пагинация и версионирование API — как не сломать клиентов</h2></a>
+    <p class="card__excerpt">Как отдавать тысячи записей постранично и что делать, когда API меняется. Разбираем offset/limit, cursor-пагинацию и версионирование.</p>
+    <div class="card__meta">
+      <span>27 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="paginaciya-i-versirovanie-api" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/chto-takoe-nginx.html"><img src="/img/nginx.svg" alt="Что такое Nginx и зачем он нужен на сервере" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">DevOps</span><span class="tag">Веб</span><span class="tag">Инструменты</span></div>
+    <a href="/articles/chto-takoe-nginx.html"><h2 class="card__title">Что такое Nginx и зачем он нужен на сервере</h2></a>
+    <p class="card__excerpt">Почему почти все сайты работают через Nginx. Разбираем: веб-сервер, reverse proxy, балансировка нагрузки, статика и конфиги.</p>
+    <div class="card__meta">
+      <span>26 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="chto-takoe-nginx" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/bash-skripty-dlya-novichka.html"><img src="/img/bash.svg" alt="Bash-скрипты для новичка — автоматизация на Linux" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Инструменты</span><span class="tag">DevOps</span><span class="tag">Разработка</span></div>
+    <a href="/articles/bash-skripty-dlya-novichka.html"><h2 class="card__title">Bash-скрипты для новичка — автоматизация на Linux</h2></a>
+    <p class="card__excerpt">Как написать первый скрипт, который автоматизирует рутину: переменные, условия, циклы, функции, аргументы командной строки.</p>
+    <div class="card__meta">
+      <span>25 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="bash-skripty-dlya-novichka" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

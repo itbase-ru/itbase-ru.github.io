@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Как создать Telegram-бота с кодом — IT·База</title>
+  <meta name="description" content="Пошагово: от BotFather и токена до рабочего бота на Python с командами, кнопками и запуском на сервере.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/kak-sozdat-telegram-bota.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Как создать Telegram-бота с кодом">
+  <meta property="og:description" content="Пошагово: от BotFather и токена до рабочего бота на Python с командами, кнопками и запуском на сервере.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/kak-sozdat-telegram-bota.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/kak-sozdat-telegram-bota.html">
+  <meta property="article:published_time" content="2026-03-26">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Как создать Telegram-бота с кодом">
+  <meta name="twitter:description" content="Пошагово: от BotFather и токена до рабочего бота на Python с командами, кнопками и запуском на сервере.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/kak-sozdat-telegram-bota.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Как создать Telegram-бота с кодом", "description": "Пошагово: от BotFather и токена до рабочего бота на Python с командами, кнопками и запуском на сервере.", "image": ["https://itbase-ru.github.io/img/og/kak-sozdat-telegram-bota.png"], "datePublished": "2026-03-26", "dateModified": "2026-03-26", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/kak-sozdat-telegram-bota.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Разработка", "item": "https://itbase-ru.github.io/?tag=Разработка"}, {"@type": "ListItem", "position": 3, "name": "Как создать Telegram-бота с кодом", "item": "https://itbase-ru.github.io/articles/kak-sozdat-telegram-bota.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="kak-sozdat-telegram-bota">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Разработка">Разработка</a>
+        <span class="sep">/</span>
+        <span>Как создать Telegram-бота с кодом</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Разработка</span><span class="tag">Python</span><span class="tag">Инструменты</span></div>
+        <h1>Как создать Telegram-бота с кодом</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-03-26">26 марта 2026</time>
+          <span class="dot">•</span>
+          <span>12 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/kak-sozdat-telegram-bota.svg" alt="Как создать Telegram-бота с кодом">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+      <p>Telegram-бот — это, пожалуй, лучший способ попробовать реальное программирование. Кода минимум, обратная связь мгновенная, а бот потом может стать полезным инструментом или даже побочным доходом.</p>
+
+      <p>В этой статье — пошагово: от создания бота у BotFather до простого рабочего кода на Python. Опыт программирования желателен, но базы из <a href="/articles/kak-uchitsya-programmirovaniyu-s-nulya.html">статьи о старте в программировании</a> хватит.</p>
+
+      <h2 id="section-0">Шаг 1. Получаем токен у BotFather</h2>
+
+      <ol>
+        <li>Открой Telegram, найди <code>@BotFather</code>.</li>
+        <li>Отправь команду <code>/newbot</code>.</li>
+        <li>Придумай имя бота — например, «Мой первый бот».</li>
+        <li>Придумай username — он должен заканчиваться на <code>bot</code>, например <code>myfirst_test_bot</code>.</li>
+        <li>BotFather пришлёт <strong>токен</strong> — длинную строку вида <code>123456789:AA...</code>.</li>
+      </ol>
+
+      <blockquote>Токен — это пароль от бота. Никому не показывай. Если утёк — через BotFather отзови и получи новый командой /revoke.</blockquote>
+
+      <h2 id="section-1">Шаг 2. Ставим библиотеку</h2>
+
+      <p>Для Python есть несколько популярных библиотек: <code>pyTelegramBotAPI</code> (telebot), <code>aiogram</code>, <code>python-telegram-bot</code>. Возьмём <code>pyTelegramBotAPI</code> — самая простая для старта.</p>
+
+      <pre><code class="language-bash">pip install pyTelegramBotAPI</code></pre>
+
+      <p>Если pip не установлен — сначала поставь Python с официального сайта и отметь галочку «Add to PATH».</p>
+
+      <h2 id="section-2">Шаг 3. Простейший эхо-бот</h2>
+
+      <p>Создай файл <code>bot.py</code> и вставь код:</p>
+
+      <pre><code class="language-python">import telebot
+
+TOKEN = 'СЮДА_ВСТАВЬ_СВОЙ_ТОКЕН'
+bot = telebot.TeleBot(TOKEN)
+
+@bot.message_handler(commands=['start'])
+def on_start(message):
+    bot.send_message(
+        message.chat.id,
+        'Привет! Я эхо-бот. Напиши что-нибудь.'
+    )
+
+@bot.message_handler(func=lambda message: True)
+def on_text(message):
+    bot.send_message(message.chat.id, message.text)
+
+bot.polling(none_stop=True)</code></pre>
+
+      <p>Запусти:</p>
+
+      <pre><code class="language-bash">python bot.py</code></pre>
+
+      <p>Открой Telegram, напиши своему боту <code>/start</code>, потом любое сообщение — он ответит тем же текстом. Поздравляю, бот работает.</p>
+
+      <h2 id="section-3">Что здесь происходит</h2>
+
+      <ul>
+        <li><strong>Импорт и токен.</strong> Подключаем библиотеку, создаём объект бота.</li>
+        <li><strong>Декоратор message_handler</strong> — «ловит» сообщения по условию.</li>
+        <li><strong>commands=['start']</strong> — срабатывает только на команду <code>/start</code>.</li>
+        <li><strong>func=lambda ...</strong> — срабатывает на всё остальное.</li>
+        <li><strong>bot.polling()</strong> — бесконечный цикл, который проверяет новые сообщения.</li>
+      </ul>
+
+      <h2 id="section-4">Шаг 4. Обработчики команд</h2>
+
+      <p>Добавим пару полезных команд:</p>
+
+      <pre><code class="language-python">import telebot
+import random
+
+TOKEN = 'СЮДА_ВСТАВЬ_СВОЙ_ТОКЕН'
+bot = telebot.TeleBot(TOKEN)
+
+@bot.message_handler(commands=['start'])
+def on_start(message):
+    bot.send_message(
+        message.chat.id,
+        'Привет! Команды:\n/start — это сообщение\n'
+        '/help — помощь\n/coin — подбросить монетку\n'
+        '/roll — бросить кубик'
+    )
+
+@bot.message_handler(commands=['help'])
+def on_help(message):
+    bot.send_message(
+        message.chat.id,
+        'Просто напиши мне что-нибудь — я повторю.'
+    )
+
+@bot.message_handler(commands=['coin'])
+def on_coin(message):
+    result = random.choice(['Орёл', 'Решка'])
+    bot.send_message(message.chat.id, result)
+
+@bot.message_handler(commands=['roll'])
+def on_roll(message):
+    result = random.randint(1, 6)
+    bot.send_message(message.chat.id, f'Выпало: {result}')
+
+@bot.message_handler(func=lambda message: True)
+def on_text(message):
+    bot.send_message(message.chat.id, f'Ты написал: {message.text}')
+
+bot.polling(none_stop=True)</code></pre>
+
+      <p>Обрати внимание на <code>\n</code> — это перенос строки. В обычном Python это пишется как <code>\n</code>, но здесь у нас дополнительный уровень экранирования для отображения.</p>
+
+      <h2 id="section-5">Шаг 5. Кнопки</h2>
+
+      <p>Кнопки в Telegram бывают двух видов: <strong>Reply</strong> (внизу, вместо клавиатуры) и <strong>Inline</strong> (прямо в сообщении). Разберём inline — они гибче.</p>
+
+      <pre><code class="language-python">from telebot import types
+
+@bot.message_handler(commands=['menu'])
+def on_menu(message):
+    markup = types.InlineKeyboardMarkup()
+    btn_yes = types.InlineKeyboardButton(
+        'Да', callback_data='yes'
+    )
+    btn_no = types.InlineKeyboardButton(
+        'Нет', callback_data='no'
+    )
+    markup.add(btn_yes, btn_no)
+    bot.send_message(
+        message.chat.id,
+        'Тебе нравится программировать?',
+        reply_markup=markup
+    )
+
+@bot.callback_query_handler(func=lambda call: True)
+def on_callback(call):
+    if call.data == 'yes':
+        bot.answer_callback_query(call.id, 'Отлично!')
+        bot.send_message(
+            call.message.chat.id, 'Так держать!'
+        )
+    elif call.data == 'no':
+        bot.answer_callback_query(call.id, 'Ну ладно...')
+        bot.send_message(
+            call.message.chat.id,
+            'Попробуй Python — обычно заходит.'
+        )</code></pre>
+
+      <p>Ключевое: у кнопки есть <code>callback_data</code>, а отдельный обработчик <code>callback_query_handler</code> ловит нажатие и реагирует.</p>
+
+      <h2 id="section-6">Шаг 6. Где запустить бота</h2>
+
+      <p>Пока бот работает, у тебя включён компьютер — ок для теста. Но чтобы бот работал всегда, нужен сервер.</p>
+
+      <p>Варианты:</p>
+
+      <ol>
+        <li><strong>VPS</strong> — от 200–400 ₽ в месяц. Полный контроль, но нужно уметь в Linux.</li>
+        <li><strong>Бесплатные хостинги</strong> — Railway, Render, Fly.io. Для простых ботов хватает.</li>
+        <li><strong>PythonAnywhere</strong> — простой, но ограничен для ботов с polling.</li>
+        <li><strong>Свой домашний сервер</strong> — Raspberry Pi и подобное.</li>
+      </ol>
+
+      <p>Самый простой путь для новичка: купить VPS за 200–300 ₽, залить туда <code>bot.py</code>, запустить через <code>screen</code> или <code>tmux</code>, чтобы работал после отключения от SSH.</p>
+
+      <pre><code class="language-bash">screen -S bot
+python bot.py
+# Ctrl+A, затем D — отцепиться, бот продолжит работать
+# screen -r bot — вернуться к сессии</code></pre>
+
+      <h2 id="section-7">Шаг 7. Куда развивать</h2>
+
+      <p>Базовый бот готов. Дальше можно:</p>
+
+      <ul>
+        <li><strong>Подключить базу данных</strong> (SQLite вначале) — хранить пользователей, состояния.</li>
+        <li><strong>Сделать FSM</strong> — «машину состояний» для диалогов: спросил имя, потом возраст, потом записал.</li>
+        <li><strong>Интегрировать с API</strong> — курс валют, погода, новости.</li>
+        <li><strong>Добавить оплату</strong> — Telegram Payments или ЮKassa.</li>
+        <li><strong>Разместить в каталогах</strong> — <code>@BotList</code>, <code>@StoreBot</code>.</li>
+      </ul>
+
+      <h2 id="section-8">Частые проблемы</h2>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Проблема</th><th>Причина</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Бот не отвечает</td><td>Не запущен скрипт или токен неправильный</td></tr>
+          <tr><td>Ошибка 401 Unauthorized</td><td>Токен устарел или отозван</td></tr>
+          <tr><td>Ошибка 409 Conflict</td><td>Запущено два экземпляра бота</td></tr>
+          <tr><td>Бот не видит команды</td><td>Команды нужно прописать через setcommands у BotFather</td></tr>
+        </tbody>
+      </table></div>
+
+      <blockquote>Главное правило: не показывай токен никому. Храни его в переменных окружения или отдельном файле .env, не в самом коде, особенно если выкладываешь проект на GitHub.</blockquote>
+
+      <h2 id="section-9">Итог</h2>
+
+      <p>Ты прошёл путь от нуля до рабочего бота: получил токен, написал пару обработчиков, добавил кнопки. Дальше — только практика. Придумай маленькую задачу и запили под неё бота: напоминалку, трекер привычек, конвертер валют. Реальная задача учит быстрее любых курсов.</p>
+    </article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Шаг 1. Получаем токен у BotFather</a><a href="#section-1" class="lvl-2">Шаг 2. Ставим библиотеку</a><a href="#section-2" class="lvl-2">Шаг 3. Простейший эхо-бот</a><a href="#section-3" class="lvl-2">Что здесь происходит</a><a href="#section-4" class="lvl-2">Шаг 4. Обработчики команд</a><a href="#section-5" class="lvl-2">Шаг 5. Кнопки</a><a href="#section-6" class="lvl-2">Шаг 6. Где запустить бота</a><a href="#section-7" class="lvl-2">Шаг 7. Куда развивать</a><a href="#section-8" class="lvl-2">Частые проблемы</a><a href="#section-9" class="lvl-2">Итог</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/bash-skripty-dlya-novichka.html"><img src="/img/bash.svg" alt="Bash-скрипты для новичка — автоматизация на Linux" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Инструменты</span><span class="tag">DevOps</span><span class="tag">Разработка</span></div>
+    <a href="/articles/bash-skripty-dlya-novichka.html"><h2 class="card__title">Bash-скрипты для новичка — автоматизация на Linux</h2></a>
+    <p class="card__excerpt">Как написать первый скрипт, который автоматизирует рутину: переменные, условия, циклы, функции, аргументы командной строки.</p>
+    <div class="card__meta">
+      <span>25 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="bash-skripty-dlya-novichka" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/obrabotka-isklyucheniy-v-python.html"><img src="/img/python-errors.svg" alt="Обработка исключений в Python — try, except, finally" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/obrabotka-isklyucheniy-v-python.html"><h2 class="card__title">Обработка исключений в Python — try, except, finally</h2></a>
+    <p class="card__excerpt">Как ловить ошибки и не давать программе падать. Разбираем try/except, собственные исключения и контекстные менеджеры с примерами.</p>
+    <div class="card__meta">
+      <span>24 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="obrabotka-isklyucheniy-v-python" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/python-s-nulya.html"><img src="/img/python.svg" alt="Python с нуля — базовый синтаксис за 15 минут" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/python-s-nulya.html"><h2 class="card__title">Python с нуля — базовый синтаксис за 15 минут</h2></a>
+    <p class="card__excerpt">Переменные, типы, условия, циклы, функции и списки. Минимальный набор, с которого начинается любой Python-проект.</p>
+    <div class="card__meta">
+      <span>20 апреля 2026</span><span class="dot">•</span><span>12 мин</span>
+      <button class="card__bm" data-slug="python-s-nulya" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

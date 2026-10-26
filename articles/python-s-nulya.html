@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Python с нуля — базовый синтаксис за 15 минут — IT·База</title>
+  <meta name="description" content="Переменные, типы, условия, циклы, функции и списки. Минимальный набор, с которого начинается любой Python-проект.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/python-s-nulya.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Python с нуля — базовый синтаксис за 15 минут">
+  <meta property="og:description" content="Переменные, типы, условия, циклы, функции и списки. Минимальный набор, с которого начинается любой Python-проект.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/python-s-nulya.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/python-s-nulya.html">
+  <meta property="article:published_time" content="2026-04-20">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Python с нуля — базовый синтаксис за 15 минут">
+  <meta name="twitter:description" content="Переменные, типы, условия, циклы, функции и списки. Минимальный набор, с которого начинается любой Python-проект.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/python-s-nulya.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Python с нуля — базовый синтаксис за 15 минут", "description": "Переменные, типы, условия, циклы, функции и списки. Минимальный набор, с которого начинается любой Python-проект.", "image": ["https://itbase-ru.github.io/img/og/python-s-nulya.png"], "datePublished": "2026-04-20", "dateModified": "2026-04-20", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/python-s-nulya.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Python", "item": "https://itbase-ru.github.io/?tag=Python"}, {"@type": "ListItem", "position": 3, "name": "Python с нуля — базовый синтаксис за 15 минут", "item": "https://itbase-ru.github.io/articles/python-s-nulya.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="python-s-nulya">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Python">Python</a>
+        <span class="sep">/</span>
+        <span>Python с нуля — базовый синтаксис за 15 минут</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+        <h1>Python с нуля — базовый синтаксис за 15 минут</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-04-20">20 апреля 2026</time>
+          <span class="dot">•</span>
+          <span>12 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/python.svg" alt="Python с нуля — базовый синтаксис за 15 минут">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+      <p>Python — один из самых дружелюбных языков для старта. Читается почти как английский, не требует лишних слов и точек с запятой. В этой статье — весь базовый синтаксис, который нужен, чтобы начать писать код.</p>
+
+      <p>Если ещё не выбрал язык — глянь <a href="/articles/kak-vybrat-pervyy-yazyk-programmirovaniya.html">как выбрать первый язык программирования</a>.</p>
+
+      <h2 id="section-0">Первая программа</h2>
+
+      <p>Традиционное начало — «Hello, world». В Python это одна строка:</p>
+
+      <pre><code class="language-python">print('Привет, мир!')</code></pre>
+
+      <p><code>print</code> — встроенная функция, которая выводит текст на экран. Запусти этот код в любом онлайн-редакторе (например, <code>replit.com</code> или <code>python.org/shell</code>) — увидишь результат.</p>
+
+      <h2 id="section-1">Переменные и типы</h2>
+
+      <p>Переменная — это имя, под которым хранится значение. В Python тип указывать не нужно — он определяется автоматически.</p>
+
+      <pre><code class="language-python"># Строка
+name = 'Кирилл'
+
+# Целое число
+age = 30
+
+# Дробное число
+height = 1.78
+
+# Логический тип
+is_student = False
+
+# Проверяем типы
+print(type(name))    # &lt;class 'str'&gt;
+print(type(age))     # &lt;class 'int'&gt;
+print(type(height))  # &lt;class 'float'&gt;
+print(type(is_student))  # &lt;class 'bool'&gt;</code></pre>
+
+      <p>Основные типы: <code>str</code> (строка), <code>int</code> (целое), <code>float</code> (дробное), <code>bool</code> (True/False), <code>None</code> (пустое значение).</p>
+
+      <h2 id="section-2">Строки</h2>
+
+      <p>Строки можно складывать и повторять:</p>
+
+      <pre><code class="language-python">first = 'Привет'
+second = 'мир'
+
+# Складываем через плюс
+greeting = first + ', ' + second + '!'
+print(greeting)   # Привет, мир!
+
+# Повторяем строку
+line = '=' * 20
+print(line)   # ====================</code></pre>
+
+      <p>Длинные тексты можно собирать через f-строки — но об этом ниже.</p>
+
+      <h2 id="section-3">Условия</h2>
+
+      <p>Программа умеет принимать решения через <code>if</code>:</p>
+
+      <pre><code class="language-python">age = 20
+
+if age &gt;= 18:
+    print('Совершеннолетний')
+else:
+    print('Ещё рано')</code></pre>
+
+      <p>Обрати внимание: в Python <strong>нет фигурных скобок</strong>. Вместо них — отступы. Всё, что с отступом, — внутри блока.</p>
+
+      <p>Можно добавить ещё вариантов через <code>elif</code>:</p>
+
+      <pre><code class="language-python">score = 75
+
+if score &gt;= 90:
+    print('Отлично')
+elif score &gt;= 70:
+    print('Хорошо')
+elif score &gt;= 50:
+    print('Удовлетворительно')
+else:
+    print('Надо доработать')</code></pre>
+
+      <h2 id="section-4">Циклы</h2>
+
+      <p>Два вида циклов: <code>for</code> и <code>while</code>.</p>
+
+      <h3 id="section-5">for — когда знаешь, сколько раз</h3>
+
+      <pre><code class="language-python"># Пройти по списку
+fruits = ['яблоко', 'банан', 'груша']
+for fruit in fruits:
+    print(fruit)
+
+# Или прогнать числа от 0 до 4
+for i in range(5):
+    print(i)</code></pre>
+
+      <p><code>range(5)</code> даёт числа 0, 1, 2, 3, 4 — пять штук, не включая 5. Это стандарт.</p>
+
+      <p>Полезный вариант — <code>range(1, 6)</code>: числа от 1 до 5.</p>
+
+      <h3 id="section-6">while — пока условие истинно</h3>
+
+      <pre><code class="language-python">counter = 0
+
+while counter &lt; 5:
+    print('Счётчик: ' + str(counter))
+    counter = counter + 1</code></pre>
+
+      <p><strong>Важно:</strong> не забудь увеличивать счётчик внутри <code>while</code>. Иначе цикл никогда не закончится, и программа зависнет.</p>
+
+      <h2 id="section-7">Списки</h2>
+
+      <p>Список — упорядоченный набор значений. В квадратных скобках:</p>
+
+      <pre><code class="language-python">numbers = [10, 20, 30, 40]
+names = ['Анна', 'Борис', 'Вера']
+
+# Первый элемент
+print(numbers[0])   # 10
+
+# Последний
+print(numbers[-1])  # 40
+
+# Длина
+print(len(numbers))   # 4</code></pre>
+
+      <p>Основные операции:</p>
+
+      <pre><code class="language-python">items = [1, 2, 3]
+
+# Добавить в конец
+items.append(4)
+print(items)   # [1, 2, 3, 4]
+
+# Удалить по значению
+items.remove(2)
+print(items)   # [1, 3, 4]
+
+# Проверить, есть ли элемент
+print(3 in items)   # True
+
+# Срез — часть списка
+print(items[0:2])   # [1, 3]</code></pre>
+
+      <p>Срез <code>[0:2]</code> — это «с 0-го по 2-й, не включая 2-й». То есть элементы с индексами 0 и 1.</p>
+
+      <h2 id="section-8">Словари</h2>
+
+      <p>Словарь хранит пары «ключ → значение». Идеален для структурированных данных:</p>
+
+      <pre><code class="language-python">user = {
+    'name': 'Кирилл',
+    'age': 30,
+    'city': 'Москва'
+}
+
+# Доступ по ключу
+print(user['name'])   # Кирилл
+
+# Добавить или изменить
+user['email'] = 'kirill@mail.ru'
+
+# Проверить наличие
+print('age' in user)   # True
+
+# Пройти по всем парам
+for key, value in user.items():
+    print(key + ': ' + str(value))</code></pre>
+
+      <h2 id="section-9">Функции</h2>
+
+      <p>Функция — блок кода с именем, который можно вызывать сколько угодно раз. Объявляется через <code>def</code>:</p>
+
+      <pre><code class="language-python">def greet(name):
+    return 'Привет, ' + name
+
+# Вызов
+result = greet('Кирилл')
+print(result)   # Привет, Кирилл</code></pre>
+
+      <p>Ключевое слово <code>return</code> возвращает значение. Без него функция вернёт <code>None</code>.</p>
+
+      <p>Функция может принимать несколько аргументов и иметь значения по умолчанию:</p>
+
+      <pre><code class="language-python">def introduce(name, age=18):
+    return name + ', ' + str(age) + ' лет'
+
+print(introduce('Анна'))          # Анна, 18 лет
+print(introduce('Борис', 25))     # Борис, 25 лет</code></pre>
+
+      <p>Аргумент с <code>=</code> — необязательный. Если его не передать, используется значение по умолчанию.</p>
+
+      <h2 id="section-10">Импорт модулей</h2>
+
+      <p>Python идёт с огромной стандартной библиотекой. Подключается через <code>import</code>:</p>
+
+      <pre><code class="language-python">import math
+import random
+
+# Используем функции модуля
+print(math.sqrt(16))         # 4.0
+print(random.randint(1, 6))  # случайное от 1 до 6</code></pre>
+
+      <p>Сторонние библиотеки ставятся через <code>pip install имя_пакета</code>. Потом — тот же <code>import</code>.</p>
+
+      <h2 id="section-11">Практический пример</h2>
+
+      <p>Соберём всё вместе. Программа, которая считает статистику по списку оценок:</p>
+
+      <pre><code class="language-python"># Список оценок
+grades = [5, 4, 3, 5, 4, 5, 4, 3, 5, 4]
+
+# Функция подсчёта среднего
+def average(numbers):
+    total = 0
+    for n in numbers:
+        total = total + n
+    return total / len(numbers)
+
+# Функция определения категории
+def category(avg):
+    if avg &gt;= 4.5:
+        return 'отличник'
+    elif avg &gt;= 3.5:
+        return 'хорошист'
+    else:
+        return 'троечник'
+
+# Основная логика
+avg = average(grades)
+cat = category(avg)
+
+print('Средний балл: ' + str(round(avg, 2)))
+print('Категория: ' + cat)</code></pre>
+
+      <p>Запусти — увидишь средний балл и категорию. Это уже настоящая программа, хоть и маленькая.</p>
+
+      <h2 id="section-12">Что учить дальше</h2>
+
+      <ol>
+        <li><strong>Кортежи и множества.</strong> Родственники списков со своими правилами.</li>
+        <li><strong>Классы и ООП.</strong> Об этом — <a href="/articles/oop-prostymi-slovami.html">ООП простыми словами</a>.</li>
+        <li><strong>Работа с файлами.</strong> Чтение и запись через <code>open</code>.</li>
+        <li><strong>Исключения.</strong> Обработка ошибок через <code>try</code> и <code>except</code>.</li>
+        <li><strong>Продвинутые функции.</strong> Декораторы, генераторы, лямбды.</li>
+      </ol>
+
+      <blockquote>Не пытайся выучить всё сразу. Освой базу — переменные, условия, циклы, функции — и напиши 5 маленьких программ. Только потом двигайся дальше.</blockquote>
+
+      <h2 id="section-13">Итог</h2>
+
+      <p>Python прост в синтаксисе: нет фигурных скобок, не нужно объявлять типы, код читается как английский. Основные конструкции — переменные, условия, циклы, списки, словари, функции — покрывают 80% задач новичка. Дальше — практика: калькулятор, todo-список, парсер. Реальные задачи учат быстрее любых курсов.</p>
+    </article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Первая программа</a><a href="#section-1" class="lvl-2">Переменные и типы</a><a href="#section-2" class="lvl-2">Строки</a><a href="#section-3" class="lvl-2">Условия</a><a href="#section-4" class="lvl-2">Циклы</a><a href="#section-5" class="lvl-3">for — когда знаешь, сколько раз</a><a href="#section-6" class="lvl-3">while — пока условие истинно</a><a href="#section-7" class="lvl-2">Списки</a><a href="#section-8" class="lvl-2">Словари</a><a href="#section-9" class="lvl-2">Функции</a><a href="#section-10" class="lvl-2">Импорт модулей</a><a href="#section-11" class="lvl-2">Практический пример</a><a href="#section-12" class="lvl-2">Что учить дальше</a><a href="#section-13" class="lvl-2">Итог</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/obrabotka-isklyucheniy-v-python.html"><img src="/img/python-errors.svg" alt="Обработка исключений в Python — try, except, finally" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/obrabotka-isklyucheniy-v-python.html"><h2 class="card__title">Обработка исключений в Python — try, except, finally</h2></a>
+    <p class="card__excerpt">Как ловить ошибки и не давать программе падать. Разбираем try/except, собственные исключения и контекстные менеджеры с примерами.</p>
+    <div class="card__meta">
+      <span>24 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="obrabotka-isklyucheniy-v-python" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/dekoratory-v-python.html"><img src="/img/decorators.svg" alt="Декораторы в Python — что это и зачем нужны" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/dekoratory-v-python.html"><h2 class="card__title">Декораторы в Python — что это и зачем нужны</h2></a>
+    <p class="card__excerpt">Функции, которые оборачивают другие функции. Разбираем декораторы с нуля: синтаксис, как работают, где применяются на практике.</p>
+    <div class="card__meta">
+      <span>19 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="dekoratory-v-python" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/mnogopotochnost-v-python-gil.html"><img src="/img/threading.svg" alt="Многопоточность в Python — GIL и потоки" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/mnogopotochnost-v-python-gil.html"><h2 class="card__title">Многопоточность в Python — GIL и потоки</h2></a>
+    <p class="card__excerpt">Почему потоки в Python не ускоряют вычисления, что такое GIL и когда всё-таки стоит использовать threading, multiprocessing или asyncio.</p>
+    <div class="card__meta">
+      <span>12 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="mnogopotochnost-v-python-gil" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

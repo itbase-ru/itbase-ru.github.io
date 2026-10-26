@@ -23,6 +23,7 @@ import re
 import subprocess
 import sys
 from pathlib import Path
+from urllib.parse import unquote
 
 # ----------------------------- НАСТРОЙКИ ------------------------------------
 SITE = "https://itbase-ru.github.io"   # адрес сайта БЕЗ слэша в конце
@@ -533,6 +534,227 @@ def normalize_pages():
             p.write_text(t, encoding="utf-8")
 
 
+# ----------------------------- RSS / MANIFEST / SITEMAP.HTML ----------------
+def write_rss(arts):
+    """RSS 2.0 — Яндекс.Вебмастер индексирует RSS быстрее, чем HTML."""
+    last_build = datetime.datetime.now(datetime.timezone.utc).strftime("%a, %d %b %Y %H:%M:%S GMT")
+    items = []
+    for a in arts[:25]:  # последние 25 статей
+        url = f"{SITE}/{a['url']}"
+        cover_url = abs_url(a["cover"])
+        items.append(
+            "    <item>\n"
+            f"      <title>{esc(a['title'])}</title>\n"
+            f"      <link>{url}</link>\n"
+            f"      <guid isPermaLink=\"true\">{url}</guid>\n"
+            f"      <description>{esc(a['excerpt'])}</description>\n"
+            f"      <category>{esc(a['tags'][0] if a['tags'] else '')}</category>\n"
+            f"      <pubDate>{datetime.datetime.strptime(a['date'], '%Y-%m-%d').strftime('%a, %d %b %Y %H:%M:%S +0300')}</pubDate>\n"
+            f"      <enclosure url=\"{cover_url}\" type=\"image/svg+xml\" length=\"0\"/>\n"
+            "    </item>"
+        )
+    xml = (
+        '<?xml version="1.0" encoding=\"UTF-8\"?>\n'
+        '<rss version=\"2.0\" xmlns:atom=\"http://www.w3.org/2005/Atom\">\n'
+        '  <channel>\n'
+        f'    <title>{esc(SITE_NAME)} — понятные статьи про ИИ, программирование и IT</title>\n'
+        f'    <link>{SITE}/</link>\n'
+        '    <description>Статьи про технологии простыми словами: ИИ, программирование, веб, базы данных, DevOps.</description>\n'
+        '    <language>ru-ru</language>\n'
+        f'    <lastBuildDate>{last_build}</lastBuildDate>\n'
+        f'    <atom:link href=\"{SITE}/rss.xml\" rel=\"self\" type=\"application/rss+xml\"/>\n'
+        '    <image>\n'
+        f'      <url>{SITE}/favicon.svg</url>\n'
+        f'      <title>{esc(SITE_NAME)}</title>\n'
+        f'      <link>{SITE}/</link>\n'
+        '    </image>\n'
+        + "\n".join(items) + "\n"
+        '  </channel>\n'
+        '</rss>\n'
+    )
+    (ROOT / "rss.xml").write_text(xml, encoding="utf-8")
+
+
+def write_manifest():
+    """PWA-манифест для установки сайта как приложения."""
+    manifest = {
+        "name": f"{SITE_NAME} — статьи про программирование",
+        "short_name": SITE_NAME,
+        "description": "Понятные статьи про ИИ, программирование и IT простыми словами",
+        "start_url": "/",
+        "scope": "/",
+        "display": "standalone",
+        "orientation": "portrait-primary",
+        "background_color": "#0d1117",
+        "theme_color": "#0d1117",
+        "lang": "ru",
+        "dir": "ltr",
+        "categories": ["education", "news", "books"],
+        "icons": [
+            {"src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable"},
+            {"src": "/favicon.ico", "sizes": "16x16 32x32 48x48", "type": "image/x-icon", "purpose": "any"},
+        ],
+        "shortcuts": [
+            {"name": "Все статьи", "url": "/", "description": "Открыть главную страницу со всеми статьями"},
+            {"name": "Карта сайта", "url": "/sitemap.html", "description": "Список всех статей по тегам"},
+        ],
+    }
+    (ROOT / "manifest.json").write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+
+
+def write_robots():
+    """robots.txt со ссылками на sitemap и правилами для Яндекса."""
+    host = SITE.replace("https://", "").replace("http://", "")
+    txt = (
+        "# robots.txt — IT·База\n"
+        f"# {SITE}/\n\n"
+        "User-agent: *\n"
+        "Allow: /\n"
+        "Allow: /articles/\n"
+        "Allow: /img/\n"
+        "Disallow: /data/\n"
+        "Disallow: /app.js\n\n"
+        "# Особые правила для Яндекса\n"
+        "User-agent: Yandex\n"
+        "Allow: /\n"
+        "Allow: /articles/\n"
+        "Allow: /img/\n"
+        "Disallow: /data/\n"
+        "Clean-param: tag&q&search /*\n"
+        "Crawl-delay: 0.5\n\n"
+        "# Особые правила для Google\n"
+        "User-agent: Googlebot\n"
+        "Allow: /\n"
+        "Allow: /articles/\n"
+        "Allow: /img/\n"
+        "Disallow: /data/\n\n"
+        f"Sitemap: {SITE}/sitemap.xml\n"
+        f"Host: {host}\n"
+    )
+    (ROOT / "robots.txt").write_text(txt, encoding="utf-8")
+
+
+def write_sitemap_html(arts):
+    """Человекочитаемая карта сайта со всеми статьями по тегам."""
+    by_tag = {}
+    for a in arts:
+        for tag in a["tags"]:
+            by_tag.setdefault(tag, []).append(a)
+
+    all_tags = sorted(by_tag.keys())
+
+    tag_chips = " ".join(
+        f'<a href="#tag-{esc(t)}" class="chip">{esc(t)}</a>' for t in all_tags
+    )
+
+    blocks = []
+    for tag in all_tags:
+        items = by_tag[tag]
+        items_html = "\n".join(
+            f'        <li>\n'
+            f'          <a href="/{a["url"]}"><strong>{esc(a["title"])}</strong></a>\n'
+            f'          <span class="sitemap-date">{fmt_date(a["date"])}</span>\n'
+            f'          <p>{esc(a["excerpt"])}</p>\n'
+            f'        </li>'
+            for a in items
+        )
+        blocks.append(
+            f'    <section class="sitemap-tag">\n'
+            f'      <h2 id="tag-{esc(tag)}">{esc(tag)} <span class="sitemap-count">({len(items)})</span></h2>\n'
+            f'      <ul class="sitemap-list">\n{items_html}\n      </ul>\n'
+            f'    </section>'
+        )
+    blocks_str = "\n\n".join(blocks)
+
+    today = datetime.date.today().isoformat()
+
+    html_out = f'''<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Карта сайта — {esc(SITE_NAME)}</title>
+  <meta name="description" content="Полная карта сайта {esc(SITE_NAME)}: все статьи по тегам, служебные страницы, RSS-фид и sitemap.xml для поисковых систем.">
+  <link rel="canonical" href="{SITE}/sitemap.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{esc(SITE_NAME)}">
+  <meta property="og:title" content="Карта сайта — {esc(SITE_NAME)}">
+  <meta property="og:description" content="Все статьи {esc(SITE_NAME)} по тегам, RSS-фид и sitemap.xml.">
+  <meta property="og:url" content="{SITE}/sitemap.html">
+  <meta property="og:image" content="{default_og()}">
+  {ICONS}
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0d1117">
+  <link rel="alternate" type="application/rss+xml" title="{esc(SITE_NAME)} — новые статьи" href="{SITE}/rss.xml">
+  {THEME_SCRIPT}
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .sitemap-wrap{{max-width:1100px;margin:0 auto;padding:30px 20px 80px;}}
+    .sitemap-intro{{margin:20px 0 30px;color:var(--muted);font-size:15px;line-height:1.6;}}
+    .sitemap-tags{{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px;}}
+    .sitemap-tag{{margin-bottom:50px;}}
+    .sitemap-tag h2{{font-family:Georgia,serif;font-size:24px;color:var(--accent);margin:0 0 18px;border-bottom:1px solid var(--border);padding-bottom:10px;}}
+    .sitemap-count{{color:var(--muted);font-size:14px;font-weight:normal;}}
+    .sitemap-list{{list-style:none;padding:0;margin:0;display:grid;gap:18px;}}
+    .sitemap-list li{{padding:14px 18px;border:1px solid var(--border);border-radius:8px;background:var(--card);transition:border-color .15s;}}
+    .sitemap-list li:hover{{border-color:var(--accent);}}
+    .sitemap-list a{{text-decoration:none;}}
+    .sitemap-list a strong{{font-size:17px;display:block;margin-bottom:6px;}}
+    .sitemap-date{{color:var(--muted);font-size:13px;}}
+    .sitemap-list p{{margin:8px 0 0;color:var(--muted);font-size:14px;line-height:1.5;}}
+    .sitemap-static{{margin-top:60px;padding-top:30px;border-top:2px solid var(--border);}}
+    .sitemap-static h2{{font-family:Georgia,serif;font-size:22px;margin:0 0 16px;}}
+    .sitemap-static ul{{list-style:none;padding:0;margin:0;display:grid;gap:8px;}}
+    .sitemap-static li a{{color:var(--accent);text-decoration:none;font-size:15px;}}
+    .sitemap-static li a:hover{{text-decoration:underline;}}
+    .chip{{display:inline-block;padding:6px 14px;border:1px solid var(--border);border-radius:16px;background:var(--card);color:var(--text);text-decoration:none;font-size:14px;}}
+    .chip:hover{{border-color:var(--accent);color:var(--accent);}}
+  </style>
+</head>
+<body>
+  <div id="progress"></div>
+  {HEADER}
+  <main>
+    <section class="hero wrap">
+      <h1>Карта сайта</h1>
+      <p>Все статьи {esc(SITE_NAME)}, сгруппированные по тегам. Обновлено: {today}.</p>
+    </section>
+    <div class="sitemap-wrap">
+      <p class="sitemap-intro">
+        На этой странице собраны все {len(arts)} статей сайта, разбитые по тегам.
+        Это удобно и для людей, и для поисковых систем — краулеры Яндекса и Google
+        обходят эту страницу по ссылкам и быстрее находят все материалы сайта.
+        Для автоматической обработки есть <a href="/sitemap.xml" style="color:var(--accent)">sitemap.xml</a>
+        и <a href="/rss.xml" style="color:var(--accent)">RSS-фид</a>.
+      </p>
+      <div class="sitemap-tags">
+        {tag_chips}
+      </div>
+{blocks_str}
+      <section class="sitemap-static">
+        <h2>Служебные страницы</h2>
+        <ul>
+          <li><a href="/">Главная</a></li>
+          <li><a href="/about.html">О сайте</a></li>
+          <li><a href="/contacts.html">Контакты</a></li>
+          <li><a href="/privacy.html">Политика конфиденциальности</a></li>
+          <li><a href="/terms.html">Условия использования</a></li>
+          <li><a href="/sitemap.xml">Карта сайта (XML)</a></li>
+          <li><a href="/rss.xml">RSS-фид</a></li>
+        </ul>
+      </section>
+    </div>
+  </main>
+  {FOOTER}
+  <script src="/app.js"></script>
+</body>
+</html>
+'''
+    (ROOT / "sitemap.html").write_text(html_out, encoding="utf-8")
+
+
 # ----------------------------- ЗАПУСК ----------------------------------------
 def main():
     raw = load_articles()
@@ -547,6 +769,12 @@ def main():
     write_sitemap(arts)
     update_index_html(arts)
     normalize_pages()
+    # Новые SEO-файлы, добавленные ботом
+    write_robots()
+    write_rss(arts)
+    write_manifest()
+    write_sitemap_html(arts)
+    print("RSS, manifest, sitemap.html и улучшенный robots.txt созданы.")
     print("Готово.")
 
 

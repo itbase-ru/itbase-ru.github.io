@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cookie, localStorage и sessionStorage — что выбрать — IT·База</title>
+  <meta name="description" content="Три способа хранить данные в браузере. Разбираем разницу, лимиты, безопасность и когда что использовать — на конкретных примерах.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/cookie-localstorage-sessionstorage.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Cookie, localStorage и sessionStorage — что выбрать">
+  <meta property="og:description" content="Три способа хранить данные в браузере. Разбираем разницу, лимиты, безопасность и когда что использовать — на конкретных примерах.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/cookie-localstorage-sessionstorage.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/cookie-localstorage-sessionstorage.html">
+  <meta property="article:published_time" content="2026-04-22">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cookie, localStorage и sessionStorage — что выбрать">
+  <meta name="twitter:description" content="Три способа хранить данные в браузере. Разбираем разницу, лимиты, безопасность и когда что использовать — на конкретных примерах.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/cookie-localstorage-sessionstorage.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Cookie, localStorage и sessionStorage — что выбрать", "description": "Три способа хранить данные в браузере. Разбираем разницу, лимиты, безопасность и когда что использовать — на конкретных примерах.", "image": ["https://itbase-ru.github.io/img/og/cookie-localstorage-sessionstorage.png"], "datePublished": "2026-04-22", "dateModified": "2026-04-22", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/cookie-localstorage-sessionstorage.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Веб", "item": "https://itbase-ru.github.io/?tag=Веб"}, {"@type": "ListItem", "position": 3, "name": "Cookie, localStorage и sessionStorage — что выбрать", "item": "https://itbase-ru.github.io/articles/cookie-localstorage-sessionstorage.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="cookie-localstorage-sessionstorage">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Веб">Веб</a>
+        <span class="sep">/</span>
+        <span>Cookie, localStorage и sessionStorage — что выбрать</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Веб</span><span class="tag">JavaScript</span><span class="tag">Безопасность</span></div>
+        <h1>Cookie, localStorage и sessionStorage — что выбрать</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-04-22">22 апреля 2026</time>
+          <span class="dot">•</span>
+          <span>10 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/storage.svg" alt="Cookie, localStorage и sessionStorage — что выбрать">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+      <p>Если ты делаешь фронтенд, рано или поздно встанет вопрос: где хранить токен авторизации, настройки темы, содержимое корзины. Есть три стандартных способа, и у каждого свои особенности. Разберём по-честному.</p>
+
+      <h2 id="section-0">Cookie</h2>
+
+      <p>Самый старый механизм. Куки — это небольшие текстовые пары «ключ=значение», которые браузер <strong>автоматически отправляет на сервер</strong> с каждым HTTP-запросом к тому же домену.</p>
+
+      <pre><code class="language-javascript">// Установить куку
+document.cookie = 'theme=dark; path=/; max-age=86400';
+
+// Прочитать все куки (строкой)
+console.log(document.cookie);   // 'theme=dark; other=value'</code></pre>
+
+      <p>Писать куки вручную неудобно — обычно это делают через сервер. Сервер присылает заголовок:</p>
+
+      <pre><code class="language-bash">Set-Cookie: session_id=abc123; HttpOnly; Secure; SameSite=Strict</code></pre>
+
+      <p>Ключевые параметры:</p>
+
+      <ul>
+        <li><strong>HttpOnly</strong> — кука недоступна из JavaScript. Защита от XSS: украсть её нельзя.</li>
+        <li><strong>Secure</strong> — отправляется только по HTTPS.</li>
+        <li><strong>SameSite</strong> — защита от CSRF. <code>Strict</code> — не отправлять на чужие сайты, <code>Lax</code> — отправлять только при переходах из адресной строки, <code>None</code> — отправлять всегда.</li>
+        <li><strong>Max-Age</strong> — время жизни в секундах.</li>
+        <li><strong>Path</strong> — для каких путей отправлять.</li>
+      </ul>
+
+      <p>Лимит: <strong>около 4 КБ на куку</strong>. И браузер ограничивает количество куки на домен (обычно 50).</p>
+
+      <h2 id="section-1">localStorage</h2>
+
+      <p>Хранилище пар «ключ=значение», которое живёт <strong>постоянно</strong> — пока пользователь сам не очистит. Не отправляется на сервер автоматически.</p>
+
+      <pre><code class="language-javascript">// Сохранить
+localStorage.setItem('theme', 'dark');
+localStorage.setItem('user', JSON.stringify({ id: 1, name: 'Кирилл' }));
+
+// Прочитать
+var theme = localStorage.getItem('theme');   // 'dark'
+
+// Прочитать объект
+var user = JSON.parse(localStorage.getItem('user'));
+
+// Удалить
+localStorage.removeItem('theme');
+
+// Очистить всё
+localStorage.clear();</code></pre>
+
+      <p>Лимит: обычно <strong>5–10 МБ</strong>. Точный объём зависит от браузера.</p>
+
+      <p>Работает синхронно — то есть блокирует поток при операциях. Для больших объёмов это может тормозить.</p>
+
+      <h2 id="section-2">sessionStorage</h2>
+
+      <p>Почти то же самое, что localStorage, но данные живут <strong>только пока открыта вкладка</strong>. Закрыл вкладку — данные исчезли.</p>
+
+      <pre><code class="language-javascript">sessionStorage.setItem('step', '3');
+console.log(sessionStorage.getItem('step'));   // '3'
+
+// При закрытии вкладки данные удаляются</code></pre>
+
+      <p>Каждая вкладка имеет своё отдельное хранилище. Если открыть тот же сайт в двух вкладках — там будут разные sessionStorage.</p>
+
+      <h2 id="section-3">Сравнение</h2>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Критерий</th><th>Cookie</th><th>localStorage</th><th>sessionStorage</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Размер</td><td>~4 КБ</td><td>5–10 МБ</td><td>5–10 МБ</td></tr>
+          <tr><td>Живёт</td><td>до срока или удаления</td><td>постоянно</td><td>до закрытия вкладки</td></tr>
+          <tr><td>Отправляется на сервер</td><td>Да, автоматически</td><td>Нет</td><td>Нет</td></tr>
+          <tr><td>Доступен из JS</td><td>Да (если не HttpOnly)</td><td>Да</td><td>Да</td></tr>
+          <tr><td>Защита от XSS</td><td>Через HttpOnly</td><td>Нет</td><td>Нет</td></tr>
+          <tr><td>Защита от CSRF</td><td>Через SameSite</td><td>Нет (не отправляется)</td><td>Нет</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2 id="section-4">Уязвимости — коротко</h2>
+
+      <h3 id="section-5">XSS и localStorage</h3>
+
+      <p>Если злоумышленник может выполнить JS на твоей странице (XSS-атака) — он украдёт всё из localStorage и sessionStorage. Токены, пароли, что угодно.</p>
+
+      <p>Куки с <code>HttpOnly</code> от этого защищены: JavaScript их не видит.</p>
+
+      <h3 id="section-6">CSRF и cookies</h3>
+
+      <p>Куки автоматически отправляются с запросами. Если пользователь залогинен и заходит на чужой сайт — тот может отправить запрос на твой сервер, а куки приложатся сами. Это CSRF.</p>
+
+      <p>Защита — атрибут <code>SameSite</code> или CSRF-токены.</p>
+
+      <h2 id="section-7">Что где хранить</h2>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Что</th><th>Где</th><th>Почему</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Токен авторизации</td><td>HttpOnly cookie</td><td>XSS не украдёт</td></tr>
+          <tr><td>Тема сайта</td><td>localStorage</td><td>Сохраняется навсегда</td></tr>
+          <tr><td>Настройки интерфейса</td><td>localStorage</td><td>Постоянные</td></tr>
+          <tr><td>Корзина (без логина)</td><td>localStorage</td><td>Живёт между сессиями</td></tr>
+          <tr><td>Данные формы</td><td>sessionStorage</td><td>Не нужны после закрытия</td></tr>
+          <tr><td>Позиция скролла</td><td>sessionStorage</td><td>Только в текущей вкладке</td></tr>
+          <tr><td>Токен CSRF</td><td>Cookie (не HttpOnly)</td><td>Нужен на сервере и в JS</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2 id="section-8">Пример: правильная работа с токеном</h2>
+
+      <p>Правильный вариант — хранить токен в <code>HttpOnly</code> куке, которую ставит сервер:</p>
+
+      <pre><code class="language-python"># На сервере (Python + Flask)
+from flask import make_response
+
+@app.route('/login', methods=['POST'])
+def login():
+    # ... проверка логина/пароля ...
+
+    response = make_response({'status': 'ok'})
+    # Ставим токен в защищённую куку
+    response.set_cookie(
+        'session_token',
+        'abc123xyz...',
+        httponly=True,       # JS не увидит
+        secure=True,         # только HTTPS
+        samesite='Strict',   # защита от CSRF
+        max_age=86400        # сутки
+    )
+    return response</code></pre>
+
+      <p>Клиент про токен вообще не знает. При каждом запросе браузер сам приложит куку. Украсть нельзя ни через XSS, ни из dev tools.</p>
+
+      <h2 id="section-9">Практический пример: тема сайта</h2>
+
+      <p>Тема — не секрет, её можно спокойно хранить в localStorage:</p>
+
+      <pre><code class="language-javascript">// Кнопка переключения темы
+function toggleTheme() {
+  var current = localStorage.getItem('theme') || 'dark';
+  var next = current === 'dark' ? 'light' : 'dark';
+
+  localStorage.setItem('theme', next);
+  document.documentElement.setAttribute('data-theme', next);
+}
+
+// При загрузке страницы — восстановить тему
+function applyTheme() {
+  var saved = localStorage.getItem('theme');
+  if (saved) {
+    document.documentElement.setAttribute('data-theme', saved);
+  }
+}
+
+applyTheme();</code></pre>
+
+      <p>Этот сайт так и работает — тема сохраняется в localStorage под ключом <code>itbase_theme</code>.</p>
+
+      <h2 id="section-10">IndexedDB — если данных много</h2>
+
+      <p>Четвёртый вариант, о котором не всегда вспоминают. IndexedDB — полноценная база данных в браузере:</p>
+
+      <ul>
+        <li>Лимит — гигабайты.</li>
+        <li>Асинхронная (не блокирует поток).</li>
+        <li>Хранит объекты, файлы, бинарные данные.</li>
+        <li>Сложнее в использовании.</li>
+      </ul>
+
+      <p>Используется для оффлайн-приложений, кэша больших данных, PWA. Для простых задач — избыточна.</p>
+
+      <h2 id="section-11">Итог</h2>
+
+      <p>Cookie — маленькие, отправляются на сервер, могут быть защищены от XSS через HttpOnly. localStorage — большой и постоянный, но уязвим для XSS. sessionStorage — как localStorage, но живёт только до закрытия вкладки. Токены авторизации — в HttpOnly cookie. Настройки и UI — в localStorage. Данные формы — в sessionStorage. Если данных много — IndexedDB. Не храни секреты в localStorage — их украдут при первой XSS.</p>
+    </article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Cookie</a><a href="#section-1" class="lvl-2">localStorage</a><a href="#section-2" class="lvl-2">sessionStorage</a><a href="#section-3" class="lvl-2">Сравнение</a><a href="#section-4" class="lvl-2">Уязвимости — коротко</a><a href="#section-5" class="lvl-3">XSS и localStorage</a><a href="#section-6" class="lvl-3">CSRF и cookies</a><a href="#section-7" class="lvl-2">Что где хранить</a><a href="#section-8" class="lvl-2">Пример: правильная работа с токеном</a><a href="#section-9" class="lvl-2">Практический пример: тема сайта</a><a href="#section-10" class="lvl-2">IndexedDB — если данных много</a><a href="#section-11" class="lvl-2">Итог</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/chto-takoe-cors.html"><img src="/img/cors.svg" alt="Что такое CORS и почему браузер блокирует запросы" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Веб</span><span class="tag">Безопасность</span><span class="tag">API</span></div>
+    <a href="/articles/chto-takoe-cors.html"><h2 class="card__title">Что такое CORS и почему браузер блокирует запросы</h2></a>
+    <p class="card__excerpt">Почему fetch с одного сайта на другой падает с ошибкой, что такое Same-Origin Policy и как правильно настроить CORS на сервере.</p>
+    <div class="card__meta">
+      <span>17 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="chto-takoe-cors" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/xss-csrf-sql-inekcii.html"><img src="/img/security.svg" alt="XSS, CSRF, SQL-инъекции — три главные атаки на веб" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Безопасность</span><span class="tag">Веб</span><span class="tag">Разработка</span></div>
+    <a href="/articles/xss-csrf-sql-inekcii.html"><h2 class="card__title">XSS, CSRF, SQL-инъекции — три главные атаки на веб</h2></a>
+    <p class="card__excerpt">Разбираем три самых частых уязвимости в веб-приложениях: как работают, чем опасны и как защититься. С примерами атак и защиты.</p>
+    <div class="card__meta">
+      <span>15 апреля 2026</span><span class="dot">•</span><span>12 мин</span>
+      <button class="card__bm" data-slug="xss-csrf-sql-inekcii" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/chto-takoe-jwt-avtorizaciya.html"><img src="/img/jwt.svg" alt="Что такое JWT и как работает авторизация" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Веб</span><span class="tag">Безопасность</span><span class="tag">API</span></div>
+    <a href="/articles/chto-takoe-jwt-avtorizaciya.html"><h2 class="card__title">Что такое JWT и как работает авторизация</h2></a>
+    <p class="card__excerpt">JWT — это токен, который заменяет куки-сессии. Разбираем структуру, подпись, срок жизни и типичные ошибки при работе с токенами.</p>
+    <div class="card__meta">
+      <span>3 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="chto-takoe-jwt-avtorizaciya" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

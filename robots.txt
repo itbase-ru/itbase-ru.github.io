@@ -1,4 +1,28 @@
+# robots.txt — IT·База
+# https://itbase-ru.github.io/
+
 User-agent: *
 Allow: /
+Allow: /articles/
+Allow: /img/
+Disallow: /data/
+Disallow: /app.js
+
+# Особые правила для Яндекса
+User-agent: Yandex
+Allow: /
+Allow: /articles/
+Allow: /img/
+Disallow: /data/
+Clean-param: tag&q&search /*
+Crawl-delay: 0.5
+
+# Особые правила для Google
+User-agent: Googlebot
+Allow: /
+Allow: /articles/
+Allow: /img/
+Disallow: /data/
 
 Sitemap: https://itbase-ru.github.io/sitemap.xml
+Host: itbase-ru.github.io

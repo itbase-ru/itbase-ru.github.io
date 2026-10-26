@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Зачем нужен TypeScript, если есть JavaScript — IT·База</title>
+  <meta name="description" content="Типы, интерфейсы, компиляция — разбираем, что даёт TypeScript, кому он нужен и почему крупные проекты уходят на него.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/zachem-nuzhen-typescript.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Зачем нужен TypeScript, если есть JavaScript">
+  <meta property="og:description" content="Типы, интерфейсы, компиляция — разбираем, что даёт TypeScript, кому он нужен и почему крупные проекты уходят на него.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/zachem-nuzhen-typescript.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/zachem-nuzhen-typescript.html">
+  <meta property="article:published_time" content="2026-04-11">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Зачем нужен TypeScript, если есть JavaScript">
+  <meta name="twitter:description" content="Типы, интерфейсы, компиляция — разбираем, что даёт TypeScript, кому он нужен и почему крупные проекты уходят на него.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/zachem-nuzhen-typescript.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Зачем нужен TypeScript, если есть JavaScript", "description": "Типы, интерфейсы, компиляция — разбираем, что даёт TypeScript, кому он нужен и почему крупные проекты уходят на него.", "image": ["https://itbase-ru.github.io/img/og/zachem-nuzhen-typescript.png"], "datePublished": "2026-04-11", "dateModified": "2026-04-11", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/zachem-nuzhen-typescript.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "TypeScript", "item": "https://itbase-ru.github.io/?tag=TypeScript"}, {"@type": "ListItem", "position": 3, "name": "Зачем нужен TypeScript, если есть JavaScript", "item": "https://itbase-ru.github.io/articles/zachem-nuzhen-typescript.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="zachem-nuzhen-typescript">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=TypeScript">TypeScript</a>
+        <span class="sep">/</span>
+        <span>Зачем нужен TypeScript, если есть JavaScript</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">TypeScript</span><span class="tag">JavaScript</span><span class="tag">Разработка</span></div>
+        <h1>Зачем нужен TypeScript, если есть JavaScript</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-04-11">11 апреля 2026</time>
+          <span class="dot">•</span>
+          <span>10 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/typescript.svg" alt="Зачем нужен TypeScript, если есть JavaScript">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+      <p>TypeScript — это надстройка над JavaScript, которая добавляет типы. За последние годы он стал стандартом для крупных фронтенд-проектов и серверной разработки на Node.js. Разберёмся, зачем он нужен и стоит ли его учить.</p>
+
+      <h2 id="section-0">Проблема JavaScript</h2>
+
+      <p>JavaScript — динамически типизированный язык. Это значит, что тип переменной определяется во время выполнения, а не при написании кода.</p>
+
+      <pre><code class="language-javascript">// Классический пример проблемы
+function greet(user) {
+  return 'Привет, ' + user.name;
+}
+
+// Где-то в коде
+greet({ name: 'Кирилл' });   // работает
+greet(undefined);            // упадёт: Cannot read property 'name' of undefined
+greet('Кирилл');             // упадёт: user.name — undefined</code></pre>
+
+      <p>Ошибку видно только когда код до неё дойдёт. В маленьком проекте это терпимо, в большом — катастрофа: одна опечатка ломает прод.</p>
+
+      <blockquote>JavaScript позволяет писать код быстро, но расплата — ошибки всплывают в самый неподходящий момент.</blockquote>
+
+      <h2 id="section-1">Что делает TypeScript</h2>
+
+      <p>TypeScript даёт возможность явно указывать типы. И проверяет их <strong>до запуска</strong> — прямо во время написания кода, в редакторе.</p>
+
+      <pre><code class="language-typescript">// Указываем, что user — объект с полем name: string
+function greet(user: { name: string }): string {
+  return 'Привет, ' + user.name;
+}
+
+greet({ name: 'Кирилл' });   // ок
+greet(undefined);            // ошибка ещё в редакторе
+greet('Кирилл');             // ошибка ещё в редакторе</code></pre>
+
+      <p>Редактор (VS Code, WebStorm) сразу подчёркивает неправильные вызовы красным. Ошибка не дойдёт до прода.</p>
+
+      <h2 id="section-2">Как это работает</h2>
+
+      <p>TypeScript <strong>компилируется в JavaScript</strong>. Браузеры и Node.js не умеют исполнять TS напрямую — только JS.</p>
+
+      <pre><code class="language-bash"># Исходник
+app.ts
+
+# После компиляции
+app.js   # этот файл уже запускается</code></pre>
+
+      <p>Во время компиляции TypeScript проверяет типы. Если есть ошибки — не соберётся (если включён строгий режим). Если всё ок — генерирует обычный JS.</p>
+
+      <p>В рантайме типов <strong>нет</strong> — они полностью исчезают. Всё превращается в чистый JavaScript.</p>
+
+      <h2 id="section-3">Основные конструкции</h2>
+
+      <h3 id="section-4">Типы примитивов</h3>
+
+      <pre><code class="language-typescript">// Явное указание типов
+let name: string = 'Кирилл';
+let age: number = 30;
+let isActive: boolean = true;
+
+// Автовывод — TS сам понимает тип по значению
+let city = 'Москва';   // тип: string, указывать не нужно
+let count = 42;        // тип: number</code></pre>
+
+      <h3 id="section-5">Массивы и объекты</h3>
+
+      <pre><code class="language-typescript">// Массив чисел
+const numbers: number[] = [1, 2, 3];
+
+// Массив строк — альтернативный синтаксис
+const names: Array&lt;string&gt; = ['Анна', 'Иван'];
+
+// Объект
+const user: { name: string; age: number } = {
+  name: 'Кирилл',
+  age: 30,
+};</code></pre>
+
+      <h3 id="section-6">Интерфейсы и типы</h3>
+
+      <p>Для сложных объектов описывают интерфейсы:</p>
+
+      <pre><code class="language-typescript">// Интерфейс описывает форму объекта
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  role?: string;   // знак вопроса — поле необязательное
+}
+
+function greet(user: User): string {
+  return 'Привет, ' + user.name;
+}
+
+const kirill: User = {
+  id: 1,
+  name: 'Кирилл',
+  email: 'kirill@mail.ru',
+};</code></pre>
+
+      <p>Аналогично можно через <code>type</code>:</p>
+
+      <pre><code class="language-typescript">type User = {
+  id: number;
+  name: string;
+};</code></pre>
+
+      <p>Разница между <code>interface</code> и <code>type</code> тонкая, на старте можно использовать любое. По общему правилу: интерфейсы — для объектов, типы — для всего остального.</p>
+
+      <h3 id="section-7">Union-типы</h3>
+
+      <p>Позволяют указать, что значение может быть одним из нескольких:</p>
+
+      <pre><code class="language-typescript">// Статус может быть только одним из этих значений
+type Status = 'pending' | 'paid' | 'cancelled';
+
+function updateStatus(status: Status) {
+  // ...
+}
+
+updateStatus('paid');       // ок
+updateStatus('unknown');    // ошибка компиляции</code></pre>
+
+      <h3 id="section-8">Generics</h3>
+
+      <p>Для функций и структур, которые работают с разными типами:</p>
+
+      <pre><code class="language-typescript">// Функция возвращает первый элемент того же типа
+function firstElement&lt;T&gt;(arr: T[]): T | undefined {
+  return arr[0];
+}
+
+const num = firstElement([1, 2, 3]);      // тип: number | undefined
+const str = firstElement(['a', 'b']);     // тип: string | undefined</code></pre>
+
+      <h2 id="section-9">Что TypeScript даёт на практике</h2>
+
+      <ul>
+        <li><strong>Автодополнение в редакторе.</strong> Пишешь <code>user.</code> — редактор показывает список полей. Работает точно, а не наугад.</li>
+        <li><strong>Рефакторинг без страха.</strong> Переименовал поле — редактор покажет все места, где его нужно поправить.</li>
+        <li><strong>Ошибки до продакшена.</strong> Опечатки и несоответствия типов ловятся в момент написания кода.</li>
+        <li><strong>Документация из коробки.</strong> Интерфейсы — это живая документация, которая не устаревает.</li>
+        <li><strong>Уверенность при командной работе.</strong> Ты точно знаешь, что функция принимает и возвращает.</li>
+      </ul>
+
+      <h2 id="section-10">Что TypeScript не делает</h2>
+
+      <ul>
+        <li><strong>Не ускоряет код.</strong> Это надстройка для разработки, а не оптимизация.</li>
+        <li><strong>Не защищает от всех ошибок.</strong> Типы — не серебряная пуля. Логические ошибки он не поймает.</li>
+        <li><strong>Не работает в браузере напрямую.</strong> Только через компиляцию в JS.</li>
+      </ul>
+
+      <h2 id="section-11">Синтаксис на примере</h2>
+
+      <p>Сравни обычный JS и TS. Одна и та же функция.</p>
+
+      <h3 id="section-12">JavaScript</h3>
+
+      <pre><code class="language-javascript">function calculateTotal(items) {
+  return items.reduce(function(sum, item) {
+    return sum + item.price * item.quantity;
+  }, 0);
+}</code></pre>
+
+      <h3 id="section-13">TypeScript</h3>
+
+      <pre><code class="language-typescript">interface CartItem {
+  price: number;
+  quantity: number;
+}
+
+function calculateTotal(items: CartItem[]): number {
+  return items.reduce(function(sum, item) {
+    return sum + item.price * item.quantity;
+  }, 0);
+}</code></pre>
+
+      <p>Кода чуть больше, но теперь редактор подсказывает поля, а если передать не тот тип — сразу увидишь ошибку.</p>
+
+      <h2 id="section-14">Кому стоит учить</h2>
+
+      <ul>
+        <li><strong>Фронтенд-разработчикам.</strong> Почти все крупные проекты на React, Angular и Vue используют TS.</li>
+        <li><strong>Node.js-разработчикам.</strong> NestJS, tRPC и большинство современных фреймворков — на TypeScript.</li>
+        <li><strong>Тем, кто работает в команде.</strong> Типы — это контракт между разработчиками.</li>
+        <li><strong>Тем, кто пишет библиотеки.</strong> TS-типы помогают пользователям вашей библиотеки.</li>
+      </ul>
+
+      <p><strong>Можно не учить, если:</strong></p>
+
+      <ul>
+        <li>Ты пишешь маленькие скрипты для себя.</li>
+        <li>Работаешь в проекте, где TS не принят.</li>
+        <li>Только начинаешь с JavaScript — сначала база, потом типы.</li>
+      </ul>
+
+      <h2 id="section-15">Как начать</h2>
+
+      <p>TypeScript не нужно ставить глобально. Проще всего:</p>
+
+      <pre><code class="language-bash"># Установить TypeScript в проект
+npm install --save-dev typescript
+
+# Создать конфиг
+npx tsc --init
+
+# Скомпилировать файл
+npx tsc app.ts</code></pre>
+
+      <p>Но самый простой путь для новичка — открыть <strong>официальный playground</strong>: <code>typescriptlang.org/play</code>. Пишешь код — сразу видишь, во что он компилируется и где ошибки. Ничего не нужно устанавливать.</p>
+
+      <blockquote>Если ты уверенно пишешь на JavaScript — переход на TypeScript занимает неделю-две. Синтаксис почти тот же, добавляются типы. Дальше — вопрос привычки.</blockquote>
+
+      <h2 id="section-16">Итог</h2>
+
+      <p>TypeScript — это JavaScript с типами. Даёт автодополнение, ловит ошибки до запуска и делает код понятнее для команды. Компилируется в обычный JS, в браузере типов нет. Учить стоит, если работаешь с большими проектами или в команде. Для мелких скриптов — не обязателен.</p>
+    </article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Проблема JavaScript</a><a href="#section-1" class="lvl-2">Что делает TypeScript</a><a href="#section-2" class="lvl-2">Как это работает</a><a href="#section-3" class="lvl-2">Основные конструкции</a><a href="#section-4" class="lvl-3">Типы примитивов</a><a href="#section-5" class="lvl-3">Массивы и объекты</a><a href="#section-6" class="lvl-3">Интерфейсы и типы</a><a href="#section-7" class="lvl-3">Union-типы</a><a href="#section-8" class="lvl-3">Generics</a><a href="#section-9" class="lvl-2">Что TypeScript даёт на практике</a><a href="#section-10" class="lvl-2">Что TypeScript не делает</a><a href="#section-11" class="lvl-2">Синтаксис на примере</a><a href="#section-12" class="lvl-3">JavaScript</a><a href="#section-13" class="lvl-3">TypeScript</a><a href="#section-14" class="lvl-2">Кому стоит учить</a><a href="#section-15" class="lvl-2">Как начать</a><a href="#section-16" class="lvl-2">Итог</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/paginaciya-i-versirovanie-api.html"><img src="/img/api-versioning.svg" alt="Пагинация и версионирование API — как не сломать клиентов" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">API</span><span class="tag">Веб</span><span class="tag">Разработка</span></div>
+    <a href="/articles/paginaciya-i-versirovanie-api.html"><h2 class="card__title">Пагинация и версионирование API — как не сломать клиентов</h2></a>
+    <p class="card__excerpt">Как отдавать тысячи записей постранично и что делать, когда API меняется. Разбираем offset/limit, cursor-пагинацию и версионирование.</p>
+    <div class="card__meta">
+      <span>27 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="paginaciya-i-versirovanie-api" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/bash-skripty-dlya-novichka.html"><img src="/img/bash.svg" alt="Bash-скрипты для новичка — автоматизация на Linux" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Инструменты</span><span class="tag">DevOps</span><span class="tag">Разработка</span></div>
+    <a href="/articles/bash-skripty-dlya-novichka.html"><h2 class="card__title">Bash-скрипты для новичка — автоматизация на Linux</h2></a>
+    <p class="card__excerpt">Как написать первый скрипт, который автоматизирует рутину: переменные, условия, циклы, функции, аргументы командной строки.</p>
+    <div class="card__meta">
+      <span>25 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="bash-skripty-dlya-novichka" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/obrabotka-isklyucheniy-v-python.html"><img src="/img/python-errors.svg" alt="Обработка исключений в Python — try, except, finally" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/obrabotka-isklyucheniy-v-python.html"><h2 class="card__title">Обработка исключений в Python — try, except, finally</h2></a>
+    <p class="card__excerpt">Как ловить ошибки и не давать программе падать. Разбираем try/except, собственные исключения и контекстные менеджеры с примерами.</p>
+    <div class="card__meta">
+      <span>24 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="obrabotka-isklyucheniy-v-python" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

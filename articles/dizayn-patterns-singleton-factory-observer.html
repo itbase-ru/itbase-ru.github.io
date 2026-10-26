@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Дизайн-паттерны — Singleton, Factory, Observer — IT·База</title>
+  <meta name="description" content="Три самых частых паттерна проектирования. Разбираем на примерах: зачем нужны, как устроены и где применяются в реальном коде.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/dizayn-patterns-singleton-factory-observer.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Дизайн-паттерны — Singleton, Factory, Observer">
+  <meta property="og:description" content="Три самых частых паттерна проектирования. Разбираем на примерах: зачем нужны, как устроены и где применяются в реальном коде.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/dizayn-patterns-singleton-factory-observer.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/dizayn-patterns-singleton-factory-observer.html">
+  <meta property="article:published_time" content="2026-04-23">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Дизайн-паттерны — Singleton, Factory, Observer">
+  <meta name="twitter:description" content="Три самых частых паттерна проектирования. Разбираем на примерах: зачем нужны, как устроены и где применяются в реальном коде.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/dizayn-patterns-singleton-factory-observer.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Дизайн-паттерны — Singleton, Factory, Observer", "description": "Три самых частых паттерна проектирования. Разбираем на примерах: зачем нужны, как устроены и где применяются в реальном коде.", "image": ["https://itbase-ru.github.io/img/og/dizayn-patterns-singleton-factory-observer.png"], "datePublished": "2026-04-23", "dateModified": "2026-04-23", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/dizayn-patterns-singleton-factory-observer.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Разработка", "item": "https://itbase-ru.github.io/?tag=Разработка"}, {"@type": "ListItem", "position": 3, "name": "Дизайн-паттерны — Singleton, Factory, Observer", "item": "https://itbase-ru.github.io/articles/dizayn-patterns-singleton-factory-observer.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="dizayn-patterns-singleton-factory-observer">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Разработка">Разработка</a>
+        <span class="sep">/</span>
+        <span>Дизайн-паттерны — Singleton, Factory, Observer</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Разработка</span><span class="tag">Архитектура</span><span class="tag">Теория</span></div>
+        <h1>Дизайн-паттерны — Singleton, Factory, Observer</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-04-23">23 апреля 2026</time>
+          <span class="dot">•</span>
+          <span>11 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/patterns.svg" alt="Дизайн-паттерны — Singleton, Factory, Observer">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+      <p>Дизайн-паттерны — это готовые решения типовых задач. Не библиотеки, не код, который копируют, а <strong>шаблоны мышления</strong>: увидел знакомую проблему — вспомнил проверенное решение. Разберём три самых частых.</p>
+
+      <h2 id="section-0">Что такое паттерн</h2>
+
+      <p>Паттерн — это описание того, как решать определённый класс задач. Появились они в 1994 году в книге «Design Patterns» (её называют «бандой четырёх» — GoF). С тех пор — стандарт индустрии.</p>
+
+      <p>Не путай с алгоритмами: алгоритм — конкретные шаги решения. Паттерн — структура кода, которую можно применить к разным задачам.</p>
+
+      <blockquote>Паттерны — не цель, а инструмент. Не надо пихать их везде. Но не знать их — значит изобретать велосипед.</blockquote>
+
+      <h2 id="section-1">Паттерн 1. Singleton (Одиночка)</h2>
+
+      <p><strong>Задача:</strong> нужен объект, который существует <strong>в единственном экземпляре</strong> на всю программу.</p>
+
+      <p>Примеры:</p>
+
+      <ul>
+        <li>Подключение к базе данных — не нужно создавать новое на каждый запрос.</li>
+        <li>Конфигурация приложения.</li>
+        <li>Логгер.</li>
+        <li>Кэш в памяти.</li>
+      </ul>
+
+      <h3 id="section-2">Реализация на Python</h3>
+
+      <pre><code class="language-python">class Database:
+    _instance = None   # храним единственный экземпляр
+
+    def __new__(cls):
+        # Если экземпляр ещё не создан — создаём
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        # Всегда возвращаем один и тот же объект
+        return cls._instance
+
+    def query(self, sql):
+        return 'Результат запроса: ' + sql
+
+# Проверяем — оба раза один и тот же объект
+db1 = Database()
+db2 = Database()
+
+print(db1 is db2)   # True</code></pre>
+
+      <p>Первый вызов создаёт объект. Второй, третий, десятый — возвращают тот же самый. Вся программа работает с одним подключением.</p>
+
+      <h3 id="section-3">Плюсы и минусы</h3>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Плюсы</th><th>Минусы</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Один объект — экономия ресурсов</td><td>Глобальное состояние — сложно тестировать</td></tr>
+          <tr><td>Единая точка доступа</td><td>Скрытые зависимости в коде</td></tr>
+          <tr><td>Контроль над состоянием</td><td>Проблемы с многопоточностью</td></tr>
+        </tbody>
+      </table></div>
+
+      <p>Singleton часто критикуют: он превращается в «глобальную переменную» и усложняет тесты. Используй его там, где правда нужен один объект — например, для подключения к базе.</p>
+
+      <h2 id="section-4">Паттерн 2. Factory (Фабрика)</h2>
+
+      <p><strong>Задача:</strong> создавать объекты, не указывая в коде их точный класс. Логика создания — в одном месте.</p>
+
+      <p>Пример: приложение поддерживает разные способы оплаты. В зависимости от выбора пользователя — создаётся нужный объект.</p>
+
+      <h3 id="section-5">Без паттерна — куча условий</h3>
+
+      <pre><code class="language-python">def process_payment(method):
+    if method == 'card':
+        payment = CardPayment()
+        payment.pay()
+    elif method == 'paypal':
+        payment = PaypalPayment()
+        payment.pay()
+    elif method == 'crypto':
+        payment = CryptoPayment()
+        payment.pay()
+    # И так везде, где нужна оплата</code></pre>
+
+      <p>Если добавится новый способ — придётся искать все такие места в коде.</p>
+
+      <h3 id="section-6">С паттерном — единая точка</h3>
+
+      <pre><code class="language-python"># Базовый класс — общий интерфейс
+class Payment:
+    def pay(self, amount):
+        raise NotImplementedError
+
+# Конкретные реализации
+class CardPayment(Payment):
+    def pay(self, amount):
+        return 'Оплата картой: ' + str(amount) + ' руб.'
+
+class PaypalPayment(Payment):
+    def pay(self, amount):
+        return 'Оплата через PayPal: ' + str(amount) + ' руб.'
+
+class CryptoPayment(Payment):
+    def pay(self, amount):
+        return 'Оплата криптой: ' + str(amount) + ' руб.'
+
+# Фабрика — единственное место с логикой выбора
+class PaymentFactory:
+    @staticmethod
+    def create(method):
+        if method == 'card':
+            return CardPayment()
+        elif method == 'paypal':
+            return PaypalPayment()
+        elif method == 'crypto':
+            return CryptoPayment()
+        else:
+            raise ValueError('Неизвестный метод: ' + method)
+
+# Использование
+payment = PaymentFactory.create('card')
+print(payment.pay(1500))</code></pre>
+
+      <p>Теперь добавление нового метода оплаты — это правка <strong>только в одном месте</strong> — в фабрике.</p>
+
+      <h3 id="section-7">Когда использовать</h3>
+
+      <ul>
+        <li>Создание объектов с разной логикой.</li>
+        <li>Выбор класса во время выполнения.</li>
+        <li>Скрыть от пользователя детали создания.</li>
+      </ul>
+
+      <h2 id="section-8">Паттерн 3. Observer (Наблюдатель)</h2>
+
+      <p><strong>Задача:</strong> одни объекты должны узнавать об изменениях других — не будучи жёстко связанными с ними.</p>
+
+      <p>Примеры:</p>
+
+      <ul>
+        <li>Уведомления: изменился заказ — отправить письмо, push, сообщение в чат.</li>
+        <li>UI: изменилась модель — обновились все компоненты.</li>
+        <li>События в браузере: клик, скролл, ввод.</li>
+      </ul>
+
+      <h3 id="section-9">Реализация</h3>
+
+      <pre><code class="language-python">class Publisher:
+    'Издатель — источник событий'
+
+    def __init__(self):
+        # Список подписчиков
+        self._subscribers = []
+
+    def subscribe(self, callback):
+        # Кто-то подписывается на события
+        self._subscribers.append(callback)
+
+    def unsubscribe(self, callback):
+        # Отписка
+        self._subscribers.remove(callback)
+
+    def notify(self, event):
+        # Уведомляем всех подписчиков
+        for callback in self._subscribers:
+            callback(event)
+
+# Создаём издателя
+shop = Publisher()
+
+# Подписчики — обычные функции
+def send_email(event):
+    print('Отправляем email о событии: ' + event)
+
+def send_push(event):
+    print('Отправляем push: ' + event)
+
+def log_event(event):
+    print('Пишем в лог: ' + event)
+
+# Подписываемся
+shop.subscribe(send_email)
+shop.subscribe(send_push)
+shop.subscribe(log_event)
+
+# Произошло событие — все узнают
+shop.notify('Новый заказ #42')</code></pre>
+
+      <p>Издатель не знает, кто на него подписан. Он просто кричит «событие!» — а подписчики реагируют каждый по-своему. Плюс в том, что подписаться можно в любой момент, а издатель об этом узнает автоматически.</p>
+
+      <h3 id="section-10">Observer в браузере</h3>
+
+      <p>Ты используешь его каждый день — это <code>addEventListener</code>:</p>
+
+      <pre><code class="language-javascript">// Кнопка — издатель
+var button = document.querySelector('#buy');
+
+// Подписчики — функции-обработчики
+button.addEventListener('click', function() {
+  console.log('Отправляем заказ');
+});
+
+button.addEventListener('click', function() {
+  console.log('Показываем уведомление');
+});
+
+// Один клик — все подписчики сработают</code></pre>
+
+      <h3 id="section-11">Когда использовать</h3>
+
+      <ul>
+        <li>Событийная модель: одно событие → много реакций.</li>
+        <li>Слабая связанность: объекты не знают друг о друге.</li>
+        <li>Динамические подписки: кто-то может подписаться или отписаться в любой момент.</li>
+      </ul>
+
+      <h2 id="section-12">Три паттерна вместе</h2>
+
+      <p>В реальном проекте они часто комбинируются:</p>
+
+      <ul>
+        <li><strong>Singleton</strong> — единый логгер приложения.</li>
+        <li><strong>Factory</strong> — создание подключений к разным сервисам.</li>
+        <li><strong>Observer</strong> — событийная шина: компоненты публикуют события, другие подписываются.</li>
+      </ul>
+
+      <h2 id="section-13">Другие паттерны — коротко</h2>
+
+      <p>Всего паттернов больше 20. Вот те, о которых стоит знать:</p>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Паттерн</th><th>Зачем</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Adapter</td><td>Превратить один интерфейс в другой</td></tr>
+          <tr><td>Decorator</td><td>Добавить поведение без изменения класса</td></tr>
+          <tr><td>Strategy</td><td>Переключать алгоритмы на лету</td></tr>
+          <tr><td>Repository</td><td>Абстракция над базой данных</td></tr>
+          <tr><td>MVC</td><td>Разделить модель, представление и контроллер</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2 id="section-14">Не увлекайся</h2>
+
+      <blockquote>Есть шутка: «Начинающий программист применяет паттерны везде. Опытный — знает, когда не применять».</blockquote>
+
+      <p>Паттерны нужны там, где они <strong>реально упрощают код</strong>. Если Singleton добавляет сложности, а Factory решает задачу на 5 строк — лучше без них.</p>
+
+      <p>Правило: <strong>сначала пиши простой код, потом замечай повторяющиеся проблемы и применяй подходящий паттерн</strong>. Не наоборот.</p>
+
+      <h2 id="section-15">Итог</h2>
+
+      <p>Singleton — один объект на всю программу. Factory — централизованное создание объектов с выбором класса. Observer — подписка на события, слабая связанность. Все три встречаются в реальном коде постоянно. Изучить их стоит — но применять только тогда, когда это упрощает, а не усложняет.</p>
+    </article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Что такое паттерн</a><a href="#section-1" class="lvl-2">Паттерн 1. Singleton (Одиночка)</a><a href="#section-2" class="lvl-3">Реализация на Python</a><a href="#section-3" class="lvl-3">Плюсы и минусы</a><a href="#section-4" class="lvl-2">Паттерн 2. Factory (Фабрика)</a><a href="#section-5" class="lvl-3">Без паттерна — куча условий</a><a href="#section-6" class="lvl-3">С паттерном — единая точка</a><a href="#section-7" class="lvl-3">Когда использовать</a><a href="#section-8" class="lvl-2">Паттерн 3. Observer (Наблюдатель)</a><a href="#section-9" class="lvl-3">Реализация</a><a href="#section-10" class="lvl-3">Observer в браузере</a><a href="#section-11" class="lvl-3">Когда использовать</a><a href="#section-12" class="lvl-2">Три паттерна вместе</a><a href="#section-13" class="lvl-2">Другие паттерны — коротко</a><a href="#section-14" class="lvl-2">Не увлекайся</a><a href="#section-15" class="lvl-2">Итог</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/obrabotka-isklyucheniy-v-python.html"><img src="/img/python-errors.svg" alt="Обработка исключений в Python — try, except, finally" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/obrabotka-isklyucheniy-v-python.html"><h2 class="card__title">Обработка исключений в Python — try, except, finally</h2></a>
+    <p class="card__excerpt">Как ловить ошибки и не давать программе падать. Разбираем try/except, собственные исключения и контекстные менеджеры с примерами.</p>
+    <div class="card__meta">
+      <span>24 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="obrabotka-isklyucheniy-v-python" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/python-s-nulya.html"><img src="/img/python.svg" alt="Python с нуля — базовый синтаксис за 15 минут" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/python-s-nulya.html"><h2 class="card__title">Python с нуля — базовый синтаксис за 15 минут</h2></a>
+    <p class="card__excerpt">Переменные, типы, условия, циклы, функции и списки. Минимальный набор, с которого начинается любой Python-проект.</p>
+    <div class="card__meta">
+      <span>20 апреля 2026</span><span class="dot">•</span><span>12 мин</span>
+      <button class="card__bm" data-slug="python-s-nulya" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/dekoratory-v-python.html"><img src="/img/decorators.svg" alt="Декораторы в Python — что это и зачем нужны" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/dekoratory-v-python.html"><h2 class="card__title">Декораторы в Python — что это и зачем нужны</h2></a>
+    <p class="card__excerpt">Функции, которые оборачивают другие функции. Разбираем декораторы с нуля: синтаксис, как работают, где применяются на практике.</p>
+    <div class="card__meta">
+      <span>19 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="dekoratory-v-python" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

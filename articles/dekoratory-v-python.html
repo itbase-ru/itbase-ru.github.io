@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Декораторы в Python — что это и зачем нужны — IT·База</title>
+  <meta name="description" content="Функции, которые оборачивают другие функции. Разбираем декораторы с нуля: синтаксис, как работают, где применяются на практике.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/dekoratory-v-python.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Декораторы в Python — что это и зачем нужны">
+  <meta property="og:description" content="Функции, которые оборачивают другие функции. Разбираем декораторы с нуля: синтаксис, как работают, где применяются на практике.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/dekoratory-v-python.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/dekoratory-v-python.html">
+  <meta property="article:published_time" content="2026-04-19">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Декораторы в Python — что это и зачем нужны">
+  <meta name="twitter:description" content="Функции, которые оборачивают другие функции. Разбираем декораторы с нуля: синтаксис, как работают, где применяются на практике.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/dekoratory-v-python.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Декораторы в Python — что это и зачем нужны", "description": "Функции, которые оборачивают другие функции. Разбираем декораторы с нуля: синтаксис, как работают, где применяются на практике.", "image": ["https://itbase-ru.github.io/img/og/dekoratory-v-python.png"], "datePublished": "2026-04-19", "dateModified": "2026-04-19", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/dekoratory-v-python.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Python", "item": "https://itbase-ru.github.io/?tag=Python"}, {"@type": "ListItem", "position": 3, "name": "Декораторы в Python — что это и зачем нужны", "item": "https://itbase-ru.github.io/articles/dekoratory-v-python.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="dekoratory-v-python">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Python">Python</a>
+        <span class="sep">/</span>
+        <span>Декораторы в Python — что это и зачем нужны</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+        <h1>Декораторы в Python — что это и зачем нужны</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-04-19">19 апреля 2026</time>
+          <span class="dot">•</span>
+          <span>11 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/decorators.svg" alt="Декораторы в Python — что это и зачем нужны">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+      <p>Декораторы в Python — одна из тех вещей, которые сначала пугают, а потом становятся любимым инструментом. Это способ обернуть функцию в другую функцию, не меняя её код. Разберём по шагам.</p>
+
+      <h2 id="section-0">Функции — это объекты</h2>
+
+      <p>Прежде чем понять декораторы, надо запомнить одну вещь: <strong>в Python функция — это объект</strong>, как число или строка. Её можно:</p>
+
+      <ul>
+        <li>Присвоить переменной.</li>
+        <li>Передать в другую функцию как аргумент.</li>
+        <li>Вернуть из функции.</li>
+      </ul>
+
+      <pre><code class="language-python">def greet(name):
+    return 'Привет, ' + name
+
+# Присваиваем функцию переменной
+hello = greet
+print(hello('Кирилл'))   # Привет, Кирилл
+
+# Передаём как аргумент
+def call_function(func, arg):
+    return func(arg)
+
+print(call_function(greet, 'Анна'))   # Привет, Анна
+
+# Возвращаем из функции
+def make_greeter():
+    def inner(name):
+        return 'Здравствуй, ' + name
+    return inner
+
+greeter = make_greeter()
+print(greeter('Иван'))   # Здравствуй, Иван</code></pre>
+
+      <p>Эта способность — <strong>основа декораторов</strong>. Запомни её — дальше всё будет логично.</p>
+
+      <h2 id="section-1">Первый пример: обёртка</h2>
+
+      <p>Хотим узнать, сколько времени работает функция. Можно вписать замеры прямо в неё, но если функций много — код повторяется.</p>
+
+      <p>Лучше написать функцию-обёртку:</p>
+
+      <pre><code class="language-python">import time
+
+def measure_time(func):
+    # Внутренняя функция — заменяет исходную
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        # Вызываем исходную функцию со всеми её аргументами
+        result = func(*args, **kwargs)
+        elapsed = time.time() - start
+        print(func.__name__ + ' работала ' + str(round(elapsed, 4)) + ' сек')
+        return result
+    return wrapper
+
+# Оборачиваем функцию вручную
+def slow_sum(n):
+    total = 0
+    for i in range(n):
+        total += i
+    return total
+
+slow_sum = measure_time(slow_sum)
+slow_sum(1000000)
+# Выведет: slow_sum работала 0.0412 сек</code></pre>
+
+      <p>Мы заменили <code>slow_sum</code> на <code>wrapper</code>, который внутри вызывает оригинал и добавляет замер времени. Функция работает по-старому, но с новой фичей.</p>
+
+      <h2 id="section-2">Синтаксис декоратора</h2>
+
+      <p>Оборачивать руками неудобно. Есть специальный синтаксис — <code>@имя_декоратора</code> над функцией.</p>
+
+      <pre><code class="language-python">import time
+
+def measure_time(func):
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        result = func(*args, **kwargs)
+        elapsed = time.time() - start
+        print(func.__name__ + ' работала ' + str(round(elapsed, 4)) + ' сек')
+        return result
+    return wrapper
+
+# То же самое, что slow_sum = measure_time(slow_sum)
+@measure_time
+def slow_sum(n):
+    total = 0
+    for i in range(n):
+        total += i
+    return total
+
+slow_sum(1000000)
+# Выведет: slow_sum работала 0.0412 сек</code></pre>
+
+      <p>Строка <code>@measure_time</code> — это просто сокращение. Python автоматически применяет декоратор к функции ниже.</p>
+
+      <blockquote>Декоратор — это функция, которая принимает одну функцию и возвращает другую. Всё. Ничего магического.</blockquote>
+
+      <h2 id="section-3">Что значат *args и **kwargs</h2>
+
+      <p>Внутри <code>wrapper</code> мы не знаем, какие аргументы будут у оборачиваемой функции. Поэтому используем:</p>
+
+      <ul>
+        <li><code>*args</code> — все позиционные аргументы как кортеж.</li>
+        <li><code>**kwargs</code> — все именованные аргументы как словарь.</li>
+      </ul>
+
+      <pre><code class="language-python">def wrapper(*args, **kwargs):
+    # args — кортеж позиционных аргументов
+    # kwargs — словарь именованных
+    return func(*args, **kwargs)   # передаём все дальше</code></pre>
+
+      <p>Это универсальный приём: обёртка работает с любой функцией, независимо от её сигнатуры.</p>
+
+      <h2 id="section-4">Декоратор с параметрами</h2>
+
+      <p>Иногда нужно передать настройки в декоратор. Например, «повторять функцию N раз при ошибке».</p>
+
+      <pre><code class="language-python">import time
+
+def retry(attempts):
+    # Внешняя функция принимает параметр декоратора
+    def decorator(func):
+        # Средняя функция принимает саму функцию
+        def wrapper(*args, **kwargs):
+            # Внутренняя — оборачивает вызов
+            for i in range(attempts):
+                try:
+                    return func(*args, **kwargs)
+                except Exception as e:
+                    if i == attempts - 1:
+                        raise   # последняя попытка — пробрасываем ошибку
+                    print('Попытка ' + str(i + 1) + ' упала, пробуем снова')
+                    time.sleep(1)
+        return wrapper
+    return decorator
+
+@retry(attempts=3)
+def unstable_request():
+    # Тут могла бы быть функция, которая иногда падает
+    print('Пробуем выполнить запрос')
+    raise ConnectionError('Сеть недоступна')
+
+unstable_request()</code></pre>
+
+      <p>Получается три уровня вложенности:</p>
+
+      <ol>
+        <li><code>retry(attempts)</code> — принимает параметры декоратора.</li>
+        <li><code>decorator(func)</code> — принимает функцию.</li>
+        <li><code>wrapper(*args)</code> — принимает аргументы вызова.</li>
+      </ol>
+
+      <p>С первого раза сложно, но это самый частый паттерн в реальном коде.</p>
+
+      <h2 id="section-5">functools.wraps — важная деталь</h2>
+
+      <p>После оборачивания функция теряет свои метаданные: имя, docstring, документацию.</p>
+
+      <pre><code class="language-python">@measure_time
+def greet(name):
+    'Возвращает приветствие'
+    return 'Привет, ' + name
+
+print(greet.__name__)   # wrapper, а не greet!
+print(greet.__doc__)    # None, а не 'Возвращает приветствие'</code></pre>
+
+      <p>Решается декоратором <code>functools.wraps</code>:</p>
+
+      <pre><code class="language-python">import functools
+import time
+
+def measure_time(func):
+    @functools.wraps(func)   # сохраняем метаданные
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        result = func(*args, **kwargs)
+        print(func.__name__ + ': ' + str(round(time.time() - start, 4)) + ' сек')
+        return result
+    return wrapper
+
+@measure_time
+def greet(name):
+    'Возвращает приветствие'
+    return 'Привет, ' + name
+
+print(greet.__name__)   # greet
+print(greet.__doc__)    # Возвращает приветствие</code></pre>
+
+      <p>Всегда добавляй <code>@functools.wraps</code> к своим wrapper'ам. Это привычка хорошего тона.</p>
+
+      <h2 id="section-6">Где применяются декораторы</h2>
+
+      <h3 id="section-7">Веб-фреймворки</h3>
+
+      <p>FastAPI, Flask, Django — везде декораторы связывают URL с функцией:</p>
+
+      <pre><code class="language-python">from flask import Flask
+app = Flask(__name__)
+
+@app.route('/users')
+def get_users():
+    return [{'id': 1, 'name': 'Кирилл'}]
+
+# При заходе на /users Flask вызовет эту функцию</code></pre>
+
+      <h3 id="section-8">Кэширование</h3>
+
+      <pre><code class="language-python">import functools
+
+@functools.lru_cache(maxsize=128)
+def fibonacci(n):
+    if n < 2:
+        return n
+    return fibonacci(n - 1) + fibonacci(n - 2)
+
+# Первый вызов для n=50 — мгновенно благодаря кэшу
+print(fibonacci(50))</code></pre>
+
+      <p><code>lru_cache</code> — встроенный декоратор. Он запоминает результаты вызовов и отдаёт их из памяти при повторе. Огромное ускорение для рекурсивных функций.</p>
+
+      <h3 id="section-9">Аутентификация</h3>
+
+      <pre><code class="language-python">def require_auth(func):
+    @functools.wraps(func)
+    def wrapper(request, *args, **kwargs):
+        if not request.user:
+            raise PermissionError('Нужна авторизация')
+        return func(request, *args, **kwargs)
+    return wrapper
+
+@require_auth
+def delete_post(request, post_id):
+    # Попадём сюда только если пользователь авторизован
+    return 'Пост удалён'</code></pre>
+
+      <h3 id="section-10">Логирование</h3>
+
+      <pre><code class="language-python">def log_call(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        print('Вызов: ' + func.__name__)
+        return func(*args, **kwargs)
+    return wrapper
+
+@log_call
+def process_order(order_id):
+    return 'Заказ ' + str(order_id) + ' обработан'
+
+process_order(42)
+# Выведет: Вызов: process_order
+# Затем: Заказ 42 обработан</code></pre>
+
+      <h2 id="section-11">Встроенные декораторы</h2>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Декоратор</th><th>Что делает</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>@property</td><td>Превращает метод в атрибут</td></tr>
+          <tr><td>@staticmethod</td><td>Метод без self</td></tr>
+          <tr><td>@classmethod</td><td>Метод, принимающий класс вместо экземпляра</td></tr>
+          <tr><td>@functools.lru_cache</td><td>Кэширует результаты</td></tr>
+          <tr><td>@functools.wraps</td><td>Сохраняет метаданные в декораторах</td></tr>
+          <tr><td>@dataclass</td><td>Автоматически создаёт init, repr, eq</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2 id="section-12">Частые ошибки</h2>
+
+      <ul>
+        <li><strong>Забыть <code>return func(*args, **kwargs)</code>.</strong> Тогда оборачиваемая функция не выполнится.</li>
+        <li><strong>Забыть <code>return wrapper</code>.</strong> Декоратор вернёт None, и функция исчезнет.</li>
+        <li><strong>Не использовать <code>functools.wraps</code>.</strong> Теряются имя и docstring.</li>
+        <li><strong>Путать уровни вложенности.</strong> Декоратор без параметров — 2 уровня. С параметрами — 3.</li>
+      </ul>
+
+      <h2 id="section-13">Итог</h2>
+
+      <p>Декоратор — это функция, которая оборачивает другую функцию. Работает через способность Python возвращать функции из функций. Применяется в фреймворках, кэшировании, аутентификации, логировании. Синтаксис <code>@имя</code> — просто сокращение. Не забывай про <code>functools.wraps</code> и <code>*args, **kwargs</code>. Как только поймёшь декораторы — код станет заметно короче.</p>
+    </article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Функции — это объекты</a><a href="#section-1" class="lvl-2">Первый пример: обёртка</a><a href="#section-2" class="lvl-2">Синтаксис декоратора</a><a href="#section-3" class="lvl-2">Что значат *args и **kwargs</a><a href="#section-4" class="lvl-2">Декоратор с параметрами</a><a href="#section-5" class="lvl-2">functools.wraps — важная деталь</a><a href="#section-6" class="lvl-2">Где применяются декораторы</a><a href="#section-7" class="lvl-3">Веб-фреймворки</a><a href="#section-8" class="lvl-3">Кэширование</a><a href="#section-9" class="lvl-3">Аутентификация</a><a href="#section-10" class="lvl-3">Логирование</a><a href="#section-11" class="lvl-2">Встроенные декораторы</a><a href="#section-12" class="lvl-2">Частые ошибки</a><a href="#section-13" class="lvl-2">Итог</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/obrabotka-isklyucheniy-v-python.html"><img src="/img/python-errors.svg" alt="Обработка исключений в Python — try, except, finally" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/obrabotka-isklyucheniy-v-python.html"><h2 class="card__title">Обработка исключений в Python — try, except, finally</h2></a>
+    <p class="card__excerpt">Как ловить ошибки и не давать программе падать. Разбираем try/except, собственные исключения и контекстные менеджеры с примерами.</p>
+    <div class="card__meta">
+      <span>24 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="obrabotka-isklyucheniy-v-python" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/python-s-nulya.html"><img src="/img/python.svg" alt="Python с нуля — базовый синтаксис за 15 минут" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/python-s-nulya.html"><h2 class="card__title">Python с нуля — базовый синтаксис за 15 минут</h2></a>
+    <p class="card__excerpt">Переменные, типы, условия, циклы, функции и списки. Минимальный набор, с которого начинается любой Python-проект.</p>
+    <div class="card__meta">
+      <span>20 апреля 2026</span><span class="dot">•</span><span>12 мин</span>
+      <button class="card__bm" data-slug="python-s-nulya" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/mnogopotochnost-v-python-gil.html"><img src="/img/threading.svg" alt="Многопоточность в Python — GIL и потоки" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/mnogopotochnost-v-python-gil.html"><h2 class="card__title">Многопоточность в Python — GIL и потоки</h2></a>
+    <p class="card__excerpt">Почему потоки в Python не ускоряют вычисления, что такое GIL и когда всё-таки стоит использовать threading, multiprocessing или asyncio.</p>
+    <div class="card__meta">
+      <span>12 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="mnogopotochnost-v-python-gil" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

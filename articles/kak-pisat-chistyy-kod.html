@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Как писать чистый код: 8 принципов, которые отличают новичка — IT·База</title>
+  <meta name="description" content="Разбор на примерах: почему код пишут для людей, а не для машин, что такое DRY, KISS, YAGNI и как одна маленькая привычка экономит часы.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/kak-pisat-chistyy-kod.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Как писать чистый код: 8 принципов, которые отличают новичка">
+  <meta property="og:description" content="Разбор на примерах: почему код пишут для людей, а не для машин, что такое DRY, KISS, YAGNI и как одна маленькая привычка экономит часы.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/kak-pisat-chistyy-kod.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/kak-pisat-chistyy-kod.html">
+  <meta property="article:published_time" content="2026-03-07">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Как писать чистый код: 8 принципов, которые отличают новичка">
+  <meta name="twitter:description" content="Разбор на примерах: почему код пишут для людей, а не для машин, что такое DRY, KISS, YAGNI и как одна маленькая привычка экономит часы.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/kak-pisat-chistyy-kod.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Как писать чистый код: 8 принципов, которые отличают новичка", "description": "Разбор на примерах: почему код пишут для людей, а не для машин, что такое DRY, KISS, YAGNI и как одна маленькая привычка экономит часы.", "image": ["https://itbase-ru.github.io/img/og/kak-pisat-chistyy-kod.png"], "datePublished": "2026-03-07", "dateModified": "2026-03-07", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/kak-pisat-chistyy-kod.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Разработка", "item": "https://itbase-ru.github.io/?tag=Разработка"}, {"@type": "ListItem", "position": 3, "name": "Как писать чистый код: 8 принципов, которые отличают новичка", "item": "https://itbase-ru.github.io/articles/kak-pisat-chistyy-kod.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="kak-pisat-chistyy-kod">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Разработка">Разработка</a>
+        <span class="sep">/</span>
+        <span>Как писать чистый код: 8 принципов, которые отличают новичка</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+        <h1>Как писать чистый код: 8 принципов, которые отличают новичка</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-03-07">7 марта 2026</time>
+          <span class="dot">•</span>
+          <span>11 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/cleancode-cover.svg" alt="Как писать чистый код: 8 принципов, которые отличают новичка">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+<p>Код читают в <strong>десять раз чаще</strong>, чем пишут. Твой собственный код через месяц будет тебе чужим. Поэтому главный критерий хорошего кода — не «работает», а «<em>понятно</em>». Разберём восемь принципов, которые отделяют джуна от мидла.</p>
+
+<h2 id="section-0">Принцип 1. Имена говорят сами за себя</h2>
+<p>Переменная <code>a</code> не расскажет ничего. <code>userAge</code> расскажет. <code>d</code> в коде — это загадка для читателя.</p>
+
+<pre><code class="language-javascript">// Плохо
+const d = 7;
+const u = users.filter(x => x.a &gt; d);
+
+// Хорошо
+const inactivityDays = 7;
+const activeUsers = users.filter(user => user.daysSinceLogin &lt;= inactivityDays);
+</code></pre>
+
+<p>Правило простое: <strong>если имя требует комментария — имя плохое</strong>. Исключение — короткоживущие переменные в лямбдах: <code>users.map(u => u.name)</code> нормально.</p>
+
+<h2 id="section-1">Принцип 2. Функция делает одну вещь</h2>
+<p>Если функция называется <code>processUser</code> и внутри она проверяет данные, отправляет письмо, пишет в БД и логирует — это <strong>четыре функции</strong>, притворяющиеся одной.</p>
+
+<pre><code class="language-javascript">// Плохо: одна функция — четыре задачи
+function handleUser(user) {
+  if (!user.email) return;
+  db.save(user);
+  sendEmail(user.email, 'Добро пожаловать');
+  logger.info('User saved: ' + user.email);
+  analytics.track('new_user');
+}
+
+// Хорошо: каждая функция делает одно
+function saveUser(user) { db.save(user); }
+function notifyUser(user) { sendEmail(user.email, 'Добро пожаловать'); }
+function logUserSaved(user) { logger.info('User saved: ' + user.email); }
+
+function handleUser(user) {
+  if (!user.email) return;
+  saveUser(user);
+  notifyUser(user);
+  logUserSaved(user);
+  analytics.track('new_user');
+}
+</code></pre>
+
+<p>Верхняя функция теперь читается как оглавление книги. Плюс каждая часть тестируется отдельно.</p>
+
+<h2 id="section-2">Принцип 3. DRY — не повторяйся</h2>
+<p><strong>Don't Repeat Yourself.</strong> Если один и тот же кусок кода копируется третий раз — пора выносить в функцию. <em>Но</em> не в первый. Правило трёх: два раза можно, третий — выносить.</p>
+
+<blockquote>Дублирование дешевле, чем преждевременная абстракция. Иногда проще продублировать, чем построить «универсальное решение» на будущее.</blockquote>
+
+<h2 id="section-3">Принцип 4. KISS — делай проще</h2>
+<p><strong>Keep It Simple, Stupid.</strong> Простое решение почти всегда выигрывает у хитрого. Читаемость важнее «элегантности».</p>
+
+<pre><code class="language-javascript">// Плохо: всё в одну строку ради краткости
+const active = users.filter(u=>u.active).map(u=>({n:u.name,t:u.tags.filter(t=>t.length&gt;3).length})).sort((a,b)=>b.t-a.t);
+
+// Хорошо: разбито на понятные шаги
+const activeUsers = users.filter(user => user.active);
+
+const usersWithTagCount = activeUsers.map(user => ({
+  name: user.name,
+  tagCount: user.tags.filter(tag => tag.length > 3).length
+}));
+
+const sorted = usersWithTagCount.sort((a, b) => b.tagCount - a.tagCount);
+</code></pre>
+<p>Строк больше, но каждая читается за секунду.</p>
+
+<h2 id="section-4">Принцип 5. YAGNI — тебе это не понадобится</h2>
+<p><strong>You Aren't Gonna Need It.</strong> Не пиши код «на будущее». 90% этого будущего не наступит, а поддерживать заготовки придётся уже сейчас.</p>
+<p>Пример: пишешь блог — не начинай с «поддержки 12 языков и мультипользовательского режима». Начни с одной статьи на русском. Добавишь остальное, если понадобится.</p>
+
+<h2 id="section-5">Принцип 6. Ранний выход вместо вложенности</h2>
+<p>Вложенные <code>if</code> — пожиратели внимания. Правило: <strong>если условие можно проверить в начале — проверь и выйди</strong>.</p>
+
+<pre><code class="language-javascript">// Плохо: три уровня вложенности
+function getDiscount(user) {
+  if (user) {
+    if (user.isActive) {
+      if (user.orders &gt; 5) {
+        return 15;
+      }
+    }
+  }
+  return 0;
+}
+
+// Хорошо: ранние выходы
+function getDiscount(user) {
+  if (!user) return 0;
+  if (!user.isActive) return 0;
+  if (user.orders &lt;= 5) return 0;
+  return 15;
+}
+</code></pre>
+<p>Каждое условие — понятно и независимо. Легко добавлять новые правила.</p>
+
+<h2 id="section-6">Принцип 7. Комментарии объясняют «почему», а не «что»</h2>
+<p>Плохой комментарий — тот, что повторяет код. Хороший — объясняет <strong>причину</strong> решения.</p>
+
+<pre><code class="language-javascript">// Плохо: повторяет код
+// Увеличиваем счётчик на 1
+counter++;
+
+// Хорошо: объясняет причину
+// Работаем с 1-индексацией, чтобы совпадало с нумерацией в UI
+counter++;
+</code></pre>
+
+<p>Если код требует много комментариев — вероятно, его стоит переписать, а не закомментировать.</p>
+
+<h2 id="section-7">Принцип 8. Правила оформления — не для красоты</h2>
+<p>Отступы, пустые строки, длина строки — не «придирки». Это <strong>визуальная иерархия</strong>. Глаз находит нужное за секунды вместо минут. Для JavaScript есть инструмент <strong>Prettier</strong> — он форматирует код автоматически по единым правилам. Установил — забыл о спорах об отступах.</p>
+
+<h2 id="section-8">Что важно запомнить</h2>
+<ul>
+  <li>Код пишут для <strong>людей</strong>, а не для машин.</li>
+  <li><strong>Имя</strong> важнее комментария. Хорошо названная переменная экономит строку объяснений.</li>
+  <li>Одна функция — <strong>одна задача</strong>.</li>
+  <li><strong>DRY</strong> — не дублируй. <strong>KISS</strong> — будь проще. <strong>YAGNI</strong> — не строй на будущее.</li>
+  <li>Ранний выход убивает вложенность.</li>
+  <li>Один вечер на освоение Prettier окупается через неделю.</li>
+</ul>
+
+
+</article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Принцип 1. Имена говорят сами за себя</a><a href="#section-1" class="lvl-2">Принцип 2. Функция делает одну вещь</a><a href="#section-2" class="lvl-2">Принцип 3. DRY — не повторяйся</a><a href="#section-3" class="lvl-2">Принцип 4. KISS — делай проще</a><a href="#section-4" class="lvl-2">Принцип 5. YAGNI — тебе это не понадобится</a><a href="#section-5" class="lvl-2">Принцип 6. Ранний выход вместо вложенности</a><a href="#section-6" class="lvl-2">Принцип 7. Комментарии объясняют «почему», а не «что»</a><a href="#section-7" class="lvl-2">Принцип 8. Правила оформления — не для красоты</a><a href="#section-8" class="lvl-2">Что важно запомнить</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/obrabotka-isklyucheniy-v-python.html"><img src="/img/python-errors.svg" alt="Обработка исключений в Python — try, except, finally" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/obrabotka-isklyucheniy-v-python.html"><h2 class="card__title">Обработка исключений в Python — try, except, finally</h2></a>
+    <p class="card__excerpt">Как ловить ошибки и не давать программе падать. Разбираем try/except, собственные исключения и контекстные менеджеры с примерами.</p>
+    <div class="card__meta">
+      <span>24 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="obrabotka-isklyucheniy-v-python" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/dizayn-patterns-singleton-factory-observer.html"><img src="/img/patterns.svg" alt="Дизайн-паттерны — Singleton, Factory, Observer" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Разработка</span><span class="tag">Архитектура</span><span class="tag">Теория</span></div>
+    <a href="/articles/dizayn-patterns-singleton-factory-observer.html"><h2 class="card__title">Дизайн-паттерны — Singleton, Factory, Observer</h2></a>
+    <p class="card__excerpt">Три самых частых паттерна проектирования. Разбираем на примерах: зачем нужны, как устроены и где применяются в реальном коде.</p>
+    <div class="card__meta">
+      <span>23 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="dizayn-patterns-singleton-factory-observer" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/python-s-nulya.html"><img src="/img/python.svg" alt="Python с нуля — базовый синтаксис за 15 минут" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/python-s-nulya.html"><h2 class="card__title">Python с нуля — базовый синтаксис за 15 минут</h2></a>
+    <p class="card__excerpt">Переменные, типы, условия, циклы, функции и списки. Минимальный набор, с которого начинается любой Python-проект.</p>
+    <div class="card__meta">
+      <span>20 апреля 2026</span><span class="dot">•</span><span>12 мин</span>
+      <button class="card__bm" data-slug="python-s-nulya" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

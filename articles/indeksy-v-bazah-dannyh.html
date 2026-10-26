@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Индексы в базах данных — зачем и как работают — IT·База</title>
+  <meta name="description" content="Почему один и тот же SQL-запрос может выполняться 10 мс или 10 секунд. Разбираем индексы: B-tree, составные, покрывающие и когда они вредят.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/indeksy-v-bazah-dannyh.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Индексы в базах данных — зачем и как работают">
+  <meta property="og:description" content="Почему один и тот же SQL-запрос может выполняться 10 мс или 10 секунд. Разбираем индексы: B-tree, составные, покрывающие и когда они вредят.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/indeksy-v-bazah-dannyh.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/indeksy-v-bazah-dannyh.html">
+  <meta property="article:published_time" content="2026-04-09">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Индексы в базах данных — зачем и как работают">
+  <meta name="twitter:description" content="Почему один и тот же SQL-запрос может выполняться 10 мс или 10 секунд. Разбираем индексы: B-tree, составные, покрывающие и когда они вредят.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/indeksy-v-bazah-dannyh.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Индексы в базах данных — зачем и как работают", "description": "Почему один и тот же SQL-запрос может выполняться 10 мс или 10 секунд. Разбираем индексы: B-tree, составные, покрывающие и когда они вредят.", "image": ["https://itbase-ru.github.io/img/og/indeksy-v-bazah-dannyh.png"], "datePublished": "2026-04-09", "dateModified": "2026-04-09", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/indeksy-v-bazah-dannyh.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Базы данных", "item": "https://itbase-ru.github.io/?tag=Базы данных"}, {"@type": "ListItem", "position": 3, "name": "Индексы в базах данных — зачем и как работают", "item": "https://itbase-ru.github.io/articles/indeksy-v-bazah-dannyh.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="indeksy-v-bazah-dannyh">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Базы данных">Базы данных</a>
+        <span class="sep">/</span>
+        <span>Индексы в базах данных — зачем и как работают</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Базы данных</span><span class="tag">SQL</span><span class="tag">Разработка</span></div>
+        <h1>Индексы в базах данных — зачем и как работают</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-04-09">9 апреля 2026</time>
+          <span class="dot">•</span>
+          <span>11 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/indeksy.svg" alt="Индексы в базах данных — зачем и как работают">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+      <p>Если ты когда-нибудь ждал ответа от сайта 10 секунд, а потом открывал тот же раздел мгновенно — скорее всего, дело было в индексах. Разберёмся, что это и почему без них база данных работает в разы медленнее.</p>
+
+      <p>Если ещё не читал про <a href="/articles/sql-zaprosy-s-nulya.html">SQL-запросы</a> — начни с той статьи.</p>
+
+      <h2 id="section-0">Проблема, которую решают индексы</h2>
+
+      <p>Представь таблицу <code>users</code> с миллионом строк. Ты пишешь:</p>
+
+      <pre><code class="language-sql">SELECT * FROM users WHERE email = 'kirill@mail.ru';</code></pre>
+
+      <p>Без индекса база данных читает <strong>каждую строку</strong> одну за другой, пока не найдёт нужную. Это называется <em>full table scan</em>. На миллионе строк — это секунды.</p>
+
+      <p>С индексом — миллисекунды. Потому что база сразу знает, где искать.</p>
+
+      <blockquote>Индекс — это как алфавитный указатель в конце книги. Вместо того чтобы листать всю книгу в поиске нужного слова, ты открываешь указатель и сразу видишь номер страницы.</blockquote>
+
+      <h2 id="section-1">Как устроен индекс</h2>
+
+      <p>Самый распространённый тип — <strong>B-tree</strong> (сбалансированное дерево). Внутри — отсортированная структура, где каждый узел содержит диапазон значений.</p>
+
+      <p>Схематично для поля <code>email</code>:</p>
+
+      <pre><code class="language-bash">                [m@mail.ru]
+              /             \
+      [a...m]                [n...z]
+     /       \              /       \
+  [a...f]  [g...m]      [n...s]   [t...z]</code></pre>
+
+      <p>Поиск идёт от корня вниз — на каждом уровне отсекается половина вариантов. На миллионе записей нужно всего около 20 сравнений. Отсюда скорость.</p>
+
+      <h2 id="section-2">Создание индекса</h2>
+
+      <pre><code class="language-sql">-- Простой индекс по одному полю
+CREATE INDEX idx_users_email ON users (email);
+
+-- Уникальный индекс — гарантирует уникальность значений
+CREATE UNIQUE INDEX idx_users_email_unique ON users (email);
+
+-- Удалить индекс
+DROP INDEX idx_users_email;</code></pre>
+
+      <p>После создания индекс начинает использоваться автоматически. Писать запросы по-другому не нужно.</p>
+
+      <h2 id="section-3">Когда индекс помогает</h2>
+
+      <p>Индекс ускоряет:</p>
+
+      <ul>
+        <li><strong>WHERE</strong> — фильтрация по индексированному полю.</li>
+        <li><strong>JOIN</strong> — соединение таблиц по индексированному полю.</li>
+        <li><strong>ORDER BY</strong> — сортировка, если индекс уже упорядочен.</li>
+        <li><strong>GROUP BY</strong> — группировка по индексированному полю.</li>
+      </ul>
+
+      <p>Пример:</p>
+
+      <pre><code class="language-sql">-- До индекса: 2 секунды (полный перебор миллиона строк)
+-- После индекса: 5 миллисекунд
+SELECT * FROM orders WHERE user_id = 42;</code></pre>
+
+      <h2 id="section-4">Когда индекс не помогает</h2>
+
+      <p>Индекс работает плохо или вообще игнорируется, если:</p>
+
+      <ul>
+        <li><strong>Условие с функцией от поля.</strong> <code>WHERE LOWER(email) = 'x'</code> — индекс по <code>email</code> не сработает. Нужен функциональный индекс: <code>CREATE INDEX ON users (LOWER(email))</code>.</li>
+        <li><strong>Поиск по подстроке в середине.</strong> <code>WHERE email LIKE '%mail%'</code> — индекс не поможет, потому что неизвестно, с чего начинать поиск. А вот <code>LIKE 'kirill%'</code> — работает.</li>
+        <li><strong>Низкая селективность.</strong> Если поле имеет 2–3 значения (например, пол), индекс почти не помогает — база всё равно прочитает половину таблицы.</li>
+        <li><strong>Отрицание в WHERE.</strong> <code>WHERE status != 'done'</code> — часто игнорирует индекс.</li>
+      </ul>
+
+      <h2 id="section-5">Составные индексы</h2>
+
+      <p>Можно индексировать сразу несколько полей. Это полезно, если ты часто фильтруешь по комбинации:</p>
+
+      <pre><code class="language-sql">-- Индекс по двум полям
+CREATE INDEX idx_orders_user_status ON orders (user_id, status);
+
+-- Такой индекс ускорит:
+SELECT * FROM orders WHERE user_id = 42 AND status = 'paid';
+SELECT * FROM orders WHERE user_id = 42;
+
+-- Но не ускорит:
+SELECT * FROM orders WHERE status = 'paid';</code></pre>
+
+      <p><strong>Правило левого префикса:</strong> составной индекс работает, если запрос использует <em>левое начало</em> списка полей. В примере выше — <code>user_id</code> идёт первым, поэтому запросы только по <code>user_id</code> тоже работают. А только по <code>status</code> — нет.</p>
+
+      <h2 id="section-6">Порядок полей в составном индексе</h2>
+
+      <p>Обычно первым ставят поле с <strong>наибольшей селективностью</strong> — то, что сильнее всего отсекает строки.</p>
+
+      <p>Пример: <code>orders</code> с полями <code>user_id</code> (много разных значений) и <code>status</code> (всего 3–4 значения).</p>
+
+      <p>Лучше <code>(user_id, status)</code>, а не <code>(status, user_id)</code>. Потому что <code>user_id</code> отсекает больше, а <code>status</code> уже добивает остаток.</p>
+
+      <h2 id="section-7">Покрывающий индекс</h2>
+
+      <p>Особый вид: индекс содержит <strong>все поля, которые нужны запросу</strong>. Тогда база данных вообще не обращается к самой таблице — берёт всё из индекса. Это очень быстро.</p>
+
+      <pre><code class="language-sql">-- Запрос нуждается в двух полях
+SELECT user_id, status FROM orders WHERE user_id = 42;
+
+-- Покрывающий индекс
+CREATE INDEX idx_orders_user_status ON orders (user_id, status);
+-- Всё нужное лежит в индексе — таблица не читается</code></pre>
+
+      <h2 id="section-8">Цена индексов</h2>
+
+      <p>Индексы — не бесплатные. Они:</p>
+
+      <ul>
+        <li><strong>Занимают место</strong> на диске — иногда столько же, сколько сама таблица.</li>
+        <li><strong>Замедляют INSERT, UPDATE, DELETE</strong> — потому что при изменении данных индекс тоже нужно обновить.</li>
+        <li><strong>Требуют времени на создание</strong> — на больших таблицах это часы.</li>
+      </ul>
+
+      <blockquote>Индекс — это компромисс: читаем быстрее, пишем медленнее. Если таблица в основном пишется (логи, события), много индексов — плохая идея.</blockquote>
+
+      <h2 id="section-9">Как проверить, используется ли индекс</h2>
+
+      <p>Есть специальная команда <code>EXPLAIN</code> — она показывает план выполнения запроса:</p>
+
+      <pre><code class="language-sql">EXPLAIN SELECT * FROM users WHERE email = 'kirill@mail.ru';</code></pre>
+
+      <p>В выводе смотри на:</p>
+
+      <ul>
+        <li><strong>Seq Scan</strong> (или Full Table Scan) — плохо, индекс не используется.</li>
+        <li><strong>Index Scan</strong> — хорошо, индекс работает.</li>
+        <li><strong>Index Only Scan</strong> — идеально, покрывающий индекс.</li>
+      </ul>
+
+      <p>На <code>EXPLAIN ANALYZE</code> (с анализом) покажет ещё и реальное время выполнения:</p>
+
+      <pre><code class="language-sql">EXPLAIN ANALYZE SELECT * FROM users WHERE email = 'kirill@mail.ru';</code></pre>
+
+      <h2 id="section-10">Практические советы</h2>
+
+      <ol>
+        <li><strong>Индексируй внешние ключи.</strong> <code>user_id</code>, <code>order_id</code> — их всегда используют в JOIN.</li>
+        <li><strong>Индексируй поля в WHERE и ORDER BY.</strong> Если по полю часто фильтруешь — индексируй.</li>
+        <li><strong>Не индексируй всё подряд.</strong> Каждый индекс замедляет запись.</li>
+        <li><strong>Проверяй EXPLAIN.</strong> После создания индекса убедись, что запрос его реально использует.</li>
+        <li><strong>Начинай с простого.</strong> Не делай сразу десять индексов — начни с тех, что нужны самому частому запросу.</li>
+      </ol>
+
+      <h2 id="section-11">Типы индексов в PostgreSQL</h2>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Тип</th><th>Для чего</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>B-tree</td><td>Стандартный. Для <code>=</code>, <code>&lt;</code>, <code>&gt;</code>, ORDER BY, LIKE с префиксом</td></tr>
+          <tr><td>Hash</td><td>Только для <code>=</code>. Редко используется</td></tr>
+          <tr><td>GIN</td><td>Для полнотекстового поиска, массивов, JSONB</td></tr>
+          <tr><td>GiST</td><td>Для геометрии, диапазонов</td></tr>
+          <tr><td>BRIN</td><td>Для больших таблиц с упорядоченными данными (логи, метрики)</td></tr>
+        </tbody>
+      </table></div>
+
+      <p>Для 95% случаев B-tree — то, что нужно. Остальные — нишевые.</p>
+
+      <h2 id="section-12">Итог</h2>
+
+      <p>Индексы — главный инструмент ускорения запросов. Работают через структуру типа дерева, отсекая половину вариантов на каждом шаге. Замедляют запись, но в разы ускоряют чтение. Составные индексы — под конкретные запросы, покрывающие — самый быстрый вариант. Проверяй всё через <code>EXPLAIN</code>.</p>
+    </article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Проблема, которую решают индексы</a><a href="#section-1" class="lvl-2">Как устроен индекс</a><a href="#section-2" class="lvl-2">Создание индекса</a><a href="#section-3" class="lvl-2">Когда индекс помогает</a><a href="#section-4" class="lvl-2">Когда индекс не помогает</a><a href="#section-5" class="lvl-2">Составные индексы</a><a href="#section-6" class="lvl-2">Порядок полей в составном индексе</a><a href="#section-7" class="lvl-2">Покрывающий индекс</a><a href="#section-8" class="lvl-2">Цена индексов</a><a href="#section-9" class="lvl-2">Как проверить, используется ли индекс</a><a href="#section-10" class="lvl-2">Практические советы</a><a href="#section-11" class="lvl-2">Типы индексов в PostgreSQL</a><a href="#section-12" class="lvl-2">Итог</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/sql-zaprosy-s-nulya.html"><img src="/img/sql.svg" alt="SQL-запросы с нуля — SELECT, WHERE, JOIN" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Базы данных</span><span class="tag">SQL</span><span class="tag">Разработка</span></div>
+    <a href="/articles/sql-zaprosy-s-nulya.html"><h2 class="card__title">SQL-запросы с нуля — SELECT, WHERE, JOIN</h2></a>
+    <p class="card__excerpt">Разбираем SQL на практике: как выбрать данные, отфильтровать, отсортировать, соединить таблицы. С примерами на реальных задачах интернет-магазина.</p>
+    <div class="card__meta">
+      <span>7 апреля 2026</span><span class="dot">•</span><span>12 мин</span>
+      <button class="card__bm" data-slug="sql-zaprosy-s-nulya" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/tranzakcii-i-acid.html"><img src="/img/tranzakcii.svg" alt="Транзакции в базах данных — ACID простыми словами" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Базы данных</span><span class="tag">SQL</span><span class="tag">Теория</span></div>
+    <a href="/articles/tranzakcii-i-acid.html"><h2 class="card__title">Транзакции в базах данных — ACID простыми словами</h2></a>
+    <p class="card__excerpt">Почему при переводе денег нельзя потерять ни копейки. Разбираем транзакции и четыре их свойства: атомарность, согласованность, изоляцию, надёжность.</p>
+    <div class="card__meta">
+      <span>21 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="tranzakcii-i-acid" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/chto-takoe-orm.html"><img src="/img/orm.svg" alt="Что такое ORM — работа с базой через объекты" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Базы данных</span><span class="tag">Разработка</span><span class="tag">Python</span></div>
+    <a href="/articles/chto-takoe-orm.html"><h2 class="card__title">Что такое ORM — работа с базой через объекты</h2></a>
+    <p class="card__excerpt">Зачем писать SQL, если можно работать с базой как с обычными объектами. Разбираем ORM: как работает, плюсы и минусы, примеры на SQLAlchemy.</p>
+    <div class="card__meta">
+      <span>13 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="chto-takoe-orm" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

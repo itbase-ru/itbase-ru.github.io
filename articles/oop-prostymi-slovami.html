@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ООП простыми словами — классы, объекты, наследование — IT·База</title>
+  <meta name="description" content="Инкапсуляция, наследование, полиморфизм и абстракция — четыре слова, которые пугают новичков. Разбираем на понятных примерах без умных терминов.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/oop-prostymi-slovami.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="ООП простыми словами — классы, объекты, наследование">
+  <meta property="og:description" content="Инкапсуляция, наследование, полиморфизм и абстракция — четыре слова, которые пугают новичков. Разбираем на понятных примерах без умных терминов.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/oop-prostymi-slovami.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/oop-prostymi-slovami.html">
+  <meta property="article:published_time" content="2026-03-28">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ООП простыми словами — классы, объекты, наследование">
+  <meta name="twitter:description" content="Инкапсуляция, наследование, полиморфизм и абстракция — четыре слова, которые пугают новичков. Разбираем на понятных примерах без умных терминов.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/oop-prostymi-slovami.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "ООП простыми словами — классы, объекты, наследование", "description": "Инкапсуляция, наследование, полиморфизм и абстракция — четыре слова, которые пугают новичков. Разбираем на понятных примерах без умных терминов.", "image": ["https://itbase-ru.github.io/img/og/oop-prostymi-slovami.png"], "datePublished": "2026-03-28", "dateModified": "2026-03-28", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/oop-prostymi-slovami.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Разработка", "item": "https://itbase-ru.github.io/?tag=Разработка"}, {"@type": "ListItem", "position": 3, "name": "ООП простыми словами — классы, объекты, наследование", "item": "https://itbase-ru.github.io/articles/oop-prostymi-slovami.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="oop-prostymi-slovami">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Разработка">Разработка</a>
+        <span class="sep">/</span>
+        <span>ООП простыми словами — классы, объекты, наследование</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+        <h1>ООП простыми словами — классы, объекты, наследование</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-03-28">28 марта 2026</time>
+          <span class="dot">•</span>
+          <span>10 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/oop.svg" alt="ООП простыми словами — классы, объекты, наследование">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+      <p>ООП — объектно-ориентированное программирование. Звучит как что-то академическое, но на деле это просто способ organising код вокруг сущностей, а не вокруг функций.</p>
+
+      <p>Разберём на пальцах.</p>
+
+      <h2 id="section-0">Проблема, которую решает ООП</h2>
+
+      <p>Представь, ты пишешь программу для интернет-магазина. У тебя есть пользователи, товары, заказы. Если писать «функционально», получится куча разрозненных функций:</p>
+
+      <pre><code class="language-python">def create_user(name, email, balance):
+    return {'name': name, 'email': email, 'balance': balance}
+
+def add_balance(user, amount):
+    user['balance'] += amount
+
+def get_user_balance(user):
+    return user['balance']</code></pre>
+
+      <p>Работает. Но когда сущностей становится много, а логики — ещё больше, такой код превращается в кашу. ООП предлагает собрать данные и функции, которые с ними работают, в одно целое.</p>
+
+      <h2 id="section-1">Класс и объект</h2>
+
+      <p><strong>Класс</strong> — это чертёж. <strong>Объект</strong> — это то, что построено по чертежу.</p>
+
+      <p>Класс <code>User</code> описывает, что вообще есть у пользователя. Объект <code>kirill</code> — конкретный пользователь с конкретными данными.</p>
+
+      <pre><code class="language-python">class User:
+    def __init__(self, name, email, balance=0):
+        self.name = name
+        self.email = email
+        self.balance = balance
+
+    def add_balance(self, amount):
+        self.balance += amount
+
+    def __str__(self):
+        return f'{self.name} ({self.email}), баланс: {self.balance}'
+
+kirill = User('Кирилл', 'k@example.com')
+kirill.add_balance(500)
+print(kirill)</code></pre>
+
+      <p>Что тут происходит:</p>
+
+      <ul>
+        <li><code>__init__</code> — это <strong>конструктор</strong>, вызывается при создании объекта.</li>
+        <li><code>self</code> — ссылка на сам объект. Через него метод обращается к своим данным.</li>
+        <li><code>add_balance</code> — метод, который работает с данными конкретного объекта.</li>
+      </ul>
+
+      <h2 id="section-2">Принцип 1. Инкапсуляция</h2>
+
+      <p>Инкапсуляция — это про то, что <strong>внутреннее устройство объекта скрыто</strong>, а снаружи доступно только то, что нужно.</p>
+
+      <p>Пример: банкомат. Ты не лезешь в его внутренности, чтобы узнать баланс — ты нажимаешь кнопку. Аналогично: класс прячет свои внутренние поля и показывает только удобные методы.</p>
+
+      <pre><code class="language-python">class BankAccount:
+    def __init__(self):
+        self._balance = 0
+
+    def deposit(self, amount):
+        if amount &lt;= 0:
+            raise ValueError('Сумма должна быть положительной')
+        self._balance += amount
+
+    @property
+    def balance(self):
+        return self._balance</code></pre>
+
+      <p>Напрямую изменить <code>_balance</code> в обход проверок нельзя — только через <code>deposit</code>. Это и есть инкапсуляция.</p>
+
+      <h2 id="section-3">Принцип 2. Наследование</h2>
+
+      <p>Наследование позволяет создать новый класс на основе существующего, добавив или переопределив поведение.</p>
+
+      <pre><code class="language-python">class Animal:
+    def __init__(self, name):
+        self.name = name
+
+    def sound(self):
+        return '...'
+
+class Dog(Animal):
+    def sound(self):
+        return 'Гав'
+
+class Cat(Animal):
+    def sound(self):
+        return 'Мяу'</code></pre>
+
+      <p><code>Dog</code> и <code>Cat</code> <strong>наследуются</strong> от <code>Animal</code>. Они автоматически получают поле <code>name</code> и могут переопределять метод <code>sound</code>.</p>
+
+      <p>Наследование хорошо, когда между классами есть отношение <strong>«является»</strong>: собака — это животное, кот — это животное.</p>
+
+      <h2 id="section-4">Принцип 3. Полиморфизм</h2>
+
+      <p>Полиморфизм — это когда <strong>разные объекты реагируют на один и тот же вызов по-разному</strong>.</p>
+
+      <pre><code class="language-python">animals = [Dog('Рекс'), Cat('Барсик')]
+
+for animal in animals:
+    print(animal.name, '-', animal.sound())</code></pre>
+
+      <p>Мы вызываем <code>sound()</code> у каждого — а поведение разное. Программе не нужно знать, кто именно перед ней: она просто вызывает метод.</p>
+
+      <p>Именно это позволяет писать гибкий код: добавляешь нового зверя — ничего в цикле менять не надо.</p>
+
+      <h2 id="section-5">Принцип 4. Абстракция</h2>
+
+      <p>Абстракция — это про то, что <strong>мы описываем только важное, отбрасывая детали</strong>. В коде это часто выражается абстрактными классами или интерфейсами.</p>
+
+      <pre><code class="language-python">from abc import ABC, abstractmethod
+
+class Shape(ABC):
+    @abstractmethod
+    def area(self):
+        pass
+
+class Circle(Shape):
+    def __init__(self, r):
+        self.r = r
+
+    def area(self):
+        return 3.14 * self.r ** 2
+
+class Square(Shape):
+    def __init__(self, side):
+        self.side = side
+
+    def area(self):
+        return self.side ** 2</code></pre>
+
+      <p>От <code>Shape</code> нельзя создать объект — это абстракция. Но она задаёт контракт: «любая фигура обязана уметь считать площадь».</p>
+
+      <h2 id="section-6">Четыре принципа на одной картинке</h2>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Принцип</th><th>О чём</th><th>Аналогия</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Инкапсуляция</td><td>Скрывать внутренности</td><td>Банкомат</td></tr>
+          <tr><td>Наследование</td><td>Наследовать поведение</td><td>Породы собак</td></tr>
+          <tr><td>Полиморфизм</td><td>Разное поведение — один интерфейс</td><td>«Открой» — дверь или книга</td></tr>
+          <tr><td>Абстракция</td><td>Оставлять главное</td><td>Схема метро</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2 id="section-7">Когда ООП не нужно</h2>
+
+      <p>ООП — не серебряная пуля. Для скрипта на 50 строк или утилиты из одной функции классы будут только мешать. ООП раскрывается в больших проектах, где есть много сущностей и сложное взаимодействие.</p>
+
+      <blockquote>Хороший признак того, что пора вводить класс: у тебя несколько функций принимают одни и те же данные и передают их друг другу.</blockquote>
+
+      <h2 id="section-8">Итог</h2>
+
+      <p>ООП — это про то, чтобы держать данные и код рядом, прятать внутренности, переиспользовать поведение через наследование и уметь работать с разными объектами одинаково. Четыре принципа — четыре способа не утонуть в сложности.</p>
+    </article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Проблема, которую решает ООП</a><a href="#section-1" class="lvl-2">Класс и объект</a><a href="#section-2" class="lvl-2">Принцип 1. Инкапсуляция</a><a href="#section-3" class="lvl-2">Принцип 2. Наследование</a><a href="#section-4" class="lvl-2">Принцип 3. Полиморфизм</a><a href="#section-5" class="lvl-2">Принцип 4. Абстракция</a><a href="#section-6" class="lvl-2">Четыре принципа на одной картинке</a><a href="#section-7" class="lvl-2">Когда ООП не нужно</a><a href="#section-8" class="lvl-2">Итог</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/obrabotka-isklyucheniy-v-python.html"><img src="/img/python-errors.svg" alt="Обработка исключений в Python — try, except, finally" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/obrabotka-isklyucheniy-v-python.html"><h2 class="card__title">Обработка исключений в Python — try, except, finally</h2></a>
+    <p class="card__excerpt">Как ловить ошибки и не давать программе падать. Разбираем try/except, собственные исключения и контекстные менеджеры с примерами.</p>
+    <div class="card__meta">
+      <span>24 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="obrabotka-isklyucheniy-v-python" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/dizayn-patterns-singleton-factory-observer.html"><img src="/img/patterns.svg" alt="Дизайн-паттерны — Singleton, Factory, Observer" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Разработка</span><span class="tag">Архитектура</span><span class="tag">Теория</span></div>
+    <a href="/articles/dizayn-patterns-singleton-factory-observer.html"><h2 class="card__title">Дизайн-паттерны — Singleton, Factory, Observer</h2></a>
+    <p class="card__excerpt">Три самых частых паттерна проектирования. Разбираем на примерах: зачем нужны, как устроены и где применяются в реальном коде.</p>
+    <div class="card__meta">
+      <span>23 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="dizayn-patterns-singleton-factory-observer" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/python-s-nulya.html"><img src="/img/python.svg" alt="Python с нуля — базовый синтаксис за 15 минут" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/python-s-nulya.html"><h2 class="card__title">Python с нуля — базовый синтаксис за 15 минут</h2></a>
+    <p class="card__excerpt">Переменные, типы, условия, циклы, функции и списки. Минимальный набор, с которого начинается любой Python-проект.</p>
+    <div class="card__meta">
+      <span>20 апреля 2026</span><span class="dot">•</span><span>12 мин</span>
+      <button class="card__bm" data-slug="python-s-nulya" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

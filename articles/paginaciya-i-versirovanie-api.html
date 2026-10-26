@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Пагинация и версионирование API — как не сломать клиентов — IT·База</title>
+  <meta name="description" content="Как отдавать тысячи записей постранично и что делать, когда API меняется. Разбираем offset/limit, cursor-пагинацию и версионирование.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/paginaciya-i-versirovanie-api.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Пагинация и версионирование API — как не сломать клиентов">
+  <meta property="og:description" content="Как отдавать тысячи записей постранично и что делать, когда API меняется. Разбираем offset/limit, cursor-пагинацию и версионирование.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/paginaciya-i-versirovanie-api.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/paginaciya-i-versirovanie-api.html">
+  <meta property="article:published_time" content="2026-04-27">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Пагинация и версионирование API — как не сломать клиентов">
+  <meta name="twitter:description" content="Как отдавать тысячи записей постранично и что делать, когда API меняется. Разбираем offset/limit, cursor-пагинацию и версионирование.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/paginaciya-i-versirovanie-api.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Пагинация и версионирование API — как не сломать клиентов", "description": "Как отдавать тысячи записей постранично и что делать, когда API меняется. Разбираем offset/limit, cursor-пагинацию и версионирование.", "image": ["https://itbase-ru.github.io/img/og/paginaciya-i-versirovanie-api.png"], "datePublished": "2026-04-27", "dateModified": "2026-04-27", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/paginaciya-i-versirovanie-api.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "API", "item": "https://itbase-ru.github.io/?tag=API"}, {"@type": "ListItem", "position": 3, "name": "Пагинация и версионирование API — как не сломать клиентов", "item": "https://itbase-ru.github.io/articles/paginaciya-i-versirovanie-api.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="paginaciya-i-versirovanie-api">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=API">API</a>
+        <span class="sep">/</span>
+        <span>Пагинация и версионирование API — как не сломать клиентов</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">API</span><span class="tag">Веб</span><span class="tag">Разработка</span></div>
+        <h1>Пагинация и версионирование API — как не сломать клиентов</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-04-27">27 апреля 2026</time>
+          <span class="dot">•</span>
+          <span>11 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/api-versioning.svg" alt="Пагинация и версионирование API — как не сломать клиентов">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+      <p>Представь: у тебя есть API, который отдаёт список статей. Сначала их было 10 — легко вернуть все разом. Потом стало 10 000. И тут начинается: клиент тормозит, сервер захлёбывается, а старые приложения ломаются от любого изменения. Разберём, как это решается.</p>
+
+      <p>Если ещё не читал про <a href="/articles/chto-takoe-api.html">основы API</a> — начни с той статьи.</p>
+
+      <h2 id="section-0">Зачем пагинация</h2>
+
+      <p>Отдать разом 10 000 записей — плохая идея:</p>
+
+      <ul>
+        <li><strong>Большой объём.</strong> Клиент получит мегабайты данных вместо нужных десяти.</li>
+        <li><strong>Медленный запрос.</strong> База выполняет тяжёлый SELECT, сервер рендерит огромный JSON.</li>
+        <li><strong>Плохой UX.</strong> Никто не читает все 10 000 записей сразу — пользователю нужна первая страница.</li>
+      </ul>
+
+      <p>Пагинация разбивает список на страницы. Клиент запрашивает по одной.</p>
+
+      <h2 id="section-1">Offset-пагинация — классика</h2>
+
+      <p>Самый простой способ. Клиент указывает, сколько записей пропустить и сколько взять.</p>
+
+      <pre><code class="language-bash">GET /api/articles?offset=0&amp;limit=10      # первая десятка
+GET /api/articles?offset=10&amp;limit=10     # вторая десятка
+GET /api/articles?offset=20&amp;limit=10     # третья</code></pre>
+
+      <p>Ответ — плюс метаданные:</p>
+
+      <pre><code class="language-json">{
+  "items": [
+    { "id": 1, "title": "Что такое API" },
+    { "id": 2, "title": "Как работает DNS" }
+  ],
+  "total": 45,
+  "offset": 0,
+  "limit": 10,
+  "next": "/api/articles?offset=10&amp;limit=10"
+}</code></pre>
+
+      <p>Реализация на Python (SQLAlchemy):</p>
+
+      <pre><code class="language-python">def get_articles(offset=0, limit=10):
+    total = session.query(Article).count()
+    items = (
+        session.query(Article)
+        .order_by(Article.id)
+        .offset(offset)
+        .limit(limit)
+        .all()
+    )
+    return {
+        'items': [a.to_dict() for a in items],
+        'total': total,
+        'offset': offset,
+        'limit': limit,
+    }</code></pre>
+
+      <h3 id="section-2">Проблемы offset-пагинации</h3>
+
+      <p><strong>1. Медленно на больших offset.</strong> <code>OFFSET 100000</code> заставляет базу отсчитать и выбросить 100 000 строк. Чем дальше — тем медленнее.</p>
+
+      <p><strong>2. Сдвиг данных.</strong> Пока пользователь смотрит первую страницу, кто-то добавил новую запись. Пользователь открывает вторую — и видит одну и ту же запись дважды или пропускает другую.</p>
+
+      <h2 id="section-3">Cursor-пагинация — современный подход</h2>
+
+      <p>Вместо «пропусти N записей» клиент говорит «дай записи после вот этой». В качестве указателя (cursor) обычно используется ID или дата.</p>
+
+      <pre><code class="language-bash">GET /api/articles?limit=10                    # первая страница
+GET /api/articles?limit=10&amp;after=42           # следующие после id=42</code></pre>
+
+      <pre><code class="language-python">def get_articles(after=None, limit=10):
+    query = session.query(Article).order_by(Article.id)
+
+    if after:
+        # Берём только записи с id больше after
+        query = query.filter(Article.id &gt; after)
+
+    items = query.limit(limit).all()
+
+    # Курсор для следующей страницы — id последней записи
+    next_cursor = items[-1].id if items else None
+
+    return {
+        'items': [a.to_dict() for a in items],
+        'next_cursor': next_cursor,
+    }</code></pre>
+
+      <p>Плюсы:</p>
+
+      <ul>
+        <li><strong>Быстро.</strong> База сразу идёт по индексу к нужному месту — не считает пропущенные.</li>
+        <li><strong>Стабильно.</strong> Новые записи не сдвигают старые. Ничего не пропустишь и не увидишь дважды.</li>
+      </ul>
+
+      <p>Минусы:</p>
+
+      <ul>
+        <li><strong>Нельзя прыгнуть на страницу 42.</strong> Только листать вперёд.</li>
+        <li><strong>Нельзя отсортировать как угодно.</strong> Курсор привязан к конкретной сортировке.</li>
+      </ul>
+
+      <p>Cursor-пагинация — стандарт для лент (Instagram, Twitter), чатов, логов. Offset — для админок с фильтрами и сортировками.</p>
+
+      <h2 id="section-4">Что выбрать</h2>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Сценарий</th><th>Что использовать</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Лента, infinite scroll</td><td>Cursor</td></tr>
+          <tr><td>Админка с фильтрами</td><td>Offset</td></tr>
+          <tr><td>Поиск по каталогу</td><td>Offset</td></tr>
+          <tr><td>Живые данные (чаты)</td><td>Cursor</td></tr>
+          <tr><td>Публичный API</td><td>Cursor + offset как fallback</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2 id="section-5">Версионирование API</h2>
+
+      <p>Рано или поздно в API нужно что-то изменить. Но если изменить старый endpoint — все клиенты сломаются. Решение — версии.</p>
+
+      <p>Старые клиенты работают на <code>v1</code>, новые — на <code>v2</code>. Одновременно.</p>
+
+      <h2 id="section-6">Способ 1. Версия в URL</h2>
+
+      <p>Самый популярный вариант:</p>
+
+      <pre><code class="language-bash">GET /api/v1/articles
+GET /api/v2/articles</code></pre>
+
+      <p>Плюсы:</p>
+
+      <ul>
+        <li>Просто и понятно. Видно сразу в браузере.</li>
+        <li>Легко тестировать — меняешь <code>v1</code> на <code>v2</code> в URL.</li>
+        <li>Легко кэшировать — URL разные.</li>
+      </ul>
+
+      <p>Минусы:</p>
+
+      <ul>
+        <li>Ссылка «привязана» к версии — старые ссылки от старых клиентов работают всегда.</li>
+        <li>Нужно держать оба кода живыми.</li>
+      </ul>
+
+      <p>Так делают Stripe, GitHub, Twilio. Это де-факто стандарт.</p>
+
+      <h2 id="section-7">Способ 2. Версия в заголовке</h2>
+
+      <pre><code class="language-bash">GET /api/articles
+Accept: application/vnd.myapi.v2+json</code></pre>
+
+      <p>Плюсы: URL всегда один и тот же, «чистая» семантика.</p>
+
+      <p>Минусы: не видно в браузере, сложнее тестировать вручную, часть клиентов и прокси могут кэшировать неудачно.</p>
+
+      <p>Так делает GitHub в некоторых API. Для большинства проектов — избыточно.</p>
+
+      <h2 id="section-8">Способ 3. Версия в параметре</h2>
+
+      <pre><code class="language-bash">GET /api/articles?version=2</code></pre>
+
+      <p>Компромисс. Редко используется, но встречается у некоторых публичных API.</p>
+
+      <h2 id="section-9">Что можно менять без версии</h2>
+
+      <p>Не каждое изменение требует новой версии. Безопасные изменения:</p>
+
+      <ul>
+        <li><strong>Добавить новое необязательное поле в ответ.</strong> Старые клиенты его проигнорируют.</li>
+        <li><strong>Добавить новый endpoint.</strong> Существующие клиенты его не используют.</li>
+        <li><strong>Добавить необязательный параметр запроса.</strong> Старые запросы работают как раньше.</li>
+      </ul>
+
+      <p>Опасные изменения — для них нужна новая версия:</p>
+
+      <ul>
+        <li><strong>Удалить поле из ответа.</strong> Старые клиенты могут его ожидать.</li>
+        <li><strong>Переименовать поле.</strong> То же самое.</li>
+        <li><strong>Изменить тип поля.</strong> Было число — стало строка.</li>
+        <li><strong>Сделать необязательный параметр обязательным.</strong> Старые вызовы сломаются.</li>
+        <li><strong>Поменять смысл поля.</strong> Клиент получит не то, что ожидал.</li>
+      </ul>
+
+      <blockquote>Правило: добавлять можно без версии, менять и удалять — только с новой версией.</blockquote>
+
+      <h2 id="section-10">Как поддерживать несколько версий</h2>
+
+      <p>Внутри кода — три подхода.</p>
+
+      <h3 id="section-11">1. Отдельные обработчики</h3>
+
+      <pre><code class="language-python">from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get('/api/v1/articles')
+def articles_v1():
+    # Старый формат ответа
+    return [{'id': 1, 'title': 'Статья', 'body': '...'}]
+
+@app.get('/api/v2/articles')
+def articles_v2():
+    # Новый формат с тегами
+    return [{
+        'id': 1,
+        'title': 'Статья',
+        'content': '...',
+        'tags': ['python', 'tutorial']
+    }]</code></pre>
+
+      <p>Просто, но код дублируется.</p>
+
+      <h3 id="section-12">2. Один обработчик с трансформацией</h3>
+
+      <pre><code class="language-python">@app.get('/api/{version}/articles')
+def articles(version: str):
+    items = fetch_articles()
+
+    if version == 'v2':
+        return [format_v2(item) for item in items]
+    return [format_v1(item) for item in items]</code></pre>
+
+      <p>Меньше дублей, но логика версий размазывается по коду.</p>
+
+      <h3 id="section-13">3. Отдельные модули на версию</h3>
+
+      <p>Самое чистое: папка <code>api/v1/</code> и <code>api/v2/</code>. Каждая — со своими обработчиками. Общая бизнес-логика выносится в отдельный слой, который используют оба.</p>
+
+      <h2 id="section-14">Когда удалять старую версию</h2>
+
+      <p>Никогда — если нет веской причины. Клиенты могут быть не обновлены годами. Даже если у тебя «новое мобильное приложение», кто-то пользуется старой версией.</p>
+
+      <p>Если правда надо — предупреди за месяцы. Стандарты:</p>
+
+      <ul>
+        <li><strong>Заголовок Deprecation.</strong> <code>Deprecation: true</code> в ответе.</li>
+        <li><strong>Sunset.</strong> <code>Sunset: Sat, 01 Jan 2027 00:00:00 GMT</code> — когда отключат.</li>
+        <li><strong>Письмо разработчикам.</strong> За 3–6 месяцев до отключения.</li>
+      </ul>
+
+      <h2 id="section-15">Пример полного ответа API</h2>
+
+      <pre><code class="language-json">{
+  "items": [
+    { "id": 42, "title": "Что такое API" },
+    { "id": 43, "title": "Как работает DNS" }
+  ],
+  "pagination": {
+    "limit": 10,
+    "next_cursor": 43,
+    "has_more": true
+  },
+  "meta": {
+    "version": "v2",
+    "generated_at": "2026-04-27T12:00:00Z"
+  }
+}</code></pre>
+
+      <p>Тут три уровня: данные, пагинация, метаинформация. Такой ответ и стабильный, и информативный.</p>
+
+      <h2 id="section-16">Итог</h2>
+
+      <p>Пагинация обязательна, если данных больше сотни. Offset прост, но медленный на глубине и сдвигается при изменениях. Cursor быстрый и стабильный — стандарт для лент. Версии в URL — самый частый и удобный способ версионировать API. Добавлять можно без версии, менять и удалять — только с новой. Старую версию не удаляй, пока клиенты не отвалятся сами.</p>
+    </article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Зачем пагинация</a><a href="#section-1" class="lvl-2">Offset-пагинация — классика</a><a href="#section-2" class="lvl-3">Проблемы offset-пагинации</a><a href="#section-3" class="lvl-2">Cursor-пагинация — современный подход</a><a href="#section-4" class="lvl-2">Что выбрать</a><a href="#section-5" class="lvl-2">Версионирование API</a><a href="#section-6" class="lvl-2">Способ 1. Версия в URL</a><a href="#section-7" class="lvl-2">Способ 2. Версия в заголовке</a><a href="#section-8" class="lvl-2">Способ 3. Версия в параметре</a><a href="#section-9" class="lvl-2">Что можно менять без версии</a><a href="#section-10" class="lvl-2">Как поддерживать несколько версий</a><a href="#section-11" class="lvl-3">1. Отдельные обработчики</a><a href="#section-12" class="lvl-3">2. Один обработчик с трансформацией</a><a href="#section-13" class="lvl-3">3. Отдельные модули на версию</a><a href="#section-14" class="lvl-2">Когда удалять старую версию</a><a href="#section-15" class="lvl-2">Пример полного ответа API</a><a href="#section-16" class="lvl-2">Итог</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/chto-takoe-cors.html"><img src="/img/cors.svg" alt="Что такое CORS и почему браузер блокирует запросы" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Веб</span><span class="tag">Безопасность</span><span class="tag">API</span></div>
+    <a href="/articles/chto-takoe-cors.html"><h2 class="card__title">Что такое CORS и почему браузер блокирует запросы</h2></a>
+    <p class="card__excerpt">Почему fetch с одного сайта на другой падает с ошибкой, что такое Same-Origin Policy и как правильно настроить CORS на сервере.</p>
+    <div class="card__meta">
+      <span>17 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="chto-takoe-cors" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/xss-csrf-sql-inekcii.html"><img src="/img/security.svg" alt="XSS, CSRF, SQL-инъекции — три главные атаки на веб" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Безопасность</span><span class="tag">Веб</span><span class="tag">Разработка</span></div>
+    <a href="/articles/xss-csrf-sql-inekcii.html"><h2 class="card__title">XSS, CSRF, SQL-инъекции — три главные атаки на веб</h2></a>
+    <p class="card__excerpt">Разбираем три самых частых уязвимости в веб-приложениях: как работают, чем опасны и как защититься. С примерами атак и защиты.</p>
+    <div class="card__meta">
+      <span>15 апреля 2026</span><span class="dot">•</span><span>12 мин</span>
+      <button class="card__bm" data-slug="xss-csrf-sql-inekcii" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/kak-rabotaet-websocket.html"><img src="/img/websocket.svg" alt="Как работает WebSocket — real-time связь между браузером и сервером" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Веб</span><span class="tag">Сети</span><span class="tag">Разработка</span></div>
+    <a href="/articles/kak-rabotaet-websocket.html"><h2 class="card__title">Как работает WebSocket — real-time связь между браузером и сервером</h2></a>
+    <p class="card__excerpt">Почему обычный HTTP плохо подходит для чатов, игр и бирж. Разбираем WebSocket: handshake, кадры, когда нужен и какие есть альтернативы.</p>
+    <div class="card__meta">
+      <span>14 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="kak-rabotaet-websocket" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

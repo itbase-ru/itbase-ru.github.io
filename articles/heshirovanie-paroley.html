@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Как правильно хранить пароли — хеширование и соль — IT·База</title>
+  <meta name="description" content="Почему нельзя хранить пароли в открытом виде, чем MD5 хуже bcrypt и что такое соль. Разбираем на примерах кода.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/heshirovanie-paroley.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Как правильно хранить пароли — хеширование и соль">
+  <meta property="og:description" content="Почему нельзя хранить пароли в открытом виде, чем MD5 хуже bcrypt и что такое соль. Разбираем на примерах кода.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/heshirovanie-paroley.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/heshirovanie-paroley.html">
+  <meta property="article:published_time" content="2026-04-16">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Как правильно хранить пароли — хеширование и соль">
+  <meta name="twitter:description" content="Почему нельзя хранить пароли в открытом виде, чем MD5 хуже bcrypt и что такое соль. Разбираем на примерах кода.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/heshirovanie-paroley.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Как правильно хранить пароли — хеширование и соль", "description": "Почему нельзя хранить пароли в открытом виде, чем MD5 хуже bcrypt и что такое соль. Разбираем на примерах кода.", "image": ["https://itbase-ru.github.io/img/og/heshirovanie-paroley.png"], "datePublished": "2026-04-16", "dateModified": "2026-04-16", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/heshirovanie-paroley.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Безопасность", "item": "https://itbase-ru.github.io/?tag=Безопасность"}, {"@type": "ListItem", "position": 3, "name": "Как правильно хранить пароли — хеширование и соль", "item": "https://itbase-ru.github.io/articles/heshirovanie-paroley.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="heshirovanie-paroley">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Безопасность">Безопасность</a>
+        <span class="sep">/</span>
+        <span>Как правильно хранить пароли — хеширование и соль</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Безопасность</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+        <h1>Как правильно хранить пароли — хеширование и соль</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-04-16">16 апреля 2026</time>
+          <span class="dot">•</span>
+          <span>10 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/passwords.svg" alt="Как правильно хранить пароли — хеширование и соль">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+      <p>Кажется, что хранить пароли просто: положил в базу — и всё. Но если база утечёт (а это происходит регулярно), все пароли окажутся у злоумышленника. Есть только один правильный способ — хеширование.</p>
+
+      <h2 id="section-0">Почему нельзя хранить пароли как есть</h2>
+
+      <p>Крупные утечки происходят каждый год. Когда база попадает в чужие руки, там оказываются миллионы логинов и паролей. Если пароли хранились в открытом виде — злоумышленник сразу получает доступ ко всему.</p>
+
+      <p>Хуже того: люди часто используют один пароль на разных сайтах. Утечка на одном проекте открывает доступ к почте, соцсетям, банку.</p>
+
+      <blockquote>Правило номер один: пароль пользователя не должен храниться ни в каком виде, кроме хеша. Никаких исключений.</blockquote>
+
+      <h2 id="section-1">Что такое хеш</h2>
+
+      <p>Хеш-функция превращает любую строку в строку фиксированной длины. При этом:</p>
+
+      <ul>
+        <li><strong>В одну сторону.</strong> Из пароля легко получить хеш, но из хеша пароль — почти невозможно.</li>
+        <li><strong>Детерминирована.</strong> Один и тот же пароль всегда даёт один и тот же хеш.</li>
+        <li><strong>Лавинна.</strong> Изменил один символ в пароле — хеш меняется полностью.</li>
+      </ul>
+
+      <p>Пример:</p>
+
+      <pre><code class="language-bash">пароль: 123456
+MD5:    e10adc3949ba59abbe56e057f20f883e
+
+пароль: 123457
+MD5:    885b2c7a6bdabd0f4f9c9bbd8f3a1c1a
+</code></pre>
+
+      <p>Из «e10adc...» вычислить «123456» математически почти невозможно. Значит, если хранить только хеш — утечка базы не раскрывает пароли.</p>
+
+      <h2 id="section-2">Как проверять пароль при входе</h2>
+
+      <p>Пользователь вводит пароль — ты хешируешь его тем же алгоритмом и сравниваешь с хешем в базе. Совпало — пароль верный.</p>
+
+      <pre><code class="language-python">import hashlib
+
+def hash_password(password):
+    # Простой пример — на практике так делать нельзя
+    return hashlib.md5(password.encode()).hexdigest()
+
+# При регистрации
+stored_hash = hash_password('qwerty123')
+# Сохраняем stored_hash в базу
+
+# При входе
+entered = input('Пароль: ')
+if hash_password(entered) == stored_hash:
+    print('Вход разрешён')
+else:
+    print('Неверный пароль')</code></pre>
+
+      <p>Идея правильная, но этот код ещё небезопасен. Продолжаем.</p>
+
+      <h2 id="section-3">Почему MD5 и SHA-1 не подходят</h2>
+
+      <p>MD5 и SHA-1 — быстрые алгоритмы. Это как раз плохо. Быстрые алгоритмы легко подбираются перебором:</p>
+
+      <ul>
+        <li><strong>Радужные таблицы.</strong> Заранее посчитанные хеши для миллионов популярных паролей. Проверяешь свой хеш — сразу находишь пароль.</li>
+        <li><strong>Брутфорс.</strong> Современная видеокарта перебирает миллиарды MD5-хешей в секунду.</li>
+        <li><strong>Утечки похожих баз.</strong> Если такой же хеш уже был в другой утечке — пароль известен.</li>
+      </ul>
+
+      <p>Проверь себя: хеш «e10adc3949ba59abbe56e057f20f883e» гуглится за секунду. Это MD5 от «123456».</p>
+
+      <h2 id="section-4">Что такое соль</h2>
+
+      <p>Соль (salt) — случайная строка, которая добавляется к паролю перед хешированием. У каждого пользователя — своя.</p>
+
+      <pre><code class="language-python">import hashlib
+import os
+
+def hash_password(password):
+    # Генерируем случайную соль — 16 байт
+    salt = os.urandom(16)
+    # Складываем соль и пароль, считаем хеш
+    hashed = hashlib.sha256(salt + password.encode()).hexdigest()
+    # Возвращаем и соль, и хеш — оба надо сохранить в базу
+    return salt.hex() + ':' + hashed
+
+# У Кирилла пароль 'qwerty'
+# Соль: a1b2c3d4...
+# Хеш:  f5e6d7c8...
+
+# У Анны тот же пароль 'qwerty'
+# Соль: 9z8y7x6w...  (другая!)
+# Хеш:  3c4d5e6f...  (тоже другая!)
+</code></pre>
+
+      <p>Даже если у двух пользователей одинаковый пароль — в базе лежат разные хеши. Радужные таблицы бесполезны: злоумышленник не знает соль каждого пользователя.</p>
+
+      <h2 id="section-5">bcrypt, scrypt, argon2</h2>
+
+      <p>Соль решает проблему радужных таблиц, но не брутфорса. Для защиты от него нужны <strong>медленные</strong> хеш-функции. Они специально спроектированы так, чтобы считать хеш долго — сотни миллисекунд.</p>
+
+      <p>Пользователю это не мешает: он вводит пароль раз в день. А злоумышленнику, который хочет перебрать миллиард вариантов, — критично.</p>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Алгоритм</th><th>Особенность</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>MD5, SHA-1</td><td>Не использовать. Слишком быстрые</td></tr>
+          <tr><td>bcrypt</td><td>Стандарт уже 20 лет. Надёжный выбор</td></tr>
+          <tr><td>scrypt</td><td>Требует много памяти — сложнее для GPU</td></tr>
+          <tr><td>argon2</td><td>Победитель конкурса 2015. Современный стандарт</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2 id="section-6">Правильный код на Python</h2>
+
+      <p>Используем библиотеку <code>bcrypt</code> — она уже умеет и соль, и правильный алгоритм.</p>
+
+      <pre><code class="language-python">import bcrypt
+
+def hash_password(password):
+    # bcrypt сам генерирует соль и включает её в результат
+    # encode нужен, чтобы превратить строку в байты
+    return bcrypt.hashpw(password.encode(), bcrypt.gensalt())
+
+def check_password(password, stored_hash):
+    # Проверяем: подходит ли пароль к сохранённому хешу
+    return bcrypt.checkpw(password.encode(), stored_hash)
+
+# Регистрация
+hashed = hash_password('qwerty123')
+# В базе лежит строка типа: $2b$12$...
+
+# Вход
+if check_password('qwerty123', hashed):
+    print('Вход разрешён')
+
+if not check_password('wrongpass', hashed):
+    print('Неверный пароль')</code></pre>
+
+      <p>bcrypt сам заботится о соли — она встроена в итоговый хеш. Тебе не нужно её хранить отдельно.</p>
+
+      <h2 id="section-7">Настройка сложности</h2>
+
+      <p>У bcrypt есть параметр <strong>cost</strong> — сколько раз прогонять алгоритм. Каждая единица увеличивает время в два раза.</p>
+
+      <pre><code class="language-python">import bcrypt
+
+# По умолчанию cost = 12 — примерно 250 мс
+hashed = bcrypt.hashpw(b'secret', bcrypt.gensalt(rounds=12))
+
+# Можно увеличить до 14 — примерно 1 секунда
+hashed2 = bcrypt.hashpw(b'secret', bcrypt.gensalt(rounds=14))</code></pre>
+
+      <p>Оптимально — чтобы проверка одного пароля занимала 100–500 мс. Тогда брутфорс практически невозможен, а пользователь не замечает задержки.</p>
+
+      <h2 id="section-8">Типичные ошибки</h2>
+
+      <ul>
+        <li><strong>Хранить пароль в открытом виде.</strong> Даже «временно». Даже «для отладки».</li>
+        <li><strong>Использовать MD5 или SHA-1.</strong> Сегодня это считается уязвимостью.</li>
+        <li><strong>Одна соль на всех.</strong> Тогда радужные таблицы снова работают.</li>
+        <li><strong>Хешировать пароль на клиенте.</strong> Клиентский JS виден всем. Хеширование — только на сервере.</li>
+        <li><strong>Присылать пароль в письме.</strong> Даже при восстановлении. Только ссылка со сроком жизни.</li>
+        <li><strong>Логировать пароль.</strong> В логах, в трассировке, где угодно — ни в каком виде.</li>
+      </ul>
+
+      <h2 id="section-9">Восстановление пароля</h2>
+
+      <p>Правильный алгоритм восстановления:</p>
+
+      <ol>
+        <li>Пользователь вводит email.</li>
+        <li>Ты генерируешь одноразовый токен (случайная строка), сохраняешь его в базу с временем истечения — например, 30 минут.</li>
+        <li>Отправляешь письмо со ссылкой вида <code>example.com/reset?token=abc123</code>.</li>
+        <li>Пользователь переходит по ссылке, вводит новый пароль.</li>
+        <li>Токен помечается использованным или удаляется.</li>
+      </ol>
+
+      <p><strong>Никогда не присылай сам пароль в письме.</strong> Это значит, что он хранится у тебя в открытом виде — а письма могут читать по пути.</p>
+
+      <h2 id="section-10">Итог</h2>
+
+      <p>Хранить пароли можно только в виде хеша. Используй bcrypt, scrypt или argon2 — медленные алгоритмы со встроенной солью. MD5, SHA-1 и «просто sha256» — не подходят. Восстановление — только через одноразовые токены. Если хочешь глубже про безопасность — смотри <a href="/articles/xss-csrf-sql-inekcii.html">XSS, CSRF, SQL-инъекции</a> и <a href="/articles/chto-takoe-jwt-avtorizaciya.html">JWT и авторизация</a>.</p>
+    </article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Почему нельзя хранить пароли как есть</a><a href="#section-1" class="lvl-2">Что такое хеш</a><a href="#section-2" class="lvl-2">Как проверять пароль при входе</a><a href="#section-3" class="lvl-2">Почему MD5 и SHA-1 не подходят</a><a href="#section-4" class="lvl-2">Что такое соль</a><a href="#section-5" class="lvl-2">bcrypt, scrypt, argon2</a><a href="#section-6" class="lvl-2">Правильный код на Python</a><a href="#section-7" class="lvl-2">Настройка сложности</a><a href="#section-8" class="lvl-2">Типичные ошибки</a><a href="#section-9" class="lvl-2">Восстановление пароля</a><a href="#section-10" class="lvl-2">Итог</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/obrabotka-isklyucheniy-v-python.html"><img src="/img/python-errors.svg" alt="Обработка исключений в Python — try, except, finally" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/obrabotka-isklyucheniy-v-python.html"><h2 class="card__title">Обработка исключений в Python — try, except, finally</h2></a>
+    <p class="card__excerpt">Как ловить ошибки и не давать программе падать. Разбираем try/except, собственные исключения и контекстные менеджеры с примерами.</p>
+    <div class="card__meta">
+      <span>24 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="obrabotka-isklyucheniy-v-python" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/dizayn-patterns-singleton-factory-observer.html"><img src="/img/patterns.svg" alt="Дизайн-паттерны — Singleton, Factory, Observer" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Разработка</span><span class="tag">Архитектура</span><span class="tag">Теория</span></div>
+    <a href="/articles/dizayn-patterns-singleton-factory-observer.html"><h2 class="card__title">Дизайн-паттерны — Singleton, Factory, Observer</h2></a>
+    <p class="card__excerpt">Три самых частых паттерна проектирования. Разбираем на примерах: зачем нужны, как устроены и где применяются в реальном коде.</p>
+    <div class="card__meta">
+      <span>23 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="dizayn-patterns-singleton-factory-observer" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/python-s-nulya.html"><img src="/img/python.svg" alt="Python с нуля — базовый синтаксис за 15 минут" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/python-s-nulya.html"><h2 class="card__title">Python с нуля — базовый синтаксис за 15 минут</h2></a>
+    <p class="card__excerpt">Переменные, типы, условия, циклы, функции и списки. Минимальный набор, с которого начинается любой Python-проект.</p>
+    <div class="card__meta">
+      <span>20 апреля 2026</span><span class="dot">•</span><span>12 мин</span>
+      <button class="card__bm" data-slug="python-s-nulya" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

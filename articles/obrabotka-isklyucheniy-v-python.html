@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Обработка исключений в Python — try, except, finally — IT·База</title>
+  <meta name="description" content="Как ловить ошибки и не давать программе падать. Разбираем try/except, собственные исключения и контекстные менеджеры с примерами.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/obrabotka-isklyucheniy-v-python.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Обработка исключений в Python — try, except, finally">
+  <meta property="og:description" content="Как ловить ошибки и не давать программе падать. Разбираем try/except, собственные исключения и контекстные менеджеры с примерами.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/obrabotka-isklyucheniy-v-python.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/obrabotka-isklyucheniy-v-python.html">
+  <meta property="article:published_time" content="2026-04-24">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Обработка исключений в Python — try, except, finally">
+  <meta name="twitter:description" content="Как ловить ошибки и не давать программе падать. Разбираем try/except, собственные исключения и контекстные менеджеры с примерами.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/obrabotka-isklyucheniy-v-python.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Обработка исключений в Python — try, except, finally", "description": "Как ловить ошибки и не давать программе падать. Разбираем try/except, собственные исключения и контекстные менеджеры с примерами.", "image": ["https://itbase-ru.github.io/img/og/obrabotka-isklyucheniy-v-python.png"], "datePublished": "2026-04-24", "dateModified": "2026-04-24", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/obrabotka-isklyucheniy-v-python.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Python", "item": "https://itbase-ru.github.io/?tag=Python"}, {"@type": "ListItem", "position": 3, "name": "Обработка исключений в Python — try, except, finally", "item": "https://itbase-ru.github.io/articles/obrabotka-isklyucheniy-v-python.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="obrabotka-isklyucheniy-v-python">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Python">Python</a>
+        <span class="sep">/</span>
+        <span>Обработка исключений в Python — try, except, finally</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+        <h1>Обработка исключений в Python — try, except, finally</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-04-24">24 апреля 2026</time>
+          <span class="dot">•</span>
+          <span>11 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/python-errors.svg" alt="Обработка исключений в Python — try, except, finally">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+      <p>Программа всегда может столкнуться с неожиданностью: файл не найден, пользователь ввёл не то, сеть пропала. Если не обрабатывать ошибки — программа упадёт. Python даёт удобный механизм для этого — исключения.</p>
+
+      <h2 id="section-0">Что такое исключение</h2>
+
+      <p>Исключение (exception) — это сигнал, что во время выполнения что-то пошло не так. Python «бросает» исключение, и если его никто не поймал — программа аварийно завершается.</p>
+
+      <pre><code class="language-python"># Программа упадёт с ошибкой
+result = 10 / 0
+# ZeroDivisionError: division by zero
+
+numbers = [1, 2, 3]
+print(numbers[10])
+# IndexError: list index out of range</code></pre>
+
+      <p>Обе ошибки — исключения. Python сообщает, что именно произошло, и останавливает выполнение, если никто ошибку не перехватил.</p>
+
+      <h2 id="section-1">try / except — базовый синтаксис</h2>
+
+      <p>Чтобы программа не падала, опасный код оборачивают в <code>try</code>. Если внутри возникает ошибка — управление переходит в <code>except</code>.</p>
+
+      <pre><code class="language-python">try:
+    result = 10 / 0
+    print('Результат:', result)
+except ZeroDivisionError:
+    print('На ноль делить нельзя!')
+
+print('Программа продолжает работу')</code></pre>
+
+      <p>Программа выведет:
+      «На ноль делить нельзя!»
+      «Программа продолжает работу»
+      — и не упадёт.</p>
+
+      <h2 id="section-2">Ловить разные ошибки отдельно</h2>
+
+      <p>Можно обрабатывать разные типы исключений по-разному:</p>
+
+      <pre><code class="language-python">try:
+    numbers = [1, 2, 3]
+    index = int(input('Какой индекс показать? '))
+    print(numbers[index])
+except ValueError:
+    print('Это не число')
+except IndexError:
+    print('Такого индекса нет в списке')</code></pre>
+
+      <p>Python сам определит, какое исключение возникло, и вызовет соответствующий блок <code>except</code>.</p>
+
+      <h2 id="section-3">Получить объект ошибки</h2>
+
+      <p>Иногда надо знать подробности ошибки. Синтаксис <code>as</code> сохраняет объект исключения:</p>
+
+      <pre><code class="language-python">try:
+    result = 10 / 0
+except ZeroDivisionError as error:
+    print('Ошибка:', error)
+    print('Тип:', type(error).__name__)</code></pre>
+
+      <p>Из объекта можно получить текст сообщения, тип, трассировку — всё, что полезно для логов.</p>
+
+      <h2 id="section-4">Ловить всё подряд</h2>
+
+      <p>Можно ловить любое исключение через <code>except Exception</code>:</p>
+
+      <pre><code class="language-python">try:
+    result = do_something_risky()
+except Exception as error:
+    print('Что-то пошло не так:', error)</code></pre>
+
+      <p>Это работает, но <strong>не рекомендую</strong> использовать в обычном коде. Ловить всё подряд — значит скрывать реальные проблемы. Если ты не знаешь, что именно может упасть, — узнай и лови точечно.</p>
+
+      <blockquote>Лови конкретные исключения. Ловить всё подряд — значит маскировать баги, которые потом будет сложно отыскать.</blockquote>
+
+      <h2 id="section-5">else и finally</h2>
+
+      <p>Полная форма try имеет четыре блока:</p>
+
+      <ul>
+        <li><code>try</code> — опасный код.</li>
+        <li><code>except</code> — что делать при ошибке.</li>
+        <li><code>else</code> — что делать, если ошибки не было.</li>
+        <li><code>finally</code> — что делать в любом случае.</li>
+      </ul>
+
+      <pre><code class="language-python">try:
+    f = open('data.txt', 'r')
+    content = f.read()
+except FileNotFoundError:
+    print('Файл не найден')
+else:
+    # Сюда попадём только если ошибки не было
+    print('Прочитано символов:', len(content))
+finally:
+    # Сюда попадём в любом случае — была ошибка или нет
+    print('Работа с файлом завершена')</code></pre>
+
+      <p><code>finally</code> — идеальное место для закрытия файлов, соединений, освобождения ресурсов.</p>
+
+      <h2 id="section-6">Собственные исключения</h2>
+
+      <p>Можно создавать свои классы исключений. Это делает код понятнее — по типу ошибки сразу видно, что пошло не так.</p>
+
+      <pre><code class="language-python"># Своё исключение — наследник Exception
+class InsufficientFundsError(Exception):
+    pass
+
+class BankAccount:
+    def __init__(self, balance):
+        self.balance = balance
+
+    def withdraw(self, amount):
+        if amount &gt; self.balance:
+            # Бросаем наше исключение
+            raise InsufficientFundsError(
+                'Недостаточно средств: нужно ' + str(amount) +
+                ', доступно ' + str(self.balance)
+            )
+        self.balance -= amount
+        return amount
+
+# Использование
+account = BankAccount(1000)
+
+try:
+    account.withdraw(5000)
+except InsufficientFundsError as error:
+    print('Ошибка:', error)</code></pre>
+
+      <p>Своё исключение превращает непонятное «что-то упало» в конкретную бизнес-ошибку.</p>
+
+      <h2 id="section-7">Ключевое слово raise</h2>
+
+      <p><code>raise</code> — бросает исключение вручную. Три способа применения:</p>
+
+      <pre><code class="language-python"># 1. Бросить новое исключение
+raise ValueError('Некорректное значение')
+
+# 2. Пробросить дальше уже пойманное
+try:
+    do_something()
+except SomeError:
+    log_error()
+    raise   # пробрасываем то же исключение выше
+
+# 3. Заменить на другое
+try:
+    do_something()
+except SomeError as error:
+    raise RuntimeError('Сбой обработки') from error</code></pre>
+
+      <p>Третий вариант хорош тем, что сохраняет связь с исходной ошибкой — в трассировке будет видно обе.</p>
+
+      <h2 id="section-8">Контекстные менеджеры</h2>
+
+      <p>Конструкция <code>with</code> — удобная альтернатива try/finally для работы с ресурсами. Она сама закроет файл, даже если внутри произойдёт ошибка:</p>
+
+      <pre><code class="language-python"># Плохо — надо не забыть закрыть
+f = open('data.txt')
+try:
+    content = f.read()
+finally:
+    f.close()
+
+# Хорошо — with закроет сам
+with open('data.txt') as f:
+    content = f.read()
+# После выхода из блока файл закрыт</code></pre>
+
+      <p>Работает с любыми объектами, у которых есть методы <code>__enter__</code> и <code>__exit__</code>. Например, с соединениями базы данных, блокировками, временными файлами.</p>
+
+      <h2 id="section-9">Практический пример: безопасное чтение числа</h2>
+
+      <pre><code class="language-python">def read_number(prompt):
+    'Просит пользователя ввести число, повторяет при ошибке'
+    while True:
+        try:
+            value = int(input(prompt))
+            return value
+        except ValueError:
+            print('Это не число. Попробуй ещё раз.')
+
+age = read_number('Сколько тебе лет? ')
+print('Через 10 лет будет:', age + 10)</code></pre>
+
+      <p>Пользователь может ошибаться сколько угодно — программа не упадёт. Такой паттерн используется везде, где ввод от человека.</p>
+
+      <h2 id="section-10">Частые ошибки</h2>
+
+      <ul>
+        <li><strong>Ловить всё через <code>except Exception</code>.</strong> Скрывает баги. Лови конкретные типы.</li>
+        <li><strong>Пустой <code>except:</code> без переменной.</strong> «Проглотить» ошибку молча — худший вариант. В логах должна остаться информация.</li>
+        <li><strong>Слишком широкий try.</strong> Оборачивай только опасный код, а не 50 строк вокруг.</li>
+        <li><strong>Не закрыть ресурс.</strong> Всегда используй <code>with</code> или <code>finally</code>.</li>
+        <li><strong>Игнорировать ошибку.</strong> Если не знаешь, что делать с исключением — не лови его. Пусть поднимется выше, где с ним разберутся осмысленно.</li>
+      </ul>
+
+      <h2 id="section-11">Как читать трассировку</h2>
+
+      <p>Когда исключение не поймано, Python печатает трассировку. Читать её надо снизу вверх:</p>
+
+      <pre><code class="language-bash">Traceback (most recent call last):
+  File "app.py", line 10, in &lt;module&gt;
+    process_user(user)
+  File "app.py", line 6, in process_user
+    return user['email']
+KeyError: 'email'</code></pre>
+
+      <p>Снизу — тип ошибки (<code>KeyError: 'email'</code>). Выше — цепочка вызовов. Самое важное: первая строка файла с ошибкой — та, где реально что-то сломалось.</p>
+
+      <h2 id="section-12">Итог</h2>
+
+      <p>Исключения — способ не дать программе падать и осмысленно обрабатывать ошибки. Основные конструкции: <code>try</code>, <code>except</code>, <code>else</code>, <code>finally</code>. Лови конкретные типы, не всё подряд. Создавай свои исключения для бизнес-ошибок. Работай с ресурсами через <code>with</code>. Не молчи, если ошибка случилась — пиши в лог. И не забывай: если не знаешь, что делать с ошибкой — не лови её.</p>
+    </article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Что такое исключение</a><a href="#section-1" class="lvl-2">try / except — базовый синтаксис</a><a href="#section-2" class="lvl-2">Ловить разные ошибки отдельно</a><a href="#section-3" class="lvl-2">Получить объект ошибки</a><a href="#section-4" class="lvl-2">Ловить всё подряд</a><a href="#section-5" class="lvl-2">else и finally</a><a href="#section-6" class="lvl-2">Собственные исключения</a><a href="#section-7" class="lvl-2">Ключевое слово raise</a><a href="#section-8" class="lvl-2">Контекстные менеджеры</a><a href="#section-9" class="lvl-2">Практический пример: безопасное чтение числа</a><a href="#section-10" class="lvl-2">Частые ошибки</a><a href="#section-11" class="lvl-2">Как читать трассировку</a><a href="#section-12" class="lvl-2">Итог</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/python-s-nulya.html"><img src="/img/python.svg" alt="Python с нуля — базовый синтаксис за 15 минут" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/python-s-nulya.html"><h2 class="card__title">Python с нуля — базовый синтаксис за 15 минут</h2></a>
+    <p class="card__excerpt">Переменные, типы, условия, циклы, функции и списки. Минимальный набор, с которого начинается любой Python-проект.</p>
+    <div class="card__meta">
+      <span>20 апреля 2026</span><span class="dot">•</span><span>12 мин</span>
+      <button class="card__bm" data-slug="python-s-nulya" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/dekoratory-v-python.html"><img src="/img/decorators.svg" alt="Декораторы в Python — что это и зачем нужны" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/dekoratory-v-python.html"><h2 class="card__title">Декораторы в Python — что это и зачем нужны</h2></a>
+    <p class="card__excerpt">Функции, которые оборачивают другие функции. Разбираем декораторы с нуля: синтаксис, как работают, где применяются на практике.</p>
+    <div class="card__meta">
+      <span>19 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="dekoratory-v-python" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/mnogopotochnost-v-python-gil.html"><img src="/img/threading.svg" alt="Многопоточность в Python — GIL и потоки" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/mnogopotochnost-v-python-gil.html"><h2 class="card__title">Многопоточность в Python — GIL и потоки</h2></a>
+    <p class="card__excerpt">Почему потоки в Python не ускоряют вычисления, что такое GIL и когда всё-таки стоит использовать threading, multiprocessing или asyncio.</p>
+    <div class="card__meta">
+      <span>12 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="mnogopotochnost-v-python-gil" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SQL-запросы с нуля — SELECT, WHERE, JOIN — IT·База</title>
+  <meta name="description" content="Разбираем SQL на практике: как выбрать данные, отфильтровать, отсортировать, соединить таблицы. С примерами на реальных задачах интернет-магазина.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/sql-zaprosy-s-nulya.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="SQL-запросы с нуля — SELECT, WHERE, JOIN">
+  <meta property="og:description" content="Разбираем SQL на практике: как выбрать данные, отфильтровать, отсортировать, соединить таблицы. С примерами на реальных задачах интернет-магазина.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/sql-zaprosy-s-nulya.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/sql-zaprosy-s-nulya.html">
+  <meta property="article:published_time" content="2026-04-07">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SQL-запросы с нуля — SELECT, WHERE, JOIN">
+  <meta name="twitter:description" content="Разбираем SQL на практике: как выбрать данные, отфильтровать, отсортировать, соединить таблицы. С примерами на реальных задачах интернет-магазина.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/sql-zaprosy-s-nulya.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "SQL-запросы с нуля — SELECT, WHERE, JOIN", "description": "Разбираем SQL на практике: как выбрать данные, отфильтровать, отсортировать, соединить таблицы. С примерами на реальных задачах интернет-магазина.", "image": ["https://itbase-ru.github.io/img/og/sql-zaprosy-s-nulya.png"], "datePublished": "2026-04-07", "dateModified": "2026-04-07", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/sql-zaprosy-s-nulya.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Базы данных", "item": "https://itbase-ru.github.io/?tag=Базы данных"}, {"@type": "ListItem", "position": 3, "name": "SQL-запросы с нуля — SELECT, WHERE, JOIN", "item": "https://itbase-ru.github.io/articles/sql-zaprosy-s-nulya.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="sql-zaprosy-s-nulya">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Базы данных">Базы данных</a>
+        <span class="sep">/</span>
+        <span>SQL-запросы с нуля — SELECT, WHERE, JOIN</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Базы данных</span><span class="tag">SQL</span><span class="tag">Разработка</span></div>
+        <h1>SQL-запросы с нуля — SELECT, WHERE, JOIN</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-04-07">7 апреля 2026</time>
+          <span class="dot">•</span>
+          <span>12 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/sql.svg" alt="SQL-запросы с нуля — SELECT, WHERE, JOIN">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+      <p>SQL — язык, на котором разговаривают с базами данных. Он старше интернета и до сих пор незаменим. Если ты работаешь с данными — SQL обязателен. Разберём базовые запросы на понятных примерах.</p>
+
+      <p>Если ещё не читал <a href="/articles/sql-vs-nosql.html">SQL vs NoSQL</a> — начни с той статьи, там про виды баз в целом.</p>
+
+      <h2 id="section-0">Что такое SQL и зачем</h2>
+
+      <p>SQL (Structured Query Language) — язык для работы с реляционными базами данных. Ты пишешь запрос — база возвращает данные.</p>
+
+      <p>Примеры СУБД: PostgreSQL, MySQL, SQLite, MS SQL Server, Oracle. Синтаксис почти одинаковый, различия в деталях.</p>
+
+      <h2 id="section-1">Наша учебная база</h2>
+
+      <p>Представим интернет-магазин. Две таблицы:</p>
+
+      <p><strong>users</strong> — пользователи:</p>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>id</th><th>name</th><th>email</th><th>city</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Кирилл</td><td>kirill@mail.ru</td><td>Москва</td></tr>
+          <tr><td>2</td><td>Анна</td><td>anna@mail.ru</td><td>СПб</td></tr>
+          <tr><td>3</td><td>Иван</td><td>ivan@mail.ru</td><td>Москва</td></tr>
+        </tbody>
+      </table></div>
+
+      <p><strong>orders</strong> — заказы:</p>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>id</th><th>user_id</th><th>total</th><th>status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>10</td><td>1</td><td>5000</td><td>paid</td></tr>
+          <tr><td>11</td><td>1</td><td>1500</td><td>pending</td></tr>
+          <tr><td>12</td><td>2</td><td>8000</td><td>paid</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2 id="section-2">SELECT — выбрать данные</h2>
+
+      <pre><code class="language-sql">-- Выбрать все колонки и все строки из таблицы users
+SELECT * FROM users;
+
+-- Выбрать только name и email
+SELECT name, email FROM users;
+
+-- Выбрать и переименовать колонку в ответе (AS)
+SELECT name AS имя, city AS город FROM users;</code></pre>
+
+      <p><code>*</code> — «все колонки». На продакшене лучше указывать явно, какие нужны — это быстрее и понятнее.</p>
+
+      <h2 id="section-3">WHERE — фильтрация</h2>
+
+      <pre><code class="language-sql">-- Найти пользователя по email
+SELECT * FROM users WHERE email = 'kirill@mail.ru';
+
+-- Все пользователи из Москвы
+SELECT * FROM users WHERE city = 'Москва';
+
+-- Заказы на сумму больше 2000
+SELECT * FROM orders WHERE total > 2000;
+
+-- Заказы пользователя с id 1 со статусом paid
+SELECT * FROM orders
+WHERE user_id = 1 AND status = 'paid';</code></pre>
+
+      <p>Операторы: <code>=</code>, <code>!=</code> или <code>&lt;&gt;</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>AND</code>, <code>OR</code>, <code>NOT</code>.</p>
+
+      <h3 id="section-4">IN, BETWEEN, LIKE</h3>
+
+      <pre><code class="language-sql">-- Пользователи из Москвы или СПб (IN — список значений)
+SELECT * FROM users WHERE city IN ('Москва', 'СПб');
+
+-- Заказы от 1000 до 5000 (BETWEEN — включительно с двух сторон)
+SELECT * FROM orders WHERE total BETWEEN 1000 AND 5000;
+
+-- Email, содержащий "mail" (LIKE с процентами — подстановка)
+SELECT * FROM users WHERE email LIKE '%mail%';
+
+-- Email, начинающийся с "kirill"
+SELECT * FROM users WHERE email LIKE 'kirill%';</code></pre>
+
+      <p>Символ <code>%</code> в LIKE — «любые символы». <code>_</code> — «ровно один символ».</p>
+
+      <h3 id="section-5">IS NULL — работа с пустыми значениями</h3>
+
+      <pre><code class="language-sql">-- Пользователи, у которых не указан город
+SELECT * FROM users WHERE city IS NULL;
+
+-- Пользователи, у которых город указан
+SELECT * FROM users WHERE city IS NOT NULL;</code></pre>
+
+      <p>Важно: <code>= NULL</code> не работает. Только <code>IS NULL</code> или <code>IS NOT NULL</code>.</p>
+
+      <h2 id="section-6">ORDER BY — сортировка</h2>
+
+      <pre><code class="language-sql">-- Пользователи по алфавиту
+SELECT * FROM users ORDER BY name;
+
+-- Заказы по убыванию суммы (DESC — descending)
+SELECT * FROM orders ORDER BY total DESC;
+
+-- Сначала по городу, потом по имени
+SELECT * FROM users ORDER BY city, name;</code></pre>
+
+      <p>По умолчанию — по возрастанию (ASC). Для убывания — <code>DESC</code>.</p>
+
+      <h2 id="section-7">LIMIT — ограничить количество</h2>
+
+      <pre><code class="language-sql">-- Только первые 10 заказов
+SELECT * FROM orders LIMIT 10;
+
+-- Топ-3 самых дорогих заказа
+SELECT * FROM orders ORDER BY total DESC LIMIT 3;
+
+-- Пропустить первые 20 и взять следующие 10 (пагинация)
+SELECT * FROM orders LIMIT 10 OFFSET 20;</code></pre>
+
+      <p><code>LIMIT + OFFSET</code> — основа пагинации на сайте.</p>
+
+      <h2 id="section-8">Агрегатные функции</h2>
+
+      <p>Считают что-то по группе строк.</p>
+
+      <pre><code class="language-sql">-- Общее количество пользователей
+SELECT COUNT(*) FROM users;
+
+-- Сумма всех заказов
+SELECT SUM(total) FROM orders;
+
+-- Средний чек
+SELECT AVG(total) FROM orders;
+
+-- Минимум и максимум
+SELECT MIN(total), MAX(total) FROM orders;</code></pre>
+
+      <h2 id="section-9">GROUP BY — группировка</h2>
+
+      <pre><code class="language-sql">-- Сколько заказов у каждого пользователя
+SELECT user_id, COUNT(*) AS order_count
+FROM orders
+GROUP BY user_id;
+
+-- Общая сумма заказов по пользователям
+SELECT user_id, SUM(total) AS total_spent
+FROM orders
+GROUP BY user_id
+ORDER BY total_spent DESC;</code></pre>
+
+      <p>Правило: в SELECT могут быть только те колонки, по которым группируешь, или агрегатные функции.</p>
+
+      <h3 id="section-10">HAVING — фильтр после группировки</h3>
+
+      <pre><code class="language-sql">-- Пользователи, сделавшие больше 1 заказа
+SELECT user_id, COUNT(*) AS order_count
+FROM orders
+GROUP BY user_id
+HAVING COUNT(*) > 1;</code></pre>
+
+      <p>WHERE фильтрует <em>до</em> группировки, HAVING — <em>после</em>.</p>
+
+      <h2 id="section-11">JOIN — соединение таблиц</h2>
+
+      <p>Самая важная часть SQL. Позволяет связать данные из разных таблиц.</p>
+
+      <h3 id="section-12">INNER JOIN — только совпадения</h3>
+
+      <pre><code class="language-sql">-- Все заказы с именами пользователей
+SELECT u.name, o.total, o.status
+FROM orders o
+INNER JOIN users u ON u.id = o.user_id;</code></pre>
+
+      <p>Что происходит:</p>
+      <ul>
+        <li>Берём таблицу <code>orders</code>, обозначаем её как <code>o</code>.</li>
+        <li>Присоединяем <code>users</code> как <code>u</code>.</li>
+        <li>Связываем по <code>u.id = o.user_id</code>.</li>
+        <li>Оставляем только строки, где есть пара.</li>
+      </ul>
+
+      <p>Если у заказа не найдётся пользователь — такой заказ в результат не попадёт.</p>
+
+      <h3 id="section-13">LEFT JOIN — все строки слева</h3>
+
+      <pre><code class="language-sql">-- Все пользователи и их заказы (если заказов нет — NULL)
+SELECT u.name, o.id AS order_id, o.total
+FROM users u
+LEFT JOIN orders o ON o.user_id = u.id;</code></pre>
+
+      <p>LEFT JOIN оставляет всех пользователей, даже тех, у кого нет заказов. У таких строк поля заказа будут <code>NULL</code>.</p>
+
+      <h3 id="section-14">Сравнение JOIN'ов</h3>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Тип</th><th>Что оставляет</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>INNER JOIN</td><td>Только строки с совпадением в обеих таблицах</td></tr>
+          <tr><td>LEFT JOIN</td><td>Все строки из левой таблицы + совпадения из правой</td></tr>
+          <tr><td>RIGHT JOIN</td><td>Все строки из правой + совпадения из левой</td></tr>
+          <tr><td>FULL OUTER JOIN</td><td>Все строки из обеих таблиц</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2 id="section-15">INSERT, UPDATE, DELETE — изменение данных</h2>
+
+      <h3 id="section-16">INSERT — добавить</h3>
+
+      <pre><code class="language-sql">-- Добавить одного пользователя
+INSERT INTO users (name, email, city)
+VALUES ('Олег', 'oleg@mail.ru', 'Казань');
+
+-- Добавить сразу несколько
+INSERT INTO users (name, email, city) VALUES
+  ('Мария', 'maria@mail.ru', 'СПб'),
+  ('Пётр', 'petr@mail.ru', 'Москва');</code></pre>
+
+      <h3 id="section-17">UPDATE — обновить</h3>
+
+      <pre><code class="language-sql">-- Обновить статус конкретного заказа
+UPDATE orders
+SET status = 'shipped'
+WHERE id = 11;
+
+-- Поднять всем заказчикам из Москвы скидку (всем строкам, подходящим под WHERE)
+UPDATE users
+SET city = 'Москва'
+WHERE email LIKE '%@mail.ru';</code></pre>
+
+      <blockquote>Забыл WHERE в UPDATE — обновил все строки таблицы. Забыл WHERE в DELETE — снёс всю таблицу. Всегда проверяй WHERE перед запуском.</blockquote>
+
+      <h3 id="section-18">DELETE — удалить</h3>
+
+      <pre><code class="language-sql">-- Удалить конкретного пользователя
+DELETE FROM users WHERE id = 3;
+
+-- Удалить все отменённые заказы
+DELETE FROM orders WHERE status = 'cancelled';</code></pre>
+
+      <h2 id="section-19">Порядок частей запроса</h2>
+
+      <p>Запрос всегда пишется в таком порядке:</p>
+
+      <pre><code class="language-sql">SELECT   -- 1. что выбрать
+FROM     -- 2. откуда
+JOIN     -- 3. с чем соединить
+WHERE    -- 4. фильтр строк
+GROUP BY -- 5. группировка
+HAVING   -- 6. фильтр групп
+ORDER BY -- 7. сортировка
+LIMIT    -- 8. сколько вернуть</code></pre>
+
+      <p>Но выполняется он в другом порядке — планировщик базы решает сам. Для понимания достаточно запомнить, что WHERE до GROUP BY, а HAVING после.</p>
+
+      <h2 id="section-20">Комплексный пример</h2>
+
+      <p>Задача: найти всех пользователей из Москвы, у которых суммарная стоимость оплаченных заказов больше 3000, и вывести их имена и суммы.</p>
+
+      <pre><code class="language-sql">SELECT
+  u.name,                       -- имя пользователя
+  SUM(o.total) AS total_spent   -- суммарная сумма заказов
+FROM users u
+INNER JOIN orders o
+  ON u.id = o.user_id           -- связываем заказы с пользователями
+WHERE
+  u.city = 'Москва'             -- только из Москвы
+  AND o.status = 'paid'         -- только оплаченные
+GROUP BY
+  u.id, u.name                  -- группируем по пользователю
+HAVING
+  SUM(o.total) > 3000           -- фильтруем группы по сумме
+ORDER BY
+  total_spent DESC;             -- самые крупные сверху</code></pre>
+
+      <p>Вот это уже настоящий «боевой» запрос. Такие ты будешь писать в реальной работе.</p>
+
+      <h2 id="section-21">Как практиковаться</h2>
+
+      <ul>
+        <li><strong>SQLite</strong> — встроена в Python, не нужно ничего ставить.</li>
+        <li><strong>PostgreSQL в Docker</strong> — одна команда, и у тебя сервер базы.</li>
+        <li><strong>Онлайн-тренажёры</strong> — sql-ex.ru, sqlbolt.com, LeetCode Database.</li>
+        <li><strong>Реальные данные</strong> — выгрузи CSV в SQLite и попробуй посчитать что-то полезное.</li>
+      </ul>
+
+      <h2 id="section-22">Итог</h2>
+
+      <p>SQL — простой, но глубокий язык. Начать можно за день: SELECT, WHERE, ORDER BY. За неделю — JOIN и GROUP BY. Дальше — практика на реальных задачах. В 90% случаев больше и не нужно.</p>
+    </article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Что такое SQL и зачем</a><a href="#section-1" class="lvl-2">Наша учебная база</a><a href="#section-2" class="lvl-2">SELECT — выбрать данные</a><a href="#section-3" class="lvl-2">WHERE — фильтрация</a><a href="#section-4" class="lvl-3">IN, BETWEEN, LIKE</a><a href="#section-5" class="lvl-3">IS NULL — работа с пустыми значениями</a><a href="#section-6" class="lvl-2">ORDER BY — сортировка</a><a href="#section-7" class="lvl-2">LIMIT — ограничить количество</a><a href="#section-8" class="lvl-2">Агрегатные функции</a><a href="#section-9" class="lvl-2">GROUP BY — группировка</a><a href="#section-10" class="lvl-3">HAVING — фильтр после группировки</a><a href="#section-11" class="lvl-2">JOIN — соединение таблиц</a><a href="#section-12" class="lvl-3">INNER JOIN — только совпадения</a><a href="#section-13" class="lvl-3">LEFT JOIN — все строки слева</a><a href="#section-14" class="lvl-3">Сравнение JOIN&#x27;ов</a><a href="#section-15" class="lvl-2">INSERT, UPDATE, DELETE — изменение данных</a><a href="#section-16" class="lvl-3">INSERT — добавить</a><a href="#section-17" class="lvl-3">UPDATE — обновить</a><a href="#section-18" class="lvl-3">DELETE — удалить</a><a href="#section-19" class="lvl-2">Порядок частей запроса</a><a href="#section-20" class="lvl-2">Комплексный пример</a><a href="#section-21" class="lvl-2">Как практиковаться</a><a href="#section-22" class="lvl-2">Итог</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/indeksy-v-bazah-dannyh.html"><img src="/img/indeksy.svg" alt="Индексы в базах данных — зачем и как работают" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Базы данных</span><span class="tag">SQL</span><span class="tag">Разработка</span></div>
+    <a href="/articles/indeksy-v-bazah-dannyh.html"><h2 class="card__title">Индексы в базах данных — зачем и как работают</h2></a>
+    <p class="card__excerpt">Почему один и тот же SQL-запрос может выполняться 10 мс или 10 секунд. Разбираем индексы: B-tree, составные, покрывающие и когда они вредят.</p>
+    <div class="card__meta">
+      <span>9 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="indeksy-v-bazah-dannyh" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/tranzakcii-i-acid.html"><img src="/img/tranzakcii.svg" alt="Транзакции в базах данных — ACID простыми словами" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Базы данных</span><span class="tag">SQL</span><span class="tag">Теория</span></div>
+    <a href="/articles/tranzakcii-i-acid.html"><h2 class="card__title">Транзакции в базах данных — ACID простыми словами</h2></a>
+    <p class="card__excerpt">Почему при переводе денег нельзя потерять ни копейки. Разбираем транзакции и четыре их свойства: атомарность, согласованность, изоляцию, надёжность.</p>
+    <div class="card__meta">
+      <span>21 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="tranzakcii-i-acid" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/chto-takoe-orm.html"><img src="/img/orm.svg" alt="Что такое ORM — работа с базой через объекты" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Базы данных</span><span class="tag">Разработка</span><span class="tag">Python</span></div>
+    <a href="/articles/chto-takoe-orm.html"><h2 class="card__title">Что такое ORM — работа с базой через объекты</h2></a>
+    <p class="card__excerpt">Зачем писать SQL, если можно работать с базой как с обычными объектами. Разбираем ORM: как работает, плюсы и минусы, примеры на SQLAlchemy.</p>
+    <div class="card__meta">
+      <span>13 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="chto-takoe-orm" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

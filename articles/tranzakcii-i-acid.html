@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Транзакции в базах данных — ACID простыми словами — IT·База</title>
+  <meta name="description" content="Почему при переводе денег нельзя потерять ни копейки. Разбираем транзакции и четыре их свойства: атомарность, согласованность, изоляцию, надёжность.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/tranzakcii-i-acid.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Транзакции в базах данных — ACID простыми словами">
+  <meta property="og:description" content="Почему при переводе денег нельзя потерять ни копейки. Разбираем транзакции и четыре их свойства: атомарность, согласованность, изоляцию, надёжность.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/tranzakcii-i-acid.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/tranzakcii-i-acid.html">
+  <meta property="article:published_time" content="2026-04-21">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Транзакции в базах данных — ACID простыми словами">
+  <meta name="twitter:description" content="Почему при переводе денег нельзя потерять ни копейки. Разбираем транзакции и четыре их свойства: атомарность, согласованность, изоляцию, надёжность.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/tranzakcii-i-acid.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Транзакции в базах данных — ACID простыми словами", "description": "Почему при переводе денег нельзя потерять ни копейки. Разбираем транзакции и четыре их свойства: атомарность, согласованность, изоляцию, надёжность.", "image": ["https://itbase-ru.github.io/img/og/tranzakcii-i-acid.png"], "datePublished": "2026-04-21", "dateModified": "2026-04-21", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/tranzakcii-i-acid.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Базы данных", "item": "https://itbase-ru.github.io/?tag=Базы данных"}, {"@type": "ListItem", "position": 3, "name": "Транзакции в базах данных — ACID простыми словами", "item": "https://itbase-ru.github.io/articles/tranzakcii-i-acid.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="tranzakcii-i-acid">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Базы данных">Базы данных</a>
+        <span class="sep">/</span>
+        <span>Транзакции в базах данных — ACID простыми словами</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Базы данных</span><span class="tag">SQL</span><span class="tag">Теория</span></div>
+        <h1>Транзакции в базах данных — ACID простыми словами</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-04-21">21 апреля 2026</time>
+          <span class="dot">•</span>
+          <span>11 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/tranzakcii.svg" alt="Транзакции в базах данных — ACID простыми словами">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+      <p>Представь перевод денег с карты на карту. С твоего счёта списалось 1000 рублей, но у получателя они не появились из-за сбоя. Деньги исчезли. Именно от такого защищают транзакции.</p>
+
+      <p>Если ещё не читал про <a href="/articles/sql-zaprosy-s-nulya.html">SQL-запросы</a> — начни с той статьи.</p>
+
+      <h2 id="section-0">Что такое транзакция</h2>
+
+      <p>Транзакция — это <strong>группа операций, которая выполняется целиком или не выполняется вообще</strong>. Промежуточного состояния быть не может.</p>
+
+      <p>Пример перевода денег — это две операции:</p>
+
+      <ol>
+        <li>Списать 1000 с одного счёта.</li>
+        <li>Зачислить 1000 на другой.</li>
+      </ol>
+
+      <p>Если первая прошла, а вторая упала — деньги потеряны. Транзакция гарантирует: либо обе прошли, либо ни одна.</p>
+
+      <blockquote>Транзакция — как кнопка «Сохранить» в документе: либо всё, либо ничего.</blockquote>
+
+      <h2 id="section-1">Пример на SQL</h2>
+
+      <pre><code class="language-sql">-- Начинаем транзакцию
+BEGIN;
+
+-- Списываем со счёта отправителя
+UPDATE accounts
+SET balance = balance - 1000
+WHERE id = 1;
+
+-- Зачисляем получателю
+UPDATE accounts
+SET balance = balance + 1000
+WHERE id = 2;
+
+-- Подтверждаем — обе операции сохраняются вместе
+COMMIT;</code></pre>
+
+      <p>Если между <code>UPDATE</code> что-то падает — мы вызываем <code>ROLLBACK</code> и обе операции отменяются:</p>
+
+      <pre><code class="language-sql">BEGIN;
+
+UPDATE accounts SET balance = balance - 1000 WHERE id = 1;
+
+-- Что-то пошло не так → откатываем всё
+ROLLBACK;</code></pre>
+
+      <p>После <code>ROLLBACK</code> база вернётся в состояние, как будто транзакции вообще не было.</p>
+
+      <h2 id="section-2">Четыре свойства — ACID</h2>
+
+      <p>Это аббревиатура из четырёх английских слов. Каждое описывает одну гарантию транзакции.</p>
+
+      <h3 id="section-3">A — Atomicity (атомарность)</h3>
+
+      <p>Все операции внутри транзакции — единое целое. Либо все выполнятся, либо ни одна. Не бывает так, что «списание прошло, а зачисление — нет».</p>
+
+      <h3 id="section-4">C — Consistency (согласованность)</h3>
+
+      <p>После транзакции база остаётся в <strong>корректном состоянии</strong>. Все правила и ограничения соблюдены. Например, если у тебя правило «баланс не может быть отрицательным», транзакция не пройдёт, если она нарушит это правило.</p>
+
+      <h3 id="section-5">I — Isolation (изоляция)</h3>
+
+      <p>Параллельные транзакции не видят друг друга «изнутри». Пока ты не завершил транзакцию, другие пользователи видят базу в прежнем состоянии.</p>
+
+      <p>Это самое сложное свойство. Об изоляции — отдельно ниже.</p>
+
+      <h3 id="section-6">D — Durability (надёжность)</h3>
+
+      <p>После <code>COMMIT</code> данные сохранены <strong>навсегда</strong>. Даже если сервер выключится, свет пропадёт или диск сломается — после перезапуска данные на месте.</p>
+
+      <p>Достигается через журналирование: все изменения сначала пишутся в лог, потом применяются к базе.</p>
+
+      <h2 id="section-7">Проблемы параллельности</h2>
+
+      <p>Когда две транзакции работают одновременно, возникают классические проблемы.</p>
+
+      <h3 id="section-8">Грязное чтение (dirty read)</h3>
+
+      <p>Одна транзакция читает данные, которые другая ещё не подтвердила. Если вторая откатится — первая работала с «фантомом».</p>
+
+      <h3 id="section-9">Неповторяющееся чтение</h3>
+
+      <p>Транзакция дважды читает одну строку и получает разные данные — потому что между чтениями вторая транзакция её изменила.</p>
+
+      <h3 id="section-10">Фантомное чтение</h3>
+
+      <p>Транзакция дважды выполняет один запрос и получает разное <strong>количество строк</strong> — потому что вторая транзакция добавила или удалила записи.</p>
+
+      <h2 id="section-11">Уровни изоляции</h2>
+
+      <p>Полная изоляция замедляет базу. Поэтому есть четыре уровня — от самого быстрого и небезопасного до самого строгого и медленного.</p>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Уровень</th><th>Грязное чтение</th><th>Неповторяющееся</th><th>Фантомное</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Read uncommitted</td><td>Возможно</td><td>Возможно</td><td>Возможно</td></tr>
+          <tr><td>Read committed</td><td>Нет</td><td>Возможно</td><td>Возможно</td></tr>
+          <tr><td>Repeatable read</td><td>Нет</td><td>Нет</td><td>Возможно</td></tr>
+          <tr><td>Serializable</td><td>Нет</td><td>Нет</td><td>Нет</td></tr>
+        </tbody>
+      </table></div>
+
+      <p>Как выбрать:</p>
+
+      <ul>
+        <li><strong>Read committed</strong> — дефолт в PostgreSQL. Достаточно для большинства задач.</li>
+        <li><strong>Repeatable read</strong> — когда важно видеть стабильные данные в рамках транзакции.</li>
+        <li><strong>Serializable</strong> — для критичных расчётов, где важна абсолютная точность.</li>
+      </ul>
+
+      <p>Чем выше уровень — тем больше блокировок и тем медленнее база.</p>
+
+      <h2 id="section-12">Пример проблемы на практике</h2>
+
+      <p>Два человека одновременно покупают последний товар на складе (осталось 1 штука).</p>
+
+      <pre><code class="language-sql">-- Транзакция 1
+BEGIN;
+SELECT quantity FROM products WHERE id = 42;   -- видит 1
+-- ... думает ...
+
+-- Транзакция 2 (в тот же момент)
+BEGIN;
+SELECT quantity FROM products WHERE id = 42;   -- тоже видит 1
+-- ... тоже думает ...
+
+-- Обе решают: товар есть, можно продавать
+-- Обе делают:
+UPDATE products SET quantity = quantity - 1 WHERE id = 42;
+
+-- Итог: продали два товара, хотя был один
+COMMIT;</code></pre>
+
+      <p>Это называется <strong>гонка</strong>. Решается через блокировки или правильный уровень изоляции.</p>
+
+      <h3 id="section-13">Решение — блокировка строки</h3>
+
+      <pre><code class="language-sql">BEGIN;
+
+-- Блокируем строку, пока не закончим транзакцию
+SELECT quantity FROM products WHERE id = 42 FOR UPDATE;
+
+-- Вторая транзакция будет ждать, пока первая не завершится
+UPDATE products SET quantity = quantity - 1 WHERE id = 42;
+
+COMMIT;</code></pre>
+
+      <p><code>FOR UPDATE</code> блокирует строку. Вторая транзакция подождёт, потом увидит quantity = 0 и откажет покупателю.</p>
+
+      <h2 id="section-14">Блокировки и дедлоки</h2>
+
+      <p>Блокировки защищают от гонок, но создают новые проблемы. Если две транзакции заблокируют разные строки и потом попробуют заблокировать строки друг друга — возникает <strong>дедлок</strong> (взаимная блокировка).</p>
+
+      <p>Пример:</p>
+
+      <ul>
+        <li>Транзакция A блокирует строку 1, хочет строку 2.</li>
+        <li>Транзакция B блокирует строку 2, хочет строку 1.</li>
+        <li>Обе ждут вечно.</li>
+      </ul>
+
+      <p>СУБД сама разрешает дедлок: одну из транзакций она принудительно откатит. Важно быть готовым к тому, что транзакция может откатиться — и обработать это в коде.</p>
+
+      <h2 id="section-15">В коде приложения</h2>
+
+      <p>Python + SQLAlchemy:</p>
+
+      <pre><code class="language-python">from sqlalchemy.orm import Session
+
+def transfer_money(session, from_id, to_id, amount):
+    try:
+        # Списываем
+        from_account = session.query(Account).get(from_id)
+        from_account.balance -= amount
+
+        # Зачисляем
+        to_account = session.query(Account).get(to_id)
+        to_account.balance += amount
+
+        # Фиксируем — обе операции вместе
+        session.commit()
+    except Exception as error:
+        # Что-то упало — откатываем всё
+        session.rollback()
+        raise error</code></pre>
+
+      <p>Здесь <code>commit()</code> = <code>COMMIT</code> в SQL. <code>rollback()</code> = <code>ROLLBACK</code>.</p>
+
+      <h2 id="section-16">Когда транзакции не нужны</h2>
+
+      <ul>
+        <li><strong>Чтение данных без изменений.</strong> Просто SELECT — транзакция не нужна.</li>
+        <li><strong>Одиночная вставка.</strong> Если это один INSERT без зависимостей — можно без BEGIN/COMMIT.</li>
+        <li><strong>Логирование и метрики.</strong> Тут наоборот — потеря одной записи не критична.</li>
+      </ul>
+
+      <h2 id="section-17">Частые ошибки</h2>
+
+      <ul>
+        <li><strong>Долгие транзакции.</strong> Открыл BEGIN, сходил на обед, вернулся — транзакция всё ещё держит блокировки. Другие ждут. Транзакции должны быть короткими.</li>
+        <li><strong>Транзакции в цикле.</strong> Не открывай отдельную транзакцию для каждой итерации — это медленно.</li>
+        <li><strong>Забыть commit.</strong> Данные не сохранятся. Или откатятся при разрыве соединения.</li>
+        <li><strong>Ловить все исключения.</strong> Если ловишь <code>except Exception</code> — не забудь сделать rollback, иначе сессия останется в нерабочем состоянии.</li>
+      </ul>
+
+      <h2 id="section-18">Итог</h2>
+
+      <p>Транзакция — группа операций, которая выполняется целиком или не выполняется вообще. Четыре свойства ACID: атомарность, согласованность, изоляция, надёжность. Уровни изоляции балансируют между точностью и скоростью. Для критичных операций — блокировки через FOR UPDATE. Не забывай про rollback при ошибках и держи транзакции короткими.</p>
+    </article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Что такое транзакция</a><a href="#section-1" class="lvl-2">Пример на SQL</a><a href="#section-2" class="lvl-2">Четыре свойства — ACID</a><a href="#section-3" class="lvl-3">A — Atomicity (атомарность)</a><a href="#section-4" class="lvl-3">C — Consistency (согласованность)</a><a href="#section-5" class="lvl-3">I — Isolation (изоляция)</a><a href="#section-6" class="lvl-3">D — Durability (надёжность)</a><a href="#section-7" class="lvl-2">Проблемы параллельности</a><a href="#section-8" class="lvl-3">Грязное чтение (dirty read)</a><a href="#section-9" class="lvl-3">Неповторяющееся чтение</a><a href="#section-10" class="lvl-3">Фантомное чтение</a><a href="#section-11" class="lvl-2">Уровни изоляции</a><a href="#section-12" class="lvl-2">Пример проблемы на практике</a><a href="#section-13" class="lvl-3">Решение — блокировка строки</a><a href="#section-14" class="lvl-2">Блокировки и дедлоки</a><a href="#section-15" class="lvl-2">В коде приложения</a><a href="#section-16" class="lvl-2">Когда транзакции не нужны</a><a href="#section-17" class="lvl-2">Частые ошибки</a><a href="#section-18" class="lvl-2">Итог</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/indeksy-v-bazah-dannyh.html"><img src="/img/indeksy.svg" alt="Индексы в базах данных — зачем и как работают" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Базы данных</span><span class="tag">SQL</span><span class="tag">Разработка</span></div>
+    <a href="/articles/indeksy-v-bazah-dannyh.html"><h2 class="card__title">Индексы в базах данных — зачем и как работают</h2></a>
+    <p class="card__excerpt">Почему один и тот же SQL-запрос может выполняться 10 мс или 10 секунд. Разбираем индексы: B-tree, составные, покрывающие и когда они вредят.</p>
+    <div class="card__meta">
+      <span>9 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="indeksy-v-bazah-dannyh" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/sql-zaprosy-s-nulya.html"><img src="/img/sql.svg" alt="SQL-запросы с нуля — SELECT, WHERE, JOIN" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Базы данных</span><span class="tag">SQL</span><span class="tag">Разработка</span></div>
+    <a href="/articles/sql-zaprosy-s-nulya.html"><h2 class="card__title">SQL-запросы с нуля — SELECT, WHERE, JOIN</h2></a>
+    <p class="card__excerpt">Разбираем SQL на практике: как выбрать данные, отфильтровать, отсортировать, соединить таблицы. С примерами на реальных задачах интернет-магазина.</p>
+    <div class="card__meta">
+      <span>7 апреля 2026</span><span class="dot">•</span><span>12 мин</span>
+      <button class="card__bm" data-slug="sql-zaprosy-s-nulya" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/sql-vs-nosql.html"><img src="/img/db-cover.svg" alt="SQL vs NoSQL: какую базу данных выбрать" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Базы данных</span><span class="tag">Теория</span></div>
+    <a href="/articles/sql-vs-nosql.html"><h2 class="card__title">SQL vs NoSQL: какую базу данных выбрать</h2></a>
+    <p class="card__excerpt">Разница между реляционными и нереляционными базами, где какие применяются и как не прогадать с выбором под свой проект.</p>
+    <div class="card__meta">
+      <span>26 февраля 2026</span><span class="dot">•</span><span>9 мин</span>
+      <button class="card__bm" data-slug="sql-vs-nosql" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

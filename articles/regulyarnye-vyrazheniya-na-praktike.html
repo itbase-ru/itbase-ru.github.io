@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Регулярные выражения: практический разбор с примерами — IT·База</title>
+  <meta name="description" content="Что это такое, зачем они нужны, как читать «страшные» строки вроде ^\d{3}-\d{2}$ и применять в реальных задачах.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/regulyarnye-vyrazheniya-na-praktike.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Регулярные выражения: практический разбор с примерами">
+  <meta property="og:description" content="Что это такое, зачем они нужны, как читать «страшные» строки вроде ^\d{3}-\d{2}$ и применять в реальных задачах.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/regulyarnye-vyrazheniya-na-praktike.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/regulyarnye-vyrazheniya-na-praktike.html">
+  <meta property="article:published_time" content="2026-03-21">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Регулярные выражения: практический разбор с примерами">
+  <meta name="twitter:description" content="Что это такое, зачем они нужны, как читать «страшные» строки вроде ^\d{3}-\d{2}$ и применять в реальных задачах.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/regulyarnye-vyrazheniya-na-praktike.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Регулярные выражения: практический разбор с примерами", "description": "Что это такое, зачем они нужны, как читать «страшные» строки вроде ^\\d{3}-\\d{2}$ и применять в реальных задачах.", "image": ["https://itbase-ru.github.io/img/og/regulyarnye-vyrazheniya-na-praktike.png"], "datePublished": "2026-03-21", "dateModified": "2026-03-21", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/regulyarnye-vyrazheniya-na-praktike.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Разработка", "item": "https://itbase-ru.github.io/?tag=Разработка"}, {"@type": "ListItem", "position": 3, "name": "Регулярные выражения: практический разбор с примерами", "item": "https://itbase-ru.github.io/articles/regulyarnye-vyrazheniya-na-praktike.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="regulyarnye-vyrazheniya-na-praktike">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Разработка">Разработка</a>
+        <span class="sep">/</span>
+        <span>Регулярные выражения: практический разбор с примерами</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Разработка</span><span class="tag">Инструменты</span></div>
+        <h1>Регулярные выражения: практический разбор с примерами</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-03-21">21 марта 2026</time>
+          <span class="dot">•</span>
+          <span>12 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/regex-cover.svg" alt="Регулярные выражения: практический разбор с примерами">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+<p>Регулярные выражения — «страшные символы», которые отпугивают новичков. На самом деле это <strong>язык для поиска и проверки текста</strong>. Освоишь базовый набор — и сможешь за секунду проверить email, найти все ссылки в тексте или вытащить номер телефона.</p>
+
+<h2 id="section-0">Что это такое</h2>
+<p>Регулярное выражение (regex) — это <em>шаблон</em>, которому должна соответствовать строка. Например, шаблон «три цифры, дефис, две цифры» описывает индекс в формате <code>123-45</code>.</p>
+<p>Regex используется в:</p>
+<ul>
+  <li>Поиске по тексту (Ctrl+F с галочкой «regex»).</li>
+  <li>Валидации форм (проверка email, телефона).</li>
+  <li>Замене и очистке текста.</li>
+  <li>Парсинге логов, данных, HTML.</li>
+</ul>
+
+<h2 id="section-1">Базовые символы</h2>
+<div class="table-scroll"><table>
+  <thead><tr><th>Символ</th><th>Что означает</th><th>Пример</th></tr></thead>
+  <tbody>
+    <tr><td><code>.</code></td><td>Любой один символ</td><td><code>a.c</code> — «abc», «aXc»</td></tr>
+    <tr><td><code>\d</code></td><td>Цифра 0-9</td><td><code>\d\d\d</code> — «123»</td></tr>
+    <tr><td><code>\w</code></td><td>Буква, цифра или _</td><td><code>\w+</code> — «hello_1»</td></tr>
+    <tr><td><code>\s</code></td><td>Пробел, таб, перенос</td><td><code>\s+</code> — « »</td></tr>
+    <tr><td><code>[abc]</code></td><td>Один из символов</td><td><code>[abc]</code> — a, b или c</td></tr>
+    <tr><td><code>[^abc]</code></td><td>Любой, кроме этих</td><td><code>[^0-9]</code> — не цифра</td></tr>
+    <tr><td><code>[a-z]</code></td><td>Диапазон</td><td>Любая строчная буква</td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="section-2">Кванторы — «сколько раз»</h2>
+<div class="table-scroll"><table>
+  <thead><tr><th>Символ</th><th>Означает</th></tr></thead>
+  <tbody>
+    <tr><td><code>*</code></td><td>0 или больше раз</td></tr>
+    <tr><td><code>+</code></td><td>1 или больше раз</td></tr>
+    <tr><td><code>?</code></td><td>0 или 1 раз (необязательно)</td></tr>
+    <tr><td><code>{3}</code></td><td>Ровно 3 раза</td></tr>
+    <tr><td><code>{2,5}</code></td><td>От 2 до 5 раз</td></tr>
+    <tr><td><code>{3,}</code></td><td>3 или больше раз</td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="section-3">Привязки — где искать</h2>
+<ul>
+  <li><code>^</code> — начало строки.</li>
+  <li><code>$</code> — конец строки.</li>
+  <li><code>\b</code> — граница слова.</li>
+</ul>
+<p>Без них regex найдёт совпадение <strong>где угодно внутри строки</strong>. С ними — только там, где указано.</p>
+
+<h2 id="section-4">Первый пример: проверка телефона</h2>
+<pre><code class="language-javascript">const phone = "+7 999 123-45-67";
+
+// Шаблон: +7, пробел, 3 цифры, пробел, 3 цифры-2 цифры-2 цифры
+const pattern = /^\+7 \d{3} \d{3}-\d{2}-\d{2}$/;
+
+console.log(pattern.test(phone));  // true
+console.log(pattern.test("89991234567"));  // false
+</code></pre>
+
+<p>Разбор шаблона:</p>
+<ul>
+  <li><code>^</code> — начало строки.</li>
+  <li><code>\+</code> — плюс (экранируем, потому что + — спецсимвол).</li>
+  <li><code>7 </code> — цифра 7 и пробел.</li>
+  <li><code>\d{3}</code> — три цифры.</li>
+  <li><code> </code> — пробел.</li>
+  <li><code>\d{3}-\d{2}-\d{2}</code> — три цифры, дефис, две, дефис, две.</li>
+  <li><code>$</code> — конец строки.</li>
+</ul>
+
+<h2 id="section-5">Пример: email</h2>
+<pre><code class="language-javascript">const emailRegex = /^[\w.-]+@[\w.-]+\.[a-z]{2,}$/i;
+
+console.log(emailRegex.test("user@mail.ru"));       // true
+console.log(emailRegex.test("my.name@site.com"));   // true
+console.log(emailRegex.test("не-email"));           // false
+console.log(emailRegex.test("@no-user.ru"));        // false
+</code></pre>
+
+<p>Что тут:</p>
+<ul>
+  <li><code>[\w.-]+</code> — буквы, цифры, точки, дефисы — один или больше.</li>
+  <li><code>@</code> — собака.</li>
+  <li><code>[\w.-]+</code> — домен.</li>
+  <li><code>\.</code> — точка (экранированная, иначе «любой символ»).</li>
+  <li><code>[a-z]{2,}</code> — две и больше буквы (зона: ru, com, io).</li>
+  <li>Флаг <code>i</code> в конце — не учитывать регистр.</li>
+</ul>
+
+<h2 id="section-6">Работа с regex в JavaScript</h2>
+
+<h3 id="section-7">test — проверить, есть ли совпадение</h3>
+<pre><code class="language-javascript">const regex = /\d+/;
+console.log(regex.test("abc123"));  // true
+console.log(regex.test("abc"));     // false
+</code></pre>
+
+<h3 id="section-8">match — найти совпадения</h3>
+<pre><code class="language-javascript">const text = "Цены: 100 руб, 250 руб, 999 руб";
+const prices = text.match(/\d+/g);
+
+console.log(prices);  // ["100", "250", "999"]
+</code></pre>
+
+<h3 id="section-9">replace — заменить</h3>
+<pre><code class="language-javascript">const phone = "+7 (999) 123-45-67";
+// Убираем все символы, кроме цифр
+const digits = phone.replace(/\D/g, "");
+
+console.log(digits);  // "79991234567"
+</code></pre>
+<p><code>\D</code> — «не цифра». Флаг <code>g</code> — заменять все совпадения, не только первое.</p>
+
+<h3 id="section-10">split — разделить строку</h3>
+<pre><code class="language-javascript">const csv = "яблоко, груша ,банан,  слива";
+const items = csv.split(/\s*,\s*/);
+
+console.log(items);
+// ["яблоко", "груша", "банан", "слива"]
+</code></pre>
+
+<h2 id="section-11">Группы и извлечение</h2>
+<p>Круглые скобки <code>(...)</code> выделяют часть шаблона, чтобы извлечь её отдельно.</p>
+
+<pre><code class="language-javascript">const date = "2026-03-21";
+const match = date.match(/(\d{4})-(\d{2})-(\d{2})/);
+
+console.log(match[0]);  // "2026-03-21" — всё совпадение
+console.log(match[1]);  // "2026"       — первая группа (год)
+console.log(match[2]);  // "03"         — вторая группа (месяц)
+console.log(match[3]);  // "21"         — третья группа (день)
+</code></pre>
+
+<h2 id="section-12">Частые задачи</h2>
+
+<h3 id="section-13">Убрать лишние пробелы</h3>
+<pre><code class="language-javascript">const messy = "  Это   строка   с   пробелами  ";
+const clean = messy.replace(/\s+/g, " ").trim();
+
+console.log(clean);  // "Это строка с пробелами"
+</code></pre>
+
+<h3 id="section-14">Найти все ссылки в тексте</h3>
+<pre><code class="language-javascript">const text = "Смотри https://example.com и http://test.ru/page";
+const urls = text.match(/https?:\/\/[^\s]+/g);
+
+console.log(urls);
+// ["https://example.com", "http://test.ru/page"]
+</code></pre>
+
+<h3 id="section-15">Проверить пароль (минимум 8 символов, цифра, буква)</h3>
+<pre><code class="language-javascript">const strong = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
+
+console.log(strong.test("qwerty123"));   // true
+console.log(strong.test("qwerty"));      // false — нет цифры
+console.log(strong.test("12345678"));    // false — нет буквы
+</code></pre>
+
+<h2 id="section-16">Инструменты, которые экономят нервы</h2>
+<p>Регулярки сложные. Их тяжело писать «в голове». Используй помощники:</p>
+<ul>
+  <li><strong>regex101.com</strong> — главный сайт. Вбиваешь regex и текст, он подсвечивает совпадения и <em>объясняет каждую часть шаблона</em>.</li>
+  <li><strong>regexr.com</strong> — похожий, чуть проще.</li>
+  <li><strong>debuggex.com</strong> — рисует схему работы regex.</li>
+</ul>
+
+<h2 id="section-17">Что важно запомнить</h2>
+<ul>
+  <li>Regex — <strong>шаблон для поиска по тексту</strong>.</li>
+  <li><code>\d</code> — цифра, <code>\w</code> — буква, <code>.</code> — любой символ.</li>
+  <li>Кванторы: <code>* + ? {n}</code> — задают количество повторов.</li>
+  <li><code>^</code> и <code>$</code> — начало и конец строки.</li>
+  <li>Круглые скобки <code>()</code> — извлечение группы.</li>
+  <li>Флаги: <code>g</code> — все совпадения, <code>i</code> — без учёта регистра.</li>
+  <li>Всегда проверяй шаблон на <strong>regex101.com</strong> — не пиши наугад.</li>
+</ul>
+</article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Что это такое</a><a href="#section-1" class="lvl-2">Базовые символы</a><a href="#section-2" class="lvl-2">Кванторы — «сколько раз»</a><a href="#section-3" class="lvl-2">Привязки — где искать</a><a href="#section-4" class="lvl-2">Первый пример: проверка телефона</a><a href="#section-5" class="lvl-2">Пример: email</a><a href="#section-6" class="lvl-2">Работа с regex в JavaScript</a><a href="#section-7" class="lvl-3">test — проверить, есть ли совпадение</a><a href="#section-8" class="lvl-3">match — найти совпадения</a><a href="#section-9" class="lvl-3">replace — заменить</a><a href="#section-10" class="lvl-3">split — разделить строку</a><a href="#section-11" class="lvl-2">Группы и извлечение</a><a href="#section-12" class="lvl-2">Частые задачи</a><a href="#section-13" class="lvl-3">Убрать лишние пробелы</a><a href="#section-14" class="lvl-3">Найти все ссылки в тексте</a><a href="#section-15" class="lvl-3">Проверить пароль (минимум 8 символов, цифра, буква)</a><a href="#section-16" class="lvl-2">Инструменты, которые экономят нервы</a><a href="#section-17" class="lvl-2">Что важно запомнить</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/bash-skripty-dlya-novichka.html"><img src="/img/bash.svg" alt="Bash-скрипты для новичка — автоматизация на Linux" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Инструменты</span><span class="tag">DevOps</span><span class="tag">Разработка</span></div>
+    <a href="/articles/bash-skripty-dlya-novichka.html"><h2 class="card__title">Bash-скрипты для новичка — автоматизация на Linux</h2></a>
+    <p class="card__excerpt">Как написать первый скрипт, который автоматизирует рутину: переменные, условия, циклы, функции, аргументы командной строки.</p>
+    <div class="card__meta">
+      <span>25 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="bash-skripty-dlya-novichka" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/docker-compose-dlya-proekta.html"><img src="/img/compose.svg" alt="Docker Compose — несколько контейнеров одной командой" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">DevOps</span><span class="tag">Инструменты</span><span class="tag">Разработка</span></div>
+    <a href="/articles/docker-compose-dlya-proekta.html"><h2 class="card__title">Docker Compose — несколько контейнеров одной командой</h2></a>
+    <p class="card__excerpt">Когда одного Dockerfile мало: как описать приложение, базу и кэш в одном файле и запускать всё одной командой docker compose up.</p>
+    <div class="card__meta">
+      <span>18 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="docker-compose-dlya-proekta" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/git-vetki-i-sliyanie.html"><img src="/img/git-vetki.svg" alt="Git ветки и слияния — branch, merge, rebase" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Git</span><span class="tag">Инструменты</span><span class="tag">Разработка</span></div>
+    <a href="/articles/git-vetki-i-sliyanie.html"><h2 class="card__title">Git ветки и слияния — branch, merge, rebase</h2></a>
+    <p class="card__excerpt">Как работать с ветками в Git: создавать, переключаться, сливать, разрешать конфликты. Разбираем merge и rebase — когда что использовать.</p>
+    <div class="card__meta">
+      <span>8 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="git-vetki-i-sliyanie" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

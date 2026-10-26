@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bash-скрипты для новичка — автоматизация на Linux — IT·База</title>
+  <meta name="description" content="Как написать первый скрипт, который автоматизирует рутину: переменные, условия, циклы, функции, аргументы командной строки.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/bash-skripty-dlya-novichka.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Bash-скрипты для новичка — автоматизация на Linux">
+  <meta property="og:description" content="Как написать первый скрипт, который автоматизирует рутину: переменные, условия, циклы, функции, аргументы командной строки.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/bash-skripty-dlya-novichka.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/bash-skripty-dlya-novichka.html">
+  <meta property="article:published_time" content="2026-04-25">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Bash-скрипты для новичка — автоматизация на Linux">
+  <meta name="twitter:description" content="Как написать первый скрипт, который автоматизирует рутину: переменные, условия, циклы, функции, аргументы командной строки.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/bash-skripty-dlya-novichka.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Bash-скрипты для новичка — автоматизация на Linux", "description": "Как написать первый скрипт, который автоматизирует рутину: переменные, условия, циклы, функции, аргументы командной строки.", "image": ["https://itbase-ru.github.io/img/og/bash-skripty-dlya-novichka.png"], "datePublished": "2026-04-25", "dateModified": "2026-04-25", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/bash-skripty-dlya-novichka.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Инструменты", "item": "https://itbase-ru.github.io/?tag=Инструменты"}, {"@type": "ListItem", "position": 3, "name": "Bash-скрипты для новичка — автоматизация на Linux", "item": "https://itbase-ru.github.io/articles/bash-skripty-dlya-novichka.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="bash-skripty-dlya-novichka">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Инструменты">Инструменты</a>
+        <span class="sep">/</span>
+        <span>Bash-скрипты для новичка — автоматизация на Linux</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Инструменты</span><span class="tag">DevOps</span><span class="tag">Разработка</span></div>
+        <h1>Bash-скрипты для новичка — автоматизация на Linux</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-04-25">25 апреля 2026</time>
+          <span class="dot">•</span>
+          <span>11 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/bash.svg" alt="Bash-скрипты для новичка — автоматизация на Linux">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+      <p>Bash-скрипт — это обычный текстовый файл с командами, которые выполняются по очереди. Пишешь один раз — запускаешь одной командой. Идеально для рутины: сборка, деплой, бэкапы, работа с логами.</p>
+
+      <p>Если ещё не читал про <a href="/articles/osnovy-linux-dlya-razrabotchika.html">основы Linux</a> — начни с той статьи, там база по терминалу.</p>
+
+      <h2 id="section-0">Первый скрипт</h2>
+
+      <p>Создай файл <code>hello.sh</code> и вставь:</p>
+
+      <pre><code class="language-bash">#!/bin/bash
+# Это комментарий
+
+echo "Привет, мир!"
+echo "Сейчас $(date)"
+echo "Ты находишься в $(pwd)"</code></pre>
+
+      <p>Разбери по частям:</p>
+
+      <ul>
+        <li><strong>#!/bin/bash</strong> — shebang. Говорит системе: «запускай этот файл через bash».</li>
+        <li><strong>echo</strong> — вывести на экран.</li>
+        <li><strong>$(команда)</strong> — подставить результат команды в строку.</li>
+        <li><strong>#</strong> — комментарий. Bash его игнорирует.</li>
+      </ul>
+
+      <p>Запусти:</p>
+
+      <pre><code class="language-bash"># Сделать исполняемым
+chmod +x hello.sh
+
+# Запустить
+./hello.sh</code></pre>
+
+      <p>Без <code>chmod +x</code> не запустится — система не знает, что файл можно исполнять.</p>
+
+      <h2 id="section-1">Переменные</h2>
+
+      <p>Переменные в bash создаются без ключевых слов. При обращении — знак доллара в начале.</p>
+
+      <pre><code class="language-bash">#!/bin/bash
+
+# Создание переменной (без пробелов вокруг =)
+name="Кирилл"
+age=30
+project="/home/user/myapp"
+
+echo "Привет, $name!"
+echo "Тебе $age лет"
+echo "Проект лежит в $project"
+
+# Значение по умолчанию для пустой переменной — через if
+if [ -z "$BACKUP_DIR" ]; then
+    BACKUP_DIR="/tmp/backup"
+fi
+echo "Папка для бэкапа: $BACKUP_DIR"</code></pre>
+
+      <p>Обрати внимание: <code>name="Кирилл"</code> — без пробелов. <code>name = "Кирилл"</code> с пробелами не сработает.</p>
+
+      <p>Если к переменной примыкает текст (например, склеить значение и слово) — переменную оборачивают в фигурные скобки. Иначе bash решит, что имя переменной включает и текст рядом. Но в этом примере мы обошлись обычным <code>$name</code>.</p>
+
+      <h2 id="section-2">Аргументы командной строки</h2>
+
+      <p>Скрипт может принимать параметры. Они доступны через <code>$1</code>, <code>$2</code> и так далее.</p>
+
+      <pre><code class="language-bash">#!/bin/bash
+
+echo "Первый аргумент: $1"
+echo "Второй аргумент: $2"
+echo "Всего аргументов: $#"
+echo "Все аргументы одной строкой: $@"</code></pre>
+
+      <pre><code class="language-bash">./script.sh привет мир
+# Первый аргумент: привет
+# Второй аргумент: мир
+# Всего аргументов: 2
+# Все аргументы одной строкой: привет мир</code></pre>
+
+      <p>Специальные переменные: <code>$0</code> — имя скрипта, <code>$#</code> — количество аргументов, <code>$@</code> — все аргументы как список.</p>
+
+      <h2 id="section-3">Условия</h2>
+
+      <p>Проверка условий — через <code>if</code> и квадратные скобки:</p>
+
+      <pre><code class="language-bash">#!/bin/bash
+
+age=20
+
+if [ "$age" -ge 18 ]; then
+    echo "Совершеннолетний"
+else
+    echo "Несовершеннолетний"
+fi</code></pre>
+
+      <p>Основные операторы:</p>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Оператор</th><th>Значение</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>-eq</td><td>равно (числа)</td></tr>
+          <tr><td>-ne</td><td>не равно (числа)</td></tr>
+          <tr><td>-gt</td><td>больше</td></tr>
+          <tr><td>-lt</td><td>меньше</td></tr>
+          <tr><td>-ge</td><td>больше или равно</td></tr>
+          <tr><td>-le</td><td>меньше или равно</td></tr>
+          <tr><td>=</td><td>равно (строки)</td></tr>
+          <tr><td>!=</td><td>не равно (строки)</td></tr>
+          <tr><td>-z</td><td>строка пустая</td></tr>
+          <tr><td>-n</td><td>строка не пустая</td></tr>
+        </tbody>
+      </table></div>
+
+      <p>Проверка файлов и папок:</p>
+
+      <pre><code class="language-bash">if [ -f "data.txt" ]; then
+    echo "Файл существует"
+fi
+
+if [ -d "/var/log" ]; then
+    echo "Папка существует"
+fi
+
+if [ ! -f "config.yml" ]; then
+    echo "Файл конфига не найден — создайте его"
+    exit 1
+fi</code></pre>
+
+      <p><code>-f</code> — обычный файл, <code>-d</code> — папка, <code>!</code> перед — отрицание.</p>
+
+      <h2 id="section-4">Циклы</h2>
+
+      <p>Два основных вида: по списку и пока условие истинно.</p>
+
+      <pre><code class="language-bash"># Цикл по значениям
+for fruit in яблоко банан груша; do
+    echo "Фрукт: $fruit"
+done
+
+# Цикл по файлам в папке
+for file in *.txt; do
+    echo "Обрабатываю: $file"
+done
+
+# Цикл по числам
+for i in {1..5}; do
+    echo "Итерация $i"
+done
+
+# Пока условие истинно
+counter=0
+while [ $counter -lt 5 ]; do
+    echo "Счётчик: $counter"
+    counter=$((counter + 1))
+done</code></pre>
+
+      <p><code>{1..5}</code> разворачивается в 1 2 3 4 5. <code>$((выражение))</code> — арифметика.</p>
+
+      <h2 id="section-5">Функции</h2>
+
+      <pre><code class="language-bash">#!/bin/bash
+
+# Объявление функции
+greet() {
+    local name=$1   # локальная переменная — видна только внутри
+    echo "Привет, $name!"
+}
+
+# Функция с возвратом значения
+sum() {
+    local a=$1
+    local b=$2
+    echo $((a + b))   # возвращаем через echo
+}
+
+# Вызов
+greet "Кирилл"
+
+result=$(sum 3 5)
+echo "3 + 5 = $result"</code></pre>
+
+      <p>Функции в bash не возвращают значения как в Python. Возврат — через <code>echo</code>, а вызывающий забирает результат через <code>$(...)</code>.</p>
+
+      <h2 id="section-6">Пример: скрипт бэкапа</h2>
+
+      <p>Соберём всё вместе. Скрипт архивирует папку проекта в директорию бэкапов:</p>
+
+      <pre><code class="language-bash">#!/bin/bash
+
+# Настройки
+PROJECT_DIR="/home/user/myapp"
+BACKUP_DIR="/home/user/backups"
+DATE=$(date +%Y-%m-%d_%H-%M)
+
+# Проверяем, что папка проекта существует
+if [ ! -d "$PROJECT_DIR" ]; then
+    echo "Ошибка: папка $PROJECT_DIR не найдена"
+    exit 1
+fi
+
+# Создаём папку для бэкапов, если её нет
+mkdir -p "$BACKUP_DIR"
+
+# Имя архива
+FILENAME="$BACKUP_DIR/backup_$DATE.tar.gz"
+
+# Архивируем
+tar -czf "$FILENAME" "$PROJECT_DIR"
+
+# Проверяем, что архив создан
+if [ -f "$FILENAME" ]; then
+    size=$(du -h "$FILENAME" | cut -f1)
+    echo "Готово: $FILENAME ($size)"
+else
+    echo "Ошибка при создании архива"
+    exit 1
+fi</code></pre>
+
+      <p>Запусти — получишь архив с датой в имени. Такую штуку можно поставить в cron и забыть про ручное бэкапирование.</p>
+
+      <h2 id="section-7">Проверка результата команд</h2>
+
+      <p>Каждая команда возвращает код возврата: 0 — успех, не ноль — ошибка. Он доступен в переменной <code>$?</code>.</p>
+
+      <pre><code class="language-bash">cp important.txt /backup/
+
+if [ $? -eq 0 ]; then
+    echo "Копирование прошло успешно"
+else
+    echo "Не удалось скопировать файл"
+fi</code></pre>
+
+      <p>Или короче — через <code>&amp;&amp;</code> и <code>||</code>:</p>
+
+      <pre><code class="language-bash">cp important.txt /backup/ &amp;&amp; echo "Готово" || echo "Ошибка"</code></pre>
+
+      <p><code>&amp;&amp;</code> — выполнить следующее, если предыдущее успешно. <code>||</code> — если упало.</p>
+
+      <h2 id="section-8">Отладка</h2>
+
+      <p>Если скрипт ведёт себя странно — запусти его с флагом <code>-x</code>. Bash будет печатать каждую строку перед выполнением:</p>
+
+      <pre><code class="language-bash">bash -x script.sh</code></pre>
+
+      <p>Ещё вариант — добавить в начало скрипта:</p>
+
+      <pre><code class="language-bash">#!/bin/bash
+set -e   # остановиться при первой ошибке
+set -u   # ругаться на неопределённые переменные
+set -o pipefail   # ошибка в пайпе = ошибка всей цепочки</code></pre>
+
+      <p>Эти три строки — стандарт для серьёзных скриптов. Они делают поведение более предсказуемым.</p>
+
+      <h2 id="section-9">Полезные приёмы</h2>
+
+      <pre><code class="language-bash"># Проверка, что запущено с root-правами
+if [ "$EUID" -ne 0 ]; then
+    echo "Запусти через sudo"
+    exit 1
+fi
+
+# Спросить подтверждение
+read -p "Удалить файл? (y/n): " answer
+if [ "$answer" = "y" ]; then
+    rm important.txt
+fi
+
+# Пройти по строкам файла
+while IFS= read -r line; do
+    echo "Строка: $line"
+done &lt; data.txt
+
+# Отправить письмо при ошибке
+./deploy.sh || echo "Деплой упал" | mail -s "Проблема" admin@example.com</code></pre>
+
+      <h2 id="section-10">Итог</h2>
+
+      <p>Bash-скрипт — текстовый файл с командами. Переменные без ключевых слов, условия через <code>if [ ... ]</code>, циклы через <code>for</code> и <code>while</code>. Аргументы приходят в <code>$1</code>, <code>$2</code>. Функции возвращают результат через <code>echo</code>. Три флага <code>set -euo pipefail</code> делают скрипты предсказуемее. Идеальная задача для первого скрипта — бэкап, деплой или ротация логов.</p>
+    </article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Первый скрипт</a><a href="#section-1" class="lvl-2">Переменные</a><a href="#section-2" class="lvl-2">Аргументы командной строки</a><a href="#section-3" class="lvl-2">Условия</a><a href="#section-4" class="lvl-2">Циклы</a><a href="#section-5" class="lvl-2">Функции</a><a href="#section-6" class="lvl-2">Пример: скрипт бэкапа</a><a href="#section-7" class="lvl-2">Проверка результата команд</a><a href="#section-8" class="lvl-2">Отладка</a><a href="#section-9" class="lvl-2">Полезные приёмы</a><a href="#section-10" class="lvl-2">Итог</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/docker-compose-dlya-proekta.html"><img src="/img/compose.svg" alt="Docker Compose — несколько контейнеров одной командой" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">DevOps</span><span class="tag">Инструменты</span><span class="tag">Разработка</span></div>
+    <a href="/articles/docker-compose-dlya-proekta.html"><h2 class="card__title">Docker Compose — несколько контейнеров одной командой</h2></a>
+    <p class="card__excerpt">Когда одного Dockerfile мало: как описать приложение, базу и кэш в одном файле и запускать всё одной командой docker compose up.</p>
+    <div class="card__meta">
+      <span>18 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="docker-compose-dlya-proekta" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/chto-takoe-nginx.html"><img src="/img/nginx.svg" alt="Что такое Nginx и зачем он нужен на сервере" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">DevOps</span><span class="tag">Веб</span><span class="tag">Инструменты</span></div>
+    <a href="/articles/chto-takoe-nginx.html"><h2 class="card__title">Что такое Nginx и зачем он нужен на сервере</h2></a>
+    <p class="card__excerpt">Почему почти все сайты работают через Nginx. Разбираем: веб-сервер, reverse proxy, балансировка нагрузки, статика и конфиги.</p>
+    <div class="card__meta">
+      <span>26 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="chto-takoe-nginx" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/git-vetki-i-sliyanie.html"><img src="/img/git-vetki.svg" alt="Git ветки и слияния — branch, merge, rebase" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Git</span><span class="tag">Инструменты</span><span class="tag">Разработка</span></div>
+    <a href="/articles/git-vetki-i-sliyanie.html"><h2 class="card__title">Git ветки и слияния — branch, merge, rebase</h2></a>
+    <p class="card__excerpt">Как работать с ветками в Git: создавать, переключаться, сливать, разрешать конфликты. Разбираем merge и rebase — когда что использовать.</p>
+    <div class="card__meta">
+      <span>8 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="git-vetki-i-sliyanie" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

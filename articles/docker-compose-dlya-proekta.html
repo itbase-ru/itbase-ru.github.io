@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Docker Compose — несколько контейнеров одной командой — IT·База</title>
+  <meta name="description" content="Когда одного Dockerfile мало: как описать приложение, базу и кэш в одном файле и запускать всё одной командой docker compose up.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/docker-compose-dlya-proekta.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Docker Compose — несколько контейнеров одной командой">
+  <meta property="og:description" content="Когда одного Dockerfile мало: как описать приложение, базу и кэш в одном файле и запускать всё одной командой docker compose up.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/docker-compose-dlya-proekta.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/docker-compose-dlya-proekta.html">
+  <meta property="article:published_time" content="2026-04-18">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Docker Compose — несколько контейнеров одной командой">
+  <meta name="twitter:description" content="Когда одного Dockerfile мало: как описать приложение, базу и кэш в одном файле и запускать всё одной командой docker compose up.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/docker-compose-dlya-proekta.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Docker Compose — несколько контейнеров одной командой", "description": "Когда одного Dockerfile мало: как описать приложение, базу и кэш в одном файле и запускать всё одной командой docker compose up.", "image": ["https://itbase-ru.github.io/img/og/docker-compose-dlya-proekta.png"], "datePublished": "2026-04-18", "dateModified": "2026-04-18", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/docker-compose-dlya-proekta.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "DevOps", "item": "https://itbase-ru.github.io/?tag=DevOps"}, {"@type": "ListItem", "position": 3, "name": "Docker Compose — несколько контейнеров одной командой", "item": "https://itbase-ru.github.io/articles/docker-compose-dlya-proekta.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="docker-compose-dlya-proekta">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=DevOps">DevOps</a>
+        <span class="sep">/</span>
+        <span>Docker Compose — несколько контейнеров одной командой</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">DevOps</span><span class="tag">Инструменты</span><span class="tag">Разработка</span></div>
+        <h1>Docker Compose — несколько контейнеров одной командой</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-04-18">18 апреля 2026</time>
+          <span class="dot">•</span>
+          <span>10 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/compose.svg" alt="Docker Compose — несколько контейнеров одной командой">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+      <p>Один контейнер — просто. А если у тебя бэкенд на Python, база PostgreSQL, кэш в Redis и фоновый воркер? Запускать четыре контейнера руками каждый раз — мучение. Docker Compose решает это одним файлом.</p>
+
+      <p>Если ещё не читал основы Docker — начни со статьи <a href="/articles/docker-za-10-minut.html">Docker за 10 минут</a>.</p>
+
+      <h2 id="section-0">Что такое Docker Compose</h2>
+
+      <p>Docker Compose — инструмент, который позволяет описать <strong>несколько контейнеров в одном файле</strong> и управлять ими вместе. Одна команда — и всё приложение поднимается со всеми зависимостями.</p>
+
+      <p>Без Compose нужно было бы:</p>
+
+      <pre><code class="language-bash">docker run -d postgres
+docker run -d redis
+docker run -d --link postgres --link redis my-backend
+# И каждый раз помнить все параметры</code></pre>
+
+      <p>С Compose:</p>
+
+      <pre><code class="language-bash">docker compose up</code></pre>
+
+      <p>Одна строка. Все контейнеры собираются, запускаются и связываются между собой.</p>
+
+      <h2 id="section-1">Файл docker-compose.yml</h2>
+
+      <p>Описывается всё в одном файле в корне проекта. Формат — YAML.</p>
+
+      <pre><code class="language-bash"># Версия формата (в новых версиях Docker можно не указывать)
+version: '3.9'
+
+services:
+  # Приложение на Python
+  backend:
+    build: .                       # собрать из Dockerfile в текущей папке
+    ports:
+      - "8000:8000"                # пробросить порт 8000 наружу
+    environment:                   # переменные окружения
+      - DATABASE_URL=postgresql://user:pass@db:5432/app
+      - REDIS_URL=redis://cache:6379
+    depends_on:                    # порядок запуска
+      - db
+      - cache
+    volumes:
+      - ./src:/app/src             # локальная папка внутрь контейнера
+
+  # База данных
+  db:
+    image: postgres:16             # готовый образ из Docker Hub
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_DB=app
+    volumes:
+      - pgdata:/var/lib/postgresql/data   # сохранить данные
+
+  # Кэш
+  cache:
+    image: redis:7-alpine
+
+# Именованные тома — данные переживают перезапуск
+volumes:
+  pgdata:</code></pre>
+
+      <p>Разберём по частям.</p>
+
+      <h2 id="section-2">services — основные блоки</h2>
+
+      <p>Каждый <code>service</code> — это один контейнер. У него есть имя (в примере: <code>backend</code>, <code>db</code>, <code>cache</code>), которое автоматически становится сетевым адресом.</p>
+
+      <p>Внутри бэкенда можно обращаться к базе по имени сервиса:</p>
+
+      <pre><code class="language-bash">postgresql://user:pass@db:5432/app
+#                    ↑↑
+#                    имя сервиса, а не localhost</code></pre>
+
+      <p>Docker поднимает внутреннюю сеть, в которой все сервисы видят друг друга по именам.</p>
+
+      <h2 id="section-3">build — из своего Dockerfile</h2>
+
+      <p>Для приложения, у которого есть свой код, используется <code>build</code>:</p>
+
+      <pre><code class="language-bash">backend:
+  build: .              # в корне, где Dockerfile
+  # или указать путь
+  build: ./backend
+  # или расширенная настройка
+  build:
+    context: .
+    dockerfile: Dockerfile.prod</code></pre>
+
+      <h2 id="section-4">image — готовый образ</h2>
+
+      <p>Для готовых сервисов — Postgres, Redis, Nginx — используется <code>image</code>:</p>
+
+      <pre><code class="language-bash">db:
+  image: postgres:16     # официальный образ, версия 16
+  image: redis:7-alpine  # Redis 7 на Alpine (маленький образ)</code></pre>
+
+      <h2 id="section-5">ports — доступ снаружи</h2>
+
+      <pre><code class="language-bash">ports:
+  - "8000:8000"    # хост:контейнер
+  - "5432:5432"    # откроем базу наружу для отладки
+  - "80:80"        # веб-сервер</code></pre>
+
+      <p><strong>Важно:</strong> для базы данных наружу порт обычно <strong>не открывают</strong> — это опасно. Оставляй базу доступной только внутри Docker-сети. Для локальной отладки можно открыть, но не на проде.</p>
+
+      <h2 id="section-6">environment — переменные окружения</h2>
+
+      <p>Три способа задать переменные:</p>
+
+      <pre><code class="language-bash"># 1. Список
+environment:
+  - DATABASE_URL=postgresql://user:pass@db:5432/app
+
+# 2. Словарь (эквивалент)
+environment:
+  DATABASE_URL: postgresql://user:pass@db:5432/app
+
+# 3. Из файла .env — самый правильный путь
+env_file:
+  - .env</code></pre>
+
+      <p>Пароли и ключи лучше держать в <code>.env</code> — и обязательно добавить его в <code>.gitignore</code>, чтобы не улетел в GitHub.</p>
+
+      <h2 id="section-7">volumes — постоянное хранилище</h2>
+
+      <p>Контейнеры легко удаляются и создаются заново. Но данные в базе должны оставаться. Для этого есть тома.</p>
+
+      <pre><code class="language-bash">db:
+  volumes:
+    # именованный том — Docker сам управляет
+    - pgdata:/var/lib/postgresql/data
+
+    # прямой маппинг папки с хоста — для разработки
+    - ./migrations:/docker-entrypoint-initdb.d</code></pre>
+
+      <p>Два вида:</p>
+
+      <ul>
+        <li><strong>Именованные тома</strong> (<code>pgdata:/path</code>) — живут на хосте, переживают перезапуск. Данные базы.</li>
+        <li><strong>Bind mounts</strong> (<code>./src:/app/src</code>) — прямая связь с локальной папкой. Изменения в коде сразу видны в контейнере. Для разработки.</li>
+      </ul>
+
+      <h2 id="section-8">depends_on — порядок запуска</h2>
+
+      <pre><code class="language-bash">backend:
+  depends_on:
+    - db
+    - cache</code></pre>
+
+      <p>Docker запустит <code>db</code> и <code>cache</code> первыми. Но не ждёт их полной готовности — только старта контейнера. Если твоё приложение сразу дёргает базу, а Postgres ещё не готов, оно упадёт.</p>
+
+      <p>Решение — healthcheck:</p>
+
+      <pre><code class="language-bash">db:
+  image: postgres:16
+  healthcheck:
+    test: ["CMD-SHELL", "pg_isready -U user"]
+    interval: 5s
+    timeout: 5s
+    retries: 5
+
+backend:
+  depends_on:
+    db:
+      condition: service_healthy   # ждать готовности базы</code></pre>
+
+      <h2 id="section-9">Основные команды</h2>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Команда</th><th>Что делает</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>docker compose up</td><td>Запустить всё</td></tr>
+          <tr><td>docker compose up -d</td><td>Запустить в фоне</td></tr>
+          <tr><td>docker compose up --build</td><td>Пересобрать образы и запустить</td></tr>
+          <tr><td>docker compose down</td><td>Остановить и удалить контейнеры</td></tr>
+          <tr><td>docker compose down -v</td><td>То же + удалить тома (данные)</td></tr>
+          <tr><td>docker compose ps</td><td>Список запущенных</td></tr>
+          <tr><td>docker compose logs -f backend</td><td>Логи сервиса в реальном времени</td></tr>
+          <tr><td>docker compose exec backend bash</td><td>Зайти внутрь контейнера</td></tr>
+          <tr><td>docker compose restart backend</td><td>Перезапустить один сервис</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2 id="section-10">Пример для реального проекта</h2>
+
+      <p>Типичная архитектура веб-приложения:</p>
+
+      <pre><code class="language-bash">version: '3.9'
+
+services:
+  # Веб-фронт на Nginx
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+  # API на FastAPI
+  backend:
+    build: ./backend
+    environment:
+      - DATABASE_URL=postgresql://user:pass@db:5432/app
+      - REDIS_URL=redis://cache:6379
+    depends_on:
+      db:
+        condition: service_healthy
+      cache:
+        condition: service_started
+    volumes:
+      - ./backend:/app
+
+  # Фоновый воркер (та же база кода, другая команда)
+  worker:
+    build: ./backend
+    command: python worker.py
+    environment:
+      - DATABASE_URL=postgresql://user:pass@db:5432/app
+      - REDIS_URL=redis://cache:6379
+    depends_on:
+      - backend
+      - db
+      - cache
+
+  # База
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: app
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user"]
+      interval: 5s
+      retries: 5
+
+  # Кэш
+  cache:
+    image: redis:7-alpine
+
+volumes:
+  pgdata:</code></pre>
+
+      <p>Тут пять сервисов. Одной командой <code>docker compose up</code> поднимается вся инфраструктура: фронт, бэк, воркер, база, кэш. Внутри — все связаны правильными URL.</p>
+
+      <h2 id="section-11">Что НЕ надо делать</h2>
+
+      <ul>
+        <li><strong>Хранить пароли прямо в файле.</strong> Через <code>.env</code> — правильно.</li>
+        <li><strong>Открывать порт базы наружу.</strong> Только если правда надо для отладки.</li>
+        <li><strong>Использовать <code>latest</code> в теге образа.</strong> Завтра обновится — сломается. Указывай конкретную версию: <code>postgres:16</code>.</li>
+        <li><strong>Писать все сервисы в один.</strong> Если можно разделить — разделяй. Это и есть смысл Compose.</li>
+      </ul>
+
+      <h2 id="section-12">Compose vs Kubernetes</h2>
+
+      <p>Docker Compose — для <strong>одной машины</strong>, локальной разработки или маленького сервера. Kubernetes — для больших продакшн-систем с десятками серверов.</p>
+
+      <p>Для 90% проектов Compose хватит с головой. Не беги в Kubernetes, пока не упрёшься в возможности Compose.</p>
+
+      <h2 id="section-13">Итог</h2>
+
+      <p>Docker Compose описывает несколько контейнеров в одном файле. Одна команда — весь проект. Volumes хранят данные, environment задаёт настройки, depends_on выстраивает порядок, healthcheck защищает от гонки при запуске. Стандарт для локальной разработки и небольших продакшн-развёртываний.</p>
+    </article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Что такое Docker Compose</a><a href="#section-1" class="lvl-2">Файл docker-compose.yml</a><a href="#section-2" class="lvl-2">services — основные блоки</a><a href="#section-3" class="lvl-2">build — из своего Dockerfile</a><a href="#section-4" class="lvl-2">image — готовый образ</a><a href="#section-5" class="lvl-2">ports — доступ снаружи</a><a href="#section-6" class="lvl-2">environment — переменные окружения</a><a href="#section-7" class="lvl-2">volumes — постоянное хранилище</a><a href="#section-8" class="lvl-2">depends_on — порядок запуска</a><a href="#section-9" class="lvl-2">Основные команды</a><a href="#section-10" class="lvl-2">Пример для реального проекта</a><a href="#section-11" class="lvl-2">Что НЕ надо делать</a><a href="#section-12" class="lvl-2">Compose vs Kubernetes</a><a href="#section-13" class="lvl-2">Итог</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/bash-skripty-dlya-novichka.html"><img src="/img/bash.svg" alt="Bash-скрипты для новичка — автоматизация на Linux" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Инструменты</span><span class="tag">DevOps</span><span class="tag">Разработка</span></div>
+    <a href="/articles/bash-skripty-dlya-novichka.html"><h2 class="card__title">Bash-скрипты для новичка — автоматизация на Linux</h2></a>
+    <p class="card__excerpt">Как написать первый скрипт, который автоматизирует рутину: переменные, условия, циклы, функции, аргументы командной строки.</p>
+    <div class="card__meta">
+      <span>25 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="bash-skripty-dlya-novichka" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/chto-takoe-nginx.html"><img src="/img/nginx.svg" alt="Что такое Nginx и зачем он нужен на сервере" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">DevOps</span><span class="tag">Веб</span><span class="tag">Инструменты</span></div>
+    <a href="/articles/chto-takoe-nginx.html"><h2 class="card__title">Что такое Nginx и зачем он нужен на сервере</h2></a>
+    <p class="card__excerpt">Почему почти все сайты работают через Nginx. Разбираем: веб-сервер, reverse proxy, балансировка нагрузки, статика и конфиги.</p>
+    <div class="card__meta">
+      <span>26 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="chto-takoe-nginx" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/git-vetki-i-sliyanie.html"><img src="/img/git-vetki.svg" alt="Git ветки и слияния — branch, merge, rebase" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Git</span><span class="tag">Инструменты</span><span class="tag">Разработка</span></div>
+    <a href="/articles/git-vetki-i-sliyanie.html"><h2 class="card__title">Git ветки и слияния — branch, merge, rebase</h2></a>
+    <p class="card__excerpt">Как работать с ветками в Git: создавать, переключаться, сливать, разрешать конфликты. Разбираем merge и rebase — когда что использовать.</p>
+    <div class="card__meta">
+      <span>8 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="git-vetki-i-sliyanie" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

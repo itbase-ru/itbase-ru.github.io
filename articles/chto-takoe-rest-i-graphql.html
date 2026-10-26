@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>REST и GraphQL — в чём разница — IT·База</title>
+  <meta name="description" content="Два главных подхода к построению API. Разбираем на примерах: когда REST удобнее, а когда GraphQL решает проблемы, которые REST создаёт.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/chto-takoe-rest-i-graphql.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="REST и GraphQL — в чём разница">
+  <meta property="og:description" content="Два главных подхода к построению API. Разбираем на примерах: когда REST удобнее, а когда GraphQL решает проблемы, которые REST создаёт.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/chto-takoe-rest-i-graphql.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/chto-takoe-rest-i-graphql.html">
+  <meta property="article:published_time" content="2026-03-30">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="REST и GraphQL — в чём разница">
+  <meta name="twitter:description" content="Два главных подхода к построению API. Разбираем на примерах: когда REST удобнее, а когда GraphQL решает проблемы, которые REST создаёт.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/chto-takoe-rest-i-graphql.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "REST и GraphQL — в чём разница", "description": "Два главных подхода к построению API. Разбираем на примерах: когда REST удобнее, а когда GraphQL решает проблемы, которые REST создаёт.", "image": ["https://itbase-ru.github.io/img/og/chto-takoe-rest-i-graphql.png"], "datePublished": "2026-03-30", "dateModified": "2026-03-30", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/chto-takoe-rest-i-graphql.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Веб", "item": "https://itbase-ru.github.io/?tag=Веб"}, {"@type": "ListItem", "position": 3, "name": "REST и GraphQL — в чём разница", "item": "https://itbase-ru.github.io/articles/chto-takoe-rest-i-graphql.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="chto-takoe-rest-i-graphql">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Веб">Веб</a>
+        <span class="sep">/</span>
+        <span>REST и GraphQL — в чём разница</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Веб</span><span class="tag">API</span><span class="tag">Теория</span></div>
+        <h1>REST и GraphQL — в чём разница</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-03-30">30 марта 2026</time>
+          <span class="dot">•</span>
+          <span>10 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/rest-graphql.svg" alt="REST и GraphQL — в чём разница">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+      <p>Если ты пишешь или потребляешь API — рано или поздно встанет вопрос: REST или GraphQL? Оба подхода живые, оба популярные. Разбираем, чем они отличаются и когда что выбирать.</p>
+
+      <p>Если ты ещё не читал <a href="/articles/chto-takoe-api.html">основы про API</a> — начни с той статьи, там база.</p>
+
+      <h2 id="section-0">REST — что это</h2>
+
+      <p>REST (Representational State Transfer) — архитектурный стиль, построенный на ресурсах и HTTP-методах. Ты обращаешься к URL, а метод говорит, что делать:</p>
+
+      <ul>
+        <li><strong>GET</strong> — получить данные.</li>
+        <li><strong>POST</strong> — создать новое.</li>
+        <li><strong>PUT / PATCH</strong> — обновить существующее.</li>
+        <li><strong>DELETE</strong> — удалить.</li>
+      </ul>
+
+      <p>Пример: интернет-магазин.</p>
+
+      <pre><code class="language-bash">GET    /users/42          → данные пользователя
+GET    /users/42/orders   → его заказы
+POST   /orders            → создать заказ
+PATCH  /orders/17         → изменить заказ
+DELETE /orders/17         → удалить заказ</code></pre>
+
+      <p>REST прост, предсказуем и «родной» для HTTP. За это его любят уже 20 лет.</p>
+
+      <h2 id="section-1">Проблемы REST</h2>
+
+      <p>У REST есть два классических болевых места.</p>
+
+      <h3 id="section-2">1. Over-fetching — данных больше, чем нужно</h3>
+
+      <p>Клиенту нужно только имя и аватар пользователя. А <code>GET /users/42</code> отдаёт всё: адрес, телефон, дату рождения, настройки. Ты тянешь лишнее и тратишь трафик.</p>
+
+      <h3 id="section-3">2. Under-fetching — данных меньше, чем нужно</h3>
+
+      <p>Нужны данные пользователя <em>и</em> его последние заказы <em>и</em> отзывы. Приходится делать три запроса:</p>
+
+      <pre><code class="language-bash">GET /users/42
+GET /users/42/orders?limit=10
+GET /users/42/reviews?limit=5</code></pre>
+
+      <p>На мобильном интернете это ощутимо. Плюс каждый запрос — отдельный round-trip к серверу.</p>
+
+      <h2 id="section-4">GraphQL — что это</h2>
+
+      <p>GraphQL придумали в Facebook в 2012 (открыли в 2015). Идея: <strong>один endpoint, а клиент сам описывает, какие данные ему нужны</strong>.</p>
+
+      <p>Запрос на GraphQL — это не URL, а специальный язык:</p>
+
+      <pre><code class="language-json">{
+  user(id: 42) {
+    name
+    avatar
+    orders(last: 10) {
+      id
+      total
+      status
+    }
+  }
+}</code></pre>
+
+      <p>Тот же запрос, что выше делал 3 вызова REST, здесь — один. И приходит ровно то, что запрошено: ничего лишнего.</p>
+
+      <h2 id="section-5">Сравнение</h2>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Критерий</th><th>REST</th><th>GraphQL</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Endpoints</td><td>Много (по ресурсам)</td><td>Один</td></tr>
+          <tr><td>Что получаешь</td><td>Всё, что даёт endpoint</td><td>Только запрошенное</td></tr>
+          <tr><td>Количество запросов</td><td>Часто несколько</td><td>Обычно один</td></tr>
+          <tr><td>Кэширование</td><td>Из коробки через HTTP</td><td>Сложнее, нужны клиенты</td></tr>
+          <tr><td>Типизация</td><td>Внешняя (OpenAPI)</td><td>Встроена в схему</td></tr>
+          <tr><td>Порог входа</td><td>Низкий</td><td>Средний</td></tr>
+          <tr><td>Загрузка файлов</td><td>Просто</td><td>Через отдельный механизм</td></tr>
+          <tr><td>Кривая обучения</td><td>Пологая</td><td>Круче</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2 id="section-6">Когда REST лучше</h2>
+
+      <ul>
+        <li><strong>Простые CRUD-приложения.</strong> Блог, задача-менеджер, админка — REST хватит с головой.</li>
+        <li><strong>Публичное API для внешних разработчиков.</strong> REST-стиль понятен почти всем, документация простая.</li>
+        <li><strong>Кэширование критично.</strong> HTTP-кэш, CDN, ETag — всё работает с REST «бесплатно».</li>
+        <li><strong>Загрузка файлов.</strong> Multipart в REST — стандарт, в GraphQL — отдельная история.</li>
+        <li><strong>Маленькая команда.</strong> Меньше сложности — меньше шансов запутаться.</li>
+      </ul>
+
+      <h2 id="section-7">Когда GraphQL лучше</h2>
+
+      <ul>
+        <li><strong>Мобильные приложения с медленной сетью.</strong> Один запрос вместо трёх — большая экономия.</li>
+        <li><strong>Сложные клиенты с разными потребностями.</strong> Веб-версия хочет одно, мобильная — другое, GraphQL отдаёт каждой нужное.</li>
+        <li><strong>Много связанных сущностей.</strong> Соцсеть, маркетплейс, дашборд со связями — GraphQL удобнее.</li>
+        <li><strong>Быстрая итерация на фронте.</strong> Новое поле — без изменения бэкенда и без новых endpoint'ов.</li>
+        <li><strong>Типизация важна.</strong> Схема GraphQL сама является документацией.</li>
+      </ul>
+
+      <h2 id="section-8">Что такое «N+1 проблема» в GraphQL</h2>
+
+      <p>Тут GraphQL не так прост, как кажется. Если написать наивно, один запрос GraphQL может превратиться в сотню запросов к базе данных. Например, ты запросил 10 заказов, и для каждого надо подтянуть данные пользователя — выходит 11 SQL-запросов вместо двух.</p>
+
+      <p>Решается через <strong>DataLoader</strong> — специальный механизм batching'а и кэширования. Но это уже ответственность бэкенд-разработчика.</p>
+
+      <h2 id="section-9">Что выбрать на практике</h2>
+
+      <p>Если ты делаешь небольшое приложение или изучаешь веб — начинай с <strong>REST</strong>. Проще, понятнее, больше примеров.</p>
+
+      <p>Если у тебя сложный фронтенд с множеством компонентов, каждый из которых дёргает свой кусок данных, — присмотрись к <strong>GraphQL</strong>.</p>
+
+      <blockquote>Реальность такова: большинство команд спокойно живут на REST. GraphQL выигрывает, когда REST начинает болеть — то есть когда клиентов много, а данные связаны.</blockquote>
+
+      <h2 id="section-10">А есть ещё tRPC, gRPC и другие</h2>
+
+      <p>За кадром этой статьи остались:</p>
+
+      <ul>
+        <li><strong>gRPC</strong> — бинарный протокол Google для микросервисов, быстрый, но не для браузера «из коробки».</li>
+        <li><strong>tRPC</strong> — TypeScript-фреймворк для full-stack проектов, даёт end-to-end типизацию.</li>
+        <li><strong>WebSocket</strong> — для real-time, это вообще не про REST или GraphQL.</li>
+      </ul>
+
+      <p>Но это темы для отдельных статей.</p>
+
+      <h2 id="section-11">Итог</h2>
+
+      <p>REST — проверенный, простой, хорошо кэшируется. GraphQL — гибкий, экономит запросы, но требует больше инфраструктуры. Не гонись за модой: выбирай инструмент под задачу.</p>
+    </article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">REST — что это</a><a href="#section-1" class="lvl-2">Проблемы REST</a><a href="#section-2" class="lvl-3">1. Over-fetching — данных больше, чем нужно</a><a href="#section-3" class="lvl-3">2. Under-fetching — данных меньше, чем нужно</a><a href="#section-4" class="lvl-2">GraphQL — что это</a><a href="#section-5" class="lvl-2">Сравнение</a><a href="#section-6" class="lvl-2">Когда REST лучше</a><a href="#section-7" class="lvl-2">Когда GraphQL лучше</a><a href="#section-8" class="lvl-2">Что такое «N+1 проблема» в GraphQL</a><a href="#section-9" class="lvl-2">Что выбрать на практике</a><a href="#section-10" class="lvl-2">А есть ещё tRPC, gRPC и другие</a><a href="#section-11" class="lvl-2">Итог</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/http-metody-i-status-kody.html"><img src="/img/http.svg" alt="HTTP-методы и статус-коды — шпаргалка с примерами" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Веб</span><span class="tag">API</span><span class="tag">Теория</span></div>
+    <a href="/articles/http-metody-i-status-kody.html"><h2 class="card__title">HTTP-методы и статус-коды — шпаргалка с примерами</h2></a>
+    <p class="card__excerpt">GET, POST, PUT, PATCH, DELETE и что значат все эти 200, 301, 404, 500. Разбираем HTTP по-человечески, с примерами запросов и ответов.</p>
+    <div class="card__meta">
+      <span>4 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="http-metody-i-status-kody" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/paginaciya-i-versirovanie-api.html"><img src="/img/api-versioning.svg" alt="Пагинация и версионирование API — как не сломать клиентов" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">API</span><span class="tag">Веб</span><span class="tag">Разработка</span></div>
+    <a href="/articles/paginaciya-i-versirovanie-api.html"><h2 class="card__title">Пагинация и версионирование API — как не сломать клиентов</h2></a>
+    <p class="card__excerpt">Как отдавать тысячи записей постранично и что делать, когда API меняется. Разбираем offset/limit, cursor-пагинацию и версионирование.</p>
+    <div class="card__meta">
+      <span>27 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="paginaciya-i-versirovanie-api" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/chto-takoe-cors.html"><img src="/img/cors.svg" alt="Что такое CORS и почему браузер блокирует запросы" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Веб</span><span class="tag">Безопасность</span><span class="tag">API</span></div>
+    <a href="/articles/chto-takoe-cors.html"><h2 class="card__title">Что такое CORS и почему браузер блокирует запросы</h2></a>
+    <p class="card__excerpt">Почему fetch с одного сайта на другой падает с ошибкой, что такое Same-Origin Policy и как правильно настроить CORS на сервере.</p>
+    <div class="card__meta">
+      <span>17 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="chto-takoe-cors" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

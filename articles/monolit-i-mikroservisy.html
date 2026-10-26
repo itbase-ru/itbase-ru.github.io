@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Монолит и микросервисы — когда что выбирать — IT·База</title>
+  <meta name="description" content="Разбираем без хайпа: что такое монолит, микросервисы, зачем они нужны, какие проблемы решают и какие создают. Спойлер: микросервисы — не всегда лучше.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/monolit-i-mikroservisy.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Монолит и микросервисы — когда что выбирать">
+  <meta property="og:description" content="Разбираем без хайпа: что такое монолит, микросервисы, зачем они нужны, какие проблемы решают и какие создают. Спойлер: микросервисы — не всегда лучше.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/monolit-i-mikroservisy.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/monolit-i-mikroservisy.html">
+  <meta property="article:published_time" content="2026-04-05">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Монолит и микросервисы — когда что выбирать">
+  <meta name="twitter:description" content="Разбираем без хайпа: что такое монолит, микросервисы, зачем они нужны, какие проблемы решают и какие создают. Спойлер: микросервисы — не всегда лучше.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/monolit-i-mikroservisy.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Монолит и микросервисы — когда что выбирать", "description": "Разбираем без хайпа: что такое монолит, микросервисы, зачем они нужны, какие проблемы решают и какие создают. Спойлер: микросервисы — не всегда лучше.", "image": ["https://itbase-ru.github.io/img/og/monolit-i-mikroservisy.png"], "datePublished": "2026-04-05", "dateModified": "2026-04-05", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/monolit-i-mikroservisy.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Разработка", "item": "https://itbase-ru.github.io/?tag=Разработка"}, {"@type": "ListItem", "position": 3, "name": "Монолит и микросервисы — когда что выбирать", "item": "https://itbase-ru.github.io/articles/monolit-i-mikroservisy.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="monolit-i-mikroservisy">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Разработка">Разработка</a>
+        <span class="sep">/</span>
+        <span>Монолит и микросервисы — когда что выбирать</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Разработка</span><span class="tag">Архитектура</span><span class="tag">DevOps</span></div>
+        <h1>Монолит и микросервисы — когда что выбирать</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-04-05">5 апреля 2026</time>
+          <span class="dot">•</span>
+          <span>11 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/mikroservisy.svg" alt="Монолит и микросервисы — когда что выбирать">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+      <p>«Мы переезжаем на микросервисы» — фраза, которую слышал каждый, кто работал в IT-компании. Звучит солидно, но не всегда означает улучшение. Разберёмся, что это и когда оно действительно оправдано.</p>
+
+      <h2 id="section-0">Монолит: как было раньше</h2>
+
+      <p>Монолит — это одно приложение, где всё вместе: пользователи, заказы, платежи, уведомления. Один код, одна база данных, один деплой.</p>
+
+      <p>Пример структуры:</p>
+
+      <pre><code class="language-bash">myapp/
+├── users/        # модуль пользователей
+├── orders/       # модуль заказов
+├── payments/     # модуль оплаты
+├── notifications/# модуль уведомлений
+└── main.py       # точка входа</code></pre>
+
+      <p>Всё запускается одной командой, деплоится одним пакетом, тестируется целиком.</p>
+
+      <h3 id="section-1">Плюсы монолита</h3>
+
+      <ul>
+        <li><strong>Простота.</strong> Один проект, один репозиторий, одна сборка.</li>
+        <li><strong>Локальная разработка.</strong> Склонировал — запустил — работает.</li>
+        <li><strong>Транзакции.</strong> Одна база — можно делать атомарные операции между любыми данными.</li>
+        <li><strong>Нет сетевых задержек.</strong> Функции вызываются напрямую, а не через HTTP.</li>
+        <li><strong>Легко отлаживать.</strong> Один стектрейс, один лог.</li>
+      </ul>
+
+      <h3 id="section-2">Минусы монолита</h3>
+
+      <ul>
+        <li><strong>Масштабируется целиком.</strong> Если нагрузка только на оплату — всё равно масштабируешь всё приложение.</li>
+        <li><strong>Один упал — всё упало.</strong> Ошибка в модуле уведомлений может положить весь сервис.</li>
+        <li><strong>Растёт и пухнет.</strong> Через 3 года кодовая база превращается в «большой шар грязи».</li>
+        <li><strong>Команды мешают друг другу.</strong> Все правят один код, релизы ждут друг друга.</li>
+        <li><strong>Долгий деплой.</strong> Собрать и задеплоить 500-тысячный монолит — не быстро.</li>
+      </ul>
+
+      <h2 id="section-3">Микросервисы: что это</h2>
+
+      <p>Микросервисы — это разбиение монолита на <strong>независимые сервисы</strong>. Каждый сервис:</p>
+
+      <ul>
+        <li>отвечает за свою бизнес-функцию (пользователи, заказы, оплата);</li>
+        <li>имеет свою базу данных;</li>
+        <li>деплоится отдельно;</li>
+        <li>общается с другими по сети (HTTP, gRPC, очереди).</li>
+      </ul>
+
+      <p>Та же структура, но разбитая:</p>
+
+      <pre><code class="language-bash">users-service/       → своя база users-db
+orders-service/      → своя база orders-db
+payments-service/    → своя база payments-db
+notifications-service/ → своя база notifications-db
+api-gateway/         → маршрутизация запросов</code></pre>
+
+      <p>Каждый сервис — отдельное приложение, отдельный репозиторий, отдельная команда.</p>
+
+      <h3 id="section-4">Плюсы микросервисов</h3>
+
+      <ul>
+        <li><strong>Независимый деплой.</strong> Обновление сервиса оплаты не требует пересборки всего.</li>
+        <li><strong>Масштабируется точечно.</strong> Большая нагрузка на поиск — масштабируем только поиск.</li>
+        <li><strong>Изоляция сбоев.</strong> Упал сервис уведомлений — остальное работает.</li>
+        <li><strong>Свобода технологий.</strong> Один сервис на Python, другой на Go, третий на Java.</li>
+        <li><strong>Команды автономны.</strong> Каждая команда владеет своим сервисом.</li>
+      </ul>
+
+      <h3 id="section-5">Минусы микросервисов</h3>
+
+      <ul>
+        <li><strong>Сложная инфраструктура.</strong> Нужны Docker, Kubernetes, service mesh, мониторинг, трейсинг.</li>
+        <li><strong>Сетевые задержки.</strong> Вызов по HTTP медленнее, чем вызов функции.</li>
+        <li><strong>Нет общих транзакций.</strong> Нельзя просто сделать «списать деньги и создать заказ» — нужны саги, компенсации.</li>
+        <li><strong>Сложная отладка.</strong> Один запрос идёт через 5 сервисов — поймай, где упало.</li>
+        <li><strong>Дублирование кода.</strong> Общие вещи (аутентификация, логирование) нужно настраивать в каждом.</li>
+      </ul>
+
+      <blockquote>Микросервисы не упрощают систему. Они переносят сложность из кода в инфраструктуру. Если у тебя и так всё просто — микросервисы сделают сложнее.</blockquote>
+
+      <h2 id="section-6">Сравнение</h2>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Критерий</th><th>Монолит</th><th>Микросервисы</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Старт проекта</td><td>Быстро</td><td>Медленно</td></tr>
+          <tr><td>Разработка</td><td>Простая</td><td>Сложная</td></tr>
+          <tr><td>Деплой</td><td>Весь сразу</td><td>По сервису</td></tr>
+          <tr><td>Масштабирование</td><td>Целиком</td><td>По сервису</td></tr>
+          <tr><td>Отказоустойчивость</td><td>Низкая</td><td>Высокая</td></tr>
+          <tr><td>Отладка</td><td>Простая</td><td>Сложная</td></tr>
+          <tr><td>Размер команды</td><td>До 20–30 человек</td><td>От 30 человек</td></tr>
+          <tr><td>Инфраструктура</td><td>Минимум</td><td>Много</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2 id="section-7">Когда монолит лучше</h2>
+
+      <ul>
+        <li><strong>Стартап на ранней стадии.</strong> Не знаешь ещё, что приживётся, — гибкость важнее масштаба.</li>
+        <li><strong>Небольшая команда.</strong> 5 человек не могут обслуживать 10 сервисов.</li>
+        <li><strong>Нет задач по масштабированию.</strong> Если 1000 пользователей — монолит справится.</li>
+        <li><strong>Простая предметная область.</strong> Блог, лендинг, простое приложение.</li>
+      </ul>
+
+      <h2 id="section-8">Когда микросервисы оправданы</h2>
+
+      <ul>
+        <li><strong>Большие команды.</strong> 100+ разработчиков в одном монолите — гарантированный хаос.</li>
+        <li><strong>Разные нагрузки на разные части.</strong> Один сервис нужен каждому пользователю, другой — раз в час.</li>
+        <li><strong>Разные технологии под задачи.</strong> Мachine learning на Python, а API — на Go.</li>
+        <li><strong>Высокие требования к отказоустойчивости.</strong> Если падение одного модуля не должно ронять всё.</li>
+      </ul>
+
+      <h2 id="section-9">Промежуточный вариант: модульный монолит</h2>
+
+      <p>Есть золотая середина — <strong>модульный монолит</strong>. Это одно приложение, но внутри чётко разделённое на модули с понятными границами.</p>
+
+      <pre><code class="language-bash">myapp/
+├── users/          # модуль с чётким публичным API
+│   ├── api.py
+│   └── internal/
+├── orders/         # модули не лезут в internals друг друга
+│   ├── api.py
+│   └── internal/
+└── main.py         # собирает всё вместе</code></pre>
+
+      <p>Плюсы:</p>
+      <ul>
+        <li>Просто, как монолит.</li>
+        <li>Если завтра понадобится — любой модуль легко вынести в отдельный сервис.</li>
+        <li>Нет инфраструктурной боли.</li>
+      </ul>
+
+      <p>Многие опытные команды советуют начинать именно с этого. Модульный монолит даёт 90% преимуществ микросервисов без 90% их проблем.</p>
+
+      <blockquote>Начни с монолита. Если он станет проблемой — разбей. Но не начинай с микросервисов, потому что «это современно».</blockquote>
+
+      <h2 id="section-10">Что нужно, если всё-таки идёшь в микросервисы</h2>
+
+      <p>Минимальный набор:</p>
+
+      <ul>
+        <li><strong>Контейнеры.</strong> Docker для каждого сервиса.</li>
+        <li><strong>Оркестрация.</strong> Kubernetes или хотя бы Docker Compose для локалки.</li>
+        <li><strong>API Gateway.</strong> Единая точка входа для клиента.</li>
+        <li><strong>Service discovery.</strong> Сервисы должны находить друг друга по имени.</li>
+        <li><strong>Централизованные логи.</strong> ELK, Loki, что угодно.</li>
+        <li><strong>Трейсинг.</strong> Jaeger, OpenTelemetry — видеть путь запроса через сервисы.</li>
+        <li><strong>Мониторинг.</strong> Prometheus + Grafana.</li>
+        <li><strong>CI/CD для каждого сервиса.</strong> Автодеплой, автотесты.</li>
+      </ul>
+
+      <p>Без этого всего микросервисы превращаются в тыкву через месяц.</p>
+
+      <h2 id="section-11">Итог</h2>
+
+      <p>Монолит — простой и быстрый старт. Микросервисы — мощная штука, но только при больших командах и серьёзной инфраструктуре. Если ты один или у тебя небольшая команда — модульный монолит покроет все нужды. А про то, как выглядит деплой в таких системах, читай в статье <a href="/articles/chto-takoe-devops-ci-cd-deploy.html">про DevOps и CI/CD</a>.</p>
+    </article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Монолит: как было раньше</a><a href="#section-1" class="lvl-3">Плюсы монолита</a><a href="#section-2" class="lvl-3">Минусы монолита</a><a href="#section-3" class="lvl-2">Микросервисы: что это</a><a href="#section-4" class="lvl-3">Плюсы микросервисов</a><a href="#section-5" class="lvl-3">Минусы микросервисов</a><a href="#section-6" class="lvl-2">Сравнение</a><a href="#section-7" class="lvl-2">Когда монолит лучше</a><a href="#section-8" class="lvl-2">Когда микросервисы оправданы</a><a href="#section-9" class="lvl-2">Промежуточный вариант: модульный монолит</a><a href="#section-10" class="lvl-2">Что нужно, если всё-таки идёшь в микросервисы</a><a href="#section-11" class="lvl-2">Итог</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/bash-skripty-dlya-novichka.html"><img src="/img/bash.svg" alt="Bash-скрипты для новичка — автоматизация на Linux" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Инструменты</span><span class="tag">DevOps</span><span class="tag">Разработка</span></div>
+    <a href="/articles/bash-skripty-dlya-novichka.html"><h2 class="card__title">Bash-скрипты для новичка — автоматизация на Linux</h2></a>
+    <p class="card__excerpt">Как написать первый скрипт, который автоматизирует рутину: переменные, условия, циклы, функции, аргументы командной строки.</p>
+    <div class="card__meta">
+      <span>25 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="bash-skripty-dlya-novichka" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/dizayn-patterns-singleton-factory-observer.html"><img src="/img/patterns.svg" alt="Дизайн-паттерны — Singleton, Factory, Observer" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Разработка</span><span class="tag">Архитектура</span><span class="tag">Теория</span></div>
+    <a href="/articles/dizayn-patterns-singleton-factory-observer.html"><h2 class="card__title">Дизайн-паттерны — Singleton, Factory, Observer</h2></a>
+    <p class="card__excerpt">Три самых частых паттерна проектирования. Разбираем на примерах: зачем нужны, как устроены и где применяются в реальном коде.</p>
+    <div class="card__meta">
+      <span>23 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="dizayn-patterns-singleton-factory-observer" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/docker-compose-dlya-proekta.html"><img src="/img/compose.svg" alt="Docker Compose — несколько контейнеров одной командой" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">DevOps</span><span class="tag">Инструменты</span><span class="tag">Разработка</span></div>
+    <a href="/articles/docker-compose-dlya-proekta.html"><h2 class="card__title">Docker Compose — несколько контейнеров одной командой</h2></a>
+    <p class="card__excerpt">Когда одного Dockerfile мало: как описать приложение, базу и кэш в одном файле и запускать всё одной командой docker compose up.</p>
+    <div class="card__meta">
+      <span>18 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="docker-compose-dlya-proekta" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

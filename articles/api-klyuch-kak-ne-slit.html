@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>API-ключ: что это и как не слить его в GitHub — IT·База</title>
+  <meta name="description" content="Что такое токены, чем они опасны и почему одна строка в публичном репозитории может стоить тысячи долларов. Правила, которые спасают.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/api-klyuch-kak-ne-slit.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="API-ключ: что это и как не слить его в GitHub">
+  <meta property="og:description" content="Что такое токены, чем они опасны и почему одна строка в публичном репозитории может стоить тысячи долларов. Правила, которые спасают.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/api-klyuch-kak-ne-slit.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/api-klyuch-kak-ne-slit.html">
+  <meta property="article:published_time" content="2026-03-13">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="API-ключ: что это и как не слить его в GitHub">
+  <meta name="twitter:description" content="Что такое токены, чем они опасны и почему одна строка в публичном репозитории может стоить тысячи долларов. Правила, которые спасают.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/api-klyuch-kak-ne-slit.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "API-ключ: что это и как не слить его в GitHub", "description": "Что такое токены, чем они опасны и почему одна строка в публичном репозитории может стоить тысячи долларов. Правила, которые спасают.", "image": ["https://itbase-ru.github.io/img/og/api-klyuch-kak-ne-slit.png"], "datePublished": "2026-03-13", "dateModified": "2026-03-13", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/api-klyuch-kak-ne-slit.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Безопасность", "item": "https://itbase-ru.github.io/?tag=Безопасность"}, {"@type": "ListItem", "position": 3, "name": "API-ключ: что это и как не слить его в GitHub", "item": "https://itbase-ru.github.io/articles/api-klyuch-kak-ne-slit.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="api-klyuch-kak-ne-слить">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Безопасность">Безопасность</a>
+        <span class="sep">/</span>
+        <span>API-ключ: что это и как не слить его в GitHub</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Безопасность</span><span class="tag">Разработка</span></div>
+        <h1>API-ключ: что это и как не слить его в GitHub</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-03-13">13 марта 2026</time>
+          <span class="dot">•</span>
+          <span>9 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/apikey-cover.svg" alt="API-ключ: что это и как не слить его в GitHub">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+<p>Каждый сервис, который даёт API, требует <strong>ключ</strong> — уникальный код, по которому он понимает, кто обращается. Проблема: если ключ попадёт в чужие руки, злоумышленник сможет действовать от твоего имени, а платить будешь ты.</p>
+
+<h2 id="section-0">Что такое API-ключ</h2>
+<p>API-ключ — это длинная строка из букв и цифр. Пример:</p>
+<pre><code class="language-bash">sk-1234567890abcdefghijklmnopqrstuvwxyzABCD</code></pre>
+<p>Ты подставляешь её в каждый запрос, сервис проверяет: «Это ключ Ивана? Ок, выполняю». Всё, что сделано под этим ключом — записано на владельца.</p>
+
+<h2 id="section-1">Чем ключ опасен</h2>
+<p>Вот реальные сценарии, которые случались не раз:</p>
+<ul>
+  <li>Ключ к OpenAI в публичном GitHub → бот находит за <strong>30 секунд</strong> → за ночь списывают $5000.</li>
+  <li>Ключ к AWS в истории коммитов → поднимают серверы для майнинга → счёт на десятки тысяч долларов.</li>
+  <li>Ключ к Telegram-боту → чужие рассылки от имени твоего бота.</li>
+  <li>Ключ к картам Google → чужие запросы маршрутов на твой аккаунт.</li>
+</ul>
+<p>Публичные репозитории сканируются <strong>роботами круглосуточно</strong>. Поиск утечек — целая индустрия. Если ключ утёк — считай, он уже использован.</p>
+
+<blockquote>Среднее время до первого использования утёкшего ключа — меньше 5 минут. Отозвать его быстрее — почти невозможно.</blockquote>
+
+<h2 id="section-2">Как НЕ надо хранить ключи</h2>
+<ul>
+  <li><strong>Прямо в коде.</strong> <code>const API_KEY = "sk-123";</code> — худший вариант.</li>
+  <li><strong>В публичном репозитории.</strong> Даже если удалил — остаётся в истории коммитов.</li>
+  <li><strong>В HTML на сайте.</strong> Любой может открыть исходник страницы (F12 → Sources).</li>
+  <li><strong>В мобильном приложении.</strong> APK легко распаковывается, ключ извлекается за минуты.</li>
+</ul>
+
+<h2 id="section-3">Как надо: .env файл</h2>
+<p>Ключи хранят в отдельном файле, который <strong>не попадает в репозиторий</strong>. Называется <code>.env</code> (от environment — окружение).</p>
+
+<pre><code class="language-bash"># .env
+OPENAI_API_KEY=sk-1234567890abcdefg
+DATABASE_URL=postgres://user:pass@localhost/db
+TELEGRAM_TOKEN=7654321:AAF3xyz</code></pre>
+
+<p>В коде ключ берётся из окружения, а не из строки:</p>
+
+<pre><code class="language-javascript">// Node.js — читаем из окружения
+const apiKey = process.env.OPENAI_API_KEY;
+
+fetch('https://api.openai.com/v1/chat/completions', {
+  method: 'POST',
+  headers: {
+    'Authorization': 'Bearer ' + apiKey,
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({ /* ... */ })
+});
+</code></pre>
+
+<p>Для чтения <code>.env</code> в Node.js используют пакет <code>dotenv</code>:</p>
+
+<pre><code class="language-bash">npm install dotenv</code></pre>
+
+<pre><code class="language-javascript">require('dotenv').config();
+// Теперь process.env содержит переменные из .env</code></pre>
+
+<h2 id="section-4">Обязательно: .gitignore</h2>
+<p>Файл <code>.env</code> должен быть <strong>в первом же коммите</strong> в списке игнорируемых. Создай в корне проекта файл <code>.gitignore</code>:</p>
+
+<pre><code class="language-bash"># .gitignore
+.env
+.env.local
+.env.*.local
+node_modules/
+*.log</code></pre>
+
+<p>Всё, что тут перечислено, Git <strong>не будет</strong> отслеживать. Проверь перед первым <code>git add .</code>.</p>
+
+<h2 id="section-5">Если ключ всё-таки утёк</h2>
+<p>Порядок действий — по секундам:</p>
+<ol>
+  <li><strong>Отозвать ключ.</strong> В панели сервиса (OpenAI, AWS, Google Cloud) — «Revoke» или «Delete». Это первое и самое важное.</li>
+  <li><strong>Создать новый.</strong> Старый уже не твой.</li>
+  <li><strong>Проверить счёт.</strong> Если успели накрутить — обратиться в поддержку сервиса.</li>
+  <li><strong>Убрать из репозитория.</strong> Просто удалить файл — мало, ключ остался в истории.</li>
+  <li><strong>Переписать историю Git</strong> (или проще — пересоздать репозиторий).</li>
+</ol>
+
+<p><strong>Пересоздать репозиторий</strong> — самый надёжный способ. История стирается полностью. Минус — теряются звёзды и форки, но для личного проекта это ерунда.</p>
+
+<h2 id="section-6">Как настроить переменные окружения на сервере</h2>
+<p>Когда проект залит на хостинг, <code>.env</code> файла там нет — его добавляют через панель управления. Например:</p>
+<ul>
+  <li><strong>Vercel, Netlify</strong> — раздел Environment Variables в настройках проекта.</li>
+  <li><strong>GitHub Actions</strong> — раздел Secrets → Actions.</li>
+  <li><strong>Обычный VPS</strong> — файл <code>.env</code> на сервере, права <code>chmod 600</code> (только владелец читает).</li>
+</ul>
+
+<h2 id="section-7">Отдельная тема: фронтенд</h2>
+<p>Запомни раз и навсегда: <strong>во фронтенде (в браузере) спрятать ключ невозможно</strong>. Любой скрипт на странице открыт для пользователя. Если ты вставляешь ключ в JS, который грузится в браузер — он уже утёк.</p>
+<p>Что делать: ключ хранится <strong>на своём сервере</strong>, а фронтенд стучится к твоему серверу, а тот уже — к внешнему API. Своего сервера нет? Значит, ключ использовать во фронтенде нельзя. Только через бесплатные serverless-функции (Vercel Functions, Cloudflare Workers).</p>
+
+<h2 id="section-8">Что важно запомнить</h2>
+<ul>
+  <li>API-ключ = <strong>пароль от твоего аккаунта в сервисе</strong>.</li>
+  <li>Никогда в коде, никогда в репозитории.</li>
+  <li><strong>.env</strong> + <strong>.gitignore</strong> = базовая гигиена.</li>
+  <li>Утёк — <strong>сразу отозвать</strong>, потом разбираться.</li>
+  <li>Во фронтенде ключ не спрячешь — там его не должно быть вообще.</li>
+  <li>Даже если удалил — Git помнит. Пересоздай репозиторий.</li>
+</ul>
+</article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Что такое API-ключ</a><a href="#section-1" class="lvl-2">Чем ключ опасен</a><a href="#section-2" class="lvl-2">Как НЕ надо хранить ключи</a><a href="#section-3" class="lvl-2">Как надо: .env файл</a><a href="#section-4" class="lvl-2">Обязательно: .gitignore</a><a href="#section-5" class="lvl-2">Если ключ всё-таки утёк</a><a href="#section-6" class="lvl-2">Как настроить переменные окружения на сервере</a><a href="#section-7" class="lvl-2">Отдельная тема: фронтенд</a><a href="#section-8" class="lvl-2">Что важно запомнить</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/heshirovanie-paroley.html"><img src="/img/passwords.svg" alt="Как правильно хранить пароли — хеширование и соль" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Безопасность</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/heshirovanie-paroley.html"><h2 class="card__title">Как правильно хранить пароли — хеширование и соль</h2></a>
+    <p class="card__excerpt">Почему нельзя хранить пароли в открытом виде, чем MD5 хуже bcrypt и что такое соль. Разбираем на примерах кода.</p>
+    <div class="card__meta">
+      <span>16 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="heshirovanie-paroley" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/xss-csrf-sql-inekcii.html"><img src="/img/security.svg" alt="XSS, CSRF, SQL-инъекции — три главные атаки на веб" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Безопасность</span><span class="tag">Веб</span><span class="tag">Разработка</span></div>
+    <a href="/articles/xss-csrf-sql-inekcii.html"><h2 class="card__title">XSS, CSRF, SQL-инъекции — три главные атаки на веб</h2></a>
+    <p class="card__excerpt">Разбираем три самых частых уязвимости в веб-приложениях: как работают, чем опасны и как защититься. С примерами атак и защиты.</p>
+    <div class="card__meta">
+      <span>15 апреля 2026</span><span class="dot">•</span><span>12 мин</span>
+      <button class="card__bm" data-slug="xss-csrf-sql-inekcii" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/paginaciya-i-versirovanie-api.html"><img src="/img/api-versioning.svg" alt="Пагинация и версионирование API — как не сломать клиентов" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">API</span><span class="tag">Веб</span><span class="tag">Разработка</span></div>
+    <a href="/articles/paginaciya-i-versirovanie-api.html"><h2 class="card__title">Пагинация и версионирование API — как не сломать клиентов</h2></a>
+    <p class="card__excerpt">Как отдавать тысячи записей постранично и что делать, когда API меняется. Разбираем offset/limit, cursor-пагинацию и версионирование.</p>
+    <div class="card__meta">
+      <span>27 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="paginaciya-i-versirovanie-api" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

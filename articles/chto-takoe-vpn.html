@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Что такое VPN и как он работает — IT·База</title>
+  <meta name="description" content="VPN — это не только «обход блокировок». Разбираем, как устроен туннель, что видит провайдер, какие бывают протоколы и где VPN не поможет.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/chto-takoe-vpn.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Что такое VPN и как он работает">
+  <meta property="og:description" content="VPN — это не только «обход блокировок». Разбираем, как устроен туннель, что видит провайдер, какие бывают протоколы и где VPN не поможет.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/chto-takoe-vpn.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/chto-takoe-vpn.html">
+  <meta property="article:published_time" content="2026-03-29">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Что такое VPN и как он работает">
+  <meta name="twitter:description" content="VPN — это не только «обход блокировок». Разбираем, как устроен туннель, что видит провайдер, какие бывают протоколы и где VPN не поможет.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/chto-takoe-vpn.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Что такое VPN и как он работает", "description": "VPN — это не только «обход блокировок». Разбираем, как устроен туннель, что видит провайдер, какие бывают протоколы и где VPN не поможет.", "image": ["https://itbase-ru.github.io/img/og/chto-takoe-vpn.png"], "datePublished": "2026-03-29", "dateModified": "2026-03-29", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/chto-takoe-vpn.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Безопасность", "item": "https://itbase-ru.github.io/?tag=Безопасность"}, {"@type": "ListItem", "position": 3, "name": "Что такое VPN и как он работает", "item": "https://itbase-ru.github.io/articles/chto-takoe-vpn.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="chto-takoe-vpn">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Безопасность">Безопасность</a>
+        <span class="sep">/</span>
+        <span>Что такое VPN и как он работает</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Безопасность</span><span class="tag">Сети</span><span class="tag">Теория</span></div>
+        <h1>Что такое VPN и как он работает</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-03-29">29 марта 2026</time>
+          <span class="dot">•</span>
+          <span>9 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/vpn.svg" alt="Что такое VPN и как он работает">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+      <p>Про VPN все слышали. Кто-то — как про способ зайти на заблокированный сайт. Кто-то — как про инструмент для удалённой работы. Но что он делает технически, знают немногие.</p>
+
+      <p>Разберём по-честному.</p>
+
+      <h2 id="section-0">Что такое VPN</h2>
+
+      <p>VPN (Virtual Private Network) — виртуальная частная сеть. Это <strong>зашифрованный туннель</strong> между твоим устройством и VPN-сервером, через который идёт весь твой трафик.</p>
+
+      <p>Проще всего представить так: обычный интернет — это открытая дорога, где все проезжающие видят, куда ты едешь. VPN — это тоннель: снаружи видно только, что ты в него заехал, а что происходит внутри — никому не видно.</p>
+
+      <h2 id="section-1">Как это работает по шагам</h2>
+
+      <ol>
+        <li>Ты включаешь VPN-клиент и подключаешься к серверу.</li>
+        <li>Клиент и сервер устанавливают шифрованный туннель.</li>
+        <li>Весь твой трафик (сайты, приложения, мессенджеры) идёт через этот туннель.</li>
+        <li>VPN-сервер расшифровывает трафик и отправляет его дальше — в открытый интернет.</li>
+        <li>Ответы возвращаются тем же путём.</li>
+      </ol>
+
+      <p>Сайты, к которым ты обращаешься, видят IP-адрес <strong>VPN-сервера</strong>, а не твой.</p>
+
+      <h2 id="section-2">Что видит провайдер</h2>
+
+      <p>Без VPN:</p>
+      <ul>
+        <li>домены сайтов, которые ты открываешь (через DNS);</li>
+        <li>IP-адреса серверов;</li>
+        <li>объём трафика и время;</li>
+        <li>содержимое — только если сайт на HTTP (не HTTPS).</li>
+      </ul>
+
+      <p>С VPN:</p>
+      <ul>
+        <li>что ты подключился к VPN-серверу;</li>
+        <li>сколько трафика ушло;</li>
+        <li>когда это было.</li>
+      </ul>
+
+      <p>Какие сайты ты посещаешь — <strong>не видит</strong>. Всё, что внутри туннеля, для провайдера — шум.</p>
+
+      <blockquote>VPN не делает тебя невидимым в интернете. Он переносит точку, из которой тебя видно, с твоего провайдера на VPN-провайдера.</blockquote>
+
+      <h2 id="section-3">Что VPN НЕ делает</h2>
+
+      <p>Это важно понимать, чтобы не обманываться:</p>
+
+      <ul>
+        <li><strong>Не защищает от вирусов.</strong> Если ты скачал malware — он останется malware.</li>
+        <li><strong>Не делает тебя анонимным полностью.</strong> VPN-провайдер видит твой реальный IP и трафик. Ему приходится доверять.</li>
+        <li><strong>Не спасает от cookies и трекинга.</strong> Google всё равно узнает тебя по аккаунту.</li>
+        <li><strong>Не работает против сайтов, которые блокируют по аккаунту.</strong> Если у тебя нет аккаунта в сервисе — VPN поможет, если есть и заблокирован — нет.</li>
+        <li><strong>Не всегда помогает обойти блокировки.</strong> Некоторые страны блокируют VPN-протоколы целиком, и туннель просто не устанавливается.</li>
+      </ul>
+
+      <h2 id="section-4">Типы VPN</h2>
+
+      <p>VPN бывают разные, и это важно различать.</p>
+
+      <h3 id="section-5">1. Корпоративный VPN</h3>
+
+      <p>Компания поднимает свой VPN-сервер, чтобы сотрудники могли безопасно подключаться к внутренним ресурсам из дома. Ты как бы «внутри офисной сети», хотя физически дома.</p>
+
+      <h3 id="section-6">2. Личный VPN-сервис</h3>
+
+      <p>Платные сервисы (NordVPN, Mullvad, Proton VPN и др.). Ты подключаешься к их серверу в другой стране и выходишь в интернет «оттуда».</p>
+
+      <h3 id="section-7">3. Self-hosted VPN</h3>
+
+      <p>Ты сам арендуешь сервер и поднимаешь на нём VPN (WireGuard, OpenVPN). Полный контроль, но нужно уметь администрировать.</p>
+
+      <h2 id="section-8">Протоколы VPN</h2>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Протокол</th><th>Особенность</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>WireGuard</td><td>Современный, быстрый, простой. Лучший выбор сейчас.</td></tr>
+          <tr><td>OpenVPN</td><td>Старый, проверенный, но медленнее WireGuard.</td></tr>
+          <tr><td>IPSec / IKEv2</td><td>Хорош для мобильных, стабильно держит соединение.</td></tr>
+          <tr><td>L2TP / PPTP</td><td>Устаревшие, PPTP небезопасен.</td></tr>
+        </tbody>
+      </table></div>
+
+      <p>Для домашнего использования чаще всего берут WireGuard — он и быстрый, и настраивается в пару строк.</p>
+
+      <h2 id="section-9">Как выбрать VPN-сервис</h2>
+
+      <p>Ключевые критерии:</p>
+
+      <ol>
+        <li><strong>No-logs policy.</strong> Провайдер не хранит логи твоих подключений. Желательно — с независимым аудитом.</li>
+        <li><strong>Юрисдикция.</strong> В каких странах серверы и законы. Пятиглазые страны (США, Великобритания и др.) — не лучший выбор.</li>
+        <li><strong>Скорость и количество серверов.</strong> Чем больше серверов в разных странах — тем стабильнее.</li>
+        <li><strong>Оплата.</strong> Возможность платить криптой или наличными — плюс к приватности.</li>
+        <li><strong>Цена.</strong> Бесплатные VPN часто зарабатывают на продаже твоих же данных.</li>
+      </ol>
+
+      <h2 id="section-10">VPN и прокси — в чём разница</h2>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Критерий</th><th>VPN</th><th>Прокси</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Что шифрует</td><td>Весь трафик</td><td>Только одно приложение</td></tr>
+          <tr><td>На каком уровне</td><td>Операционная система</td><td>Конкретная программа</td></tr>
+          <tr><td>Шифрование</td><td>Есть</td><td>Обычно нет</td></tr>
+          <tr><td>Скорость</td><td>Чуть медленнее</td><td>Обычно быстрее</td></tr>
+        </tbody>
+      </table></div>
+
+      <p>Прокси — это «промежуточный адрес» для одного приложения. VPN — туннель для всей системы.</p>
+
+      <h2 id="section-11">Практический совет</h2>
+
+      <p>Если VPN нужен для работы с публичных Wi-Fi (кафе, аэропорт) — сгодится любой платный сервис. Если нужен для доступа к заблокированным сайтам — важен выбор протокола и того, чтобы VPN-сервис не был сам заблокирован.</p>
+
+      <p>Если ты продвинутый — подними свой WireGuard на VPS за 200–300 ₽ в месяц. Это даст и приватности больше, и не зависишь от чужой политики.</p>
+
+      <blockquote>Лучший VPN — тот, которому ты доверяешь. С точки зрения приватности VPN не защищает от провайдера VPN, а лишь переносит доверие с одного игрока на другого.</blockquote>
+
+      <h2 id="section-12">Итог</h2>
+
+      <p>VPN — это шифрованный туннель, который меняет твою точку выхода в интернет. Полезен для защиты в открытых сетях, обхода географических ограничений и корпоративного доступа. Не защищает от вирусов, не делает полностью анонимным и требует доверия к провайдеру.</p>
+    </article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Что такое VPN</a><a href="#section-1" class="lvl-2">Как это работает по шагам</a><a href="#section-2" class="lvl-2">Что видит провайдер</a><a href="#section-3" class="lvl-2">Что VPN НЕ делает</a><a href="#section-4" class="lvl-2">Типы VPN</a><a href="#section-5" class="lvl-3">1. Корпоративный VPN</a><a href="#section-6" class="lvl-3">2. Личный VPN-сервис</a><a href="#section-7" class="lvl-3">3. Self-hosted VPN</a><a href="#section-8" class="lvl-2">Протоколы VPN</a><a href="#section-9" class="lvl-2">Как выбрать VPN-сервис</a><a href="#section-10" class="lvl-2">VPN и прокси — в чём разница</a><a href="#section-11" class="lvl-2">Практический совет</a><a href="#section-12" class="lvl-2">Итог</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/heshirovanie-paroley.html"><img src="/img/passwords.svg" alt="Как правильно хранить пароли — хеширование и соль" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Безопасность</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/heshirovanie-paroley.html"><h2 class="card__title">Как правильно хранить пароли — хеширование и соль</h2></a>
+    <p class="card__excerpt">Почему нельзя хранить пароли в открытом виде, чем MD5 хуже bcrypt и что такое соль. Разбираем на примерах кода.</p>
+    <div class="card__meta">
+      <span>16 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="heshirovanie-paroley" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/kak-rabotaet-dns.html"><img src="/img/dns.svg" alt="Как работает DNS — простыми словами" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Веб</span><span class="tag">Сети</span><span class="tag">Теория</span></div>
+    <a href="/articles/kak-rabotaet-dns.html"><h2 class="card__title">Как работает DNS — простыми словами</h2></a>
+    <p class="card__excerpt">Что происходит за секунду между вводом адреса в браузере и загрузкой сайта. Разбираем DNS: корневые серверы, зоны, кэш и типы записей.</p>
+    <div class="card__meta">
+      <span>27 марта 2026</span><span class="dot">•</span><span>9 мин</span>
+      <button class="card__bm" data-slug="kak-rabotaet-dns" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/obrabotka-isklyucheniy-v-python.html"><img src="/img/python-errors.svg" alt="Обработка исключений в Python — try, except, finally" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Python</span><span class="tag">Разработка</span><span class="tag">Теория</span></div>
+    <a href="/articles/obrabotka-isklyucheniy-v-python.html"><h2 class="card__title">Обработка исключений в Python — try, except, finally</h2></a>
+    <p class="card__excerpt">Как ловить ошибки и не давать программе падать. Разбираем try/except, собственные исключения и контекстные менеджеры с примерами.</p>
+    <div class="card__meta">
+      <span>24 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="obrabotka-isklyucheniy-v-python" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

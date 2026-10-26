@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Git ветки и слияния — branch, merge, rebase — IT·База</title>
+  <meta name="description" content="Как работать с ветками в Git: создавать, переключаться, сливать, разрешать конфликты. Разбираем merge и rebase — когда что использовать.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/git-vetki-i-sliyanie.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Git ветки и слияния — branch, merge, rebase">
+  <meta property="og:description" content="Как работать с ветками в Git: создавать, переключаться, сливать, разрешать конфликты. Разбираем merge и rebase — когда что использовать.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/git-vetki-i-sliyanie.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/git-vetki-i-sliyanie.html">
+  <meta property="article:published_time" content="2026-04-08">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Git ветки и слияния — branch, merge, rebase">
+  <meta name="twitter:description" content="Как работать с ветками в Git: создавать, переключаться, сливать, разрешать конфликты. Разбираем merge и rebase — когда что использовать.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/git-vetki-i-sliyanie.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Git ветки и слияния — branch, merge, rebase", "description": "Как работать с ветками в Git: создавать, переключаться, сливать, разрешать конфликты. Разбираем merge и rebase — когда что использовать.", "image": ["https://itbase-ru.github.io/img/og/git-vetki-i-sliyanie.png"], "datePublished": "2026-04-08", "dateModified": "2026-04-08", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/git-vetki-i-sliyanie.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Git", "item": "https://itbase-ru.github.io/?tag=Git"}, {"@type": "ListItem", "position": 3, "name": "Git ветки и слияния — branch, merge, rebase", "item": "https://itbase-ru.github.io/articles/git-vetki-i-sliyanie.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="git-vetki-i-sliyanie">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Git">Git</a>
+        <span class="sep">/</span>
+        <span>Git ветки и слияния — branch, merge, rebase</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Git</span><span class="tag">Инструменты</span><span class="tag">Разработка</span></div>
+        <h1>Git ветки и слияния — branch, merge, rebase</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-04-08">8 апреля 2026</time>
+          <span class="dot">•</span>
+          <span>11 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/git-vetki.svg" alt="Git ветки и слияния — branch, merge, rebase">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+      <p>Одна из главных фишек Git — ветки. Ты можешь работать над новой фичей, не ломая основную версию проекта. Если что-то пойдёт не так — просто удалишь ветку. Если получилось — сольёшь в основную.</p>
+
+      <p>Если ты ещё не знаешь базовых команд — начни со статьи <a href="/articles/git-dlya-novichkov.html">Git для новичков</a>. Здесь про ветки и слияния.</p>
+
+      <h2 id="section-0">Что такое ветка</h2>
+
+      <p>Ветка (branch) — это отдельная линия разработки. По умолчанию в репозитории есть одна ветка — обычно <code>main</code>. Но ты можешь создать сколько угодно дополнительных.</p>
+
+      <blockquote>Ветка — это просто указатель на коммит. Не копия файлов, не копия папки. Всего лишь метка. Поэтому создание ветки в Git — мгновенно.</blockquote>
+
+      <p>Схематично:</p>
+
+      <pre><code class="language-bash">main:    A --- B --- C --- D
+                    \
+feature:             E --- F</code></pre>
+
+      <p>Тут мы от коммита B создали ветку <code>feature</code>, сделали два коммита E и F, а <code>main</code> в это время продолжал жить своей жизнью.</p>
+
+      <h2 id="section-1">Основные команды</h2>
+
+      <pre><code class="language-bash"># Посмотреть все ветки (текущая помечена звёздочкой)
+git branch
+
+# Создать новую ветку
+git branch feature-login
+
+# Переключиться на существующую ветку
+git checkout feature-login
+
+# Создать ветку и сразу переключиться (два в одном)
+git checkout -b feature-login
+
+# Современный синтаксис (то же самое, но нагляднее)
+git switch -c feature-login
+
+# Удалить ветку (если уже слита)
+git branch -d feature-login
+
+# Удалить ветку принудительно (если не слита)
+git branch -D feature-login</code></pre>
+
+      <p>Команда <code>git switch</code> появилась в Git 2.23 как замена <code>checkout</code> для переключения веток. Старый вариант тоже работает, но новый понятнее: <code>switch</code> — про ветки, <code>restore</code> — про файлы.</p>
+
+      <h2 id="section-2">Как происходит типичная работа</h2>
+
+      <p>Допустим, ты хочешь добавить форму логина на сайт. Делаешь так:</p>
+
+      <pre><code class="language-bash"># Убеждаемся, что мы на main и он актуален
+git checkout main
+git pull
+
+# Создаём ветку для новой фичи
+git switch -c feature-login
+
+# Работаем — пишем код, коммитим
+# ... несколько коммитов ...
+
+# Отправляем ветку на GitHub
+git push -u origin feature-login</code></pre>
+
+      <p>Флаг <code>-u</code> (upstream) связывает локальную ветку с удалённой — потом можно писать просто <code>git push</code> без указания имени.</p>
+
+      <p>Дальше на GitHub ты открываешь Pull Request — предложение слить изменения в main. Команда смотрит, обсуждает, комментирует. Если всё ок — мержит.</p>
+
+      <h2 id="section-3">Merge — слияние веток</h2>
+
+      <p>Когда работа в ветке закончена, её нужно влить в основную. Это делает команда <code>merge</code>.</p>
+
+      <pre><code class="language-bash"># Переключаемся на main
+git checkout main
+
+# Вливаем в него ветку feature-login
+git merge feature-login</code></pre>
+
+      <p>Что произойдёт — зависит от истории.</p>
+
+      <h3 id="section-4">Fast-forward merge</h3>
+
+      <p>Если <code>main</code> не менялся с момента создания ветки, Git просто «переставит» указатель main на последний коммит ветки:</p>
+
+      <pre><code class="language-bash">До:
+main:    A --- B
+                \
+feature:         C --- D
+
+После:
+main:    A --- B --- C --- D</code></pre>
+
+      <p>Получается линейная история, и это красиво.</p>
+
+      <h3 id="section-5">Three-way merge</h3>
+
+      <p>Если <code>main</code> менялся параллельно, Git создаёт специальный <strong>merge-коммит</strong>, у которого два родителя:</p>
+
+      <pre><code class="language-bash">До:
+main:    A --- B --- E
+                \
+feature:         C --- D
+
+После:
+main:    A --- B --- E --- M
+                \         /
+feature:         C --- D</code></pre>
+
+      <p>Коммит M — это и есть merge-коммит. Он говорит: «здесь мы объединили две ветки».</p>
+
+      <h2 id="section-6">Конфликты и как их решать</h2>
+
+      <p>Если ты и коллега изменили одну и ту же строку в одном файле — Git не знает, кого выбрать. Это конфликт.</p>
+
+      <pre><code class="language-bash">git merge feature-login
+# CONFLICT (content): Merge conflict in src/login.js
+# Automatic merge failed; fix conflicts and then commit the result.</code></pre>
+
+      <p>В файле появятся маркеры:</p>
+
+      <pre><code class="language-javascript">function login() {
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+  return api.post('/auth/login');   // твой вариант (main)
+=======
+  return api.post('/auth/signin');  // вариант из ветки
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature-login
+}</code></pre>
+
+      <p>Что делать:</p>
+
+      <ol>
+        <li>Открыть файл и вручную выбрать правильный вариант (или объединить оба).</li>
+        <li>Удалить маркеры <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>.</li>
+        <li>Сохранить файл.</li>
+        <li>Добавить его в индекс: <code>git add src/login.js</code>.</li>
+        <li>Завершить merge: <code>git commit</code>.</li>
+      </ol>
+
+      <p>Конфликт — не страшно. Это нормальная часть командной работы. Чем чаще мержишь ветки — тем меньше конфликтов.</p>
+
+      <h2 id="section-7">Rebase — альтернатива merge</h2>
+
+      <p>Rebase делает то же самое — переносит изменения из одной ветки в другую, — но по-другому. Вместо merge-коммита он «перебазирует» коммиты, создавая линейную историю.</p>
+
+      <pre><code class="language-bash"># Находясь на feature-login
+git rebase main</code></pre>
+
+      <p>Что происходит:</p>
+
+      <pre><code class="language-bash">До:
+main:    A --- B --- E
+                \
+feature:         C --- D
+
+После:
+main:    A --- B --- E
+                      \
+feature:               C' --- D'</code></pre>
+
+      <p>Коммиты C и D как бы «переиграны» поверх E. Получается линейная история без merge-коммита.</p>
+
+      <h3 id="section-8">Merge vs rebase</h3>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Критерий</th><th>Merge</th><th>Rebase</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>История</td><td>Сохраняет как было</td><td>Переписывает</td></tr>
+          <tr><td>Merge-коммиты</td><td>Создаёт</td><td>Не создаёт</td></tr>
+          <tr><td>Читаемость</td><td>Ветвистая</td><td>Линейная</td></tr>
+          <tr><td>Безопасность</td><td>Всегда безопасно</td><td>Опасно на общих ветках</td></tr>
+        </tbody>
+      </table></div>
+
+      <blockquote>Золотое правило: не делай rebase на ветках, которые уже кто-то скачал. Rebase переписывает историю — у коллег всё сломается. На своих локальных ветках — можно.</blockquote>
+
+      <h2 id="section-9">Типичные сценарии</h2>
+
+      <h3 id="section-10">Обновить свою ветку до последнего main</h3>
+
+      <pre><code class="language-bash"># Переключаемся на main, обновляемся
+git checkout main
+git pull
+
+# Возвращаемся в свою ветку
+git checkout feature-login
+
+# Вливаем в неё свежий main
+git merge main
+# или для чистой истории:
+# git rebase main</code></pre>
+
+      <h3 id="section-11">Отменить незаконченный merge</h3>
+
+      <pre><code class="language-bash">git merge --abort</code></pre>
+
+      <h3 id="section-12">Взять один коммит из другой ветки</h3>
+
+      <pre><code class="language-bash"># Хеш коммита можно посмотреть через git log
+git cherry-pick a1b2c3d</code></pre>
+
+      <h2 id="section-13">Что посмотреть</h2>
+
+      <pre><code class="language-bash"># История в виде графика со всеми ветками
+git log --oneline --graph --all
+
+# Что отличается в текущей ветке от main
+git diff main..HEAD
+
+# Список коммитов, которых нет в main
+git log main..HEAD --oneline</code></pre>
+
+      <p>Особенно полезен <code>git log --oneline --graph --all</code> — он рисует дерево коммитов в терминале. Сразу видно, где ветки разошлись и где слились.</p>
+
+      <h2 id="section-14">Итог</h2>
+
+      <p>Ветки — основа командной работы в Git. Создавай ветку под каждую фичу, работай в ней, потом сливай в main через merge или rebase. Конфликты — не страшно, их просто нужно решать руками. Главное правило: не делай rebase на чужих ветках.</p>
+    </article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Что такое ветка</a><a href="#section-1" class="lvl-2">Основные команды</a><a href="#section-2" class="lvl-2">Как происходит типичная работа</a><a href="#section-3" class="lvl-2">Merge — слияние веток</a><a href="#section-4" class="lvl-3">Fast-forward merge</a><a href="#section-5" class="lvl-3">Three-way merge</a><a href="#section-6" class="lvl-2">Конфликты и как их решать</a><a href="#section-7" class="lvl-2">Rebase — альтернатива merge</a><a href="#section-8" class="lvl-3">Merge vs rebase</a><a href="#section-9" class="lvl-2">Типичные сценарии</a><a href="#section-10" class="lvl-3">Обновить свою ветку до последнего main</a><a href="#section-11" class="lvl-3">Отменить незаконченный merge</a><a href="#section-12" class="lvl-3">Взять один коммит из другой ветки</a><a href="#section-13" class="lvl-2">Что посмотреть</a><a href="#section-14" class="lvl-2">Итог</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/bash-skripty-dlya-novichka.html"><img src="/img/bash.svg" alt="Bash-скрипты для новичка — автоматизация на Linux" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Инструменты</span><span class="tag">DevOps</span><span class="tag">Разработка</span></div>
+    <a href="/articles/bash-skripty-dlya-novichka.html"><h2 class="card__title">Bash-скрипты для новичка — автоматизация на Linux</h2></a>
+    <p class="card__excerpt">Как написать первый скрипт, который автоматизирует рутину: переменные, условия, циклы, функции, аргументы командной строки.</p>
+    <div class="card__meta">
+      <span>25 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="bash-skripty-dlya-novichka" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/docker-compose-dlya-proekta.html"><img src="/img/compose.svg" alt="Docker Compose — несколько контейнеров одной командой" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">DevOps</span><span class="tag">Инструменты</span><span class="tag">Разработка</span></div>
+    <a href="/articles/docker-compose-dlya-proekta.html"><h2 class="card__title">Docker Compose — несколько контейнеров одной командой</h2></a>
+    <p class="card__excerpt">Когда одного Dockerfile мало: как описать приложение, базу и кэш в одном файле и запускать всё одной командой docker compose up.</p>
+    <div class="card__meta">
+      <span>18 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="docker-compose-dlya-proekta" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/kak-rabotaet-kompilyator-i-interpretator.html"><img src="/img/kompilyator.svg" alt="Как работает компилятор и интерпретатор" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Разработка</span><span class="tag">Теория</span><span class="tag">Инструменты</span></div>
+    <a href="/articles/kak-rabotaet-kompilyator-i-interpretator.html"><h2 class="card__title">Как работает компилятор и интерпретатор</h2></a>
+    <p class="card__excerpt">Почему Python медленнее C, а JavaScript работает в браузере, хотя он интерпретируемый. Разбираем компиляцию, интерпретацию и JIT.</p>
+    <div class="card__meta">
+      <span>1 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="kak-rabotaet-kompilyator-i-interpretator" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

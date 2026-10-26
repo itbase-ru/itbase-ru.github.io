@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Как работает WebSocket — real-time связь между браузером и сервером — IT·База</title>
+  <meta name="description" content="Почему обычный HTTP плохо подходит для чатов, игр и бирж. Разбираем WebSocket: handshake, кадры, когда нужен и какие есть альтернативы.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/kak-rabotaet-websocket.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Как работает WebSocket — real-time связь между браузером и сервером">
+  <meta property="og:description" content="Почему обычный HTTP плохо подходит для чатов, игр и бирж. Разбираем WebSocket: handshake, кадры, когда нужен и какие есть альтернативы.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/kak-rabotaet-websocket.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/kak-rabotaet-websocket.html">
+  <meta property="article:published_time" content="2026-04-14">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Как работает WebSocket — real-time связь между браузером и сервером">
+  <meta name="twitter:description" content="Почему обычный HTTP плохо подходит для чатов, игр и бирж. Разбираем WebSocket: handshake, кадры, когда нужен и какие есть альтернативы.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/kak-rabotaet-websocket.png">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Как работает WebSocket — real-time связь между браузером и сервером", "description": "Почему обычный HTTP плохо подходит для чатов, игр и бирж. Разбираем WebSocket: handshake, кадры, когда нужен и какие есть альтернативы.", "image": ["https://itbase-ru.github.io/img/og/kak-rabotaet-websocket.png"], "datePublished": "2026-04-14", "dateModified": "2026-04-14", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/kak-rabotaet-websocket.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Веб", "item": "https://itbase-ru.github.io/?tag=Веб"}, {"@type": "ListItem", "position": 3, "name": "Как работает WebSocket — real-time связь между браузером и сервером", "item": "https://itbase-ru.github.io/articles/kak-rabotaet-websocket.html"}]}]</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="kak-rabotaet-websocket">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Веб">Веб</a>
+        <span class="sep">/</span>
+        <span>Как работает WebSocket — real-time связь между браузером и сервером</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Веб</span><span class="tag">Сети</span><span class="tag">Разработка</span></div>
+        <h1>Как работает WebSocket — real-time связь между браузером и сервером</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-04-14">14 апреля 2026</time>
+          <span class="dot">•</span>
+          <span>10 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/websocket.svg" alt="Как работает WebSocket — real-time связь между браузером и сервером">
+      </figure>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+      <p>Если делаешь чат, биржевой терминал, онлайн-игру или просто уведомления в реальном времени — обычный HTTP будет мешать. Сервер не может «сам» отправить данные клиенту. Для таких задач есть WebSocket.</p>
+
+      <h2 id="section-0">Проблема HTTP</h2>
+
+      <p>HTTP работает по схеме «запрос-ответ». Клиент спрашивает — сервер отвечает. Сервер не может первым обратиться к клиенту.</p>
+
+      <p>Что делать, если нужно получать сообщения из чата в реальном времени? Есть три плохих способа.</p>
+
+      <h3 id="section-1">1. Постоянные запросы (polling)</h3>
+
+      <p>Клиент каждую секунду спрашивает: «Есть новые сообщения?». В 99% случаев ответ пустой — а трафик тратится.</p>
+
+      <pre><code class="language-javascript">// Каждую секунду — новый HTTP-запрос
+setInterval(function() {
+  fetch('/api/messages?since=' + lastId)
+    .then(function(r) { return r.json(); })
+    .then(function(messages) {
+      messages.forEach(showMessage);
+    });
+}, 1000);</code></pre>
+
+      <h3 id="section-2">2. Длинные запросы (long polling)</h3>
+
+      <p>Клиент отправляет запрос и держит его открытым, пока сервер не ответит. Как только ответ пришёл — сразу новый запрос. Уже лучше, но нагрузка огромная.</p>
+
+      <h3 id="section-3">3. Server-Sent Events</h3>
+
+      <p>Сервер отправляет поток данных в одну сторону — от себя к клиенту. Работает для новостных лент, но не для чата: клиент не может так же легко отвечать.</p>
+
+      <h2 id="section-4">Что такое WebSocket</h2>
+
+      <p>WebSocket — это протокол для <strong>двустороннего постоянного соединения</strong>. Один раз установил — и клиент, и сервер могут отправлять данные друг другу в любой момент.</p>
+
+      <blockquote>WebSocket — это как телефонный разговор: соединились один раз и говорите, пока кто-то не положит трубку. HTTP — как переписка письмами: каждый раз нужно новое сообщение.</blockquote>
+
+      <h2 id="section-5">Как устанавливается соединение</h2>
+
+      <p>Соединение начинается с обычного HTTP-запроса — это называется <strong>handshake</strong>.</p>
+
+      <ol>
+        <li>Клиент отправляет HTTP-запрос со специальным заголовком <code>Upgrade: websocket</code>.</li>
+        <li>Сервер отвечает кодом <code>101 Switching Protocols</code> — «согласен, переключаемся».</li>
+        <li>Дальше то же TCP-соединение используется для общения по правилам WebSocket.</li>
+      </ol>
+
+      <p>После handshake начинается двусторонний обмен короткими сообщениями — <strong>кадрами</strong>.</p>
+
+      <h2 id="section-6">Клиент на JavaScript</h2>
+
+      <pre><code class="language-javascript">// Открываем соединение с сервером
+var socket = new WebSocket('wss://example.com/chat');
+
+// Соединение установлено
+socket.onopen = function() {
+  console.log('Соединение открыто');
+  socket.send('Привет, сервер!');
+};
+
+// Пришло сообщение от сервера
+socket.onmessage = function(event) {
+  console.log('Сообщение:', event.data);
+};
+
+// Ошибка или закрытие
+socket.onerror = function(error) {
+  console.error('Ошибка:', error);
+};
+
+socket.onclose = function() {
+  console.log('Соединение закрыто');
+};
+
+// Отправить данные в любой момент
+function sendMessage(text) {
+  if (socket.readyState === WebSocket.OPEN) {
+    socket.send(text);
+  }
+}</code></pre>
+
+      <p>Обрати внимание на <code>wss://</code> — это защищённая версия WebSocket, как HTTPS для HTTP. Всегда используй её в проде.</p>
+
+      <h2 id="section-7">Сервер на Python</h2>
+
+      <p>Самый простой способ — библиотека <code>websockets</code>.</p>
+
+      <pre><code class="language-python">import asyncio
+import websockets
+
+# Множество активных клиентов
+clients = set()
+
+async def handler(websocket):
+    # Регистрируем нового клиента
+    clients.add(websocket)
+    print('Подключился клиент, всего:', len(clients))
+
+    try:
+        async for message in websocket:
+            # Пришло сообщение — рассылаем всем клиентам
+            print('Получено:', message)
+            for client in clients:
+                await client.send(message)
+    finally:
+        # Клиент отключился — убираем его
+        clients.remove(websocket)
+        print('Клиент отключился, осталось:', len(clients))
+
+async def main():
+    # Запускаем сервер на порту 8765
+    async with websockets.serve(handler, 'localhost', 8765):
+        print('Сервер запущен на ws://localhost:8765')
+        await asyncio.Future()   # работаем вечно
+
+asyncio.run(main())</code></pre>
+
+      <p>Это минимальный чат. Все клиенты получают все сообщения — а сервер живёт одним бесконечным циклом.</p>
+
+      <h2 id="section-8">Что важно знать про соединение</h2>
+
+      <h3 id="section-9">Обрыв связи</h3>
+
+      <p>WebSocket-соединение может разорваться: пропал интернет, сервер перезапустился, мобильное устройство уснуло. Клиент должен уметь <strong>переподключаться</strong> автоматически.</p>
+
+      <pre><code class="language-javascript">function connect() {
+  var socket = new WebSocket('wss://example.com/chat');
+
+  socket.onopen = function() {
+    console.log('Соединение установлено');
+  };
+
+  socket.onclose = function() {
+    console.log('Соединение закрыто, переподключаемся через 3 секунды');
+    // Через 3 секунды пробуем снова
+    setTimeout(connect, 3000);
+  };
+}
+
+connect();</code></pre>
+
+      <h3 id="section-10">Heartbeat (пинг-понг)</h3>
+
+      <p>Чтобы соединение не закрылось само по таймауту, клиент периодически отправляет «пинг» — короткое пустое сообщение. Сервер отвечает «понг».</p>
+
+      <pre><code class="language-javascript">// Каждые 30 секунд — проверка, что соединение живо
+setInterval(function() {
+  if (socket.readyState === WebSocket.OPEN) {
+    socket.send(JSON.stringify({ type: 'ping' }));
+  }
+}, 30000);</code></pre>
+
+      <h3 id="section-11">Состояния соединения</h3>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Код</th><th>Состояние</th><th>Что значит</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>0</td><td>CONNECTING</td><td>Идёт handshake</td></tr>
+          <tr><td>1</td><td>OPEN</td><td>Можно отправлять и получать</td></tr>
+          <tr><td>2</td><td>CLOSING</td><td>Соединение закрывается</td></tr>
+          <tr><td>3</td><td>CLOSED</td><td>Уже закрыто</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2 id="section-12">Где применяется WebSocket</h2>
+
+      <ul>
+        <li><strong>Чаты и мессенджеры.</strong> Мгновенная доставка сообщений.</li>
+        <li><strong>Онлайн-игры.</strong> Позиции игроков обновляются десятки раз в секунду.</li>
+        <li><strong>Биржевые терминалы.</strong> Курсы акций в реальном времени.</li>
+        <li><strong>Совместное редактирование.</strong> Google Docs, Figma — все изменения сразу видны.</li>
+        <li><strong>Уведомления.</strong> Push-сообщения без перезагрузки страницы.</li>
+        <li><strong>Стриминг данных.</strong> Логи, метрики, телеметрия.</li>
+      </ul>
+
+      <h2 id="section-13">WebSocket vs HTTP</h2>
+
+      <div class="table-scroll"><table>
+        <thead>
+          <tr><th>Критерий</th><th>HTTP</th><th>WebSocket</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Соединение</td><td>Новое на каждый запрос</td><td>Одно постоянное</td></tr>
+          <tr><td>Направление</td><td>Клиент → сервер</td><td>В обе стороны</td></tr>
+          <tr><td>Оверхед</td><td>Много заголовков на каждый запрос</td><td>Минимальный</td></tr>
+          <tr><td>Инициатор</td><td>Клиент</td><td>И клиент, и сервер</td></tr>
+          <tr><td>Кэширование</td><td>Работает</td><td>Нет</td></tr>
+          <tr><td>Когда использовать</td><td>Загрузка страниц, API</td><td>Real-time данные</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2 id="section-14">Альтернативы</h2>
+
+      <p>WebSocket — не единственный вариант для real-time. Есть ещё:</p>
+
+      <ul>
+        <li><strong>Socket.IO.</strong> Библиотека поверх WebSocket с автоматическим fallback на long polling, если WebSocket не работает. Удобна, но добавляет вес.</li>
+        <li><strong>Server-Sent Events (SSE).</strong> Односторонний поток от сервера к клиенту. Проще WebSocket, работает поверх HTTP.</li>
+        <li><strong>WebRTC.</strong> Прямое соединение между браузерами — для видео и аудио.</li>
+        <li><strong>gRPC streaming.</strong> Двусторонний поток для микросервисов.</li>
+      </ul>
+
+      <h2 id="section-15">Частые ошибки</h2>
+
+      <ul>
+        <li><strong>Забыть про переподключение.</strong> Соединение оборвётся — и без авто-реконнекта клиент перестанет получать данные.</li>
+        <li><strong>Открывать много сокетов.</strong> Один сокет на вкладку — достаточно. Не создавай новый на каждый компонент.</li>
+        <li><strong>Забыть про wss.</strong> В проде — только защищённое соединение.</li>
+        <li><strong>Хранить состояние только в памяти сервера.</strong> При перезапуске всё пропадёт. Для серьёзных систем состояние держат в Redis или базе.</li>
+      </ul>
+
+      <h2 id="section-16">Итог</h2>
+
+      <p>WebSocket — протокол для двусторонней связи в реальном времени. Устанавливается один раз через HTTP-handshake, дальше обмен идёт напрямую. Идеален для чатов, игр, бирж и уведомлений. Требует аккуратности: переподключение, heartbeat, wss. Для обычных сайтов с загрузкой страниц — не нужен, там HTTP достаточно.</p>
+    </article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Проблема HTTP</a><a href="#section-1" class="lvl-3">1. Постоянные запросы (polling)</a><a href="#section-2" class="lvl-3">2. Длинные запросы (long polling)</a><a href="#section-3" class="lvl-3">3. Server-Sent Events</a><a href="#section-4" class="lvl-2">Что такое WebSocket</a><a href="#section-5" class="lvl-2">Как устанавливается соединение</a><a href="#section-6" class="lvl-2">Клиент на JavaScript</a><a href="#section-7" class="lvl-2">Сервер на Python</a><a href="#section-8" class="lvl-2">Что важно знать про соединение</a><a href="#section-9" class="lvl-3">Обрыв связи</a><a href="#section-10" class="lvl-3">Heartbeat (пинг-понг)</a><a href="#section-11" class="lvl-3">Состояния соединения</a><a href="#section-12" class="lvl-2">Где применяется WebSocket</a><a href="#section-13" class="lvl-2">WebSocket vs HTTP</a><a href="#section-14" class="lvl-2">Альтернативы</a><a href="#section-15" class="lvl-2">Частые ошибки</a><a href="#section-16" class="lvl-2">Итог</a></aside>
+      </div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/paginaciya-i-versirovanie-api.html"><img src="/img/api-versioning.svg" alt="Пагинация и версионирование API — как не сломать клиентов" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">API</span><span class="tag">Веб</span><span class="tag">Разработка</span></div>
+    <a href="/articles/paginaciya-i-versirovanie-api.html"><h2 class="card__title">Пагинация и версионирование API — как не сломать клиентов</h2></a>
+    <p class="card__excerpt">Как отдавать тысячи записей постранично и что делать, когда API меняется. Разбираем offset/limit, cursor-пагинацию и версионирование.</p>
+    <div class="card__meta">
+      <span>27 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="paginaciya-i-versirovanie-api" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/xss-csrf-sql-inekcii.html"><img src="/img/security.svg" alt="XSS, CSRF, SQL-инъекции — три главные атаки на веб" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Безопасность</span><span class="tag">Веб</span><span class="tag">Разработка</span></div>
+    <a href="/articles/xss-csrf-sql-inekcii.html"><h2 class="card__title">XSS, CSRF, SQL-инъекции — три главные атаки на веб</h2></a>
+    <p class="card__excerpt">Разбираем три самых частых уязвимости в веб-приложениях: как работают, чем опасны и как защититься. С примерами атак и защиты.</p>
+    <div class="card__meta">
+      <span>15 апреля 2026</span><span class="dot">•</span><span>12 мин</span>
+      <button class="card__bm" data-slug="xss-csrf-sql-inekcii" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/chto-takoe-keshirovanie.html"><img src="/img/cache.svg" alt="Что такое кэширование и зачем оно нужно" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Разработка</span><span class="tag">Веб</span><span class="tag">DevOps</span></div>
+    <a href="/articles/chto-takoe-keshirovanie.html"><h2 class="card__title">Что такое кэширование и зачем оно нужно</h2></a>
+    <p class="card__excerpt">Кэш — одна из главных идей в IT. Разбираем, какие бывают уровни кэша, что такое TTL, инвалидация, и почему кэш может всё сломать.</p>
+    <div class="card__meta">
+      <span>2 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="chto-takoe-keshirovanie" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
