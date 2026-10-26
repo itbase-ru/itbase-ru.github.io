@@ -19,6 +19,7 @@ build.py — сборка сайта IT·База.
 import datetime
 import html
 import json
+import os
 import re
 import subprocess
 import sys
@@ -31,6 +32,15 @@ SITE_NAME = "IT·База"                  # название сайта
 AUTHOR_NAME = "IT·База"                # автор в микроразметке (можно своё имя)
 CONTACT_EMAIL = "kirillfomichev05@mail.ru"
 FORCE_OG = False                       # True = перерисовать все OG-картинки
+
+# ─── Монетизация и аналитика (вкл/выкл через переменные окружения в GitHub Secrets) ───
+YANDEX_METRIKA_ID = os.environ.get("YANDEX_METRIKA_ID", "")  # например "12345678"
+GOOGLE_ANALYTICS_ID = os.environ.get("GOOGLE_ANALYTICS_ID", "")  # например "G-XXXXXXX"
+YANDEX_RSY_BLOCK_ID = os.environ.get("YANDEX_RSY_BLOCK_ID", "")  # ID блока РСЯ, напр. "R-A-123456-1"
+DONATE_BOOSTY_URL  = os.environ.get("DONATE_BOOSTY_URL", "https://boosty.to/itbase")  # Replace на свой
+DONATE_TG_URL      = os.environ.get("DONATE_TG_URL", "https://t.me/itbase_bot")
+DONATE_YOOMONEY    = os.environ.get("DONATE_YOOMONEY", "")  # напр. "https://yoomoney.ru/to/4100123456789"
+TG_CHANNEL_URL     = os.environ.get("TG_CHANNEL_URL", "https://t.me/itbase")  # для кнопки в шапке/футере
 # -----------------------------------------------------------------------------
 
 ROOT = Path(__file__).resolve().parent
@@ -60,11 +70,127 @@ FOOTER = f"""<footer class="site-footer">
     <span>© <span id="year">{YEAR}</span> IT·База</span>
     <a href="/about.html">О сайте</a>
     <a href="/contacts.html">Контакты</a>
+    <a href="/support.html">Поддержать ★</a>
     <a href="/privacy.html">Политика</a>
     <a href="/terms.html">Условия</a>
     <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
   </div>
 </footer>"""
+
+
+# ─── Аналитика: Яндекс.Метрика и Google Analytics ─────────────────────────
+def analytics_snippet():
+    """Возвращает HTML-код счётчиков, если ID заданы в переменных окружения."""
+    parts = []
+    if YANDEX_METRIKA_ID:
+        parts.append(f'''<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){{m[i]=m[i]||function(){{(m[i].a=m[i].a||[]).push(arguments)}};
+m[i].l=1*new Date();
+for (var j = 0; j < document.scripts.length; j++) {{if (document.scripts[j].src === r) {{ return; }} }}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)}})
+(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+ym({YANDEX_METRIKA_ID}, "init", {{
+    clickmap:true,
+    trackLinks:true,
+    accurateTrackBounce:true,
+    webvisor:true
+}});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/{YANDEX_METRIKA_ID}" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->''')
+    if GOOGLE_ANALYTICS_ID:
+        parts.append(f'''<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={GOOGLE_ANALYTICS_ID}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){{dataLayer.push(arguments);}}
+  gtag('js', new Date());
+  gtag('config', '{GOOGLE_ANALYTICS_ID}', {{ 'anonymize_ip': true }});
+</script>
+<!-- /Google Analytics -->''')
+    return "\n".join(parts)
+
+
+# ─── Рекламный слот РСЯ (Рекламная Сеть Яндекса) ──────────────────────────
+def ad_slot_html(block_id=YANDEX_RSY_BLOCK_ID, slot_name="inline"):
+    """Возвращает HTML-код рекламного блока РСЯ, если block_id задан.
+    Если block_id пустой — возвращает пустой div с классом ad-slot
+    (через CSS скрыт, не мешает верстке).
+    """
+    if not block_id:
+        return f'<div class="ad-slot ad-slot--{slot_name}" data-slot="{slot_name}"></div>'
+    return f'''<div class="ad-slot ad-slot--{slot_name}" data-slot="{slot_name}">
+  <!-- Яндекс.РСЯ -->
+  <div id="yandex_rtb_{slot_name}"></div>
+  <script>
+    window.yaContextCb = window.yaContextCb || [];
+    window.yaContextCb.push(()=>{{
+      window.yaContext.renderTo("{block_id}", {{
+        blockId: "{slot_name}",
+        renderTo: "yandex_rtb_{slot_name}"
+      }});
+    }});
+  </script>
+</div>'''
+
+
+# ─── Кнопка «Поддержать» для вставки в статьи ─────────────────────────────
+def donate_block_html():
+    """Блок поддержки проекта — Boosty/Telegram/ЮMoney. Вставляется в конец статьи."""
+    buttons = []
+    if DONATE_BOOSTY_URL:
+        buttons.append(f'<a href="{DONATE_BOOSTY_URL}" target="_blank" rel="noopener nofollow" class="donate-btn donate-boosty">☕ Boosty</a>')
+    if DONATE_TG_URL:
+        buttons.append(f'<a href="{DONATE_TG_URL}" target="_blank" rel="noopener nofollow" class="donate-btn donate-tg">✈️ Telegram</a>')
+    if DONATE_YOOMONEY:
+        buttons.append(f'<a href="{DONATE_YOOMONEY}" target="_blank" rel="noopener nofollow" class="donate-btn donate-yoo">💳 ЮMoney</a>')
+    if not buttons:
+        return ''
+    return f'''
+    <aside class="donate-block" aria-label="Поддержать проект">
+      <div class="donate-block__title">Поддержи проект</div>
+      <p class="donate-block__text">Сайт живёт на энтузиазме. Если статья оказалась полезной — поблагодари автора. Любая сумма идёт на хостинг, домен и новые статьи.</p>
+      <div class="donate-block__buttons">
+        {''.join(buttons)}
+      </div>
+      <p class="donate-block__hint">Также можно подписаться на <a href="{TG_CHANNEL_URL}" target="_blank" rel="noopener">Telegram-канал</a> — там анонсы новых статей.</p>
+    </aside>
+    '''
+
+
+# ─── FAQ JSON-LD: если в статье есть H3 в формате «Вопрос?» → генерируем ───
+FAQ_Q_RE = re.compile(r'<h3[^>]*>([^<\?]+(?:\?|:))</h3>', re.I)
+
+
+def extract_faq_jsonld(content):
+    """Извлекает вопросы (h3, оканчивающиеся на ? или :) → FAQPage schema.
+    Возвращает dict или None, если вопросов меньше 3 (Яндекс требует 3+)."""
+    questions = []
+    for m in FAQ_Q_RE.finditer(content):
+        q = strip_tags(m.group(1)).strip()
+        if not q:
+            continue
+        # Найти ближайший <p> после вопроса как ответ
+        after = content[m.end():]
+        p_m = re.search(r'<p[^>]*>(.*?)</p>', after, re.S)
+        if not p_m:
+            continue
+        answer = strip_tags(p_m.group(1)).strip()
+        if len(answer) < 20:
+            continue
+        questions.append({"q": q, "a": answer})
+    if len(questions) < 3:
+        return None
+    return {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {"@type": "Question", "name": q["q"],
+             "acceptedAnswer": {"@type": "Answer", "text": q["a"]}}
+            for q in questions[:10]  # максимум 10 вопросов
+        ]
+    }
 
 # ----------------------------- ВСПОМОГАТЕЛЬНОЕ -------------------------------
 TR = dict(zip(
@@ -339,8 +465,11 @@ def build_article_page(a, arts):
          "headline": a["title"], "description": a["excerpt"], "image": [img],
          "datePublished": a["date"], "dateModified": a["date"], "inLanguage": "ru",
          "author": {"@type": "Organization", "name": AUTHOR_NAME, "url": SITE + "/"},
-         "publisher": {"@type": "Organization", "name": SITE_NAME, "url": SITE + "/"},
-         "mainEntityOfPage": {"@type": "WebPage", "@id": canon}},
+         "publisher": {"@type": "Organization", "name": SITE_NAME, "url": SITE + "/",
+                       "logo": {"@type": "ImageObject", "url": SITE + "/favicon.svg"}},
+         "mainEntityOfPage": {"@type": "WebPage", "@id": canon},
+         "articleSection": first_tag,
+         "keywords": ", ".join(a["tags"])},
         {"@context": "https://schema.org", "@type": "BreadcrumbList",
          "itemListElement": [
              {"@type": "ListItem", "position": 1, "name": "Главная", "item": SITE + "/"},
@@ -348,6 +477,21 @@ def build_article_page(a, arts):
               "item": f"{SITE}/?tag={first_tag}"},
              {"@type": "ListItem", "position": 3, "name": a["title"], "item": canon}]},
     ]
+    # FAQ JSON-LD — если в статье есть 3+ вопроса под H3
+    faq = extract_faq_jsonld(a["content"])
+    if faq:
+        ld.append(faq)
+
+    # Склеиваем все LD в один тег
+    ld_inline = "\n".join(
+        f'<script type="application/ld+json">{ld_json(item)}</script>'
+        for item in ld
+    )
+
+    donate_html = donate_block_html()
+    ad_inline = ad_slot_html(slot_name="ad-inline")
+    ad_bottom = ad_slot_html(slot_name="ad-bottom")
+    analytics = analytics_snippet()
 
     toc = ""
     if len(a["heads"]) >= 2:
@@ -379,7 +523,7 @@ def build_article_page(a, arts):
   <meta name="twitter:title" content="{esc(a['title'])}">
   <meta name="twitter:description" content="{esc(a['excerpt'])}">
   <meta name="twitter:image" content="{img}">
-  <script type="application/ld+json">{ld_json(ld)}</script>
+  {ld_inline}
   {THEME_SCRIPT}
   {ICONS}
   <link rel="stylesheet" href="/style.css">
@@ -421,10 +565,16 @@ def build_article_page(a, arts):
         <img src="{esc(src(a['cover']))}" alt="{esc(a['title'])}">
       </figure>
 
+      {ad_inline}
+
       <div class="article-layout">
         <article class="article-body" id="article-body">{a['content']}</article>
         <aside class="toc" id="toc">{toc}</aside>
       </div>
+
+      {donate_html}
+
+      {ad_bottom}
 
       <section class="wrap" style="padding-bottom:70px">
         <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
@@ -441,6 +591,7 @@ def build_article_page(a, arts):
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
   <script src="/app.js"></script>
+  {analytics}
 </body>
 </html>
 """
@@ -614,6 +765,7 @@ def write_robots():
         "Allow: /\n"
         "Allow: /articles/\n"
         "Allow: /img/\n"
+        "Allow: /support.html\n"
         "Disallow: /data/\n"
         "Disallow: /app.js\n\n"
         "# Особые правила для Яндекса\n"
@@ -621,6 +773,7 @@ def write_robots():
         "Allow: /\n"
         "Allow: /articles/\n"
         "Allow: /img/\n"
+        "Allow: /support.html\n"
         "Disallow: /data/\n"
         "Clean-param: tag&q&search /*\n"
         "Crawl-delay: 0.5\n\n"
@@ -629,8 +782,10 @@ def write_robots():
         "Allow: /\n"
         "Allow: /articles/\n"
         "Allow: /img/\n"
+        "Allow: /support.html\n"
         "Disallow: /data/\n\n"
         f"Sitemap: {SITE}/sitemap.xml\n"
+        f"Sitemap: {SITE}/sitemap-images.xml\n"
         f"Host: {host}\n"
     )
     (ROOT / "robots.txt").write_text(txt, encoding="utf-8")
@@ -755,6 +910,171 @@ def write_sitemap_html(arts):
     (ROOT / "sitemap.html").write_text(html_out, encoding="utf-8")
 
 
+def write_sitemap_images(arts):
+    """sitemap-images.xml — карта изображений для индексации в Яндекс.Картинки."""
+    urls = []
+    seen = set()
+    for a in arts:
+        # Обложка статьи (OG-картинка если есть, иначе SVG)
+        img_url = og_image(a)
+        page_url = f"{SITE}/{a['url']}"
+        if img_url not in seen:
+            urls.append((img_url, page_url, a["title"]))
+            seen.add(img_url)
+        # OG-default
+        default = default_og()
+        if default not in seen:
+            urls.append((default, SITE + "/", SITE_NAME))
+            seen.add(default)
+
+    rows = []
+    for img_url, page_url, caption in urls:
+        rows.append(
+            "  <url>\n"
+            f"    <loc>{esc(img_url)}</loc>\n"
+            f"    <image:image>\n"
+            f"      <image:loc>{esc(img_url)}</image:loc>\n"
+            f"      <image:caption>{esc(caption)}</image:caption>\n"
+            f"      <image:title>{esc(caption)}</image:title>\n"
+            f"      <image:license>{SITE}/terms.html</image:license>\n"
+            "    </image:image>\n"
+            "  </url>"
+        )
+    xml = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
+        'xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n'
+        + "\n".join(rows) + "\n"
+        "</urlset>\n"
+    )
+    (ROOT / "sitemap-images.xml").write_text(xml, encoding="utf-8")
+
+
+def write_support_page(arts):
+    """Страница /support.html с кнопками Boosty/Telegram/ЮMoney."""
+    donate_html = donate_block_html()
+    n_articles = len(arts)
+    html_out = f'''<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Поддержать проект — {esc(SITE_NAME)}</title>
+  <meta name="description" content="Поддержка проекта IT·База: Boosty, Telegram, ЮMoney. Любая сумма идёт на хостинг, домен и создание новых статей.">
+  <link rel="canonical" href="{SITE}/support.html">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{esc(SITE_NAME)}">
+  <meta property="og:title" content="Поддержать проект — {esc(SITE_NAME)}">
+  <meta property="og:description" content="Поддержка проекта IT·База: Boosty, Telegram, ЮMoney.">
+  <meta property="og:url" content="{SITE}/support.html">
+  <meta property="og:image" content="{default_og()}">
+  {ICONS}
+  <link rel="manifest" href="/manifest.json">
+  <link rel="alternate" type="application/rss+xml" title="{esc(SITE_NAME)} — новые статьи" href="{SITE}/rss.xml">
+  {THEME_SCRIPT}
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .support-wrap{{max-width:760px;margin:0 auto;padding:40px 20px 80px;}}
+    .support-hero{{text-align:center;margin:30px 0 50px;}}
+    .support-hero h1{{font-family:Georgia,serif;font-size:42px;margin:0 0 14px;}}
+    .support-hero p{{color:var(--muted);font-size:17px;line-height:1.6;margin:0 auto;max-width:560px;}}
+    .donate-block{{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:36px;margin:30px 0;}}
+    .donate-block__title{{font-family:Georgia,serif;font-size:26px;margin:0 0 16px;color:var(--accent);}}
+    .donate-block__text{{color:var(--muted);font-size:16px;line-height:1.6;margin:0 0 24px;}}
+    .donate-block__buttons{{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:18px;}}
+    .donate-btn{{display:inline-flex;align-items:center;gap:8px;padding:14px 24px;border-radius:10px;font-weight:600;font-size:15px;text-decoration:none;transition:transform .15s,box-shadow .15s;}}
+    .donate-btn:hover{{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.25);}}
+    .donate-boosty{{background:#f8f000;color:#1a1a1a;}}
+    .donate-tg{{background:#0088cc;color:#fff;}}
+    .donate-yoo{{background:#8b00cc;color:#fff;}}
+    .donate-block__hint{{color:var(--muted);font-size:14px;margin:0;}}
+    .donate-block__hint a{{color:var(--accent);}}
+    .support-stats{{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;margin-top:40px;}}
+    .support-stat{{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center;}}
+    .support-stat__num{{font-family:Georgia,serif;font-size:32px;color:var(--accent);margin-bottom:4px;}}
+    .support-stat__label{{font-size:13px;color:var(--muted);}}
+    .support-faq{{margin-top:50px;}}
+    .support-faq h2{{font-family:Georgia,serif;font-size:26px;margin:0 0 20px;}}
+    .support-faq details{{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:10px;}}
+    .support-faq summary{{cursor:pointer;font-weight:600;font-size:16px;color:var(--text);}}
+    .support-faq details[open] summary{{color:var(--accent);}}
+    .support-faq p{{color:var(--muted);font-size:15px;line-height:1.6;margin:12px 0 0;}}
+  </style>
+</head>
+<body>
+  <div id="progress"></div>
+  {HEADER}
+  <main>
+    <section class="support-wrap">
+      <div class="support-hero">
+        <h1>Поддержать проект</h1>
+        <p>IT·База — бесплатный образовательный проект. Здесь нет рекламы, которая мешает
+        чтению, и нет пейволов. Если статьи оказались полезными — поддержи автора любой
+        суммой. Это поможет платить за хостинг, домен и тратить больше времени на
+        написание новых материалов.</p>
+      </div>
+
+      {donate_html}
+
+      <div class="support-stats">
+        <div class="support-stat">
+          <div class="support-stat__num">{n_articles}</div>
+          <div class="support-stat__label">статей на сайте</div>
+        </div>
+        <div class="support-stat">
+          <div class="support-stat__num">100%</div>
+          <div class="support-stat__label">бесплатно</div>
+        </div>
+        <div class="support-stat">
+          <div class="support-stat__num">0</div>
+          <div class="support-stat__label">рекламы в статьях</div>
+        </div>
+        <div class="support-stat">
+          <div class="support-stat__num">2026</div>
+          <div class="support-stat__label">год запуска</div>
+        </div>
+      </div>
+
+      <section class="support-faq">
+        <h2>Частые вопросы</h2>
+        <details>
+          <summary>Зачем мне вас поддерживать?</summary>
+          <p>Сайт живёт на хостинге GitHub Pages — он бесплатный, но есть ограничения.
+          Домен стоит денег. А главное — время автора: написание одной статьи занимает
+          10-20 часов с проверкой фактов и кода. Поддержка позволяет выделять на это
+          больше времени.</p>
+        </details>
+        <details>
+          <summary>Какие способы оплаты есть?</summary>
+          <p>Boosty (карты РФ и мира, подписка разовая или ежемесячная), Telegram-оплата
+          (карты, крипта), ЮMoney (только для РФ). Все способы — внешние сервисы, данные
+          карты нигде на сайте не сохраняются.</p>
+        </details>
+        <details>
+          <summary>Можно ли подписаться на регулярную поддержку?</summary>
+          <p>Да, через Boosty есть тарифы от 100 ₽/мес. Подписчики получают доступ к
+          закрытому Telegram-каналу, где я делюсь прогрессом по новым статьям и
+          отвечаю на вопросы.</p>
+        </details>
+        <details>
+          <summary>Что если я не могу финансово помочь?</summary>
+          <p>Поделись ссылкой на статью с другом — это тоже поддержка. Можно подписаться
+          на <a href="{TG_CHANNEL_URL}" target="_blank" rel="noopener">Telegram-канал</a>,
+          поставить звёздочку в закладки и рассказать о проекте в своём окружении.</p>
+        </details>
+      </section>
+    </section>
+  </main>
+  {FOOTER}
+  <script src="/app.js"></script>
+  {analytics_snippet()}
+</body>
+</html>
+'''
+    (ROOT / "support.html").write_text(html_out, encoding="utf-8")
+
+
 # ----------------------------- ЗАПУСК ----------------------------------------
 def main():
     raw = load_articles()
@@ -774,7 +1094,9 @@ def main():
     write_rss(arts)
     write_manifest()
     write_sitemap_html(arts)
-    print("RSS, manifest, sitemap.html и улучшенный robots.txt созданы.")
+    write_sitemap_images(arts)
+    write_support_page(arts)
+    print("RSS, manifest, sitemap.html, sitemap-images, support.html и улучшенный robots.txt созданы.")
     print("Готово.")
 
 

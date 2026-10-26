@@ -18,7 +18,8 @@
   <meta name="twitter:title" content="REST и GraphQL — в чём разница">
   <meta name="twitter:description" content="Два главных подхода к построению API. Разбираем на примерах: когда REST удобнее, а когда GraphQL решает проблемы, которые REST создаёт.">
   <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/chto-takoe-rest-i-graphql.png">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "REST и GraphQL — в чём разница", "description": "Два главных подхода к построению API. Разбираем на примерах: когда REST удобнее, а когда GraphQL решает проблемы, которые REST создаёт.", "image": ["https://itbase-ru.github.io/img/og/chto-takoe-rest-i-graphql.png"], "datePublished": "2026-03-30", "dateModified": "2026-03-30", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/chto-takoe-rest-i-graphql.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Веб", "item": "https://itbase-ru.github.io/?tag=Веб"}, {"@type": "ListItem", "position": 3, "name": "REST и GraphQL — в чём разница", "item": "https://itbase-ru.github.io/articles/chto-takoe-rest-i-graphql.html"}]}]</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "REST и GraphQL — в чём разница", "description": "Два главных подхода к построению API. Разбираем на примерах: когда REST удобнее, а когда GraphQL решает проблемы, которые REST создаёт.", "image": ["https://itbase-ru.github.io/img/og/chto-takoe-rest-i-graphql.png"], "datePublished": "2026-03-30", "dateModified": "2026-03-30", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/", "logo": {"@type": "ImageObject", "url": "https://itbase-ru.github.io/favicon.svg"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/chto-takoe-rest-i-graphql.html"}, "articleSection": "Веб", "keywords": "Веб, API, Теория"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Веб", "item": "https://itbase-ru.github.io/?tag=Веб"}, {"@type": "ListItem", "position": 3, "name": "REST и GraphQL — в чём разница", "item": "https://itbase-ru.github.io/articles/chto-takoe-rest-i-graphql.html"}]}</script>
   <script>
     (function(){
       try{
@@ -72,6 +73,8 @@
       <figure class="article-cover">
         <img src="/img/rest-graphql.svg" alt="REST и GraphQL — в чём разница">
       </figure>
+
+      <div class="ad-slot ad-slot--ad-inline" data-slot="ad-inline"></div>
 
       <div class="article-layout">
         <article class="article-body" id="article-body">
@@ -209,6 +212,19 @@ GET /users/42/reviews?limit=5</code></pre>
         <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">REST — что это</a><a href="#section-1" class="lvl-2">Проблемы REST</a><a href="#section-2" class="lvl-3">1. Over-fetching — данных больше, чем нужно</a><a href="#section-3" class="lvl-3">2. Under-fetching — данных меньше, чем нужно</a><a href="#section-4" class="lvl-2">GraphQL — что это</a><a href="#section-5" class="lvl-2">Сравнение</a><a href="#section-6" class="lvl-2">Когда REST лучше</a><a href="#section-7" class="lvl-2">Когда GraphQL лучше</a><a href="#section-8" class="lvl-2">Что такое «N+1 проблема» в GraphQL</a><a href="#section-9" class="lvl-2">Что выбрать на практике</a><a href="#section-10" class="lvl-2">А есть ещё tRPC, gRPC и другие</a><a href="#section-11" class="lvl-2">Итог</a></aside>
       </div>
 
+      
+    <aside class="donate-block" aria-label="Поддержать проект">
+      <div class="donate-block__title">Поддержи проект</div>
+      <p class="donate-block__text">Сайт живёт на энтузиазме. Если статья оказалась полезной — поблагодари автора. Любая сумма идёт на хостинг, домен и новые статьи.</p>
+      <div class="donate-block__buttons">
+        <a href="https://boosty.to/itbase" target="_blank" rel="noopener nofollow" class="donate-btn donate-boosty">☕ Boosty</a><a href="https://t.me/itbase_bot" target="_blank" rel="noopener nofollow" class="donate-btn donate-tg">✈️ Telegram</a>
+      </div>
+      <p class="donate-block__hint">Также можно подписаться на <a href="https://t.me/itbase" target="_blank" rel="noopener">Telegram-канал</a> — там анонсы новых статей.</p>
+    </aside>
+    
+
+      <div class="ad-slot ad-slot--ad-bottom" data-slot="ad-bottom"></div>
+
       <section class="wrap" style="padding-bottom:70px">
         <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
         <div class="grid" id="related">
@@ -258,6 +274,7 @@ GET /users/42/reviews?limit=5</code></pre>
     <span>© <span id="year">2026</span> IT·База</span>
     <a href="/about.html">О сайте</a>
     <a href="/contacts.html">Контакты</a>
+    <a href="/support.html">Поддержать ★</a>
     <a href="/privacy.html">Политика</a>
     <a href="/terms.html">Условия</a>
     <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
@@ -268,5 +285,6 @@ GET /users/42/reviews?limit=5</code></pre>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
   <script src="/app.js"></script>
+  
 </body>
 </html>

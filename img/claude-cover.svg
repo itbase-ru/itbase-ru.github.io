@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+<defs>
+<linearGradient id="cd" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#170d04"/><stop offset="1" stop-color="#2a1810"/>
+</linearGradient>
+<radialGradient id="glow2" cx="0.5" cy="0.5" r="0.5">
+<stop offset="0" stop-color="#d97757" stop-opacity="0.40"/>
+<stop offset="1" stop-color="#d97757" stop-opacity="0"/>
+</radialGradient>
+</defs>
+<rect width="1200" height="675" fill="url(#cd)"/>
+<circle cx="900" cy="320" r="340" fill="url(#glow2)"/>
+<g fill="none" stroke="#d97757" stroke-width="6" stroke-linecap="round">
+<path d="M 880 200 L 920 260 L 980 260 L 935 310 L 960 380 L 880 330 L 800 380 L 825 310 L 780 260 L 840 260 Z"/>
+</g>
+<g fill="#d97757" opacity="0.9">
+<circle cx="880" cy="280" r="6"/>
+</g>
+<g font-family="monospace" font-size="20">
+<text x="720" y="470" fill="#8a95a6">// Claude умеет</text>
+<text x="720" y="500" fill="#d97757">- читать код</text>
+<text x="720" y="530" fill="#d97757">- писать статьи</text>
+<text x="720" y="560" fill="#d97757">- анализировать PDF</text>
+</g>
+<text x="60" y="280" fill="#e9eef5" font-family="Georgia, serif" font-size="100" font-weight="700">Claude AI</text>
+<text x="60" y="340" fill="#d97757" font-family="monospace" font-size="20" letter-spacing="3">// ANTHROPIC · ОБЗОР</text>
+</svg>

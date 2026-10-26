@@ -18,7 +18,8 @@
   <meta name="twitter:title" content="Docker Compose — несколько контейнеров одной командой">
   <meta name="twitter:description" content="Когда одного Dockerfile мало: как описать приложение, базу и кэш в одном файле и запускать всё одной командой docker compose up.">
   <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/docker-compose-dlya-proekta.png">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Docker Compose — несколько контейнеров одной командой", "description": "Когда одного Dockerfile мало: как описать приложение, базу и кэш в одном файле и запускать всё одной командой docker compose up.", "image": ["https://itbase-ru.github.io/img/og/docker-compose-dlya-proekta.png"], "datePublished": "2026-04-18", "dateModified": "2026-04-18", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/docker-compose-dlya-proekta.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "DevOps", "item": "https://itbase-ru.github.io/?tag=DevOps"}, {"@type": "ListItem", "position": 3, "name": "Docker Compose — несколько контейнеров одной командой", "item": "https://itbase-ru.github.io/articles/docker-compose-dlya-proekta.html"}]}]</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Docker Compose — несколько контейнеров одной командой", "description": "Когда одного Dockerfile мало: как описать приложение, базу и кэш в одном файле и запускать всё одной командой docker compose up.", "image": ["https://itbase-ru.github.io/img/og/docker-compose-dlya-proekta.png"], "datePublished": "2026-04-18", "dateModified": "2026-04-18", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/", "logo": {"@type": "ImageObject", "url": "https://itbase-ru.github.io/favicon.svg"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/docker-compose-dlya-proekta.html"}, "articleSection": "DevOps", "keywords": "DevOps, Инструменты, Разработка"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "DevOps", "item": "https://itbase-ru.github.io/?tag=DevOps"}, {"@type": "ListItem", "position": 3, "name": "Docker Compose — несколько контейнеров одной командой", "item": "https://itbase-ru.github.io/articles/docker-compose-dlya-proekta.html"}]}</script>
   <script>
     (function(){
       try{
@@ -72,6 +73,8 @@
       <figure class="article-cover">
         <img src="/img/compose.svg" alt="Docker Compose — несколько контейнеров одной командой">
       </figure>
+
+      <div class="ad-slot ad-slot--ad-inline" data-slot="ad-inline"></div>
 
       <div class="article-layout">
         <article class="article-body" id="article-body">
@@ -346,6 +349,19 @@ volumes:
         <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Что такое Docker Compose</a><a href="#section-1" class="lvl-2">Файл docker-compose.yml</a><a href="#section-2" class="lvl-2">services — основные блоки</a><a href="#section-3" class="lvl-2">build — из своего Dockerfile</a><a href="#section-4" class="lvl-2">image — готовый образ</a><a href="#section-5" class="lvl-2">ports — доступ снаружи</a><a href="#section-6" class="lvl-2">environment — переменные окружения</a><a href="#section-7" class="lvl-2">volumes — постоянное хранилище</a><a href="#section-8" class="lvl-2">depends_on — порядок запуска</a><a href="#section-9" class="lvl-2">Основные команды</a><a href="#section-10" class="lvl-2">Пример для реального проекта</a><a href="#section-11" class="lvl-2">Что НЕ надо делать</a><a href="#section-12" class="lvl-2">Compose vs Kubernetes</a><a href="#section-13" class="lvl-2">Итог</a></aside>
       </div>
 
+      
+    <aside class="donate-block" aria-label="Поддержать проект">
+      <div class="donate-block__title">Поддержи проект</div>
+      <p class="donate-block__text">Сайт живёт на энтузиазме. Если статья оказалась полезной — поблагодари автора. Любая сумма идёт на хостинг, домен и новые статьи.</p>
+      <div class="donate-block__buttons">
+        <a href="https://boosty.to/itbase" target="_blank" rel="noopener nofollow" class="donate-btn donate-boosty">☕ Boosty</a><a href="https://t.me/itbase_bot" target="_blank" rel="noopener nofollow" class="donate-btn donate-tg">✈️ Telegram</a>
+      </div>
+      <p class="donate-block__hint">Также можно подписаться на <a href="https://t.me/itbase" target="_blank" rel="noopener">Telegram-канал</a> — там анонсы новых статей.</p>
+    </aside>
+    
+
+      <div class="ad-slot ad-slot--ad-bottom" data-slot="ad-bottom"></div>
+
       <section class="wrap" style="padding-bottom:70px">
         <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
         <div class="grid" id="related">
@@ -362,26 +378,26 @@ volumes:
   </div>
 </article>
 <article class="card">
-  <a class="card__cover" href="/articles/chto-takoe-nginx.html"><img src="/img/nginx.svg" alt="Что такое Nginx и зачем он нужен на сервере" loading="lazy"></a>
+  <a class="card__cover" href="/articles/kubernetes-dlya-novichka.html"><img src="/img/kubernetes-cover.svg" alt="Kubernetes для новичка: поды, деплойменты, сервисы за 15 минут" loading="lazy"></a>
   <div class="card__body">
-    <div class="card__tags"><span class="tag">DevOps</span><span class="tag">Веб</span><span class="tag">Инструменты</span></div>
-    <a href="/articles/chto-takoe-nginx.html"><h2 class="card__title">Что такое Nginx и зачем он нужен на сервере</h2></a>
-    <p class="card__excerpt">Почему почти все сайты работают через Nginx. Разбираем: веб-сервер, reverse proxy, балансировка нагрузки, статика и конфиги.</p>
+    <div class="card__tags"><span class="tag">DevOps</span><span class="tag">Инструменты</span></div>
+    <a href="/articles/kubernetes-dlya-novichka.html"><h2 class="card__title">Kubernetes для новичка: поды, деплойменты, сервисы за 15 минут</h2></a>
+    <p class="card__excerpt">Объяснение Kubernetes простыми словами: что такое поды, деплойменты и сервисы, зачем они нужны и как написать первый манифест. Без воды и без заумных терминов.</p>
     <div class="card__meta">
-      <span>26 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
-      <button class="card__bm" data-slug="chto-takoe-nginx" title="В закладки" aria-label="В закладки">★</button>
+      <span>15 ноября 2026</span><span class="dot">•</span><span>15 мин</span>
+      <button class="card__bm" data-slug="kubernetes-dlya-novichka" title="В закладки" aria-label="В закладки">★</button>
     </div>
   </div>
 </article>
 <article class="card">
-  <a class="card__cover" href="/articles/git-vetki-i-sliyanie.html"><img src="/img/git-vetki.svg" alt="Git ветки и слияния — branch, merge, rebase" loading="lazy"></a>
+  <a class="card__cover" href="/articles/github-copilot-obzor.html"><img src="/img/copilot-cover.svg" alt="GitHub Copilot: обзор, цена, сравнение с альтернативами" loading="lazy"></a>
   <div class="card__body">
-    <div class="card__tags"><span class="tag">Git</span><span class="tag">Инструменты</span><span class="tag">Разработка</span></div>
-    <a href="/articles/git-vetki-i-sliyanie.html"><h2 class="card__title">Git ветки и слияния — branch, merge, rebase</h2></a>
-    <p class="card__excerpt">Как работать с ветками в Git: создавать, переключаться, сливать, разрешать конфликты. Разбираем merge и rebase — когда что использовать.</p>
+    <div class="card__tags"><span class="tag">ИИ</span><span class="tag">Инструменты</span><span class="tag">Разработка</span></div>
+    <a href="/articles/github-copilot-obzor.html"><h2 class="card__title">GitHub Copilot: обзор, цена, сравнение с альтернативами</h2></a>
+    <p class="card__excerpt">Что умеет GitHub Copilot в 2026 году, сколько стоит и стоит ли переключаться на Cursor, Codeium и Tabnine. Реальные сценарии, где ИИ-ассистент помогает и мешает.</p>
     <div class="card__meta">
-      <span>8 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
-      <button class="card__bm" data-slug="git-vetki-i-sliyanie" title="В закладки" aria-label="В закладки">★</button>
+      <span>12 ноября 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="github-copilot-obzor" title="В закладки" aria-label="В закладки">★</button>
     </div>
   </div>
 </article>
@@ -395,6 +411,7 @@ volumes:
     <span>© <span id="year">2026</span> IT·База</span>
     <a href="/about.html">О сайте</a>
     <a href="/contacts.html">Контакты</a>
+    <a href="/support.html">Поддержать ★</a>
     <a href="/privacy.html">Политика</a>
     <a href="/terms.html">Условия</a>
     <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
@@ -405,5 +422,6 @@ volumes:
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
   <script src="/app.js"></script>
+  
 </body>
 </html>

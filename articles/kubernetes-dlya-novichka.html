@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kubernetes для новичка: поды, деплойменты, сервисы за 15 минут — IT·База</title>
+  <meta name="description" content="Объяснение Kubernetes простыми словами: что такое поды, деплойменты и сервисы, зачем они нужны и как написать первый манифест. Без воды и без заумных терминов.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/kubernetes-dlya-novichka.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Kubernetes для новичка: поды, деплойменты, сервисы за 15 минут">
+  <meta property="og:description" content="Объяснение Kubernetes простыми словами: что такое поды, деплойменты и сервисы, зачем они нужны и как написать первый манифест. Без воды и без заумных терминов.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/kubernetes-dlya-novichka.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/kubernetes-dlya-novichka.html">
+  <meta property="article:published_time" content="2026-11-15">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kubernetes для новичка: поды, деплойменты, сервисы за 15 минут">
+  <meta name="twitter:description" content="Объяснение Kubernetes простыми словами: что такое поды, деплойменты и сервисы, зачем они нужны и как написать первый манифест. Без воды и без заумных терминов.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/kubernetes-dlya-novichka.png">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Kubernetes для новичка: поды, деплойменты, сервисы за 15 минут", "description": "Объяснение Kubernetes простыми словами: что такое поды, деплойменты и сервисы, зачем они нужны и как написать первый манифест. Без воды и без заумных терминов.", "image": ["https://itbase-ru.github.io/img/og/kubernetes-dlya-novichka.png"], "datePublished": "2026-11-15", "dateModified": "2026-11-15", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/", "logo": {"@type": "ImageObject", "url": "https://itbase-ru.github.io/favicon.svg"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/kubernetes-dlya-novichka.html"}, "articleSection": "DevOps", "keywords": "DevOps, Инструменты"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "DevOps", "item": "https://itbase-ru.github.io/?tag=DevOps"}, {"@type": "ListItem", "position": 3, "name": "Kubernetes для новичка: поды, деплойменты, сервисы за 15 минут", "item": "https://itbase-ru.github.io/articles/kubernetes-dlya-novichka.html"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Kubernetes и Docker — это одно и то же?", "acceptedAnswer": {"@type": "Answer", "text": "Нет. Docker — это инструмент, который запускает контейнеры. Kubernetes — это оркестратор, который управляет множеством контейнеров на множестве серверов. Без Docker Kubernetes не жил бы, но они не заменяют друг друга."}}, {"@type": "Question", "name": "Сколько стоит Kubernetes в облаке?", "acceptedAnswer": {"@type": "Answer", "text": "Сам куб бесплатный (open-source). Платишь за инфраструктуру: виртуалки, сети, балансировщики. В managed-вариантах (EKS, GKE, AKS) добавляется плата за control plane — обычно 70-80 USD/мес сверху. Полная стоимость небольшого проекта обычно начинается от 100 USD/мес."}}, {"@type": "Question", "name": "Стоит ли учить Kubernetes в 2026?", "acceptedAnswer": {"@type": "Answer", "text": "Да, если планируешь расти в backend или DevOps. Большинство крупных проектов используют куб, и навык манифестов высоко ценится. Если ты фронтендер или делаешь маленькие проекты — пока обойдёшься Docker Compose, куб тебе не нужен."}}, {"@type": "Question", "name": "Можно ли запустить Kubernetes на ноутбуке?", "acceptedAnswer": {"@type": "Answer", "text": "Да, через minikube или kind. Они поднимают полноценный одноузловой кластер на твоей машине. Это отличный способ учиться без оплаты облака."}}, {"@type": "Question", "name": "Что такое Helm?", "acceptedAnswer": {"@type": "Answer", "text": "Это пакетный менеджер для Kubernetes. С его помощью можно установить готовый пакет (chart) с PostgreSQL, Redis, Grafana — одной командой. Helm упрощает повторное использование манифестов и версионирование."}}, {"@type": "Question", "name": "В чём отличие пода от контейнера?", "acceptedAnswer": {"@type": "Answer", "text": "Контейнер — это экземпляр образа (Docker). Под — это группа из одного или нескольких контейнеров, которые живут вместе и делят сеть. В 95% случаев в поде один контейнер с твоим приложением, но бывают и sidecar-сценарии, когда в поде два контейнера (приложение + например лог-агент)."}}]}</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="kubernetes-dlya-novichka">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=DevOps">DevOps</a>
+        <span class="sep">/</span>
+        <span>Kubernetes для новичка: поды, деплойменты, сервисы за 15 минут</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">DevOps</span><span class="tag">Инструменты</span></div>
+        <h1>Kubernetes для новичка: поды, деплойменты, сервисы за 15 минут</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-11-15">15 ноября 2026</time>
+          <span class="dot">•</span>
+          <span>15 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/kubernetes-cover.svg" alt="Kubernetes для новичка: поды, деплойменты, сервисы за 15 минут">
+      </figure>
+
+      <div class="ad-slot ad-slot--ad-inline" data-slot="ad-inline"></div>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+<p>Kubernetes — это «оркестратор» контейнеров. Звучит пугающе, но на деле это просто программа, которая запускает твои приложения в Docker-контейнерах и следит, чтобы они не падали. Без тебя. В 2026 году куб — стандарт в больших компаниях, и его полезно понимать даже если ты пока не DevOps-инженер.</p>
+<p>За 15 минут мы разберём три ключевые сущности — поды, деплойменты и сервисы — и сделаем это простыми словами. Если ты только начинаешь с контейнерами — начни с <a href="/articles/docker-za-10-minut.html">базовой статьи про Docker</a> и <a href="/articles/chto-takoe-devops-ci-cd-deploy.html">DevOps</a>. Без воды — только то, что нужно понять новичку.</p>
+
+<h2 id="section-0">Зачем нужен Kubernetes</h2>
+<p>Представь: у тебя сайт. Сначала он крутится на одной виртуалке. Потом нагрузка растёт, и ты добавляешь вторую. Потом третью. Каждый раз надо следить: если сервер упал — перезапустить, если нагрузка выросла — поднять ещё, если вышла новая версия — обновить плавно, без простоя.</p>
+<p>Вручную это ад. Kubernetes берёт всю эту рутину на себя: запускает N копий твоего приложения, перезапускает упавшие, балансирует трафик между ними и обновляет без даунтайма. Ты описываешь желаемое состояние в YAML, а куб делает так, чтобы реальность совпала с описанием.</p>
+<p>Если у тебя один маленький сайт — Kubernetes избыточен. Пользуйся <a href="/articles/docker-compose-dlya-proekta.html">Docker Compose</a> или вообще PaaS-сервисами. Куб оправдан, когда у тебя микросервисная архитектура, несколько команд, деплои по 10 раз в день. Тогда экономия перекрывает сложность.</p>
+
+<h2 id="section-1">Поды (Pods): минимальная единица</h2>
+<p>Под — это группа из одного или нескольких контейнеров, которые живут на одной машине и делят сеть. Чаще всего в поде один контейнер с твоим приложением. Куб не запускает контейнеры напрямую — он всегда создаёт поды, а уже в них крутятся контейнеры.</p>
+<p>У пода есть IP-адрес, но он эфемерный: под умер — IP исчез, новый под получил другой IP. Поэтому напрямую по IP обращаться нельзя — нужен более постоянный указатель. Об этом ниже, в разделе про сервисы.</p>
+<p>Манифест пода в YAML выглядит так:</p>
+
+<pre><code class="language-yaml">apiVersion: v1
+kind: Pod
+metadata:
+  name: my-app
+  labels:
+    app: my-app
+spec:
+  containers:
+    - name: app
+      image: nginx:1.27
+      ports:
+        - containerPort: 80
+</code></pre>
+
+<p>В реальных проектах ты почти никогда не будешь создавать поды вручную — для этого есть деплойменты.</p>
+<p>У пода есть жизненный цикл: Pending (ждёт ресурсов), Running (работает), Succeeded (завершился), Failed (упал). По команде <code>kubectl describe pod ИМЯ</code> виден подробный статус — там видно, почему под не стартует: не хватает памяти, не найден образ, упал readiness-зонд. Это первая команда при любых проблемах с подом.</p>
+<p>Также важно понимать, что поды не «самостоятельны»: они живут на worker-узлах. Если узел падает — все поды на нём погибают, и их поднимает контроллер (если под управлялся деплойментом). Поэтому голые поды без деплоймента — почти всегда ошибка: они не восстановятся автоматически. Всегда используй деплоймент.</p>
+
+<h2 id="section-2">Деплойменты (Deployments): желаемое состояние</h2>
+<p>Деплоймент — это объект, который описывает «как должно быть». Ты говоришь: «хочу 3 копии приложения my-app с образом nginx:1.27». Куб берёт эту декларацию и держит 3 пода. Один упал — куб поднимет новый. Это и есть суть reconciliation loop — постоянное сравнение желаемого с реальным.</p>
+<p>Пример деплоймента:</p>
+
+<pre><code class="language-yaml">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - name: app
+          image: my-app:1.4.0
+          ports:
+            - containerPort: 8080
+</code></pre>
+
+<p>Строка <code>replicas: 3</code> — это и есть то самое «хочу 3 копии». Если ты изменишь на 5 и применишь манифест — куб поднимет ещё два пода. Если на 1 — плавно погасит четыре. Это называется масштабированием.</p>
+<p>Обновление образа — тоже плавно: куб по одному поднимает поды с новой версией и гасит старые. Если в новой версии ошибка — откатываешь одной командой, без простоя.</p>
+
+<h2 id="section-3">Сервисы (Services): постоянный адрес</h2>
+<p>Как я уже сказал, поды эфемерны — их IP меняется. Чтобы другие приложения могли найти твой my-app, нужен постоянный указатель. Это и есть сервис.</p>
+<p>Сервис — это объект с постоянным DNS-именем (my-app.default.svc.cluster.local) и стабильным IP. Он автоматически находит все поды с подходящими лейблами и балансирует трафик между ними. Когда поды умирают и рождаются — сервис перекидывает трафик на новые.</p>
+
+<pre><code class="language-yaml">apiVersion: v1
+kind: Service
+metadata:
+  name: my-app
+spec:
+  selector:
+    app: my-app
+  ports:
+    - port: 80
+      targetPort: 8080
+  type: ClusterIP
+</code></pre>
+
+<p>Этот сервис направляет трафик с порта 80 на порт 8080 подов с лейблом app: my-app. Тип ClusterIP означает, что сервис доступен только внутри кластера — для внешних пользователей нужен тип LoadBalancer или Ingress.</p>
+<p>Сервисы бывают четырёх типов: ClusterIP (по умолчанию, доступ только внутри кластера), NodePort (открывает порт на каждой ноде), LoadBalancer (создаёт внешний балансировщик в облаке), ExternalName (алиас на внешнее DNS-имя). Для внутреннего общения между подами — ClusterIP. Для выставления наружу в проде — LoadBalancer или Ingress. NodePort обычно не используют в проде: он открывает высокий порт на каждой ноде, что неудобно для пользователей.</p>
+
+<h2 id="section-4">Полная картина: чек-лист и команды</h2>
+<p>Стандартный деплой приложения в Kubernetes выглядит так:</p>
+<ol>
+  <li>Собери Docker-образ и запушь в registry.</li>
+  <li>Напиши манифест Deployment с нужным числом реплик.</li>
+  <li>Напиши манифест Service, чтобы приложение нашлось внутри кластера.</li>
+  <li>Примени оба: kubectl apply -f deployment.yaml.</li>
+  <li>Если нужен доступ извне — добавь Ingress или LoadBalancer.</li>
+</ol>
+
+<blockquote>Kubernetes не ускоряет первый деплой. Он ускоряет второй, третий и сотый — за счёт повторяемости.</blockquote>
+
+<div class="table-scroll"><table>
+  <thead><tr><th>Команда kubectl</th><th>Что делает</th></tr></thead>
+  <tbody>
+    <tr><td><code>kubectl get pods</code></td><td>Список всех подов</td></tr>
+    <tr><td><code>kubectl get deploy</code></td><td>Список деплойментов</td></tr>
+    <tr><td><code>kubectl get svc</code></td><td>Список сервисов</td></tr>
+    <tr><td><code>kubectl apply -f FILE</code></td><td>Применить манифест</td></tr>
+    <tr><td><code>kubectl delete -f FILE</code></td><td>Удалить ресурсы из манифеста</td></tr>
+    <tr><td><code>kubectl logs POD</code></td><td>Логи пода</td></tr>
+    <tr><td><code>kubectl exec -it POD -- bash</code></td><td>Зайти в контейнер</td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="section-5">Что ещё важно знать новичку</h2>
+<p>Из чего состоит кластер: control plane (мастер-узлы, которые управляют) и worker-узлы (где реально бегут поды). Для локальной разработки бери minikube или kind — поднимут кластер на твоём ноутбуке.</p>
+<p>Helm — это пакетный менеджер для Kubernetes, аналог npm, только для манифестов. С его помощью ставишь PostgreSQL, Redis и другие инструменты одной командой. Когда разберёшься с голым кубом — Helm станет твоим лучшим другом.</p>
+<p>Ingress — это «входная дверь» в кластер: маршрутизирует HTTP-запросы по доменам и путям. Без него внешние пользователи не попадут в твои сервисы. Обычно используют Ingress NGINX или Traefik. Подробнее про роутинг и API — в <a href="/articles/chto-takoe-api.html">базовой статье про API</a>.</p>
+
+<h2 id="section-6">ConfigMaps, Secrets и namespaces</h2>
+<p>Одной пары Deployment+Service хватит для первой недели. В реальных проектах появляются новые сущности, без которых не обойтись. Главные из них — ConfigMap, Secret и Namespace. Разберём, зачем они нужны.</p>
+<p><strong>ConfigMap</strong> — это способ хранить конфигурацию отдельно от кода. Раньше ты бы захардкодил URL базы данных прямо в образе. С ConfigMap ты хранишь его в манифесте и прокидываешь в под как переменную окружения или файл. Меняешь окружение — меняешь ConfigMap, не пересобирая образ.</p>
+<pre><code class="language-yaml">apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  DB_HOST: "postgres.default.svc.cluster.local"
+  LOG_LEVEL: "info"
+  FEATURE_FLAGS: "beta_ui=true"</code></pre>
+<p><strong>Secret</strong> — то же самое, но для чувствительных данных: пароли, токены, ключи API. Secret хранит значения в base64 и доступ к нему можно ограничить через RBAC. В реальности base64 — не настоящая защита, но он защищает от случайных утечек в логах.</p>
+<pre><code class="language-yaml">apiVersion: v1
+kind: Secret
+metadata:
+  name: db-secret
+type: Opaque
+data:
+  password: c2VjcmV0LXBhc3M=</code></pre>
+<p><strong>Namespace</strong> — логическое разделение кластера. Ты можешь иметь пространство <code>dev</code>, <code>staging</code>, <code>prod</code> в одном кластере. Ресурсы в разных namespace не видят друг друга (кроме специальных случаев). Это удобно для изоляции команд и окружений.</p>
+<p>Стандартные namespace: <code>default</code> (куда всё попадает, если не указать), <code>kube-system</code> (системные поды куба), <code>kube-public</code> (публичные ресурсы). Создать свой: <code>kubectl create namespace myapp</code>.</p>
+<p>Хорошая практика — давать каждому окружению свой namespace. Это не создаёт полной изоляции (ресурсы кластера общие), но упрощает навигацию, применение политик и cleanup. Для production-изоляции лучше отдельные кластеры.</p>
+<p>Также полезно знать про <strong>Probes</strong>: liveness (живой ли под) и readiness (готов ли принимать трафик). Куб опрашивает под через эти пробы, и если liveness-проверка падает — перезапускает контейнер. Это даёт самовосстановление без ручного вмешательства. Подробнее про эксплуатацию — в <a href="/articles/chto-takoe-devops-ci-cd-deploy.html">статье про DevOps</a>.</p>
+
+<h2 id="section-7">FAQ</h2>
+
+<h3 id="section-8">Kubernetes и Docker — это одно и то же?</h3>
+<p>Нет. Docker — это инструмент, который запускает контейнеры. Kubernetes — это оркестратор, который управляет множеством контейнеров на множестве серверов. Без Docker Kubernetes не жил бы, но они не заменяют друг друга.</p>
+
+<h3 id="section-9">Сколько стоит Kubernetes в облаке?</h3>
+<p>Сам куб бесплатный (open-source). Платишь за инфраструктуру: виртуалки, сети, балансировщики. В managed-вариантах (EKS, GKE, AKS) добавляется плата за control plane — обычно 70-80 USD/мес сверху. Полная стоимость небольшого проекта обычно начинается от 100 USD/мес.</p>
+
+<h3 id="section-10">Стоит ли учить Kubernetes в 2026?</h3>
+<p>Да, если планируешь расти в backend или DevOps. Большинство крупных проектов используют куб, и навык манифестов высоко ценится. Если ты фронтендер или делаешь маленькие проекты — пока обойдёшься Docker Compose, куб тебе не нужен.</p>
+
+<h3 id="section-11">Можно ли запустить Kubernetes на ноутбуке?</h3>
+<p>Да, через minikube или kind. Они поднимают полноценный одноузловой кластер на твоей машине. Это отличный способ учиться без оплаты облака.</p>
+
+<h3 id="section-12">Что такое Helm?</h3>
+<p>Это пакетный менеджер для Kubernetes. С его помощью можно установить готовый пакет (chart) с PostgreSQL, Redis, Grafana — одной командой. Helm упрощает повторное использование манифестов и версионирование.</p>
+
+<h3 id="section-13">В чём отличие пода от контейнера?</h3>
+<p>Контейнер — это экземпляр образа (Docker). Под — это группа из одного или нескольких контейнеров, которые живут вместе и делят сеть. В 95% случаев в поде один контейнер с твоим приложением, но бывают и sidecar-сценарии, когда в поде два контейнера (приложение + например лог-агент).</p>
+
+<h2 id="section-14">Краткий вывод</h2>
+<p>Kubernetes не страшный, если разбить его на три понятные сущности: поды, деплойменты, сервисы. Поды запускают твоё приложение, деплойменты управляют количеством подов, сервисы дают постоянный адрес. Этого минимума хватает, чтобы понимать 80% того, что происходит в реальном кластере. Дальше — Ingress, Helm, StatefulSets — но это уже продвинутые темы.</p>
+</article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Зачем нужен Kubernetes</a><a href="#section-1" class="lvl-2">Поды (Pods): минимальная единица</a><a href="#section-2" class="lvl-2">Деплойменты (Deployments): желаемое состояние</a><a href="#section-3" class="lvl-2">Сервисы (Services): постоянный адрес</a><a href="#section-4" class="lvl-2">Полная картина: чек-лист и команды</a><a href="#section-5" class="lvl-2">Что ещё важно знать новичку</a><a href="#section-6" class="lvl-2">ConfigMaps, Secrets и namespaces</a><a href="#section-7" class="lvl-2">FAQ</a><a href="#section-8" class="lvl-3">Kubernetes и Docker — это одно и то же?</a><a href="#section-9" class="lvl-3">Сколько стоит Kubernetes в облаке?</a><a href="#section-10" class="lvl-3">Стоит ли учить Kubernetes в 2026?</a><a href="#section-11" class="lvl-3">Можно ли запустить Kubernetes на ноутбуке?</a><a href="#section-12" class="lvl-3">Что такое Helm?</a><a href="#section-13" class="lvl-3">В чём отличие пода от контейнера?</a><a href="#section-14" class="lvl-2">Краткий вывод</a></aside>
+      </div>
+
+      
+    <aside class="donate-block" aria-label="Поддержать проект">
+      <div class="donate-block__title">Поддержи проект</div>
+      <p class="donate-block__text">Сайт живёт на энтузиазме. Если статья оказалась полезной — поблагодари автора. Любая сумма идёт на хостинг, домен и новые статьи.</p>
+      <div class="donate-block__buttons">
+        <a href="https://boosty.to/itbase" target="_blank" rel="noopener nofollow" class="donate-btn donate-boosty">☕ Boosty</a><a href="https://t.me/itbase_bot" target="_blank" rel="noopener nofollow" class="donate-btn donate-tg">✈️ Telegram</a>
+      </div>
+      <p class="donate-block__hint">Также можно подписаться на <a href="https://t.me/itbase" target="_blank" rel="noopener">Telegram-канал</a> — там анонсы новых статей.</p>
+    </aside>
+    
+
+      <div class="ad-slot ad-slot--ad-bottom" data-slot="ad-bottom"></div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/chto-takoe-nginx.html"><img src="/img/nginx.svg" alt="Что такое Nginx и зачем он нужен на сервере" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">DevOps</span><span class="tag">Веб</span><span class="tag">Инструменты</span></div>
+    <a href="/articles/chto-takoe-nginx.html"><h2 class="card__title">Что такое Nginx и зачем он нужен на сервере</h2></a>
+    <p class="card__excerpt">Почему почти все сайты работают через Nginx. Разбираем: веб-сервер, reverse proxy, балансировка нагрузки, статика и конфиги.</p>
+    <div class="card__meta">
+      <span>26 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="chto-takoe-nginx" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/bash-skripty-dlya-novichka.html"><img src="/img/bash.svg" alt="Bash-скрипты для новичка — автоматизация на Linux" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Инструменты</span><span class="tag">DevOps</span><span class="tag">Разработка</span></div>
+    <a href="/articles/bash-skripty-dlya-novichka.html"><h2 class="card__title">Bash-скрипты для новичка — автоматизация на Linux</h2></a>
+    <p class="card__excerpt">Как написать первый скрипт, который автоматизирует рутину: переменные, условия, циклы, функции, аргументы командной строки.</p>
+    <div class="card__meta">
+      <span>25 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="bash-skripty-dlya-novichka" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/docker-compose-dlya-proekta.html"><img src="/img/compose.svg" alt="Docker Compose — несколько контейнеров одной командой" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">DevOps</span><span class="tag">Инструменты</span><span class="tag">Разработка</span></div>
+    <a href="/articles/docker-compose-dlya-proekta.html"><h2 class="card__title">Docker Compose — несколько контейнеров одной командой</h2></a>
+    <p class="card__excerpt">Когда одного Dockerfile мало: как описать приложение, базу и кэш в одном файле и запускать всё одной командой docker compose up.</p>
+    <div class="card__meta">
+      <span>18 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="docker-compose-dlya-proekta" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/support.html">Поддержать ★</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+  
+</body>
+</html>

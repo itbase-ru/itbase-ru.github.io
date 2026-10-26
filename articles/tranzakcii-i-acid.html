@@ -18,7 +18,8 @@
   <meta name="twitter:title" content="Транзакции в базах данных — ACID простыми словами">
   <meta name="twitter:description" content="Почему при переводе денег нельзя потерять ни копейки. Разбираем транзакции и четыре их свойства: атомарность, согласованность, изоляцию, надёжность.">
   <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/tranzakcii-i-acid.png">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Транзакции в базах данных — ACID простыми словами", "description": "Почему при переводе денег нельзя потерять ни копейки. Разбираем транзакции и четыре их свойства: атомарность, согласованность, изоляцию, надёжность.", "image": ["https://itbase-ru.github.io/img/og/tranzakcii-i-acid.png"], "datePublished": "2026-04-21", "dateModified": "2026-04-21", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/tranzakcii-i-acid.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Базы данных", "item": "https://itbase-ru.github.io/?tag=Базы данных"}, {"@type": "ListItem", "position": 3, "name": "Транзакции в базах данных — ACID простыми словами", "item": "https://itbase-ru.github.io/articles/tranzakcii-i-acid.html"}]}]</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Транзакции в базах данных — ACID простыми словами", "description": "Почему при переводе денег нельзя потерять ни копейки. Разбираем транзакции и четыре их свойства: атомарность, согласованность, изоляцию, надёжность.", "image": ["https://itbase-ru.github.io/img/og/tranzakcii-i-acid.png"], "datePublished": "2026-04-21", "dateModified": "2026-04-21", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/", "logo": {"@type": "ImageObject", "url": "https://itbase-ru.github.io/favicon.svg"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/tranzakcii-i-acid.html"}, "articleSection": "Базы данных", "keywords": "Базы данных, SQL, Теория"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Базы данных", "item": "https://itbase-ru.github.io/?tag=Базы данных"}, {"@type": "ListItem", "position": 3, "name": "Транзакции в базах данных — ACID простыми словами", "item": "https://itbase-ru.github.io/articles/tranzakcii-i-acid.html"}]}</script>
   <script>
     (function(){
       try{
@@ -72,6 +73,8 @@
       <figure class="article-cover">
         <img src="/img/tranzakcii.svg" alt="Транзакции в базах данных — ACID простыми словами">
       </figure>
+
+      <div class="ad-slot ad-slot--ad-inline" data-slot="ad-inline"></div>
 
       <div class="article-layout">
         <article class="article-body" id="article-body">
@@ -289,9 +292,34 @@ def transfer_money(session, from_id, to_id, amount):
         <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Что такое транзакция</a><a href="#section-1" class="lvl-2">Пример на SQL</a><a href="#section-2" class="lvl-2">Четыре свойства — ACID</a><a href="#section-3" class="lvl-3">A — Atomicity (атомарность)</a><a href="#section-4" class="lvl-3">C — Consistency (согласованность)</a><a href="#section-5" class="lvl-3">I — Isolation (изоляция)</a><a href="#section-6" class="lvl-3">D — Durability (надёжность)</a><a href="#section-7" class="lvl-2">Проблемы параллельности</a><a href="#section-8" class="lvl-3">Грязное чтение (dirty read)</a><a href="#section-9" class="lvl-3">Неповторяющееся чтение</a><a href="#section-10" class="lvl-3">Фантомное чтение</a><a href="#section-11" class="lvl-2">Уровни изоляции</a><a href="#section-12" class="lvl-2">Пример проблемы на практике</a><a href="#section-13" class="lvl-3">Решение — блокировка строки</a><a href="#section-14" class="lvl-2">Блокировки и дедлоки</a><a href="#section-15" class="lvl-2">В коде приложения</a><a href="#section-16" class="lvl-2">Когда транзакции не нужны</a><a href="#section-17" class="lvl-2">Частые ошибки</a><a href="#section-18" class="lvl-2">Итог</a></aside>
       </div>
 
+      
+    <aside class="donate-block" aria-label="Поддержать проект">
+      <div class="donate-block__title">Поддержи проект</div>
+      <p class="donate-block__text">Сайт живёт на энтузиазме. Если статья оказалась полезной — поблагодари автора. Любая сумма идёт на хостинг, домен и новые статьи.</p>
+      <div class="donate-block__buttons">
+        <a href="https://boosty.to/itbase" target="_blank" rel="noopener nofollow" class="donate-btn donate-boosty">☕ Boosty</a><a href="https://t.me/itbase_bot" target="_blank" rel="noopener nofollow" class="donate-btn donate-tg">✈️ Telegram</a>
+      </div>
+      <p class="donate-block__hint">Также можно подписаться на <a href="https://t.me/itbase" target="_blank" rel="noopener">Telegram-канал</a> — там анонсы новых статей.</p>
+    </aside>
+    
+
+      <div class="ad-slot ad-slot--ad-bottom" data-slot="ad-bottom"></div>
+
       <section class="wrap" style="padding-bottom:70px">
         <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
         <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/postgresql-vs-mysql.html"><img src="/img/pg-mysql-cover.svg" alt="PostgreSQL vs MySQL: что выбрать в 2026" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Базы данных</span><span class="tag">SQL</span></div>
+    <a href="/articles/postgresql-vs-mysql.html"><h2 class="card__title">PostgreSQL vs MySQL: что выбрать в 2026</h2></a>
+    <p class="card__excerpt">Сравнение PostgreSQL и MySQL простыми словами: философия, производительность, JSON, индексы и расширения. Поможем выбрать БД под твой проект.</p>
+    <div class="card__meta">
+      <span>25 ноября 2026</span><span class="dot">•</span><span>14 мин</span>
+      <button class="card__bm" data-slug="postgresql-vs-mysql" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
 <article class="card">
   <a class="card__cover" href="/articles/indeksy-v-bazah-dannyh.html"><img src="/img/indeksy.svg" alt="Индексы в базах данных — зачем и как работают" loading="lazy"></a>
   <div class="card__body">
@@ -316,18 +344,6 @@ def transfer_money(session, from_id, to_id, amount):
     </div>
   </div>
 </article>
-<article class="card">
-  <a class="card__cover" href="/articles/sql-vs-nosql.html"><img src="/img/db-cover.svg" alt="SQL vs NoSQL: какую базу данных выбрать" loading="lazy"></a>
-  <div class="card__body">
-    <div class="card__tags"><span class="tag">Базы данных</span><span class="tag">Теория</span></div>
-    <a href="/articles/sql-vs-nosql.html"><h2 class="card__title">SQL vs NoSQL: какую базу данных выбрать</h2></a>
-    <p class="card__excerpt">Разница между реляционными и нереляционными базами, где какие применяются и как не прогадать с выбором под свой проект.</p>
-    <div class="card__meta">
-      <span>26 февраля 2026</span><span class="dot">•</span><span>9 мин</span>
-      <button class="card__bm" data-slug="sql-vs-nosql" title="В закладки" aria-label="В закладки">★</button>
-    </div>
-  </div>
-</article>
         </div>
       </section>
     </div>
@@ -338,6 +354,7 @@ def transfer_money(session, from_id, to_id, amount):
     <span>© <span id="year">2026</span> IT·База</span>
     <a href="/about.html">О сайте</a>
     <a href="/contacts.html">Контакты</a>
+    <a href="/support.html">Поддержать ★</a>
     <a href="/privacy.html">Политика</a>
     <a href="/terms.html">Условия</a>
     <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
@@ -348,5 +365,6 @@ def transfer_money(session, from_id, to_id, amount):
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
   <script src="/app.js"></script>
+  
 </body>
 </html>

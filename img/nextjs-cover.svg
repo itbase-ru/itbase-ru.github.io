@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+<defs>
+<linearGradient id="nx" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#050505"/><stop offset="1" stop-color="#101418"/>
+</linearGradient>
+</defs>
+<rect width="1200" height="675" fill="url(#nx)"/>
+<circle cx="600" cy="340" r="240" fill="none" stroke="#fff" stroke-width="3" opacity="0.9"/>
+<circle cx="600" cy="340" r="240" fill="none" stroke="#4f8cff" stroke-width="2" opacity="0.4"/>
+<path d="M 360 510 L 600 200 L 840 510" stroke="#fff" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<text x="60" y="280" fill="#e9eef5" font-family="Georgia, serif" font-size="100" font-weight="700">Next.js 15</text>
+<text x="60" y="340" fill="#4f8cff" font-family="monospace" font-size="20" letter-spacing="3">// APP ROUTER · RSC</text>
+<text x="60" y="540" fill="#8a95a6" font-family="monospace" font-size="18">'use client'</text>
+<text x="60" y="575" fill="#8a95a6" font-family="monospace" font-size="18">'use server'</text>
+</svg>

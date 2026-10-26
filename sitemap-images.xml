@@ -1,0 +1,615 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/kak-napisat-rezyume-programmista.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/kak-napisat-rezyume-programmista.png</image:loc>
+      <image:caption>Как написать резюме программисту: шаблон + примеры 2026</image:caption>
+      <image:title>Как написать резюме программисту: шаблон + примеры 2026</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og-default.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og-default.png</image:loc>
+      <image:caption>IT·База</image:caption>
+      <image:title>IT·База</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/tailwind-css-vs-bootstrap.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/tailwind-css-vs-bootstrap.png</image:loc>
+      <image:caption>Tailwind CSS vs Bootstrap: что лучше в 2026</image:caption>
+      <image:title>Tailwind CSS vs Bootstrap: что лучше в 2026</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/websocket-vs-sse-vs-polling.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/websocket-vs-sse-vs-polling.png</image:loc>
+      <image:caption>WebSocket vs Server-Sent Events vs Long Polling: что когда использовать</image:caption>
+      <image:title>WebSocket vs Server-Sent Events vs Long Polling: что когда использовать</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/postgresql-vs-mysql.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/postgresql-vs-mysql.png</image:loc>
+      <image:caption>PostgreSQL vs MySQL: что выбрать в 2026</image:caption>
+      <image:title>PostgreSQL vs MySQL: что выбрать в 2026</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/claude-ai-obzor.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/claude-ai-obzor.png</image:loc>
+      <image:caption>Claude AI от Anthropic: обзор, сравнение с ChatGPT, как пользоваться</image:caption>
+      <image:title>Claude AI от Anthropic: обзор, сравнение с ChatGPT, как пользоваться</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/nextjs-15-chto-novogo.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/nextjs-15-chto-novogo.png</image:loc>
+      <image:caption>Next.js 15: что нового, App Router, Server Components</image:caption>
+      <image:title>Next.js 15: что нового, App Router, Server Components</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/rust-vs-go-sravnenie.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/rust-vs-go-sravnenie.png</image:loc>
+      <image:caption>Rust vs Go: какой язык учить в 2026</image:caption>
+      <image:title>Rust vs Go: какой язык учить в 2026</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/kubernetes-dlya-novichka.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/kubernetes-dlya-novichka.png</image:loc>
+      <image:caption>Kubernetes для новичка: поды, деплойменты, сервисы за 15 минут</image:caption>
+      <image:title>Kubernetes для новичка: поды, деплойменты, сервисы за 15 минут</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/github-copilot-obzor.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/github-copilot-obzor.png</image:loc>
+      <image:caption>GitHub Copilot: обзор, цена, сравнение с альтернативами</image:caption>
+      <image:title>GitHub Copilot: обзор, цена, сравнение с альтернативами</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/chatgpt-kak-polzovatsya.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/chatgpt-kak-polzovatsya.png</image:loc>
+      <image:caption>ChatGPT: как пользоваться, промпты, лайфхаки</image:caption>
+      <image:title>ChatGPT: как пользоваться, промпты, лайфхаки</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/paginaciya-i-versirovanie-api.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/paginaciya-i-versirovanie-api.png</image:loc>
+      <image:caption>Пагинация и версионирование API — как не сломать клиентов</image:caption>
+      <image:title>Пагинация и версионирование API — как не сломать клиентов</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/chto-takoe-nginx.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/chto-takoe-nginx.png</image:loc>
+      <image:caption>Что такое Nginx и зачем он нужен на сервере</image:caption>
+      <image:title>Что такое Nginx и зачем он нужен на сервере</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/bash-skripty-dlya-novichka.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/bash-skripty-dlya-novichka.png</image:loc>
+      <image:caption>Bash-скрипты для новичка — автоматизация на Linux</image:caption>
+      <image:title>Bash-скрипты для новичка — автоматизация на Linux</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/obrabotka-isklyucheniy-v-python.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/obrabotka-isklyucheniy-v-python.png</image:loc>
+      <image:caption>Обработка исключений в Python — try, except, finally</image:caption>
+      <image:title>Обработка исключений в Python — try, except, finally</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/dizayn-patterns-singleton-factory-observer.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/dizayn-patterns-singleton-factory-observer.png</image:loc>
+      <image:caption>Дизайн-паттерны — Singleton, Factory, Observer</image:caption>
+      <image:title>Дизайн-паттерны — Singleton, Factory, Observer</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/cookie-localstorage-sessionstorage.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/cookie-localstorage-sessionstorage.png</image:loc>
+      <image:caption>Cookie, localStorage и sessionStorage — что выбрать</image:caption>
+      <image:title>Cookie, localStorage и sessionStorage — что выбрать</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/tranzakcii-i-acid.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/tranzakcii-i-acid.png</image:loc>
+      <image:caption>Транзакции в базах данных — ACID простыми словами</image:caption>
+      <image:title>Транзакции в базах данных — ACID простыми словами</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/python-s-nulya.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/python-s-nulya.png</image:loc>
+      <image:caption>Python с нуля — базовый синтаксис за 15 минут</image:caption>
+      <image:title>Python с нуля — базовый синтаксис за 15 минут</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/dekoratory-v-python.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/dekoratory-v-python.png</image:loc>
+      <image:caption>Декораторы в Python — что это и зачем нужны</image:caption>
+      <image:title>Декораторы в Python — что это и зачем нужны</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/docker-compose-dlya-proekta.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/docker-compose-dlya-proekta.png</image:loc>
+      <image:caption>Docker Compose — несколько контейнеров одной командой</image:caption>
+      <image:title>Docker Compose — несколько контейнеров одной командой</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/chto-takoe-cors.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/chto-takoe-cors.png</image:loc>
+      <image:caption>Что такое CORS и почему браузер блокирует запросы</image:caption>
+      <image:title>Что такое CORS и почему браузер блокирует запросы</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/heshirovanie-paroley.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/heshirovanie-paroley.png</image:loc>
+      <image:caption>Как правильно хранить пароли — хеширование и соль</image:caption>
+      <image:title>Как правильно хранить пароли — хеширование и соль</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/xss-csrf-sql-inekcii.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/xss-csrf-sql-inekcii.png</image:loc>
+      <image:caption>XSS, CSRF, SQL-инъекции — три главные атаки на веб</image:caption>
+      <image:title>XSS, CSRF, SQL-инъекции — три главные атаки на веб</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/kak-rabotaet-websocket.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/kak-rabotaet-websocket.png</image:loc>
+      <image:caption>Как работает WebSocket — real-time связь между браузером и сервером</image:caption>
+      <image:title>Как работает WebSocket — real-time связь между браузером и сервером</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/chto-takoe-orm.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/chto-takoe-orm.png</image:loc>
+      <image:caption>Что такое ORM — работа с базой через объекты</image:caption>
+      <image:title>Что такое ORM — работа с базой через объекты</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/mnogopotochnost-v-python-gil.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/mnogopotochnost-v-python-gil.png</image:loc>
+      <image:caption>Многопоточность в Python — GIL и потоки</image:caption>
+      <image:title>Многопоточность в Python — GIL и потоки</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/zachem-nuzhen-typescript.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/zachem-nuzhen-typescript.png</image:loc>
+      <image:caption>Зачем нужен TypeScript, если есть JavaScript</image:caption>
+      <image:title>Зачем нужен TypeScript, если есть JavaScript</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/asinhronnost-v-python.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/asinhronnost-v-python.png</image:loc>
+      <image:caption>Асинхронность в Python — asyncio простыми словами</image:caption>
+      <image:title>Асинхронность в Python — asyncio простыми словами</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/indeksy-v-bazah-dannyh.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/indeksy-v-bazah-dannyh.png</image:loc>
+      <image:caption>Индексы в базах данных — зачем и как работают</image:caption>
+      <image:title>Индексы в базах данных — зачем и как работают</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/git-vetki-i-sliyanie.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/git-vetki-i-sliyanie.png</image:loc>
+      <image:caption>Git ветки и слияния — branch, merge, rebase</image:caption>
+      <image:title>Git ветки и слияния — branch, merge, rebase</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/sql-zaprosy-s-nulya.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/sql-zaprosy-s-nulya.png</image:loc>
+      <image:caption>SQL-запросы с нуля — SELECT, WHERE, JOIN</image:caption>
+      <image:title>SQL-запросы с нуля — SELECT, WHERE, JOIN</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/osnovy-linux-dlya-razrabotchika.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/osnovy-linux-dlya-razrabotchika.png</image:loc>
+      <image:caption>Основы Linux для разработчика — базовые команды</image:caption>
+      <image:title>Основы Linux для разработчика — базовые команды</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/monolit-i-mikroservisy.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/monolit-i-mikroservisy.png</image:loc>
+      <image:caption>Монолит и микросервисы — когда что выбирать</image:caption>
+      <image:title>Монолит и микросервисы — когда что выбирать</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/http-metody-i-status-kody.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/http-metody-i-status-kody.png</image:loc>
+      <image:caption>HTTP-методы и статус-коды — шпаргалка с примерами</image:caption>
+      <image:title>HTTP-методы и статус-коды — шпаргалка с примерами</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/chto-takoe-jwt-avtorizaciya.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/chto-takoe-jwt-avtorizaciya.png</image:loc>
+      <image:caption>Что такое JWT и как работает авторизация</image:caption>
+      <image:title>Что такое JWT и как работает авторизация</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/chto-takoe-keshirovanie.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/chto-takoe-keshirovanie.png</image:loc>
+      <image:caption>Что такое кэширование и зачем оно нужно</image:caption>
+      <image:title>Что такое кэширование и зачем оно нужно</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/kak-rabotaet-kompilyator-i-interpretator.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/kak-rabotaet-kompilyator-i-interpretator.png</image:loc>
+      <image:caption>Как работает компилятор и интерпретатор</image:caption>
+      <image:title>Как работает компилятор и интерпретатор</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/algoritmy-i-struktury-dannyh.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/algoritmy-i-struktury-dannyh.png</image:loc>
+      <image:caption>Алгоритмы и структуры данных — с чего начать</image:caption>
+      <image:title>Алгоритмы и структуры данных — с чего начать</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/chto-takoe-rest-i-graphql.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/chto-takoe-rest-i-graphql.png</image:loc>
+      <image:caption>REST и GraphQL — в чём разница</image:caption>
+      <image:title>REST и GraphQL — в чём разница</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/chto-takoe-vpn.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/chto-takoe-vpn.png</image:loc>
+      <image:caption>Что такое VPN и как он работает</image:caption>
+      <image:title>Что такое VPN и как он работает</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/oop-prostymi-slovami.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/oop-prostymi-slovami.png</image:loc>
+      <image:caption>ООП простыми словами — классы, объекты, наследование</image:caption>
+      <image:title>ООП простыми словами — классы, объекты, наследование</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/kak-rabotaet-dns.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/kak-rabotaet-dns.png</image:loc>
+      <image:caption>Как работает DNS — простыми словами</image:caption>
+      <image:title>Как работает DNS — простыми словами</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/kak-sozdat-telegram-bota.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/kak-sozdat-telegram-bota.png</image:loc>
+      <image:caption>Как создать Telegram-бота с кодом</image:caption>
+      <image:title>Как создать Telegram-бота с кодом</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/chto-takoe-devops-ci-cd-deploy.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/chto-takoe-devops-ci-cd-deploy.png</image:loc>
+      <image:caption>Что такое DevOps — CI/CD и деплой простыми словами</image:caption>
+      <image:title>Что такое DevOps — CI/CD и деплой простыми словами</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/scrum-i-agile-prostymi-slovami.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/scrum-i-agile-prostymi-slovami.png</image:loc>
+      <image:caption>Scrum и Agile простыми словами</image:caption>
+      <image:title>Scrum и Agile простыми словами</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/kak-vybrat-pervyy-yazyk-programmirovaniya.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/kak-vybrat-pervyy-yazyk-programmirovaniya.png</image:loc>
+      <image:caption>Как выбрать первый язык программирования</image:caption>
+      <image:title>Как выбрать первый язык программирования</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/regulyarnye-vyrazheniya-na-praktike.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/regulyarnye-vyrazheniya-na-praktike.png</image:loc>
+      <image:caption>Регулярные выражения: практический разбор с примерами</image:caption>
+      <image:title>Регулярные выражения: практический разбор с примерами</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/kak-rabotaet-brauzer.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/kak-rabotaet-brauzer.png</image:loc>
+      <image:caption>Как работает браузер: DOM, парсинг и рендеринг</image:caption>
+      <image:title>Как работает браузер: DOM, парсинг и рендеринг</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/modulnye-testy-zachem-nuzhny.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/modulnye-testy-zachem-nuzhny.png</image:loc>
+      <image:caption>Модульные тесты: зачем они нужны и как их писать</image:caption>
+      <image:title>Модульные тесты: зачем они нужны и как их писать</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/chto-takoe-neyroset-posloyam.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/chto-takoe-neyroset-posloyam.png</image:loc>
+      <image:caption>Что такое нейросеть: разбор по слоям без формул</image:caption>
+      <image:title>Что такое нейросеть: разбор по слоям без формул</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/api-klyuch-kak-ne-slit.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/api-klyuch-kak-ne-slit.png</image:loc>
+      <image:caption>API-ключ: что это и как не слить его в GitHub</image:caption>
+      <image:title>API-ключ: что это и как не слить его в GitHub</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/asinhronnost-v-javascript.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/asinhronnost-v-javascript.png</image:loc>
+      <image:caption>Асинхронность в JavaScript: промисы и async/await</image:caption>
+      <image:title>Асинхронность в JavaScript: промисы и async/await</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/javascript-massivy-i-obekty.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/javascript-massivy-i-obekty.png</image:loc>
+      <image:caption>Массивы и объекты в JavaScript: полный разбор с примерами</image:caption>
+      <image:title>Массивы и объекты в JavaScript: полный разбор с примерами</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/kak-pisat-chistyy-kod.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/kak-pisat-chistyy-kod.png</image:loc>
+      <image:caption>Как писать чистый код: 8 принципов, которые отличают новичка</image:caption>
+      <image:title>Как писать чистый код: 8 принципов, которые отличают новичка</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/chto-takoe-oblako.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/chto-takoe-oblako.png</image:loc>
+      <image:caption>Что такое облако: IaaS, PaaS, SaaS и почему это удобно</image:caption>
+      <image:title>Что такое облако: IaaS, PaaS, SaaS и почему это удобно</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/kak-rabotaet-poisk-v-google.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/kak-rabotaet-poisk-v-google.png</image:loc>
+      <image:caption>Как работает поиск в Google: краулеры, индекс и ранжирование</image:caption>
+      <image:title>Как работает поиск в Google: краулеры, индекс и ранжирование</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/docker-za-10-minut.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/docker-za-10-minut.png</image:loc>
+      <image:caption>Docker за 10 минут: зачем нужны контейнеры</image:caption>
+      <image:title>Docker за 10 минут: зачем нужны контейнеры</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/kak-rabotaet-https.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/kak-rabotaet-https.png</image:loc>
+      <image:caption>Как работает HTTPS: шифрование простыми словами</image:caption>
+      <image:title>Как работает HTTPS: шифрование простыми словами</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/sql-vs-nosql.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/sql-vs-nosql.png</image:loc>
+      <image:caption>SQL vs NoSQL: какую базу данных выбрать</image:caption>
+      <image:title>SQL vs NoSQL: какую базу данных выбрать</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/javascript-peremennye-i-tipy.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/javascript-peremennye-i-tipy.png</image:loc>
+      <image:caption>JavaScript: переменные и типы данных простыми словами</image:caption>
+      <image:title>JavaScript: переменные и типы данных простыми словами</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/css-flexbox-vs-grid.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/css-flexbox-vs-grid.png</image:loc>
+      <image:caption>CSS: Flexbox против Grid — когда что использовать</image:caption>
+      <image:title>CSS: Flexbox против Grid — когда что использовать</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/html-s-nulya.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/html-s-nulya.png</image:loc>
+      <image:caption>HTML с нуля: как устроена любая веб-страница</image:caption>
+      <image:title>HTML с нуля: как устроена любая веб-страница</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/terminal-dlya-novichka.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/terminal-dlya-novichka.png</image:loc>
+      <image:caption>Терминал для новичка: 20 команд, которые нужны каждый день</image:caption>
+      <image:title>Терминал для новичка: 20 команд, которые нужны каждый день</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/chto-takoe-api.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/chto-takoe-api.png</image:loc>
+      <image:caption>Что такое API за 5 минут: понятное объяснение с примерами</image:caption>
+      <image:title>Что такое API за 5 минут: понятное объяснение с примерами</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/kak-uchitsya-programmirovaniyu-s-nulya.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/kak-uchitsya-programmirovaniyu-s-nulya.png</image:loc>
+      <image:caption>Как учиться программированию с нуля в 2026 году</image:caption>
+      <image:title>Как учиться программированию с нуля в 2026 году</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/chto-takoe-iskusstvennyy-intellekt.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/chto-takoe-iskusstvennyy-intellekt.png</image:loc>
+      <image:caption>Что такое искусственный интеллект: разбор с нуля</image:caption>
+      <image:title>Что такое искусственный интеллект: разбор с нуля</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/img/og/git-dlya-novichkov.png</loc>
+    <image:image>
+      <image:loc>https://itbase-ru.github.io/img/og/git-dlya-novichkov.png</image:loc>
+      <image:caption>Git для новичков: 10 команд, которых хватит в 90% случаев</image:caption>
+      <image:title>Git для новичков: 10 команд, которых хватит в 90% случаев</image:title>
+      <image:license>https://itbase-ru.github.io/terms.html</image:license>
+    </image:image>
+  </url>
+</urlset>

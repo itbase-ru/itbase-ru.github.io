@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WebSocket vs Server-Sent Events vs Long Polling: что когда использовать — IT·База</title>
+  <meta name="description" content="Сравнение трёх технологий real-time в вебе: long polling, SSE и WebSocket. Разбираем, что выбрать для чата, уведомлений, ленты и игр. С примерами кода.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/websocket-vs-sse-vs-polling.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="WebSocket vs Server-Sent Events vs Long Polling: что когда использовать">
+  <meta property="og:description" content="Сравнение трёх технологий real-time в вебе: long polling, SSE и WebSocket. Разбираем, что выбрать для чата, уведомлений, ленты и игр. С примерами кода.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/websocket-vs-sse-vs-polling.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/websocket-vs-sse-vs-polling.html">
+  <meta property="article:published_time" content="2026-11-28">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WebSocket vs Server-Sent Events vs Long Polling: что когда использовать">
+  <meta name="twitter:description" content="Сравнение трёх технологий real-time в вебе: long polling, SSE и WebSocket. Разбираем, что выбрать для чата, уведомлений, ленты и игр. С примерами кода.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/websocket-vs-sse-vs-polling.png">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "WebSocket vs Server-Sent Events vs Long Polling: что когда использовать", "description": "Сравнение трёх технологий real-time в вебе: long polling, SSE и WebSocket. Разбираем, что выбрать для чата, уведомлений, ленты и игр. С примерами кода.", "image": ["https://itbase-ru.github.io/img/og/websocket-vs-sse-vs-polling.png"], "datePublished": "2026-11-28", "dateModified": "2026-11-28", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/", "logo": {"@type": "ImageObject", "url": "https://itbase-ru.github.io/favicon.svg"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/websocket-vs-sse-vs-polling.html"}, "articleSection": "Веб", "keywords": "Веб, Сети, Разработка"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Веб", "item": "https://itbase-ru.github.io/?tag=Веб"}, {"@type": "ListItem", "position": 3, "name": "WebSocket vs Server-Sent Events vs Long Polling: что когда использовать", "item": "https://itbase-ru.github.io/articles/websocket-vs-sse-vs-polling.html"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Что выбрать для чата?", "acceptedAnswer": {"@type": "Answer", "text": "WebSocket. Чат — двунаправленная коммуникация: пользователь шлёт сообщения и получает от других. SSE не подходит, потому что не может принимать данные от клиента."}}, {"@type": "Question", "name": "Что выбрать для уведомлений?", "acceptedAnswer": {"@type": "Answer", "text": "SSE. Это односторонний сценарий: сервер шлёт уведомления, клиент их слушает. Реализуется в 20 строк кода, работает без библиотек."}}, {"@type": "Question", "name": "SSE работает с HTTPS?", "acceptedAnswer": {"@type": "Answer", "text": "Да, идеально. Если страница открыта по HTTPS, EventSource автоматически использует защиту. Просто указывай относительный URL — браузер всё сделает."}}, {"@type": "Question", "name": "WebSocket работает через Nginx?", "acceptedAnswer": {"@type": "Answer", "text": "Да, с правильной конфигурацией. Nginx поддерживает WebSocket через upgrade-заголовки. Подробнее — в статье про Nginx."}}, {"@type": "Question", "name": "Что быстрее — WebSocket или SSE?", "acceptedAnswer": {"@type": "Answer", "text": "По накладным расходам WebSocket чуть быстрее для частых мелких сообщений, потому что нет HTTP-overhead на каждом сообщении. Для редких событий (раз в секунду и реже) — разница незаметна. SSE компактнее на уровне кода."}}, {"@type": "Question", "name": "Что лучше для стриминга видео?", "acceptedAnswer": {"@type": "Answer", "text": "Ни одно из этого. Для видео используют другие протоколы: HLS, WebRTC, RTMP. WebSocket и SSE — для коротких событий и текстовых сообщений, не для медиа-стримов."}}]}</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="websocket-vs-sse-vs-polling">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Веб">Веб</a>
+        <span class="sep">/</span>
+        <span>WebSocket vs Server-Sent Events vs Long Polling: что когда использовать</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Веб</span><span class="tag">Сети</span><span class="tag">Разработка</span></div>
+        <h1>WebSocket vs Server-Sent Events vs Long Polling: что когда использовать</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-11-28">28 ноября 2026</time>
+          <span class="dot">•</span>
+          <span>10 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/ws-sse-cover.svg" alt="WebSocket vs Server-Sent Events vs Long Polling: что когда использовать">
+      </figure>
+
+      <div class="ad-slot ad-slot--ad-inline" data-slot="ad-inline"></div>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+<p>Реал-тайм в вебе — это когда данные приходят в браузер без перезагрузки страницы: чаты, уведомления, обновления курсов, статусы заказов. Чтобы это работало, у тебя есть три основных технологии: long polling, Server-Sent Events (SSE) и WebSocket. В этой статье разберём, чем они отличаются и что выбирать.</p>
+<p>Если ты не очень в HTTP — загляни в <a href="/articles/http-metody-i-status-kody.html">основы HTTP</a> и <a href="/articles/kak-rabotaet-websocket.html">детальный разбор WebSocket</a>. Без воды — только то, что влияет на выбор.</p>
+
+<h2 id="section-0">Что такое real-time в вебе</h2>
+<p>Классический HTTP работает по модели запрос-ответ: браузер просит, сервер даёт. Если сервер хочет сам отправить что-то в браузер — он не может: HTTP не поддерживает «инициативу сервера». Поэтому придумали обходные пути.</p>
+<p>Long polling — браузер делает запрос, сервер держит его открытым, пока не появится новое сообщение, и только тогда отвечает. Браузер тут же открывает новый запрос. SSE — сервер держит одно соединение открытым и шлёт события потоком. WebSocket — отдельный протокол поверх TCP, где сервер и клиент общаются в обе стороны свободно.</p>
+
+<div class="table-scroll"><table>
+  <thead><tr><th>Параметр</th><th>Long Polling</th><th>SSE</th><th>WebSocket</th></tr></thead>
+  <tbody>
+    <tr><td>Протокол</td><td>HTTP</td><td>HTTP</td><td>WS (поверх TCP)</td></tr>
+    <tr><td>Направление</td><td>Сервер к клиенту</td><td>Сервер к клиенту</td><td>Двунаправленный</td></tr>
+    <tr><td>Сложность реализации</td><td>Низкая</td><td>Низкая</td><td>Средняя</td></tr>
+    <tr><td>Накладные расходы</td><td>Высокие</td><td>Низкие</td><td>Минимальные</td></tr>
+    <tr><td>Реконнект</td><td>Вручную</td><td>Автоматический</td><td>Вручную</td></tr>
+    <tr><td>Лимиты соединений</td><td>Зависит от браузера</td><td>6 на домен</td><td>Нет жёстких</td></tr>
+    <tr><td>Через прокси/CDN</td><td>Да</td><td>Да</td><td>Не всегда</td></tr>
+    <tr><td>Где использовать</td><td>Совместимость со старым</td><td>Уведомления, ленты</td><td>Чаты, игры, редакторы</td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="section-1">Long Polling: старая добрая классика</h2>
+<p>Long polling — самый простой вариант. Браузер делает обычный HTTP-запрос к серверу, сервер не отвечает сразу, а ждёт появления данных. Когда данные появляются — отвечает. Браузер тут же делает новый запрос. Цикл повторяется.</p>
+<p>Плюсы: работает везде, даже в старых браузерах, легко реализуется на любой серверной технологии без специальных библиотек. Минусы: много лишних запросов, накладные расходы на handshake, задержки между получением ответа и новым запросом (gap).</p>
+
+<pre><code class="language-js">// Клиентский long polling
+async function poll() {
+  while (true) {
+    try {
+      const res = await fetch('/api/updates');
+      const data = await res.json();
+      handleEvent(data);
+    } catch (e) {
+      await new Promise(r =&gt; setTimeout(r, 1000));
+    }
+  }
+}
+poll();</code></pre>
+
+<p>В 2026 году long polling почти не используют в новых проектах — SSE и WebSocket делают то же самое лучше. Но он остаётся аварийным вариантом для старых прокси и корпоративных сетей, где WebSocket не проходит.</p>
+<p>Иногда long polling — лучший выбор даже в 2026 году. Например, если у тебя нечастые события (раз в минуту) и простая серверная инфраструктура — нет смысла усложнять код SSE или WebSocket. Long polling с лимитом времени запроса (например, 30 секунд) даёт простую и работающую систему без лишних абстракций.</p>
+
+<h2 id="section-2">Server-Sent Events: простой и достаточный</h2>
+<p>SSE — это способ получить постоянный поток событий с сервера в браузер. Соединение держится открытым, сервер шлёт сообщения в формате text/event-stream. Браузер автоматически восстанавливает соединение при обрыве. Поддержка встроена через объект EventSource — никаких библиотек не нужно.</p>
+<p>SSE идеален для односторонней коммуникации: уведомления, ленты новостей, обновления статусов, логи в реальном времени. Большая часть real-time веба на самом деле односторонняя — и SSE там идеально подходит.</p>
+
+<pre><code class="language-js">// Клиент
+const es = new EventSource('/api/events');
+es.onmessage = (e) =&gt; {
+  const data = JSON.parse(e.data);
+  console.log('Получено:', data);
+};
+es.onerror = () =&gt; console.log('Реконнект автоматический');</code></pre>
+
+<pre><code class="language-python"># Сервер (Python, FastAPI)
+from fastapi import FastAPI
+from fastapi.responses import StreamingResponse
+
+app = FastAPI()
+
+async def event_stream():
+    while True:
+        yield "data: hello\n\n"
+
+@app.get("/api/events")
+async def events():
+    return StreamingResponse(
+        event_stream(),
+        media_type="text/event-stream"
+    )</code></pre>
+
+<p>Минусы SSE: только односторонний (сервер к клиенту), лимит в 6 соединений на домен в HTTP/1.1 (с HTTP/2 это снимается), не работает через некоторые старые прокси. Также SSE не работает в IE — но в 2026 году это уже не проблема.</p>
+
+<h2 id="section-3">WebSocket: двунаправленный канал</h2>
+<p>WebSocket — это отдельный протокол поверх TCP. Устанавливается через HTTP-рукопожатие, потом переходит в режим постоянного двунаправленного канала. Сервер и клиент могут слать сообщения в любую сторону в любое время.</p>
+<p>WebSocket идеален для чатов, multiplayer-игр, коллаборативных редакторов (Google Docs), стримов котировок в обе стороны, интерактивных досок. Если тебе надо слать данные от клиента к серверу часто и с малой задержкой — WebSocket.</p>
+
+<pre><code class="language-js">// Клиент
+const ws = new WebSocket('wss://api.example.com/ws');
+ws.onopen = () =&gt; ws.send('hello');
+ws.onmessage = (e) =&gt; console.log('Получено:', e.data);
+ws.onclose = () =&gt; console.log('Соединение закрылось');
+
+// Отправка в любой момент
+ws.send(JSON.stringify({type: 'ping'}));</code></pre>
+
+<p>Минусы: сложнее в реализации, надо вручную реконнектить, не все прокси и CDN корректно проксируют WS-соединения. Также WebSocket не работает с HTTP/2 мультиплексированием в старых реализациях.</p>
+<p>Для production-сценариев WebSocket почти всегда требует дополнительной инфраструктуры: sticky sessions на load balancer, отдельный gateway для управления соединениями, мониторинг активных коннектов. В большой системе с десятками тысяч одновременных клиентов ставят специализированные WS-балансировщики вроде Pushpin или Centrifugo. Они принимают WS от клиентов и делают pub/sub между инстансами приложения.</p>
+
+<h2 id="section-4">Что выбрать: практическое руководство</h2>
+<p>Если тебе нужно просто показать пользователю, что у него новое сообщение — SSE. Это самый недооценённый инструмент: многие выбирают WebSocket «на всякий случай», хотя SSE хватит за глаза. Меньше кода, меньше багов, проще масштабировать.</p>
+<p>Если ты делаешь чат с друзьями, где надо слать сообщения в обе стороны — WebSocket. Аналогично для игр и интерактивных досок. Если нужна двусторонняя коммуникация — без WebSocket не обойтись.</p>
+<p>Если ты поддерживаешь старый корпоративный софт с прокси, которые режут WS, — оставайся на long polling. Это редкий сценарий, но встречается в больших компаниях с жёсткой сетевой политикой.</p>
+
+<blockquote>Не выбирай WebSocket «на всякий случай». SSE покрывает 70% real-time сценариев с половиной сложности.</blockquote>
+
+<h2 id="section-5">Production-нюансы</h2>
+<p>Масштабирование: long polling и SSE хорошо горизонтально масштабируются через sticky sessions или распределение событий через pub/sub (Redis, Kafka). WebSocket сложнее — нужен gateway вроде Pushpin или специальный WS-балансировщик.</p>
+<p>Реконнекты: SSE встроен в браузер. WebSocket надо делать вручную через библиотеку reconnecting-websocket или свою обёртку. Long polling — сам становится реконнектом, если оформить правильно.</p>
+<p>Аутентификация: SSE и long polling идёт через обычные HTTP-cookies — всё просто. WebSocket со standard-протоколом не отправляет cookies автоматически, нужно прокидывать токен в первом сообщении или через подзапрос.</p>
+<p>Сравни подробно — в <a href="/articles/kak-rabotaet-websocket.html">статье про WebSocket</a> и <a href="/articles/http-metody-i-status-kody.html">HTTP-методы</a>. Если нужна маршрутизация — <a href="/articles/chto-takoe-nginx.html">обзор Nginx</a>.</p>
+
+<h2 id="section-6">Типичные паттерны и примеры кода</h2>
+<p>Реал-тайм в реальных приложениях редко сводится к чистому «слать события». Вокруг вырастают паттерны: авторизация, реконнекты, сердце-биения (heartbeat), масштабирование через pub/sub. Разберём ключевые.</p>
+<p><strong>Heartbeat (пинг-понг).</strong> Соединение может упасть незаметно для клиента — например, NAT-таблица на роутере устарела. Чтобы это отловить, шлют periodic-пинги. В WebSocket это встроено в протокол (control-фреймы), но часто дублируют на уровне приложения: каждые 30 секунд клиент шлёт «ping», сервер отвечает «pong». Если ответа нет 60 секунд — реконнект.</p>
+<pre><code class="language-js">// Heartbeat на уровне приложения
+setInterval(() =&gt; {
+  if (ws.readyState === WebSocket.OPEN) {
+    ws.send(JSON.stringify({type: 'ping'}));
+  }
+}, 30000);
+
+ws.onmessage = (e) =&gt; {
+  const msg = JSON.parse(e.data);
+  if (msg.type === 'pong') return; // heartbeat ответ
+  // обрабатываем реальные сообщения
+};</code></pre>
+<p><strong>Аутентификация на handshake.</strong> В WebSocket токен обычно передают в query-параметре: <code>wss://api.example.com/ws?token=xxx</code>. Это небезопасно для production — токен попадает в логи. Лучший подход: открыть обычный HTTP-запрос для handshake, получить одноразовый ticket, потом подключаться по WebSocket с этим ticket. Подробнее про токены — в <a href="/articles/chto-takoe-jwt-avtorizaciya.html">статье про JWT</a>.</p>
+<p><strong>Pub/sub для масштабирования.</strong> Когда у тебя несколько инстансов сервера, нельзя слать события прямо из текущего процесса — другие не узнают. Все инстансы подписываются на Redis/Kafka, и когда любой из них хочет слать событие — публикует в канал. Все инстансы получают и решают, у кого из клиентов подписка на это событие.</p>
+<p><strong>Backpressure.</strong> Если клиент медленный или сеть плохая, сервер может наваливать события быстрее, чем клиент успевает. Это «backpressure»: надо либо буферизировать, либо дропать, либо сигнализировать вышестоящему сервису о замедлении. WebSocket API даёт <code>ws.bufferedAmount</code> — размер очереди отправки. Если он растёт — пора притормозить.</p>
+<p><strong>Idempotency.</strong> События могут приходить дважды (из-за ретраев или обрывов). Обработчик должен быть идемпотентным: повторное применение не меняет результат. Для этого используют event ID: каждое сообщение содержит уникальный ID, клиент хранит последние N IDs и игнорирует дубликаты.</p>
+<p><strong>Reconnection с backoff.</strong> При обрыве не подключайся сразу — сервер может лежать и тысяча клиентов одновременно ударит по нему. Используй экспоненциальный backoff: 1с, 2с, 4с, 8с, 16с, 30с максимум. Это сглаживает нагрузку при массовом реконнекте.</p>
+
+<h2 id="section-7">FAQ</h2>
+
+<h3 id="section-8">Что выбрать для чата?</h3>
+<p>WebSocket. Чат — двунаправленная коммуникация: пользователь шлёт сообщения и получает от других. SSE не подходит, потому что не может принимать данные от клиента.</p>
+
+<h3 id="section-9">Что выбрать для уведомлений?</h3>
+<p>SSE. Это односторонний сценарий: сервер шлёт уведомления, клиент их слушает. Реализуется в 20 строк кода, работает без библиотек.</p>
+
+<h3 id="section-10">SSE работает с HTTPS?</h3>
+<p>Да, идеально. Если страница открыта по HTTPS, EventSource автоматически использует защиту. Просто указывай относительный URL — браузер всё сделает.</p>
+
+<h3 id="section-11">WebSocket работает через Nginx?</h3>
+<p>Да, с правильной конфигурацией. Nginx поддерживает WebSocket через upgrade-заголовки. Подробнее — в <a href="/articles/chto-takoe-nginx.html">статье про Nginx</a>.</p>
+
+<h3 id="section-12">Что быстрее — WebSocket или SSE?</h3>
+<p>По накладным расходам WebSocket чуть быстрее для частых мелких сообщений, потому что нет HTTP-overhead на каждом сообщении. Для редких событий (раз в секунду и реже) — разница незаметна. SSE компактнее на уровне кода.</p>
+
+<h3 id="section-13">Что лучше для стриминга видео?</h3>
+<p>Ни одно из этого. Для видео используют другие протоколы: HLS, WebRTC, RTMP. WebSocket и SSE — для коротких событий и текстовых сообщений, не для медиа-стримов.</p>
+
+<h2 id="section-14">Краткий вывод</h2>
+<p>В 2026 году выбор real-time-технологии зависит от задачи. Long polling — fallback для старых сетей. SSE — простой и достаточный для односторонних обновлений. WebSocket — для полноценной двусторонней коммуникации. Главное правило: не усложняй. Если SSE достаточно — не тащи WebSocket. Если WebSocket необходим — не пытайся выкрутиться через long polling.</p>
+<p>Также помни: real-time — это не только протокол, но и инфраструктура. Реконнекты, heartbeat, аутентификация, масштабирование через pub/sub — всё это надо продумать до продакшна. Напиши простой прототип, погоняй под нагрузкой, и только потом выкатывай. Лучше потратить день на тесты, чем получить отвал в час пик.</p>
+</article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Что такое real-time в вебе</a><a href="#section-1" class="lvl-2">Long Polling: старая добрая классика</a><a href="#section-2" class="lvl-2">Server-Sent Events: простой и достаточный</a><a href="#section-3" class="lvl-2">WebSocket: двунаправленный канал</a><a href="#section-4" class="lvl-2">Что выбрать: практическое руководство</a><a href="#section-5" class="lvl-2">Production-нюансы</a><a href="#section-6" class="lvl-2">Типичные паттерны и примеры кода</a><a href="#section-7" class="lvl-2">FAQ</a><a href="#section-8" class="lvl-3">Что выбрать для чата?</a><a href="#section-9" class="lvl-3">Что выбрать для уведомлений?</a><a href="#section-10" class="lvl-3">SSE работает с HTTPS?</a><a href="#section-11" class="lvl-3">WebSocket работает через Nginx?</a><a href="#section-12" class="lvl-3">Что быстрее — WebSocket или SSE?</a><a href="#section-13" class="lvl-3">Что лучше для стриминга видео?</a><a href="#section-14" class="lvl-2">Краткий вывод</a></aside>
+      </div>
+
+      
+    <aside class="donate-block" aria-label="Поддержать проект">
+      <div class="donate-block__title">Поддержи проект</div>
+      <p class="donate-block__text">Сайт живёт на энтузиазме. Если статья оказалась полезной — поблагодари автора. Любая сумма идёт на хостинг, домен и новые статьи.</p>
+      <div class="donate-block__buttons">
+        <a href="https://boosty.to/itbase" target="_blank" rel="noopener nofollow" class="donate-btn donate-boosty">☕ Boosty</a><a href="https://t.me/itbase_bot" target="_blank" rel="noopener nofollow" class="donate-btn donate-tg">✈️ Telegram</a>
+      </div>
+      <p class="donate-block__hint">Также можно подписаться на <a href="https://t.me/itbase" target="_blank" rel="noopener">Telegram-канал</a> — там анонсы новых статей.</p>
+    </aside>
+    
+
+      <div class="ad-slot ad-slot--ad-bottom" data-slot="ad-bottom"></div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/kak-rabotaet-websocket.html"><img src="/img/websocket.svg" alt="Как работает WebSocket — real-time связь между браузером и сервером" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Веб</span><span class="tag">Сети</span><span class="tag">Разработка</span></div>
+    <a href="/articles/kak-rabotaet-websocket.html"><h2 class="card__title">Как работает WebSocket — real-time связь между браузером и сервером</h2></a>
+    <p class="card__excerpt">Почему обычный HTTP плохо подходит для чатов, игр и бирж. Разбираем WebSocket: handshake, кадры, когда нужен и какие есть альтернативы.</p>
+    <div class="card__meta">
+      <span>14 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="kak-rabotaet-websocket" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/paginaciya-i-versirovanie-api.html"><img src="/img/api-versioning.svg" alt="Пагинация и версионирование API — как не сломать клиентов" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">API</span><span class="tag">Веб</span><span class="tag">Разработка</span></div>
+    <a href="/articles/paginaciya-i-versirovanie-api.html"><h2 class="card__title">Пагинация и версионирование API — как не сломать клиентов</h2></a>
+    <p class="card__excerpt">Как отдавать тысячи записей постранично и что делать, когда API меняется. Разбираем offset/limit, cursor-пагинацию и версионирование.</p>
+    <div class="card__meta">
+      <span>27 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="paginaciya-i-versirovanie-api" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/xss-csrf-sql-inekcii.html"><img src="/img/security.svg" alt="XSS, CSRF, SQL-инъекции — три главные атаки на веб" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Безопасность</span><span class="tag">Веб</span><span class="tag">Разработка</span></div>
+    <a href="/articles/xss-csrf-sql-inekcii.html"><h2 class="card__title">XSS, CSRF, SQL-инъекции — три главные атаки на веб</h2></a>
+    <p class="card__excerpt">Разбираем три самых частых уязвимости в веб-приложениях: как работают, чем опасны и как защититься. С примерами атак и защиты.</p>
+    <div class="card__meta">
+      <span>15 апреля 2026</span><span class="dot">•</span><span>12 мин</span>
+      <button class="card__bm" data-slug="xss-csrf-sql-inekcii" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/support.html">Поддержать ★</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+  
+</body>
+</html>

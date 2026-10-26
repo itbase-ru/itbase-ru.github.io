@@ -1,6 +1,138 @@
 /* Файл создаётся автоматически скриптом build.py — не редактируй. */
 const ARTICLES = [
  {
+  "slug": "kak-napisat-rezyume-programmista",
+  "title": "Как написать резюме программисту: шаблон + примеры 2026",
+  "excerpt": "Практический гайд по резюме разработчика в 2026: структура, саммари, описание опыта с метриками, навыки, дизайн, ATS-формат и типичные ошибки.",
+  "cover": "img/resume-cover.svg",
+  "tags": [
+   "Карьера",
+   "Разработка"
+  ],
+  "date": "2026-12-02",
+  "readTime": 12,
+  "url": "articles/kak-napisat-rezyume-programmista.html"
+ },
+ {
+  "slug": "tailwind-css-vs-bootstrap",
+  "title": "Tailwind CSS vs Bootstrap: что лучше в 2026",
+  "excerpt": "Сравнение Tailwind и Bootstrap простыми словами: философия, размер бандла, кривая обучения, экосистема. Поможем выбрать фреймворк под проект.",
+  "cover": "img/tailwind-cover.svg",
+  "tags": [
+   "Веб",
+   "CSS"
+  ],
+  "date": "2026-11-30",
+  "readTime": 11,
+  "url": "articles/tailwind-css-vs-bootstrap.html"
+ },
+ {
+  "slug": "websocket-vs-sse-vs-polling",
+  "title": "WebSocket vs Server-Sent Events vs Long Polling: что когда использовать",
+  "excerpt": "Сравнение трёх технологий real-time в вебе: long polling, SSE и WebSocket. Разбираем, что выбрать для чата, уведомлений, ленты и игр. С примерами кода.",
+  "cover": "img/ws-sse-cover.svg",
+  "tags": [
+   "Веб",
+   "Сети",
+   "Разработка"
+  ],
+  "date": "2026-11-28",
+  "readTime": 10,
+  "url": "articles/websocket-vs-sse-vs-polling.html"
+ },
+ {
+  "slug": "postgresql-vs-mysql",
+  "title": "PostgreSQL vs MySQL: что выбрать в 2026",
+  "excerpt": "Сравнение PostgreSQL и MySQL простыми словами: философия, производительность, JSON, индексы и расширения. Поможем выбрать БД под твой проект.",
+  "cover": "img/pg-mysql-cover.svg",
+  "tags": [
+   "Базы данных",
+   "SQL"
+  ],
+  "date": "2026-11-25",
+  "readTime": 14,
+  "url": "articles/postgresql-vs-mysql.html"
+ },
+ {
+  "slug": "claude-ai-obzor",
+  "title": "Claude AI от Anthropic: обзор, сравнение с ChatGPT, как пользоваться",
+  "excerpt": "Обзор Claude AI в 2026 году: где он сильнее ChatGPT, тарифы, работа с длинными документами и кодом. Практический гайд без маркетингового шума.",
+  "cover": "img/claude-cover.svg",
+  "tags": [
+   "ИИ",
+   "Инструменты"
+  ],
+  "date": "2026-11-22",
+  "readTime": 11,
+  "url": "articles/claude-ai-obzor.html"
+ },
+ {
+  "slug": "nextjs-15-chto-novogo",
+  "title": "Next.js 15: что нового, App Router, Server Components",
+  "excerpt": "Обзор Next.js 15 простыми словами: чем App Router отличается от Pages, как работают Server Components, зачем Turbopack и где лежат грабли при миграции.",
+  "cover": "img/nextjs-cover.svg",
+  "tags": [
+   "Веб",
+   "JavaScript"
+  ],
+  "date": "2026-11-20",
+  "readTime": 13,
+  "url": "articles/nextjs-15-chto-novogo.html"
+ },
+ {
+  "slug": "rust-vs-go-sravnenie",
+  "title": "Rust vs Go: какой язык учить в 2026",
+  "excerpt": "Сравнение Rust и Go простыми словами: философия, управление памятью, параллелизм, где использовать каждый язык. Поможем выбрать под твою задачу и карьеру.",
+  "cover": "img/rust-go-cover.svg",
+  "tags": [
+   "Разработка",
+   "Карьера"
+  ],
+  "date": "2026-11-18",
+  "readTime": 12,
+  "url": "articles/rust-vs-go-sravnenie.html"
+ },
+ {
+  "slug": "kubernetes-dlya-novichka",
+  "title": "Kubernetes для новичка: поды, деплойменты, сервисы за 15 минут",
+  "excerpt": "Объяснение Kubernetes простыми словами: что такое поды, деплойменты и сервисы, зачем они нужны и как написать первый манифест. Без воды и без заумных терминов.",
+  "cover": "img/kubernetes-cover.svg",
+  "tags": [
+   "DevOps",
+   "Инструменты"
+  ],
+  "date": "2026-11-15",
+  "readTime": 15,
+  "url": "articles/kubernetes-dlya-novichka.html"
+ },
+ {
+  "slug": "github-copilot-obzor",
+  "title": "GitHub Copilot: обзор, цена, сравнение с альтернативами",
+  "excerpt": "Что умеет GitHub Copilot в 2026 году, сколько стоит и стоит ли переключаться на Cursor, Codeium и Tabnine. Реальные сценарии, где ИИ-ассистент помогает и мешает.",
+  "cover": "img/copilot-cover.svg",
+  "tags": [
+   "ИИ",
+   "Инструменты",
+   "Разработка"
+  ],
+  "date": "2026-11-12",
+  "readTime": 10,
+  "url": "articles/github-copilot-obzor.html"
+ },
+ {
+  "slug": "chatgpt-kak-polzovatsya",
+  "title": "ChatGPT: как пользоваться, промпты, лайфхаки",
+  "excerpt": "Практический гайд по ChatGPT в 2026 году: тарифы, промпт-инжиниринг простыми словами, лайфхаки и ловушки, в которые попадают новички.",
+  "cover": "img/chatgpt-cover.svg",
+  "tags": [
+   "ИИ",
+   "Инструменты"
+  ],
+  "date": "2026-11-10",
+  "readTime": 12,
+  "url": "articles/chatgpt-kak-polzovatsya.html"
+ },
+ {
   "slug": "paginaciya-i-versirovanie-api",
   "title": "Пагинация и версионирование API — как не сломать клиентов",
   "excerpt": "Как отдавать тысячи записей постранично и что делать, когда API меняется. Разбираем offset/limit, cursor-пагинацию и версионирование.",

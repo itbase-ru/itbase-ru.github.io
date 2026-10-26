@@ -18,7 +18,8 @@
   <meta name="twitter:title" content="Cookie, localStorage и sessionStorage — что выбрать">
   <meta name="twitter:description" content="Три способа хранить данные в браузере. Разбираем разницу, лимиты, безопасность и когда что использовать — на конкретных примерах.">
   <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/cookie-localstorage-sessionstorage.png">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Cookie, localStorage и sessionStorage — что выбрать", "description": "Три способа хранить данные в браузере. Разбираем разницу, лимиты, безопасность и когда что использовать — на конкретных примерах.", "image": ["https://itbase-ru.github.io/img/og/cookie-localstorage-sessionstorage.png"], "datePublished": "2026-04-22", "dateModified": "2026-04-22", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/cookie-localstorage-sessionstorage.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Веб", "item": "https://itbase-ru.github.io/?tag=Веб"}, {"@type": "ListItem", "position": 3, "name": "Cookie, localStorage и sessionStorage — что выбрать", "item": "https://itbase-ru.github.io/articles/cookie-localstorage-sessionstorage.html"}]}]</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Cookie, localStorage и sessionStorage — что выбрать", "description": "Три способа хранить данные в браузере. Разбираем разницу, лимиты, безопасность и когда что использовать — на конкретных примерах.", "image": ["https://itbase-ru.github.io/img/og/cookie-localstorage-sessionstorage.png"], "datePublished": "2026-04-22", "dateModified": "2026-04-22", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/", "logo": {"@type": "ImageObject", "url": "https://itbase-ru.github.io/favicon.svg"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/cookie-localstorage-sessionstorage.html"}, "articleSection": "Веб", "keywords": "Веб, JavaScript, Безопасность"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Веб", "item": "https://itbase-ru.github.io/?tag=Веб"}, {"@type": "ListItem", "position": 3, "name": "Cookie, localStorage и sessionStorage — что выбрать", "item": "https://itbase-ru.github.io/articles/cookie-localstorage-sessionstorage.html"}]}</script>
   <script>
     (function(){
       try{
@@ -72,6 +73,8 @@
       <figure class="article-cover">
         <img src="/img/storage.svg" alt="Cookie, localStorage и sessionStorage — что выбрать">
       </figure>
+
+      <div class="ad-slot ad-slot--ad-inline" data-slot="ad-inline"></div>
 
       <div class="article-layout">
         <article class="article-body" id="article-body">
@@ -255,9 +258,34 @@ applyTheme();</code></pre>
         <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Cookie</a><a href="#section-1" class="lvl-2">localStorage</a><a href="#section-2" class="lvl-2">sessionStorage</a><a href="#section-3" class="lvl-2">Сравнение</a><a href="#section-4" class="lvl-2">Уязвимости — коротко</a><a href="#section-5" class="lvl-3">XSS и localStorage</a><a href="#section-6" class="lvl-3">CSRF и cookies</a><a href="#section-7" class="lvl-2">Что где хранить</a><a href="#section-8" class="lvl-2">Пример: правильная работа с токеном</a><a href="#section-9" class="lvl-2">Практический пример: тема сайта</a><a href="#section-10" class="lvl-2">IndexedDB — если данных много</a><a href="#section-11" class="lvl-2">Итог</a></aside>
       </div>
 
+      
+    <aside class="donate-block" aria-label="Поддержать проект">
+      <div class="donate-block__title">Поддержи проект</div>
+      <p class="donate-block__text">Сайт живёт на энтузиазме. Если статья оказалась полезной — поблагодари автора. Любая сумма идёт на хостинг, домен и новые статьи.</p>
+      <div class="donate-block__buttons">
+        <a href="https://boosty.to/itbase" target="_blank" rel="noopener nofollow" class="donate-btn donate-boosty">☕ Boosty</a><a href="https://t.me/itbase_bot" target="_blank" rel="noopener nofollow" class="donate-btn donate-tg">✈️ Telegram</a>
+      </div>
+      <p class="donate-block__hint">Также можно подписаться на <a href="https://t.me/itbase" target="_blank" rel="noopener">Telegram-канал</a> — там анонсы новых статей.</p>
+    </aside>
+    
+
+      <div class="ad-slot ad-slot--ad-bottom" data-slot="ad-bottom"></div>
+
       <section class="wrap" style="padding-bottom:70px">
         <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
         <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/nextjs-15-chto-novogo.html"><img src="/img/nextjs-cover.svg" alt="Next.js 15: что нового, App Router, Server Components" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Веб</span><span class="tag">JavaScript</span></div>
+    <a href="/articles/nextjs-15-chto-novogo.html"><h2 class="card__title">Next.js 15: что нового, App Router, Server Components</h2></a>
+    <p class="card__excerpt">Обзор Next.js 15 простыми словами: чем App Router отличается от Pages, как работают Server Components, зачем Turbopack и где лежат грабли при миграции.</p>
+    <div class="card__meta">
+      <span>20 ноября 2026</span><span class="dot">•</span><span>13 мин</span>
+      <button class="card__bm" data-slug="nextjs-15-chto-novogo" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
 <article class="card">
   <a class="card__cover" href="/articles/chto-takoe-cors.html"><img src="/img/cors.svg" alt="Что такое CORS и почему браузер блокирует запросы" loading="lazy"></a>
   <div class="card__body">
@@ -282,18 +310,6 @@ applyTheme();</code></pre>
     </div>
   </div>
 </article>
-<article class="card">
-  <a class="card__cover" href="/articles/chto-takoe-jwt-avtorizaciya.html"><img src="/img/jwt.svg" alt="Что такое JWT и как работает авторизация" loading="lazy"></a>
-  <div class="card__body">
-    <div class="card__tags"><span class="tag">Веб</span><span class="tag">Безопасность</span><span class="tag">API</span></div>
-    <a href="/articles/chto-takoe-jwt-avtorizaciya.html"><h2 class="card__title">Что такое JWT и как работает авторизация</h2></a>
-    <p class="card__excerpt">JWT — это токен, который заменяет куки-сессии. Разбираем структуру, подпись, срок жизни и типичные ошибки при работе с токенами.</p>
-    <div class="card__meta">
-      <span>3 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
-      <button class="card__bm" data-slug="chto-takoe-jwt-avtorizaciya" title="В закладки" aria-label="В закладки">★</button>
-    </div>
-  </div>
-</article>
         </div>
       </section>
     </div>
@@ -304,6 +320,7 @@ applyTheme();</code></pre>
     <span>© <span id="year">2026</span> IT·База</span>
     <a href="/about.html">О сайте</a>
     <a href="/contacts.html">Контакты</a>
+    <a href="/support.html">Поддержать ★</a>
     <a href="/privacy.html">Политика</a>
     <a href="/terms.html">Условия</a>
     <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
@@ -314,5 +331,6 @@ applyTheme();</code></pre>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
   <script src="/app.js"></script>
+  
 </body>
 </html>

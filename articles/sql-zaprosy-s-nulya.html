@@ -18,7 +18,8 @@
   <meta name="twitter:title" content="SQL-запросы с нуля — SELECT, WHERE, JOIN">
   <meta name="twitter:description" content="Разбираем SQL на практике: как выбрать данные, отфильтровать, отсортировать, соединить таблицы. С примерами на реальных задачах интернет-магазина.">
   <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/sql-zaprosy-s-nulya.png">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "SQL-запросы с нуля — SELECT, WHERE, JOIN", "description": "Разбираем SQL на практике: как выбрать данные, отфильтровать, отсортировать, соединить таблицы. С примерами на реальных задачах интернет-магазина.", "image": ["https://itbase-ru.github.io/img/og/sql-zaprosy-s-nulya.png"], "datePublished": "2026-04-07", "dateModified": "2026-04-07", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/sql-zaprosy-s-nulya.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Базы данных", "item": "https://itbase-ru.github.io/?tag=Базы данных"}, {"@type": "ListItem", "position": 3, "name": "SQL-запросы с нуля — SELECT, WHERE, JOIN", "item": "https://itbase-ru.github.io/articles/sql-zaprosy-s-nulya.html"}]}]</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "SQL-запросы с нуля — SELECT, WHERE, JOIN", "description": "Разбираем SQL на практике: как выбрать данные, отфильтровать, отсортировать, соединить таблицы. С примерами на реальных задачах интернет-магазина.", "image": ["https://itbase-ru.github.io/img/og/sql-zaprosy-s-nulya.png"], "datePublished": "2026-04-07", "dateModified": "2026-04-07", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/", "logo": {"@type": "ImageObject", "url": "https://itbase-ru.github.io/favicon.svg"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/sql-zaprosy-s-nulya.html"}, "articleSection": "Базы данных", "keywords": "Базы данных, SQL, Разработка"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Базы данных", "item": "https://itbase-ru.github.io/?tag=Базы данных"}, {"@type": "ListItem", "position": 3, "name": "SQL-запросы с нуля — SELECT, WHERE, JOIN", "item": "https://itbase-ru.github.io/articles/sql-zaprosy-s-nulya.html"}]}</script>
   <script>
     (function(){
       try{
@@ -72,6 +73,8 @@
       <figure class="article-cover">
         <img src="/img/sql.svg" alt="SQL-запросы с нуля — SELECT, WHERE, JOIN">
       </figure>
+
+      <div class="ad-slot ad-slot--ad-inline" data-slot="ad-inline"></div>
 
       <div class="article-layout">
         <article class="article-body" id="article-body">
@@ -370,6 +373,19 @@ ORDER BY
         <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Что такое SQL и зачем</a><a href="#section-1" class="lvl-2">Наша учебная база</a><a href="#section-2" class="lvl-2">SELECT — выбрать данные</a><a href="#section-3" class="lvl-2">WHERE — фильтрация</a><a href="#section-4" class="lvl-3">IN, BETWEEN, LIKE</a><a href="#section-5" class="lvl-3">IS NULL — работа с пустыми значениями</a><a href="#section-6" class="lvl-2">ORDER BY — сортировка</a><a href="#section-7" class="lvl-2">LIMIT — ограничить количество</a><a href="#section-8" class="lvl-2">Агрегатные функции</a><a href="#section-9" class="lvl-2">GROUP BY — группировка</a><a href="#section-10" class="lvl-3">HAVING — фильтр после группировки</a><a href="#section-11" class="lvl-2">JOIN — соединение таблиц</a><a href="#section-12" class="lvl-3">INNER JOIN — только совпадения</a><a href="#section-13" class="lvl-3">LEFT JOIN — все строки слева</a><a href="#section-14" class="lvl-3">Сравнение JOIN&#x27;ов</a><a href="#section-15" class="lvl-2">INSERT, UPDATE, DELETE — изменение данных</a><a href="#section-16" class="lvl-3">INSERT — добавить</a><a href="#section-17" class="lvl-3">UPDATE — обновить</a><a href="#section-18" class="lvl-3">DELETE — удалить</a><a href="#section-19" class="lvl-2">Порядок частей запроса</a><a href="#section-20" class="lvl-2">Комплексный пример</a><a href="#section-21" class="lvl-2">Как практиковаться</a><a href="#section-22" class="lvl-2">Итог</a></aside>
       </div>
 
+      
+    <aside class="donate-block" aria-label="Поддержать проект">
+      <div class="donate-block__title">Поддержи проект</div>
+      <p class="donate-block__text">Сайт живёт на энтузиазме. Если статья оказалась полезной — поблагодари автора. Любая сумма идёт на хостинг, домен и новые статьи.</p>
+      <div class="donate-block__buttons">
+        <a href="https://boosty.to/itbase" target="_blank" rel="noopener nofollow" class="donate-btn donate-boosty">☕ Boosty</a><a href="https://t.me/itbase_bot" target="_blank" rel="noopener nofollow" class="donate-btn donate-tg">✈️ Telegram</a>
+      </div>
+      <p class="donate-block__hint">Также можно подписаться на <a href="https://t.me/itbase" target="_blank" rel="noopener">Telegram-канал</a> — там анонсы новых статей.</p>
+    </aside>
+    
+
+      <div class="ad-slot ad-slot--ad-bottom" data-slot="ad-bottom"></div>
+
       <section class="wrap" style="padding-bottom:70px">
         <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
         <div class="grid" id="related">
@@ -386,6 +402,18 @@ ORDER BY
   </div>
 </article>
 <article class="card">
+  <a class="card__cover" href="/articles/postgresql-vs-mysql.html"><img src="/img/pg-mysql-cover.svg" alt="PostgreSQL vs MySQL: что выбрать в 2026" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Базы данных</span><span class="tag">SQL</span></div>
+    <a href="/articles/postgresql-vs-mysql.html"><h2 class="card__title">PostgreSQL vs MySQL: что выбрать в 2026</h2></a>
+    <p class="card__excerpt">Сравнение PostgreSQL и MySQL простыми словами: философия, производительность, JSON, индексы и расширения. Поможем выбрать БД под твой проект.</p>
+    <div class="card__meta">
+      <span>25 ноября 2026</span><span class="dot">•</span><span>14 мин</span>
+      <button class="card__bm" data-slug="postgresql-vs-mysql" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
   <a class="card__cover" href="/articles/tranzakcii-i-acid.html"><img src="/img/tranzakcii.svg" alt="Транзакции в базах данных — ACID простыми словами" loading="lazy"></a>
   <div class="card__body">
     <div class="card__tags"><span class="tag">Базы данных</span><span class="tag">SQL</span><span class="tag">Теория</span></div>
@@ -394,18 +422,6 @@ ORDER BY
     <div class="card__meta">
       <span>21 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
       <button class="card__bm" data-slug="tranzakcii-i-acid" title="В закладки" aria-label="В закладки">★</button>
-    </div>
-  </div>
-</article>
-<article class="card">
-  <a class="card__cover" href="/articles/chto-takoe-orm.html"><img src="/img/orm.svg" alt="Что такое ORM — работа с базой через объекты" loading="lazy"></a>
-  <div class="card__body">
-    <div class="card__tags"><span class="tag">Базы данных</span><span class="tag">Разработка</span><span class="tag">Python</span></div>
-    <a href="/articles/chto-takoe-orm.html"><h2 class="card__title">Что такое ORM — работа с базой через объекты</h2></a>
-    <p class="card__excerpt">Зачем писать SQL, если можно работать с базой как с обычными объектами. Разбираем ORM: как работает, плюсы и минусы, примеры на SQLAlchemy.</p>
-    <div class="card__meta">
-      <span>13 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
-      <button class="card__bm" data-slug="chto-takoe-orm" title="В закладки" aria-label="В закладки">★</button>
     </div>
   </div>
 </article>
@@ -419,6 +435,7 @@ ORDER BY
     <span>© <span id="year">2026</span> IT·База</span>
     <a href="/about.html">О сайте</a>
     <a href="/contacts.html">Контакты</a>
+    <a href="/support.html">Поддержать ★</a>
     <a href="/privacy.html">Политика</a>
     <a href="/terms.html">Условия</a>
     <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
@@ -429,5 +446,6 @@ ORDER BY
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
   <script src="/app.js"></script>
+  
 </body>
 </html>

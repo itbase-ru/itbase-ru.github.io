@@ -5,13 +5,103 @@
     <link>https://itbase-ru.github.io/</link>
     <description>Статьи про технологии простыми словами: ИИ, программирование, веб, базы данных, DevOps.</description>
     <language>ru-ru</language>
-    <lastBuildDate>Mon, 26 Oct 2026 16:19:27 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 26 Oct 2026 17:04:30 GMT</lastBuildDate>
     <atom:link href="https://itbase-ru.github.io/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://itbase-ru.github.io/favicon.svg</url>
       <title>IT·База</title>
       <link>https://itbase-ru.github.io/</link>
     </image>
+    <item>
+      <title>Как написать резюме программисту: шаблон + примеры 2026</title>
+      <link>https://itbase-ru.github.io/articles/kak-napisat-rezyume-programmista.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/kak-napisat-rezyume-programmista.html</guid>
+      <description>Практический гайд по резюме разработчика в 2026: структура, саммари, описание опыта с метриками, навыки, дизайн, ATS-формат и типичные ошибки.</description>
+      <category>Карьера</category>
+      <pubDate>Wed, 02 Dec 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/resume-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Tailwind CSS vs Bootstrap: что лучше в 2026</title>
+      <link>https://itbase-ru.github.io/articles/tailwind-css-vs-bootstrap.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/tailwind-css-vs-bootstrap.html</guid>
+      <description>Сравнение Tailwind и Bootstrap простыми словами: философия, размер бандла, кривая обучения, экосистема. Поможем выбрать фреймворк под проект.</description>
+      <category>Веб</category>
+      <pubDate>Mon, 30 Nov 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/tailwind-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>WebSocket vs Server-Sent Events vs Long Polling: что когда использовать</title>
+      <link>https://itbase-ru.github.io/articles/websocket-vs-sse-vs-polling.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/websocket-vs-sse-vs-polling.html</guid>
+      <description>Сравнение трёх технологий real-time в вебе: long polling, SSE и WebSocket. Разбираем, что выбрать для чата, уведомлений, ленты и игр. С примерами кода.</description>
+      <category>Веб</category>
+      <pubDate>Sat, 28 Nov 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/ws-sse-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>PostgreSQL vs MySQL: что выбрать в 2026</title>
+      <link>https://itbase-ru.github.io/articles/postgresql-vs-mysql.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/postgresql-vs-mysql.html</guid>
+      <description>Сравнение PostgreSQL и MySQL простыми словами: философия, производительность, JSON, индексы и расширения. Поможем выбрать БД под твой проект.</description>
+      <category>Базы данных</category>
+      <pubDate>Wed, 25 Nov 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/pg-mysql-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Claude AI от Anthropic: обзор, сравнение с ChatGPT, как пользоваться</title>
+      <link>https://itbase-ru.github.io/articles/claude-ai-obzor.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/claude-ai-obzor.html</guid>
+      <description>Обзор Claude AI в 2026 году: где он сильнее ChatGPT, тарифы, работа с длинными документами и кодом. Практический гайд без маркетингового шума.</description>
+      <category>ИИ</category>
+      <pubDate>Sun, 22 Nov 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/claude-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Next.js 15: что нового, App Router, Server Components</title>
+      <link>https://itbase-ru.github.io/articles/nextjs-15-chto-novogo.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/nextjs-15-chto-novogo.html</guid>
+      <description>Обзор Next.js 15 простыми словами: чем App Router отличается от Pages, как работают Server Components, зачем Turbopack и где лежат грабли при миграции.</description>
+      <category>Веб</category>
+      <pubDate>Fri, 20 Nov 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/nextjs-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Rust vs Go: какой язык учить в 2026</title>
+      <link>https://itbase-ru.github.io/articles/rust-vs-go-sravnenie.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/rust-vs-go-sravnenie.html</guid>
+      <description>Сравнение Rust и Go простыми словами: философия, управление памятью, параллелизм, где использовать каждый язык. Поможем выбрать под твою задачу и карьеру.</description>
+      <category>Разработка</category>
+      <pubDate>Wed, 18 Nov 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/rust-go-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Kubernetes для новичка: поды, деплойменты, сервисы за 15 минут</title>
+      <link>https://itbase-ru.github.io/articles/kubernetes-dlya-novichka.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/kubernetes-dlya-novichka.html</guid>
+      <description>Объяснение Kubernetes простыми словами: что такое поды, деплойменты и сервисы, зачем они нужны и как написать первый манифест. Без воды и без заумных терминов.</description>
+      <category>DevOps</category>
+      <pubDate>Sun, 15 Nov 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/kubernetes-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>GitHub Copilot: обзор, цена, сравнение с альтернативами</title>
+      <link>https://itbase-ru.github.io/articles/github-copilot-obzor.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/github-copilot-obzor.html</guid>
+      <description>Что умеет GitHub Copilot в 2026 году, сколько стоит и стоит ли переключаться на Cursor, Codeium и Tabnine. Реальные сценарии, где ИИ-ассистент помогает и мешает.</description>
+      <category>ИИ</category>
+      <pubDate>Thu, 12 Nov 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/copilot-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>ChatGPT: как пользоваться, промпты, лайфхаки</title>
+      <link>https://itbase-ru.github.io/articles/chatgpt-kak-polzovatsya.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/chatgpt-kak-polzovatsya.html</guid>
+      <description>Практический гайд по ChatGPT в 2026 году: тарифы, промпт-инжиниринг простыми словами, лайфхаки и ловушки, в которые попадают новички.</description>
+      <category>ИИ</category>
+      <pubDate>Tue, 10 Nov 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/chatgpt-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
     <item>
       <title>Пагинация и версионирование API — как не сломать клиентов</title>
       <link>https://itbase-ru.github.io/articles/paginaciya-i-versirovanie-api.html</link>
@@ -146,96 +236,6 @@
       <category>Базы данных</category>
       <pubDate>Mon, 13 Apr 2026 00:00:00 +0300</pubDate>
       <enclosure url="https://itbase-ru.github.io/img/orm.svg" type="image/svg+xml" length="0"/>
-    </item>
-    <item>
-      <title>Многопоточность в Python — GIL и потоки</title>
-      <link>https://itbase-ru.github.io/articles/mnogopotochnost-v-python-gil.html</link>
-      <guid isPermaLink="true">https://itbase-ru.github.io/articles/mnogopotochnost-v-python-gil.html</guid>
-      <description>Почему потоки в Python не ускоряют вычисления, что такое GIL и когда всё-таки стоит использовать threading, multiprocessing или asyncio.</description>
-      <category>Python</category>
-      <pubDate>Sun, 12 Apr 2026 00:00:00 +0300</pubDate>
-      <enclosure url="https://itbase-ru.github.io/img/threading.svg" type="image/svg+xml" length="0"/>
-    </item>
-    <item>
-      <title>Зачем нужен TypeScript, если есть JavaScript</title>
-      <link>https://itbase-ru.github.io/articles/zachem-nuzhen-typescript.html</link>
-      <guid isPermaLink="true">https://itbase-ru.github.io/articles/zachem-nuzhen-typescript.html</guid>
-      <description>Типы, интерфейсы, компиляция — разбираем, что даёт TypeScript, кому он нужен и почему крупные проекты уходят на него.</description>
-      <category>TypeScript</category>
-      <pubDate>Sat, 11 Apr 2026 00:00:00 +0300</pubDate>
-      <enclosure url="https://itbase-ru.github.io/img/typescript.svg" type="image/svg+xml" length="0"/>
-    </item>
-    <item>
-      <title>Асинхронность в Python — asyncio простыми словами</title>
-      <link>https://itbase-ru.github.io/articles/asinhronnost-v-python.html</link>
-      <guid isPermaLink="true">https://itbase-ru.github.io/articles/asinhronnost-v-python.html</guid>
-      <description>async, await, event loop, задачи и корутины. Разбираем, зачем нужна асинхронность в Python, где она помогает и где только мешает.</description>
-      <category>Python</category>
-      <pubDate>Fri, 10 Apr 2026 00:00:00 +0300</pubDate>
-      <enclosure url="https://itbase-ru.github.io/img/asyncio.svg" type="image/svg+xml" length="0"/>
-    </item>
-    <item>
-      <title>Индексы в базах данных — зачем и как работают</title>
-      <link>https://itbase-ru.github.io/articles/indeksy-v-bazah-dannyh.html</link>
-      <guid isPermaLink="true">https://itbase-ru.github.io/articles/indeksy-v-bazah-dannyh.html</guid>
-      <description>Почему один и тот же SQL-запрос может выполняться 10 мс или 10 секунд. Разбираем индексы: B-tree, составные, покрывающие и когда они вредят.</description>
-      <category>Базы данных</category>
-      <pubDate>Thu, 09 Apr 2026 00:00:00 +0300</pubDate>
-      <enclosure url="https://itbase-ru.github.io/img/indeksy.svg" type="image/svg+xml" length="0"/>
-    </item>
-    <item>
-      <title>Git ветки и слияния — branch, merge, rebase</title>
-      <link>https://itbase-ru.github.io/articles/git-vetki-i-sliyanie.html</link>
-      <guid isPermaLink="true">https://itbase-ru.github.io/articles/git-vetki-i-sliyanie.html</guid>
-      <description>Как работать с ветками в Git: создавать, переключаться, сливать, разрешать конфликты. Разбираем merge и rebase — когда что использовать.</description>
-      <category>Git</category>
-      <pubDate>Wed, 08 Apr 2026 00:00:00 +0300</pubDate>
-      <enclosure url="https://itbase-ru.github.io/img/git-vetki.svg" type="image/svg+xml" length="0"/>
-    </item>
-    <item>
-      <title>SQL-запросы с нуля — SELECT, WHERE, JOIN</title>
-      <link>https://itbase-ru.github.io/articles/sql-zaprosy-s-nulya.html</link>
-      <guid isPermaLink="true">https://itbase-ru.github.io/articles/sql-zaprosy-s-nulya.html</guid>
-      <description>Разбираем SQL на практике: как выбрать данные, отфильтровать, отсортировать, соединить таблицы. С примерами на реальных задачах интернет-магазина.</description>
-      <category>Базы данных</category>
-      <pubDate>Tue, 07 Apr 2026 00:00:00 +0300</pubDate>
-      <enclosure url="https://itbase-ru.github.io/img/sql.svg" type="image/svg+xml" length="0"/>
-    </item>
-    <item>
-      <title>Основы Linux для разработчика — базовые команды</title>
-      <link>https://itbase-ru.github.io/articles/osnovy-linux-dlya-razrabotchika.html</link>
-      <guid isPermaLink="true">https://itbase-ru.github.io/articles/osnovy-linux-dlya-razrabotchika.html</guid>
-      <description>Что нужно знать про Linux, чтобы работать на сервере. Разбираем навигацию по файлам, права доступа, процессы, SSH и полезные команды с примерами.</description>
-      <category>Инструменты</category>
-      <pubDate>Mon, 06 Apr 2026 00:00:00 +0300</pubDate>
-      <enclosure url="https://itbase-ru.github.io/img/linux.svg" type="image/svg+xml" length="0"/>
-    </item>
-    <item>
-      <title>Монолит и микросервисы — когда что выбирать</title>
-      <link>https://itbase-ru.github.io/articles/monolit-i-mikroservisy.html</link>
-      <guid isPermaLink="true">https://itbase-ru.github.io/articles/monolit-i-mikroservisy.html</guid>
-      <description>Разбираем без хайпа: что такое монолит, микросервисы, зачем они нужны, какие проблемы решают и какие создают. Спойлер: микросервисы — не всегда лучше.</description>
-      <category>Разработка</category>
-      <pubDate>Sun, 05 Apr 2026 00:00:00 +0300</pubDate>
-      <enclosure url="https://itbase-ru.github.io/img/mikroservisy.svg" type="image/svg+xml" length="0"/>
-    </item>
-    <item>
-      <title>HTTP-методы и статус-коды — шпаргалка с примерами</title>
-      <link>https://itbase-ru.github.io/articles/http-metody-i-status-kody.html</link>
-      <guid isPermaLink="true">https://itbase-ru.github.io/articles/http-metody-i-status-kody.html</guid>
-      <description>GET, POST, PUT, PATCH, DELETE и что значат все эти 200, 301, 404, 500. Разбираем HTTP по-человечески, с примерами запросов и ответов.</description>
-      <category>Веб</category>
-      <pubDate>Sat, 04 Apr 2026 00:00:00 +0300</pubDate>
-      <enclosure url="https://itbase-ru.github.io/img/http.svg" type="image/svg+xml" length="0"/>
-    </item>
-    <item>
-      <title>Что такое JWT и как работает авторизация</title>
-      <link>https://itbase-ru.github.io/articles/chto-takoe-jwt-avtorizaciya.html</link>
-      <guid isPermaLink="true">https://itbase-ru.github.io/articles/chto-takoe-jwt-avtorizaciya.html</guid>
-      <description>JWT — это токен, который заменяет куки-сессии. Разбираем структуру, подпись, срок жизни и типичные ошибки при работе с токенами.</description>
-      <category>Веб</category>
-      <pubDate>Fri, 03 Apr 2026 00:00:00 +0300</pubDate>
-      <enclosure url="https://itbase-ru.github.io/img/jwt.svg" type="image/svg+xml" length="0"/>
     </item>
   </channel>
 </rss>

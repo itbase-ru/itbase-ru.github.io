@@ -5,6 +5,7 @@ User-agent: *
 Allow: /
 Allow: /articles/
 Allow: /img/
+Allow: /support.html
 Disallow: /data/
 Disallow: /app.js
 
@@ -13,6 +14,7 @@ User-agent: Yandex
 Allow: /
 Allow: /articles/
 Allow: /img/
+Allow: /support.html
 Disallow: /data/
 Clean-param: tag&q&search /*
 Crawl-delay: 0.5
@@ -22,7 +24,9 @@ User-agent: Googlebot
 Allow: /
 Allow: /articles/
 Allow: /img/
+Allow: /support.html
 Disallow: /data/
 
 Sitemap: https://itbase-ru.github.io/sitemap.xml
+Sitemap: https://itbase-ru.github.io/sitemap-images.xml
 Host: itbase-ru.github.io

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+<defs>
+<linearGradient id="ws" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#0a0d14"/><stop offset="1" stop-color="#15202e"/>
+</linearGradient>
+</defs>
+<rect width="1200" height="675" fill="url(#ws)"/>
+<g stroke="#4f8cff" stroke-width="3" fill="none" opacity="0.85" stroke-linecap="round">
+<path d="M 100 240 L 600 240" stroke-dasharray="6 8"/>
+<path d="M 100 280 L 600 280" stroke-dasharray="6 8"/>
+<path d="M 100 320 L 600 320" stroke-dasharray="6 8"/>
+</g>
+<g fill="#4f8cff">
+<circle cx="100" cy="240" r="8"/><circle cx="100" cy="280" r="8"/><circle cx="100" cy="320" r="8"/>
+<circle cx="600" cy="240" r="8"/><circle cx="600" cy="280" r="8"/><circle cx="600" cy="320" r="8"/>
+</g>
+<text x="100" y="200" fill="#4f8cff" font-family="monospace" font-size="18">Polling</text>
+<g stroke="#2ea043" stroke-width="4" fill="none" opacity="0.9" stroke-linecap="round">
+<path d="M 100 420 L 600 420"/>
+<path d="M 100 450 L 200 450"/>
+<path d="M 250 450 L 400 450"/>
+<path d="M 450 450 L 600 450"/>
+</g>
+<g fill="#2ea043">
+<circle cx="100" cy="420" r="10"/><circle cx="600" cy="420" r="10"/>
+<circle cx="200" cy="450" r="8" fill="none" stroke="#2ea043" stroke-width="3"/>
+<circle cx="400" cy="450" r="8" fill="none" stroke="#2ea043" stroke-width="3"/>
+</g>
+<text x="100" y="395" fill="#2ea043" font-family="monospace" font-size="18">SSE (Server-Sent Events)</text>
+<g stroke="#8f52ff" stroke-width="4" fill="none" opacity="0.95" stroke-linecap="round">
+<path d="M 100 560 L 250 560 L 200 600 L 600 600"/>
+<path d="M 350 540 L 500 540 L 450 580"/>
+</g>
+<g fill="#8f52ff">
+<circle cx="100" cy="560" r="10"/><circle cx="600" cy="600" r="10"/>
+</g>
+<text x="700" y="200" fill="#4f8cff" font-family="Georgia, serif" font-size="40" font-weight="700">Polling</text>
+<text x="700" y="395" fill="#2ea043" font-family="Georgia, serif" font-size="40" font-weight="700">SSE</text>
+<text x="700" y="580" fill="#8f52ff" font-family="Georgia, serif" font-size="40" font-weight="700">WebSocket</text>
+<text x="60" y="120" fill="#e9eef5" font-family="Georgia, serif" font-size="68" font-weight="700">Real-time</text>
+<text x="60" y="640" fill="#8f52ff" font-family="monospace" font-size="16" letter-spacing="3">// WS · SSE · POLLING</text>
+</svg>

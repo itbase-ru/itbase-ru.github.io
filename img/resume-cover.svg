@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+<defs>
+<linearGradient id="rv" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#0a0e14"/><stop offset="1" stop-color="#1a1d28"/>
+</linearGradient>
+</defs>
+<rect width="1200" height="675" fill="url(#rv)"/>
+<g opacity="0.95">
+<rect x="720" y="160" width="380" height="400" rx="14" fill="#12161d" stroke="#4f8cff" stroke-width="2"/>
+<rect x="740" y="190" width="120" height="120" rx="60" fill="#1a2030" stroke="#4f8cff" stroke-width="2"/>
+<rect x="740" y="330" width="220" height="14" rx="7" fill="#4f8cff"/>
+<rect x="740" y="360" width="160" height="10" rx="5" fill="#8a95a6"/>
+<rect x="740" y="380" width="180" height="10" rx="5" fill="#8a95a6"/>
+<rect x="740" y="420" width="340" height="10" rx="5" fill="#8a95a6" opacity="0.5"/>
+<rect x="740" y="440" width="300" height="10" rx="5" fill="#8a95a6" opacity="0.5"/>
+<rect x="740" y="460" width="320" height="10" rx="5" fill="#8a95a6" opacity="0.5"/>
+<rect x="740" y="500" width="100" height="30" rx="6" fill="#2ea043"/>
+<rect x="860" y="500" width="100" height="30" rx="6" fill="#8a95a6" opacity="0.4"/>
+</g>
+<text x="60" y="120" fill="#e9eef5" font-family="Georgia, serif" font-size="68" font-weight="700">Резюме</text>
+<text x="60" y="170" fill="#4f8cff" font-family="monospace" font-size="20" letter-spacing="3">// ПРОГРАММИСТА · 2026</text>
+<text x="60" y="320" fill="#8a95a6" font-family="monospace" font-size="18">Шаблон + примеры</text>
+<text x="60" y="350" fill="#8a95a6" font-family="monospace" font-size="18">PDF · ATS-friendly</text>
+<text x="60" y="380" fill="#8a95a6" font-family="monospace" font-size="18">Portfolio · GitHub</text>
+</svg>

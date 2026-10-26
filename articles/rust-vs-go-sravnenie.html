@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rust vs Go: какой язык учить в 2026 — IT·База</title>
+  <meta name="description" content="Сравнение Rust и Go простыми словами: философия, управление памятью, параллелизм, где использовать каждый язык. Поможем выбрать под твою задачу и карьеру.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/rust-vs-go-sravnenie.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Rust vs Go: какой язык учить в 2026">
+  <meta property="og:description" content="Сравнение Rust и Go простыми словами: философия, управление памятью, параллелизм, где использовать каждый язык. Поможем выбрать под твою задачу и карьеру.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/rust-vs-go-sravnenie.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/rust-vs-go-sravnenie.html">
+  <meta property="article:published_time" content="2026-11-18">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Rust vs Go: какой язык учить в 2026">
+  <meta name="twitter:description" content="Сравнение Rust и Go простыми словами: философия, управление памятью, параллелизм, где использовать каждый язык. Поможем выбрать под твою задачу и карьеру.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/rust-vs-go-sravnenie.png">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Rust vs Go: какой язык учить в 2026", "description": "Сравнение Rust и Go простыми словами: философия, управление памятью, параллелизм, где использовать каждый язык. Поможем выбрать под твою задачу и карьеру.", "image": ["https://itbase-ru.github.io/img/og/rust-vs-go-sravnenie.png"], "datePublished": "2026-11-18", "dateModified": "2026-11-18", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/", "logo": {"@type": "ImageObject", "url": "https://itbase-ru.github.io/favicon.svg"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/rust-vs-go-sravnenie.html"}, "articleSection": "Разработка", "keywords": "Разработка, Карьера"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Разработка", "item": "https://itbase-ru.github.io/?tag=Разработка"}, {"@type": "ListItem", "position": 3, "name": "Rust vs Go: какой язык учить в 2026", "item": "https://itbase-ru.github.io/articles/rust-vs-go-sravnenie.html"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Что быстрее — Rust или Go?", "acceptedAnswer": {"@type": "Answer", "text": "В чистых benchmark Rust обычно на 20-50% быстрее, потому что нет GC и overhead на runtime. Но разница часто не критична: для большинства задач быстрее тот язык, на котором ты быстрее напишешь. Скорость разработки обычно важнее скорости исполнения."}}, {"@type": "Question", "name": "Какой язык легче выучить?", "acceptedAnswer": {"@type": "Answer", "text": "Go намного легче. Синтаксис помещается в голову, стандартная библиотека богатая, концепций мало. Rust требует понять ownership, lifetimes, traits — это недели активного обучения до первого полезного проекта."}}, {"@type": "Question", "name": "На каком языке больше вакансий?", "acceptedAnswer": {"@type": "Answer", "text": "Go — стандарт в DevOps и backend в больших компаниях. Вакансий много, особенно в финтехе, телекоме и cloud. Rust — вакансий меньше, но они обычно более интересные и выше оплачиваются, особенно в системном программировании и блокчейне."}}, {"@type": "Question", "name": "Можно ли писать веб на Rust?", "acceptedAnswer": {"@type": "Answer", "text": "Да, есть фреймворки — Actix, Axum, Rocket. Они быстрые и надёжные, но написание типичного CRUD-сервиса занимает больше времени, чем на Go или Node.js. Для обычного веба Rust — overkill, но для высоконагруженных API — хороший выбор."}}, {"@type": "Question", "name": "Стоит ли учить оба языка?", "acceptedAnswer": {"@type": "Answer", "text": "Если ты уже знаешь один — изучать второй имеет смысл. Они взаимодополняемы: Go для быстрых прототипов и продакшна, Rust для глубокого понимания систем. Если ты новичок — выбери один и прокачай его до middle-уровня, потом уже расширяй."}}, {"@type": "Question", "name": "Какой язык выбирают в больших компаниях?", "acceptedAnswer": {"@type": "Answer", "text": "Зависит от задачи. Cloudflare, Dropbox, Discord активно юзают Rust для критичных компонентов. Uber, Twitch, большинство финтехов — Go для backend. Google использует оба. Если сомневаешься — посмотри вакансии в твоём регионе и выбирай по рынку."}}]}</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="rust-vs-go-sravnenie">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Разработка">Разработка</a>
+        <span class="sep">/</span>
+        <span>Rust vs Go: какой язык учить в 2026</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Разработка</span><span class="tag">Карьера</span></div>
+        <h1>Rust vs Go: какой язык учить в 2026</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-11-18">18 ноября 2026</time>
+          <span class="dot">•</span>
+          <span>12 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/rust-go-cover.svg" alt="Rust vs Go: какой язык учить в 2026">
+      </figure>
+
+      <div class="ad-slot ad-slot--ad-inline" data-slot="ad-inline"></div>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+<p>В 2026 году Rust и Go — два самых востребованных системных языка. Оба претендуют на место «следующего C», но подходы у них принципиально разные. Go сделан в Google для простых и быстрых серверов. Rust сделан в Mozilla для безопасного и эффективного кода там, где цена ошибки высока.</p>
+<p>В этой статье разберём, чем они отличаются, что у них общего и какой выбрать под твою задачу. Если ты только начинаешь — загляни в <a href="/articles/kak-vybrat-pervyy-yazyk-programmirovaniya.html">статью про выбор первого языка</a>, чтобы понимать контекст. Без воды — только то, что реально важно для решения.</p>
+
+<h2 id="section-0">Философия языков</h2>
+<p>Go создавали «отцы интернета»: Роб Пайк, Кен Томпсон, Роберт Грисмер. Их цель — простой, читаемый язык для больших команд. В Go мало фич: нет классического наследования, нет исключений, нет сложных макросов. Синтаксис помещается в голову, и код на нём читается даже спустя годы.</p>
+<p>Rust создавали для безопасности и производительности. Это системный язык с zero-cost abstractions: ты получаешь высокоуровневые возможности, но компилятор превращает их в тот же код, что написал бы на C вручную. Цена — крутая кривая обучения и долгая компиляция.</p>
+<p>Простое правило: Go — про простоту и предсказуемость, Rust — про контроль и безопасность. Если у тебя 50 разработчиков в команде — Go. Если у тебя криптография, ОС или браузер — Rust.</p>
+
+<h2 id="section-1">Сравнение по ключевым параметрам</h2>
+<p>Давай разложим по полочкам главные отличия.</p>
+
+<div class="table-scroll"><table>
+  <thead><tr><th>Параметр</th><th>Go</th><th>Rust</th></tr></thead>
+  <tbody>
+    <tr><td>Скорость</td><td>Высокая</td><td>Очень высокая</td></tr>
+    <tr><td>Кривая обучения</td><td>Низкая</td><td>Высокая</td></tr>
+    <tr><td>Время компиляции</td><td>Секунды</td><td>Минуты</td></tr>
+    <tr><td>Управление памятью</td><td>Сборщик мусора</td><td>Ownership + borrow checker</td></tr>
+    <tr><td>Параллелизм</td><td>Goroutines (простой)</td><td>Async + Send/Sync (сложно)</td></tr>
+    <tr><td>Безопасность</td><td>На уровне runtime</td><td>На уровне компилятора</td></tr>
+    <tr><td>Области применения</td><td>Серверы, CLI, микросервисы</td><td>Системы, браузер, WASM, kernel</td></tr>
+    <tr><td>Экосистема</td><td>Богатая стандартная библиотека</td><td>crates.io огромная</td></tr>
+    <tr><td>Размер бинарника</td><td>Маленький</td><td>Маленький</td></tr>
+    <tr><td>Время разработки</td><td>Быстрое</td><td>Медленнее</td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="section-2">Управление памятью: главное отличие</h2>
+<p>В Go есть сборщик мусора (GC). Ты создаёшь объекты — runtime сам освобождает память, когда на них нет ссылок. Это удобно: не думаешь о памяти, не получаешь segfault. Минус — GC иногда делает паузы, и приложение может на миллисекунды замереть. Для 99% серверных задач это не критично.</p>
+<p>Rust работает без GC. У него концепция ownership: у каждого значения есть один владелец, и когда владелец выходит из области видимости — память освобождается автоматически. Компилятор на этапе сборки проверяет все правила (borrow checker). Если что-то не так — код не соберётся. Это значит: ты не можешь иметь dangling pointer или гонку данных в безопасном Rust. Проверка происходит в compile time.</p>
+<p>Платой за эту безопасность становится кривая обучения: программист должен бороться с компилятором, который не даёт код скомпилировать, пока не убедится, что всё корректно. Первые недели на Rust — это боль, потом — наслаждение.</p>
+
+<h2 id="section-3">Параллелизм и concurrency</h2>
+<p>В Go параллелизм — это горутины. Пишешь <code>go myFunc()</code> — функция запустилась в лёгком потоке. Мильон горутин — норма. Каналы (<code>chan</code>) передают данные между ними. Код выглядит прямолинейно и читается легко. Подробнее про параллелизм можно почитать <a href="/articles/mnogopotochnost-v-python-gil.html">в статье про GIL</a> — там есть базовая теория.</p>
+
+<pre><code class="language-go">func main() {
+    ch := make(chan int)
+    go func() {
+        ch &lt;- 42
+    }()
+    fmt.Println(&lt;-ch)
+}</code></pre>
+
+<p>В Rust параллелизм сложнее: есть async/await (на tokio), потоки (std::thread), и компилятор проверяет, что у тебя нет гонок данных через Send/Sync. Код надёжнее, но писать его сложнее. Если ты привык к горутинам — переход на async Rust ощущается как шаг назад по простоте.</p>
+
+<h2 id="section-4">Где использовать Go</h2>
+<p>Go идеален для backend-сервисов: API, микросервисы, фоновые воркеры, CLI-утилиты. Большая часть инфраструктуры Kubernetes, Docker, Terraform, Prometheus написана на Go — и это не случайно. Язык отлично ложится на задачи, где надо поднять много сетевых соединений и обрабатывать их параллельно.</p>
+<p>Также Go — хороший выбор для тех, кто только переходит с Python/PHP: язык простой, стандартная библиотека богатая, сообщество огромное. Первые полезные сервисы можно написать за неделю.</p>
+
+<h2 id="section-5">Где использовать Rust</h2>
+<p>Rust shines там, где важны скорость и безопасность: движки браузеров (его пишут на нём половину Firefox), операционные системы, блокчейны, обработка звука/видео, embedded, WebAssembly. Также Rust — хороший выбор, если ты устал от медленного Python и хочешь быстрее, но не готов жертвовать безопасностью.</p>
+<p>Для типичного веб-API на 100 RPS Rust — overkill. Тебе придётся потратить 3 недели на обучение и долгую компиляцию, чтобы получить результат, который на Go был бы готов за 3 дня. Но если у тебя нагрузка 100k RPS или реальные деньги на кону — Rust окупается.</p>
+
+<blockquote>Go — для тех, кто хочет доставлять быстро. Rust — для тех, кто не может себе позволить ошибку.</blockquote>
+
+<h2 id="section-6">Что учить в 2026 году</h2>
+<p>Если ты новичок и выбираешь первый системный язык — бери Go. Через неделю ты напишешь первый полезный CLI, через месяц — небольшой сервис. Вакансий много, входной порог низкий, переход с Python максимально плавный.</p>
+<p>Если ты уже опытный разработчик и хочешь расти в системное программирование или блокчейн — Rust. Будет больно первые пару месяцев, но ты получишь навык, который выделит тебя на рынке. Вакансий меньше, но они круче и дороже.</p>
+<p>Если ты делаешь обычный веб и не планируешь уходить в системщину — забудь про оба, бери TypeScript или Python. Они покрывают 90% типичных задач, и не нужно переусложнять стек.</p>
+<p>Ещё один практический совет: смотри на вакансии в твоём регионе. В России и СНГ Go-вакансий заметно больше, особенно в финтехе и телекоме. Rust-вакансии есть, но в основном в крупных международных компаниях и стартапах. Если ты хочешь работать локально — Go. Если готов к удалёнке и международной карьере — Rust может принести больший доход, но и порог входа выше.</p>
+
+<h3 id="section-7">Когда Go лучше Rust</h3>
+<ul>
+  <li>Микросервисы с типичной CRUD-нагрузкой.</li>
+  <li>CLI-утилиты, где важна скорость разработки.</li>
+  <li>Команды из 10+ человек — простота Go делает код читаемым для всех.</li>
+  <li>Сетевые сервисы с большим числом соединений (goroutines).</li>
+</ul>
+
+<h3 id="section-8">Когда Rust лучше Go</h3>
+<ul>
+  <li>Системное программирование: ОС, драйверы, kernel-модули.</li>
+  <li>Проекты, где важна realtime-производительность (аудио, видео, игры).</li>
+  <li>Безопасные библиотеки, которые вызываются из других языков.</li>
+  <li>WebAssembly — Rust де-факто стандарт.</li>
+</ul>
+
+<h2 id="section-9">Экосистема и tooling</h2>
+<p>Язык — половина успеха. Вторая половина — экосистема: package manager, debugger, линтеры, документация. У Go и Rust здесь разные подходы, и это влияет на ежедневный опыт разработки.</p>
+<p>У Go всё просто: <code>go mod</code> — встроенный package manager, <code>go fmt</code> — форматирование, <code>go test</code> — тесты, <code>go build</code> — сборка. Никаких внешних тулзов, всё идёт из коробки. Это огромный плюс для команд: новый разработчик за час ставит среду и начинает работать. Конфигурации проектов почти нет, все делают одинаково.</p>
+<p>У Rust экосистема — <code>cargo</code>. Это одновременно package manager, build tool и test runner. Тоже идёт из коробки, тоже всё из одного места. <code>rustup</code> управляет версиями тулчейна. <code>clippy</code> — продвинутый линтер, который ловит не только стилистику, но и логические ошибки. <code>rust-analyzer</code> — LSP-сервер для редакторов, даёт автодополнение и инлайн-ошибки.</p>
+<p>Документация: у Go отличный сайт pkg.go.dev, где все пакеты автоматически задокументированы. У Rust — docs.rs, автоматически генерирует доку из комментариев в коде. Оба подхода хороши, разница в деталях.</p>
+<p>Качество пакетов: у Go модули обычно маленькие и делают одну вещь. У Rust crates часто крупные и сложные, потому что язык позволяет абстракции. И там и там есть популярные «де-факто стандарты»: у Go это gorilla/mux, gin, echo для HTTP; у Rust — tokio, serde, axum.</p>
+<p>Время компиляции — главная боль Rust. Большой проект на Rust может собираться 5-10 минут. Go собирает тот же объём за секунды. В CI/CD это превращается в реальные деньги: минуты ожидания на каждый pull request. Кэши Cargo помогают, но полностью проблему не снимают.</p>
+<p>Размер бинарника: оба языка дают компактные standalone-бинарники. Go-бинарник на 10 МБ — норма. Rust-бинарник часто меньше (3-5 МБ), если включить оптимизации размера. Это удобно для Docker-образов и микросервисов: маленький image — быстрая загрузка и меньше поверхность атаки. Подробнее про контейнеры — в <a href="/articles/docker-za-10-minut.html">статье про Docker</a>.</p>
+
+<h2 id="section-10">FAQ</h2>
+
+<h3 id="section-11">Что быстрее — Rust или Go?</h3>
+<p>В чистых benchmark Rust обычно на 20-50% быстрее, потому что нет GC и overhead на runtime. Но разница часто не критична: для большинства задач быстрее тот язык, на котором ты быстрее напишешь. Скорость разработки обычно важнее скорости исполнения.</p>
+
+<h3 id="section-12">Какой язык легче выучить?</h3>
+<p>Go намного легче. Синтаксис помещается в голову, стандартная библиотека богатая, концепций мало. Rust требует понять ownership, lifetimes, traits — это недели активного обучения до первого полезного проекта.</p>
+
+<h3 id="section-13">На каком языке больше вакансий?</h3>
+<p>Go — стандарт в DevOps и backend в больших компаниях. Вакансий много, особенно в финтехе, телекоме и cloud. Rust — вакансий меньше, но они обычно более интересные и выше оплачиваются, особенно в системном программировании и блокчейне.</p>
+
+<h3 id="section-14">Можно ли писать веб на Rust?</h3>
+<p>Да, есть фреймворки — Actix, Axum, Rocket. Они быстрые и надёжные, но написание типичного CRUD-сервиса занимает больше времени, чем на Go или Node.js. Для обычного веба Rust — overkill, но для высоконагруженных API — хороший выбор.</p>
+
+<h3 id="section-15">Стоит ли учить оба языка?</h3>
+<p>Если ты уже знаешь один — изучать второй имеет смысл. Они взаимодополняемы: Go для быстрых прототипов и продакшна, Rust для глубокого понимания систем. Если ты новичок — выбери один и прокачай его до middle-уровня, потом уже расширяй.</p>
+
+<h3 id="section-16">Какой язык выбирают в больших компаниях?</h3>
+<p>Зависит от задачи. Cloudflare, Dropbox, Discord активно юзают Rust для критичных компонентов. Uber, Twitch, большинство финтехов — Go для backend. Google использует оба. Если сомневаешься — посмотри вакансии в твоём регионе и выбирай по рынку.</p>
+
+<h2 id="section-17">Краткий вывод</h2>
+<p>Нет объективно «лучшего» языка — есть правильный под задачу. Go даёт скорость разработки и простоту, Rust — производительность и безопасность. Бери Go, если делаешь серверы и хочешь доставлять быстро. Бери Rust, если идёшь в системное программирование или не можешь позволить себе ошибку. Оба языка живут и растут в 2026 году, оба стоят изучения — но начинать лучше с одного.</p>
+</article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Философия языков</a><a href="#section-1" class="lvl-2">Сравнение по ключевым параметрам</a><a href="#section-2" class="lvl-2">Управление памятью: главное отличие</a><a href="#section-3" class="lvl-2">Параллелизм и concurrency</a><a href="#section-4" class="lvl-2">Где использовать Go</a><a href="#section-5" class="lvl-2">Где использовать Rust</a><a href="#section-6" class="lvl-2">Что учить в 2026 году</a><a href="#section-7" class="lvl-3">Когда Go лучше Rust</a><a href="#section-8" class="lvl-3">Когда Rust лучше Go</a><a href="#section-9" class="lvl-2">Экосистема и tooling</a><a href="#section-10" class="lvl-2">FAQ</a><a href="#section-11" class="lvl-3">Что быстрее — Rust или Go?</a><a href="#section-12" class="lvl-3">Какой язык легче выучить?</a><a href="#section-13" class="lvl-3">На каком языке больше вакансий?</a><a href="#section-14" class="lvl-3">Можно ли писать веб на Rust?</a><a href="#section-15" class="lvl-3">Стоит ли учить оба языка?</a><a href="#section-16" class="lvl-3">Какой язык выбирают в больших компаниях?</a><a href="#section-17" class="lvl-2">Краткий вывод</a></aside>
+      </div>
+
+      
+    <aside class="donate-block" aria-label="Поддержать проект">
+      <div class="donate-block__title">Поддержи проект</div>
+      <p class="donate-block__text">Сайт живёт на энтузиазме. Если статья оказалась полезной — поблагодари автора. Любая сумма идёт на хостинг, домен и новые статьи.</p>
+      <div class="donate-block__buttons">
+        <a href="https://boosty.to/itbase" target="_blank" rel="noopener nofollow" class="donate-btn donate-boosty">☕ Boosty</a><a href="https://t.me/itbase_bot" target="_blank" rel="noopener nofollow" class="donate-btn donate-tg">✈️ Telegram</a>
+      </div>
+      <p class="donate-block__hint">Также можно подписаться на <a href="https://t.me/itbase" target="_blank" rel="noopener">Telegram-канал</a> — там анонсы новых статей.</p>
+    </aside>
+    
+
+      <div class="ad-slot ad-slot--ad-bottom" data-slot="ad-bottom"></div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/kak-napisat-rezyume-programmista.html"><img src="/img/resume-cover.svg" alt="Как написать резюме программисту: шаблон + примеры 2026" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Карьера</span><span class="tag">Разработка</span></div>
+    <a href="/articles/kak-napisat-rezyume-programmista.html"><h2 class="card__title">Как написать резюме программисту: шаблон + примеры 2026</h2></a>
+    <p class="card__excerpt">Практический гайд по резюме разработчика в 2026: структура, саммари, описание опыта с метриками, навыки, дизайн, ATS-формат и типичные ошибки.</p>
+    <div class="card__meta">
+      <span>2 декабря 2026</span><span class="dot">•</span><span>12 мин</span>
+      <button class="card__bm" data-slug="kak-napisat-rezyume-programmista" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/algoritmy-i-struktury-dannyh.html"><img src="/img/algoritmy.svg" alt="Алгоритмы и структуры данных — с чего начать" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Разработка</span><span class="tag">Теория</span><span class="tag">Карьера</span></div>
+    <a href="/articles/algoritmy-i-struktury-dannyh.html"><h2 class="card__title">Алгоритмы и структуры данных — с чего начать</h2></a>
+    <p class="card__excerpt">Зачем программисту знать про массивы, списки, деревья и хеш-таблицы. Разбираем базовые структуры и алгоритмы на понятных примерах.</p>
+    <div class="card__meta">
+      <span>31 марта 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="algoritmy-i-struktury-dannyh" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/kak-vybrat-pervyy-yazyk-programmirovaniya.html"><img src="/img/kak-vybrat-pervyy-yazyk-programmirovaniya.svg" alt="Как выбрать первый язык программирования" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Карьера</span><span class="tag">Теория</span><span class="tag">Разработка</span></div>
+    <a href="/articles/kak-vybrat-pervyy-yazyk-programmirovaniya.html"><h2 class="card__title">Как выбрать первый язык программирования</h2></a>
+    <p class="card__excerpt">Python, JavaScript, Java или Go? Разбираем без холиваров: как выбрать первый язык под свою цель, что важно и что вообще не имеет значения.</p>
+    <div class="card__meta">
+      <span>23 марта 2026</span><span class="dot">•</span><span>9 мин</span>
+      <button class="card__bm" data-slug="kak-vybrat-pervyy-yazyk-programmirovaniya" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/support.html">Поддержать ★</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+  
+</body>
+</html>

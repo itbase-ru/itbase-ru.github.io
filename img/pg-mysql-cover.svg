@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+<defs>
+<linearGradient id="db" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#0a0d14"/><stop offset="1" stop-color="#1a1f2e"/>
+</linearGradient>
+</defs>
+<rect width="1200" height="675" fill="url(#db)"/>
+<g stroke="#4f8cff" stroke-width="3" fill="none" opacity="0.95">
+<ellipse cx="320" cy="220" rx="120" ry="40"/>
+<path d="M 200 220 L 200 440 Q 200 480 320 480 Q 440 480 440 440 L 440 220"/>
+<path d="M 200 280 Q 200 320 320 320 Q 440 320 440 280"/>
+<path d="M 200 360 Q 200 400 320 400 Q 440 400 440 360"/>
+</g>
+<g fill="#336791" opacity="0.85">
+<ellipse cx="320" cy="220" rx="120" ry="40"/>
+<ellipse cx="320" cy="320" rx="120" ry="40" opacity="0.4"/>
+<ellipse cx="320" cy="400" rx="120" ry="40" opacity="0.5"/>
+</g>
+<g stroke="#ffb454" stroke-width="3" fill="none" opacity="0.95">
+<ellipse cx="880" cy="220" rx="120" ry="40"/>
+<path d="M 760 220 L 760 440 Q 760 480 880 480 Q 1000 480 1000 440 L 1000 220"/>
+<path d="M 760 280 Q 760 320 880 320 Q 1000 320 1000 280"/>
+<path d="M 760 360 Q 760 400 880 400 Q 1000 400 1000 360"/>
+</g>
+<g fill="#f29111" opacity="0.85">
+<ellipse cx="880" cy="220" rx="120" ry="40"/>
+<ellipse cx="880" cy="320" rx="120" ry="40" opacity="0.4"/>
+<ellipse cx="880" cy="400" rx="120" ry="40" opacity="0.5"/>
+</g>
+<text x="60" y="120" fill="#e9eef5" font-family="Georgia, serif" font-size="68" font-weight="700">PostgreSQL vs MySQL</text>
+<text x="60" y="170" fill="#4f8cff" font-family="monospace" font-size="18" letter-spacing="3">// ЧТО ВЫБРАТЬ В 2026</text>
+<text x="200" y="540" fill="#336791" font-family="monospace" font-size="20" letter-spacing="3">Postgres</text>
+<text x="780" y="540" fill="#f29111" font-family="monospace" font-size="20" letter-spacing="3">MySQL</text>
+</svg>

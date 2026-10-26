@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ChatGPT: как пользоваться, промпты, лайфхаки — IT·База</title>
+  <meta name="description" content="Практический гайд по ChatGPT в 2026 году: тарифы, промпт-инжиниринг простыми словами, лайфхаки и ловушки, в которые попадают новички.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/chatgpt-kak-polzovatsya.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="ChatGPT: как пользоваться, промпты, лайфхаки">
+  <meta property="og:description" content="Практический гайд по ChatGPT в 2026 году: тарифы, промпт-инжиниринг простыми словами, лайфхаки и ловушки, в которые попадают новички.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/chatgpt-kak-polzovatsya.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/chatgpt-kak-polzovatsya.html">
+  <meta property="article:published_time" content="2026-11-10">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ChatGPT: как пользоваться, промпты, лайфхаки">
+  <meta name="twitter:description" content="Практический гайд по ChatGPT в 2026 году: тарифы, промпт-инжиниринг простыми словами, лайфхаки и ловушки, в которые попадают новички.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/chatgpt-kak-polzovatsya.png">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "ChatGPT: как пользоваться, промпты, лайфхаки", "description": "Практический гайд по ChatGPT в 2026 году: тарифы, промпт-инжиниринг простыми словами, лайфхаки и ловушки, в которые попадают новички.", "image": ["https://itbase-ru.github.io/img/og/chatgpt-kak-polzovatsya.png"], "datePublished": "2026-11-10", "dateModified": "2026-11-10", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/", "logo": {"@type": "ImageObject", "url": "https://itbase-ru.github.io/favicon.svg"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/chatgpt-kak-polzovatsya.html"}, "articleSection": "ИИ", "keywords": "ИИ, Инструменты"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "ИИ", "item": "https://itbase-ru.github.io/?tag=ИИ"}, {"@type": "ListItem", "position": 3, "name": "ChatGPT: как пользоваться, промпты, лайфхаки", "item": "https://itbase-ru.github.io/articles/chatgpt-kak-polzovatsya.html"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Можно ли использовать ChatGPT бесплатно?", "acceptedAnswer": {"@type": "Answer", "text": "Да, есть бесплатный тариф с GPT-5 mini и базовыми лимитами. Для простых задач — перевод, суммаризация, генерация идей — хватает с головой. Платить стоит, когда часто сталкиваешься с лимитами или нужна генерация картинок и длинный контекст."}}, {"@type": "Question", "name": "Что такое галлюцинации у ChatGPT?", "acceptedAnswer": {"@type": "Answer", "text": "Это когда модель уверенно выдаёт выдуманный факт как реальный. Причина — в устройстве LLM: она не различает «правду» и «правдоподобный текст». Если не знает ответа, она может «придумать» правдоподобно звучащий вариант. Поэтому критичные данные проверяй по источникам."}}, {"@type": "Question", "name": "В каком языке лучше писать промпты — на русском или английском?", "acceptedAnswer": {"@type": "Answer", "text": "Английский работает чуть стабильнее и точнее, потому что в обучающей выборке его было больше. Но GPT-5 отлично понимает и русский. Если тебе важен стиль и нюансы на русском — пиши по-русски, модель справится."}}, {"@type": "Question", "name": "Можно ли научить ChatGPT на своих данных?", "acceptedAnswer": {"@type": "Answer", "text": "Да, через Custom GPTs: загружаешь свои документы, и модель будет с ними работать. Также есть API для тонкой настройки (fine-tuning) — но это уже для разработчиков. Обычным пользователям достаточно Custom GPTs и подключённых файлов в чате."}}, {"@type": "Question", "name": "Чем ChatGPT отличается от Claude и Copilot?", "acceptedAnswer": {"@type": "Answer", "text": "ChatGPT — универсальный ассистент, сильный в задачах разного типа. Claude лучше пишет длинные тексты и анализирует большие документы. Copilot — это ассистент прямо в редакторе кода. Сравни подробнее в обзоре Claude и в обзоре Copilot."}}]}</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="chatgpt-kak-polzovatsya">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=ИИ">ИИ</a>
+        <span class="sep">/</span>
+        <span>ChatGPT: как пользоваться, промпты, лайфхаки</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">ИИ</span><span class="tag">Инструменты</span></div>
+        <h1>ChatGPT: как пользоваться, промпты, лайфхаки</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-11-10">10 ноября 2026</time>
+          <span class="dot">•</span>
+          <span>12 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/chatgpt-cover.svg" alt="ChatGPT: как пользоваться, промпты, лайфхаки">
+      </figure>
+
+      <div class="ad-slot ad-slot--ad-inline" data-slot="ad-inline"></div>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+<p>К 2026 году ChatGPT есть почти у каждого: школьники делают с ним домашку, маркетологи пишут рассылки, программисты гоняют код. Но большинство людей используют ChatGPT как обычный поисковик — пишут короткий вопрос и получают поверхностный ответ. Чтобы реально выжать из нейросети пользу, нужно понять, как она «думает», и научиться формулировать запросы.</p>
+<p>Эта статья — практический гайд: от регистрации до продвинутых промптов. Разберём промпт-инжиниринг простыми словами, посмотрим на конкретные лайфхаки и ловушки, в которые попадают новички. Если хочешь глубже в теорию — загляни в <a href="/articles/chto-takoe-iskusstvennyy-intellekt.html">базовую статью про ИИ</a>. Без воды — только то, что реально работает на практике.</p>
+
+<h2 id="section-0">Как устроен ChatGPT внутри (коротко)</h2>
+<p>ChatGPT — это большая языковая модель от OpenAI. Если совсем просто: нейросеть, обученная на миллиардах текстов из интернета, которая предсказывает следующее слово. У неё нет сознания, памяти и эмоций. Каждый чат — это заново разворачивающийся контекст, и модель каждый раз «читает» всю твою переписку, чтобы сформировать ответ.</p>
+<p>Это значит две вещи. Во-первых, ChatGPT не «помнит» ничего из прошлых чатов, если ты их не открыл. Во-вторых, у него по умолчанию нет доступа к интернету — у него в «голове» только то, что было в обучающей выборке на момент тренировки. Если нужно свежее — включаешь веб-поиск или подключаешь инструмент.</p>
+<p>Отсюда главный вывод: ChatGPT — это не поисковик и не оракул. Это умный собеседник, который очень правдоподобно формулирует текст. Иногда эта правдоподобность прикрывает фактические ошибки — так называемые галлюцинации. Запомни: на критичные факты всегда проверяй вручную.</p>
+<p>Также важно понимать, что у модели нет «памяти между сессиями» — это значимое ограничение, а не баг. Каждый новый чат начинается с чистого листа. Поэтому для долгосрочной работы над проектом лучше создать Custom GPT или использовать Projects — там можно загрузить контекст один раз и переиспользовать. Если ты любишь персонализацию — потрать вечер на создание собственного GPT с нужными промптами, документами и стилем. Это окупится за пару недель.</p>
+
+<h2 id="section-1">Регистрация и тарифы</h2>
+<p>Зайти в ChatGPT просто: открываешь chat.openai.com, логинишься через Google или Microsoft, подтверждаешь телефон. Через минуту ты уже в чате. С мобильного удобно использовать официальное приложение — там есть ещё голосовой режим, который реально проигрывает ассистентов вроде Siri.</p>
+<p>В 2026 году у OpenAI несколько тарифов. Бесплатный даёт доступ к GPT-5 mini, но с лимитами по числу сообщений и без свежих функций. Plus за 20 долларов в месяц открывает GPT-5, генерацию картинок, расширенный контекст и доступ к новым фичам раньше всех. Pro за 200 долларов — это для тяжёлых задач: лимиты выше, плюс доступ к более глубоким моделям для кода и анализа.</p>
+<p>Командный тариф Team удобен, если вы втроём-вчетвером работаете с одним брифом: там общий доступ к чатам, безлимит на основные модели и общее хранилище файлов. Для одиночки это переплата — Plus более чем достаточно.</p>
+
+<div class="table-scroll"><table>
+  <thead><tr><th>Тариф</th><th>Цена</th><th>Что входит</th><th>Кому подходит</th></tr></thead>
+  <tbody>
+    <tr><td>Free</td><td>0</td><td>GPT-5 mini, базовые лимиты</td><td>Попробовать</td></tr>
+    <tr><td>Plus</td><td>20 USD/мес</td><td>GPT-5, картинки, длинный контекст</td><td>Большинству</td></tr>
+    <tr><td>Team</td><td>25 USD/чел.</td><td>Безлимит, совместный доступ</td><td>Командам</td></tr>
+    <tr><td>Pro</td><td>200 USD/мес</td><td>Расширенные лимиты, ранний доступ</td><td>Профи</td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="section-2">Базовые принципы работы с промптами</h2>
+<p>Промпт — это твой запрос к модели. Чем точнее ты объяснишь, что нужно, тем меньше придётся переделывать. Главное правило: представляй, что объясняешь задачу стажёру в первый рабочий день. Он умный, но не знает контекста твоего проекта.</p>
+<p>В хорошем промпте обычно есть четыре элемента: роль (кем должна быть модель), задача (что сделать), контекст (какие исходные данные), формат (как оформить ответ). Не обязательно каждый раз писать все четыре, но чем сложнее задача — тем важнее их учесть.</p>
+<p>Сравни два варианта. Плохой: «напиши код для бота». Хороший: «ты senior Python-разработчик. Напиши Telegram-бота на aiogram, который принимает текст и возвращает его задом наперёд. Код должен быть в одном файле, с комментариями на русском, без внешних API. В ответе — только код, без объяснений». Разница в результате будет колоссальной.</p>
+
+<pre><code class="language-text">Плохо:
+  напиши статью про питон
+
+Хорошо:
+  Ты редактор IT-блога. Напиши статью на 800 слов про основы Python
+  для школьника, который никогда не программировал.
+  Структура: вступление, 3 раздела с h2, FAQ из 4 вопросов, вывод.
+  Стиль: дружелюбный, обращение "ты", без эмодзи, с примерами кода.
+  Используй метафоры из жизни: переменная — это коробка с подписью.</code></pre>
+
+<h2 id="section-3">Лайфхаки, которые экономят часы</h2>
+<p>Несколько приёмов, которые делают работу с ChatGPT в разы продуктивнее. Они выглядят банально, но 90% пользователей их не применяют — и теряют время на повторных запросах.</p>
+
+<h3 id="section-4">Контекст и роль</h3>
+<p>Всегда задавай роль в начале чата. «Ты — опытный Python-разработчик с 10 годами опыта» даёт кардинально другой ответ, чем запрос без контекста. Модель «настраивается» на тон, уровень сложности и набор терминов, который подходит выбранной роли.</p>
+
+<h3 id="section-5">Структура ответа</h3>
+<p>Проси не «ответ», а конкретный формат: таблица из трёх колонок, нумерованный список, JSON с полями id и name, Markdown с заголовками h2. Это снимает с тебя ручное переформатирование и сразу даёт годный результат.</p>
+
+<h3 id="section-6">Цепочки промптов</h3>
+<p>Сложную задачу дроби на шаги. Сначала проси набросать план, потом — детализировать первый пункт, потом — второй. Это работает в разы лучше, чем «сделай всё за один раз». Модель не теряет нить, ты контролируешь направление.</p>
+<p>И ещё один приём — револьвер промптов: проси сгенерировать три разных варианта и выбери лучший. Стоит копейки по времени, а качество растёт ощутимо.</p>
+
+<pre><code class="language-text">Шаблон универсального промпта:
+1. Роль: "Ты [профессия], который [опыт]"
+2. Задача: "Напиши/объясни/сделай [что именно]"
+3. Контекст: "Учитывай: [ситуация, данные, ограничения]"
+4. Формат: "Оформи как [таблица/список/JSON/Markdown]"
+5. Тон: "Стиль: [официальный/дружеский/простой]"
+6. Ограничения: "Не используй: [что избегать]"</code></pre>
+
+<h2 id="section-7">Чего ChatGPT не умеет и где можно наломать дров</h2>
+<p>Не используй ChatGPT для юридических и медицинских решений. Модель не различает источник достоверности — она одинаково уверенно выдаёт и факт, и бред. Для таких тем всегда проверяй у специалиста.</p>
+<p>Не корми модель конфиденциальными данными компании. Даже если OpenAI говорит, что не использует данные для обучения — у бесплатного тарифа иная история. Лучший подход: анонимизируй, замени имена и суммы, отправляй схему, а не реальный текст.</p>
+<p>Не доверяй коду вслепую. ChatGPT может выдать синтаксически правильный, но логически сломанный код. Особенно опасно в криптографии, работе с датами и параллельных вычислениях — там нюансы, которые нейросеть пропускает. Всегда прогоняй тесты.</p>
+
+<blockquote>Хорошее правило: если ошибка ChatGPT будет стоить тебе больше 10 минут — потрать 5 минут на проверку.</blockquote>
+
+<h2 id="section-8">Продвинутые техники работы с ChatGPT</h2>
+<p>Базовые промпты — половина пути. Когда начнёшь чувствовать модель, откроются приёмы, которые выводят качество на новый уровень. Они требуют чуть больше времени на запрос, но экономят часы на переделках.</p>
+<p><strong>Цепочка рассуждений (Chain-of-Thought).</strong> Проси модель «думать по шагам» перед финальным ответом. Фраза «объясни свои рассуждения шаг за шагом» заставляет ChatGPT декомпозировать задачу и резко снижает число ошибок. Особенно полезно для математики, кода и аналитики, где один неточный шаг ломает весь результат.</p>
+<p><strong>Few-shot промпты.</strong> Дай модели 2-3 примера того, что хочешь получить, и потом формулируй запрос. Примеры работают лучше инструкций: модель копирует паттерн, а не пытается интерпретировать абстрактные требования. Например, покажи три готовых формата ответа — и получишь точно такой же.</p>
+<p><strong>Переключение ролей.</strong> В сложном чате задавай разным сообщениям разные роли: «Ты product manager», «Теперь ты backend-разработчик», «Теперь ты тестировщик». Это даёт разные перспективы на одну задачу и помогает увидеть пропуски, которые одна роль не замечает.</p>
+<p><strong>Контрольная проверка.</strong> После ответа проси: «Какие могут быть ошибки в твоём ответе? Что ты упустил?». Модель охотно ревизует себя и часто находит слабые места. Это дешевле, чем ловить баги в продакшене.</p>
+<p><strong>Обновление контекста.</strong> Когда чат разрастается, в начале нового сообщения пиши: «Контекст: мы обсуждаем X, решение Y, ограничение Z». Это обновляет рабочую память модели и не даёт ей уйти в сторону. После 30-40 сообщений без обновления модель начинает забывать ранние детали.</p>
+<p>Эти приёмы не обязательны, а когда задача сложная. Если тебе надо перефразировать пару предложений — не заморачивайся. Если пишешь статью на 5000 слов или разбираешь архитектуру — эти техники окупаются в десятки раз.</p>
+
+<h2 id="section-9">FAQ</h2>
+
+<h3 id="section-10">Можно ли использовать ChatGPT бесплатно?</h3>
+<p>Да, есть бесплатный тариф с GPT-5 mini и базовыми лимитами. Для простых задач — перевод, суммаризация, генерация идей — хватает с головой. Платить стоит, когда часто сталкиваешься с лимитами или нужна генерация картинок и длинный контекст.</p>
+
+<h3 id="section-11">Что такое галлюцинации у ChatGPT?</h3>
+<p>Это когда модель уверенно выдаёт выдуманный факт как реальный. Причина — в устройстве LLM: она не различает «правду» и «правдоподобный текст». Если не знает ответа, она может «придумать» правдоподобно звучащий вариант. Поэтому критичные данные проверяй по источникам.</p>
+
+<h3 id="section-12">В каком языке лучше писать промпты — на русском или английском?</h3>
+<p>Английский работает чуть стабильнее и точнее, потому что в обучающей выборке его было больше. Но GPT-5 отлично понимает и русский. Если тебе важен стиль и нюансы на русском — пиши по-русски, модель справится.</p>
+
+<h3 id="section-13">Можно ли научить ChatGPT на своих данных?</h3>
+<p>Да, через Custom GPTs: загружаешь свои документы, и модель будет с ними работать. Также есть API для тонкой настройки (fine-tuning) — но это уже для разработчиков. Обычным пользователям достаточно Custom GPTs и подключённых файлов в чате.</p>
+
+<h3 id="section-14">Чем ChatGPT отличается от Claude и Copilot?</h3>
+<p>ChatGPT — универсальный ассистент, сильный в задачах разного типа. Claude лучше пишет длинные тексты и анализирует большие документы. Copilot — это ассистент прямо в редакторе кода. Сравни подробнее в <a href="/articles/claude-ai-obzor.html">обзоре Claude</a> и в <a href="/articles/github-copilot-obzor.html">обзоре Copilot</a>.</p>
+
+<h2 id="section-15">Краткий вывод</h2>
+<p>ChatGPT — мощный инструмент, если уметь с ним разговаривать. Главное: давай контекст, дроби задачу, проси конкретный формат и всегда проверяй факты. С этих трёх правил уже можно делать в три раза больше работы за то же время.</p>
+<p>Если хочешь двигаться дальше — попробуй автоматизацию через API и собери своего первого бота. Это тема для отдельной статьи, но базовые промпты — твой фундамент. Удачи в экспериментах!</p>
+</article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Как устроен ChatGPT внутри (коротко)</a><a href="#section-1" class="lvl-2">Регистрация и тарифы</a><a href="#section-2" class="lvl-2">Базовые принципы работы с промптами</a><a href="#section-3" class="lvl-2">Лайфхаки, которые экономят часы</a><a href="#section-4" class="lvl-3">Контекст и роль</a><a href="#section-5" class="lvl-3">Структура ответа</a><a href="#section-6" class="lvl-3">Цепочки промптов</a><a href="#section-7" class="lvl-2">Чего ChatGPT не умеет и где можно наломать дров</a><a href="#section-8" class="lvl-2">Продвинутые техники работы с ChatGPT</a><a href="#section-9" class="lvl-2">FAQ</a><a href="#section-10" class="lvl-3">Можно ли использовать ChatGPT бесплатно?</a><a href="#section-11" class="lvl-3">Что такое галлюцинации у ChatGPT?</a><a href="#section-12" class="lvl-3">В каком языке лучше писать промпты — на русском или английском?</a><a href="#section-13" class="lvl-3">Можно ли научить ChatGPT на своих данных?</a><a href="#section-14" class="lvl-3">Чем ChatGPT отличается от Claude и Copilot?</a><a href="#section-15" class="lvl-2">Краткий вывод</a></aside>
+      </div>
+
+      
+    <aside class="donate-block" aria-label="Поддержать проект">
+      <div class="donate-block__title">Поддержи проект</div>
+      <p class="donate-block__text">Сайт живёт на энтузиазме. Если статья оказалась полезной — поблагодари автора. Любая сумма идёт на хостинг, домен и новые статьи.</p>
+      <div class="donate-block__buttons">
+        <a href="https://boosty.to/itbase" target="_blank" rel="noopener nofollow" class="donate-btn donate-boosty">☕ Boosty</a><a href="https://t.me/itbase_bot" target="_blank" rel="noopener nofollow" class="donate-btn donate-tg">✈️ Telegram</a>
+      </div>
+      <p class="donate-block__hint">Также можно подписаться на <a href="https://t.me/itbase" target="_blank" rel="noopener">Telegram-канал</a> — там анонсы новых статей.</p>
+    </aside>
+    
+
+      <div class="ad-slot ad-slot--ad-bottom" data-slot="ad-bottom"></div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/claude-ai-obzor.html"><img src="/img/claude-cover.svg" alt="Claude AI от Anthropic: обзор, сравнение с ChatGPT, как пользоваться" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">ИИ</span><span class="tag">Инструменты</span></div>
+    <a href="/articles/claude-ai-obzor.html"><h2 class="card__title">Claude AI от Anthropic: обзор, сравнение с ChatGPT, как пользоваться</h2></a>
+    <p class="card__excerpt">Обзор Claude AI в 2026 году: где он сильнее ChatGPT, тарифы, работа с длинными документами и кодом. Практический гайд без маркетингового шума.</p>
+    <div class="card__meta">
+      <span>22 ноября 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="claude-ai-obzor" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/github-copilot-obzor.html"><img src="/img/copilot-cover.svg" alt="GitHub Copilot: обзор, цена, сравнение с альтернативами" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">ИИ</span><span class="tag">Инструменты</span><span class="tag">Разработка</span></div>
+    <a href="/articles/github-copilot-obzor.html"><h2 class="card__title">GitHub Copilot: обзор, цена, сравнение с альтернативами</h2></a>
+    <p class="card__excerpt">Что умеет GitHub Copilot в 2026 году, сколько стоит и стоит ли переключаться на Cursor, Codeium и Tabnine. Реальные сценарии, где ИИ-ассистент помогает и мешает.</p>
+    <div class="card__meta">
+      <span>12 ноября 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="github-copilot-obzor" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/kubernetes-dlya-novichka.html"><img src="/img/kubernetes-cover.svg" alt="Kubernetes для новичка: поды, деплойменты, сервисы за 15 минут" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">DevOps</span><span class="tag">Инструменты</span></div>
+    <a href="/articles/kubernetes-dlya-novichka.html"><h2 class="card__title">Kubernetes для новичка: поды, деплойменты, сервисы за 15 минут</h2></a>
+    <p class="card__excerpt">Объяснение Kubernetes простыми словами: что такое поды, деплойменты и сервисы, зачем они нужны и как написать первый манифест. Без воды и без заумных терминов.</p>
+    <div class="card__meta">
+      <span>15 ноября 2026</span><span class="dot">•</span><span>15 мин</span>
+      <button class="card__bm" data-slug="kubernetes-dlya-novichka" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/support.html">Поддержать ★</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+  
+</body>
+</html>

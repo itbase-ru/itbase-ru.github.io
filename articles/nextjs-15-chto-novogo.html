@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Next.js 15: что нового, App Router, Server Components — IT·База</title>
+  <meta name="description" content="Обзор Next.js 15 простыми словами: чем App Router отличается от Pages, как работают Server Components, зачем Turbopack и где лежат грабли при миграции.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/nextjs-15-chto-novogo.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Next.js 15: что нового, App Router, Server Components">
+  <meta property="og:description" content="Обзор Next.js 15 простыми словами: чем App Router отличается от Pages, как работают Server Components, зачем Turbopack и где лежат грабли при миграции.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/nextjs-15-chto-novogo.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/nextjs-15-chto-novogo.html">
+  <meta property="article:published_time" content="2026-11-20">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Next.js 15: что нового, App Router, Server Components">
+  <meta name="twitter:description" content="Обзор Next.js 15 простыми словами: чем App Router отличается от Pages, как работают Server Components, зачем Turbopack и где лежат грабли при миграции.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/nextjs-15-chto-novogo.png">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Next.js 15: что нового, App Router, Server Components", "description": "Обзор Next.js 15 простыми словами: чем App Router отличается от Pages, как работают Server Components, зачем Turbopack и где лежат грабли при миграции.", "image": ["https://itbase-ru.github.io/img/og/nextjs-15-chto-novogo.png"], "datePublished": "2026-11-20", "dateModified": "2026-11-20", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/", "logo": {"@type": "ImageObject", "url": "https://itbase-ru.github.io/favicon.svg"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/nextjs-15-chto-novogo.html"}, "articleSection": "Веб", "keywords": "Веб, JavaScript"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Веб", "item": "https://itbase-ru.github.io/?tag=Веб"}, {"@type": "ListItem", "position": 3, "name": "Next.js 15: что нового, App Router, Server Components", "item": "https://itbase-ru.github.io/articles/nextjs-15-chto-novogo.html"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Стоит ли мигрировать старый проект с Pages на App Router?", "acceptedAnswer": {"@type": "Answer", "text": "Если проект маленький — да, миграция займёт пару дней. Если большой — лучше начать новые страницы на App Router, а старые оставить. Vercel обещает поддержку Pages ещё долго, так что спешки нет."}}, {"@type": "Question", "name": "Server Components заменят обычные React-компоненты?", "acceptedAnswer": {"@type": "Answer", "text": "Нет, они их дополняют. Server Components работают только в серверной среде (Next.js), а обычные React-компоненты — везде, включая SPA. Это просто новый инструмент, а не замена экосистемы."}}, {"@type": "Question", "name": "Нужен ли Next.js, если у меня обычный SPA?", "acceptedAnswer": {"@type": "Answer", "text": "Если у тебя сложное приложение с SEO-страницами, блогом, лендингами — Next.js подходит идеально. Если у тебя админка без SEO — хватит Vite + React. Next.js — это про гибрид: можно часть страниц делать статичными, часть — серверными, часть — клиентскими."}}, {"@type": "Question", "name": "Turbopack заменит Webpack полностью?", "acceptedAnswer": {"@type": "Answer", "text": "Со временем — да, но пока Turbopack стабилен только для dev. Для продакшн-бандла всё ещё рекомендуют Webpack. Vercel обещает полную стабильность Turbopack для prod в ближайших версиях."}}, {"@type": "Question", "name": "Что лучше — Next.js или Remix?", "acceptedAnswer": {"@type": "Answer", "text": "Remix (ныне React Router 7) — отличная альтернатива с похожей философией. Next.js даёт больше «из коробки»: image optimization, ISR, edge functions. Remix фокусируется на веб-стандартах. Для большинства проектов Next.js — безопасный выбор."}}, {"@type": "Question", "name": "Как быстро стартовать с Next.js 15?", "acceptedAnswer": {"@type": "Answer", "text": "Одной командой: npx create-next-app@latest my-app. Получишь готовый проект на App Router, TypeScript, Tailwind. Дальше — документация nextjs.org, она очень качественная. Через час сделаешь первую страницу."}}]}</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="nextjs-15-chto-novogo">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Веб">Веб</a>
+        <span class="sep">/</span>
+        <span>Next.js 15: что нового, App Router, Server Components</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Веб</span><span class="tag">JavaScript</span></div>
+        <h1>Next.js 15: что нового, App Router, Server Components</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-11-20">20 ноября 2026</time>
+          <span class="dot">•</span>
+          <span>13 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/nextjs-cover.svg" alt="Next.js 15: что нового, App Router, Server Components">
+      </figure>
+
+      <div class="ad-slot ad-slot--ad-inline" data-slot="ad-inline"></div>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+<p>Next.js — это фреймворк на React, который к 2026 году стал де-факто стандартом для продакшна. Версия 15 принесла долгожданные улучшения: стабильный App Router, Server Components, Turbopack и новый API кеширования. Если ты фронтендер — это уже не «опция на будущее», а рабочий инструмент здесь и сейчас.</p>
+<p>В этой статье — что нового в Next.js 15 простыми словами, как это использовать и какие грабли лежат по пути. Если React для тебя пока нов — начни с <a href="/articles/javascript-peremennye-i-tipy.html">основ JavaScript</a>. Без воды — только то, что реально поменяется в твоём коде.</p>
+
+<h2 id="section-0">App Router против Pages Router</h2>
+<p>В старом Next.js (до 13 версии) был Pages Router: каждый маршрут — это файл в папке pages/. Простая модель, но с ограничениями: layout нельзя было переиспользовать, nested-роуты были болью, data-fetching происходил через getServerSideProps.</p>
+<p>В Next.js 15 App Router — стабильный и рекомендуемый. Теперь маршруты живут в папке app/, и каждый маршрут — это папка с файлом page.tsx. Layout-и объявляются в layout.tsx и автоматически оборачивают дочерние страницы. Loading.tsx, error.tsx, not-found.tsx — это всё файлы, которые автоматически подхватываются роутером.</p>
+<p>Старый Pages Router всё ещё работает — не надо переписывать всё за раз. Новые проекты лучше делать на App Router, а старые мигрировать постепенно. Команда Vercel обещает поддерживать Pages Router ещё долго.</p>
+<p>Главное архитектурное отличие App Router — layout-и вкладываются автоматически. У тебя может быть корневой layout (с шапкой и футером), в нём — layout секции (с сайдбаром), в нём — layout конкретной страницы. Это даёт переиспользование и не требует вручную оборачивать каждую страницу в одни и те же компоненты.</p>
+<p>Также в App Router появился файл <code>template.tsx</code> — он похож на layout, но пересоздаётся при каждой навигации. Это полезно, когда ты хочешь сбросить состояние компонента при переходе между страницами. Например, форма поиска в хедере должна обнуляться при переходе на новую страницу — template.tsx делает это автоматически.</p>
+
+<h2 id="section-1">Server Components: серверный рендеринг нового поколения</h2>
+<p>Главное новшество Next.js 13+, и в 15-й версии оно доведено до ума. Server Component — это React-компонент, который рендерится на сервере и присылает в браузер готовый HTML. В браузер не попадает ни JSX, ни данные — только готовый DOM. Это уменьшает размер бандла и ускоряет первый paint.</p>
+<p>По умолчанию в App Router все компоненты — серверные. Чтобы сделать компонент клиентским, нужно явно написать в начале файла:</p>
+
+<pre><code class="language-js">'use client';
+
+import { useState } from 'react';
+
+export default function Counter() {
+  const [n, setN] = useState(0);
+  return &lt;button onClick={() =&gt; setN(n + 1)}&gt;{n}&lt;/button&gt;;
+}</code></pre>
+
+<p>Это разделение — главное архитектурное отличие нового Next. Серверные компоненты могут обращаться к БД напрямую, не тащут библиотеки в бандл, не имеют useState. Клиентские — те, где нужен интерактив: состояние, события, браузерные API.</p>
+<p>Сравни: ты делаешь страницу товара. Информация о товаре — server component: тянется из БД, рендерится на сервере, клиенту приходит HTML. Кнопка «в корзину» — client component: нужно состояние, нужно событие. Они легко комбинируются.</p>
+
+<h2 id="section-2">Data fetching: теперь проще</h2>
+<p>В Pages Router для данных использовали getServerSideProps и getStaticProps — отдельные функции в каждом файле. В App Router — обычный async/await прямо в серверном компоненте:</p>
+
+<pre><code class="language-js">async function getUser(id) {
+  const res = await fetch('https://api.example.com/users/' + id);
+  return res.json();
+}
+
+export default async function Page({ params }) {
+  const user = await getUser(params.id);
+  return &lt;h1&gt;{user.name}&lt;/h1&gt;;
+}</code></pre>
+
+<p>Fetch автоматически кешируется, и ты можешь управлять поведением через опции: <code>{ next: { revalidate: 60 } }</code> — ревалидация раз в 60 секунд, <code>{ cache: 'no-store' }</code> — всегда свежие данные. Это и есть новый API кеширования.</p>
+<p>Также появился <code>generateStaticParams</code> для динамических маршрутов — он говорит Next.js, какие страницы сгенерировать статически на этапе сборки. Это особенно полезно для блогов и документации: ты заранее знаешь все URL, и Next сделает готовые HTML-файлы без запросов к БД в runtime. Сочетание generateStaticParams и ISR даёт гибкость: что-то статичное, что-то с ревалидацией, что-то серверное.</p>
+
+<h2 id="section-3">Turbopack: быстрая разработка</h2>
+<p>Turbopack — это новый bundler от Vercel, замена Webpack на dev. В Next.js 15 он стабильный для разработки и реально быстрее: холодный старт в 5-10 раз, hot reload почти мгновенный. Для продакшна пока рекомендуют Webpack, но и туда Turbopack скоро доберётся.</p>
+<p>В больших проектах Turbopack даёт заметный буст: dev-сервер поднимается за секунды вместо минут, изменения видны сразу. Это особенно полезно, когда у тебя десятки страниц и сложная структура компонентов.</p>
+
+<h2 id="section-4">Что ещё важного</h2>
+<p>Streaming и Suspense: ты можешь показать часть страницы сразу, а тяжёлые части догружаются потом через Suspense-блоки. Это улучшает perceived performance — пользователь видит контент сразу, а не через 2 секунды.</p>
+<p>Metadata API: вместо ручного управления head и meta-тегами — экспорт объекта metadata из компонента. Next сам собирает все мета-данные и собирает в правильном порядке.</p>
+<p>Server Actions: вместо создания API-эндпоинтов для форм — пишешь async-функцию прямо в серверном компоненте, и она автоматически становится эндпоинтом. Удобно для мутаций.</p>
+
+<div class="table-scroll"><table>
+  <thead><tr><th>Возможность</th><th>Pages Router</th><th>App Router (Next 15)</th></tr></thead>
+  <tbody>
+    <tr><td>Роутинг</td><td>pages/ файлы</td><td>app/ папки</td></tr>
+    <tr><td>Layouts</td><td>Через _app.tsx</td><td>Вложенные layout.tsx</td></tr>
+    <tr><td>Data fetching</td><td>getServerSideProps</td><td>async в компоненте</td></tr>
+    <tr><td>Server Components</td><td>Нет</td><td>По умолчанию</td></tr>
+    <tr><td>Streaming</td><td>Ограниченно</td><td>Через Suspense</td></tr>
+    <tr><td>Metadata</td><td>next/head</td><td>Metadata API</td></tr>
+    <tr><td>Bundler</td><td>Webpack</td><td>Webpack + Turbopack</td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="section-5">Грабли и что не сделать так</h2>
+<p>Главная ошибка — сделать все компоненты клиентскими. Это убивает смысл Server Components и раздувает бандл. Старайся держать максимум на сервере, а в 'use client' переносить только листья с интерактивом.</p>
+<p>Вторая ошибка — тащить в серверные компоненты библиотеки, которые работают только в браузере (например, те, что обращаются к window). Они сломаются на сервере. Такие части выделяй в отдельные клиентские компоненты.</p>
+<p>Третья — полагаться на автоматическое кеширование, не зная, как оно работает. По умолчанию fetch кешируется надолго, и ты можешь получить устаревшие данные. Если данные должны быть свежими — явно отключай кеш. Подробнее про кеширование — в <a href="/articles/chto-takoe-keshirovanie.html">отдельной статье</a>.</p>
+
+<blockquote>App Router — это не новый синтаксис. Это новая архитектура: сервер-клиентский контракт вместо клиентского SPA.</blockquote>
+
+<h2 id="section-6">Деплой и хостинг: где крутить</h2>
+<p>Next.js можно захостить где угодно, но не любой хостинг раскроет все фичи. SSR, ISR, edge functions — это требует серверной среды, а не статичного файлового сервера. Разберём основные варианты.</p>
+<p><strong>Vercel</strong> — компания-создатель Next.js, их платформа — первый кандидат. Деплой сводится к <code>git push</code>: Vercel сам собирает, деплоит и раздаёт через CDN. Поддерживаются все фичи: ISR, Edge Functions, Image Optimization. Для хобби-проектов — бесплатно, для серьёзных — Pro за 20 USD/мес.</p>
+<p><strong>Self-hosted через Docker.</strong> Next.js можно собрать в Docker-образ и крутить где угодно: в облаке, на VPS, в Kubernetes. Важно: для SSR нужен Node.js-сервер, не статика. Образ собирается через <code>next build</code> и запускается через <code>next start</code>. Это даёт полный контроль, но требует настройки Nginx, SSL, мониторинга.</p>
+<pre><code class="language-dockerfile">FROM node:20-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+EXPOSE 3000
+CMD ["npm", "start"]</code></pre>
+<p><strong>Static export.</strong> Если у тебя полностью статичный сайт (блог, лендинг, документация), можно собрать Next.js в набор HTML/CSS/JS файлов через <code>next export</code>. Эти файлы раздаются любым статическим хостингом: GitHub Pages, Cloudflare Pages, Netlify. Минус — теряешь SSR, ISR, edge-функции. Только статика.</p>
+<p><strong>Cloudflare Pages.</strong> Альтернатива Vercel с акцентом на edge-сеть. Поддерживает Next.js через @cloudflare/next-on-pages. Бесплатно для большинства задач, но есть ограничения: не все Node.js API доступны на edge-runtime, библиотеки с fs или тяжёлыми зависимостями могут не работать.</p>
+<p><strong>AWS, GCP, Azure.</strong> Полная свобода, но и полная головная боль. Поднимаешь ECS/EKS или App Runner, деплоишь Docker-образ. Это выбор для больших компаний с DevOps-командой — для одиночек оверкилл. Подробнее про деплой и CI/CD — в <a href="/articles/chto-takoe-devops-ci-cd-deploy.html">статье про DevOps</a>.</p>
+<p>Главный совет: стартуй на Vercel, даже для коммерческих проектов. Когда упрёшься в лимиты или захочешь cost-optimization — мигрируй на self-hosted. Это займёт день-два, но только когда станет действительно нужно.</p>
+
+<h2 id="section-7">FAQ</h2>
+
+<h3 id="section-8">Стоит ли мигрировать старый проект с Pages на App Router?</h3>
+<p>Если проект маленький — да, миграция займёт пару дней. Если большой — лучше начать новые страницы на App Router, а старые оставить. Vercel обещает поддержку Pages ещё долго, так что спешки нет.</p>
+
+<h3 id="section-9">Server Components заменят обычные React-компоненты?</h3>
+<p>Нет, они их дополняют. Server Components работают только в серверной среде (Next.js), а обычные React-компоненты — везде, включая SPA. Это просто новый инструмент, а не замена экосистемы.</p>
+
+<h3 id="section-10">Нужен ли Next.js, если у меня обычный SPA?</h3>
+<p>Если у тебя сложное приложение с SEO-страницами, блогом, лендингами — Next.js подходит идеально. Если у тебя админка без SEO — хватит Vite + React. Next.js — это про гибрид: можно часть страниц делать статичными, часть — серверными, часть — клиентскими.</p>
+
+<h3 id="section-11">Turbopack заменит Webpack полностью?</h3>
+<p>Со временем — да, но пока Turbopack стабилен только для dev. Для продакшн-бандла всё ещё рекомендуют Webpack. Vercel обещает полную стабильность Turbopack для prod в ближайших версиях.</p>
+
+<h3 id="section-12">Что лучше — Next.js или Remix?</h3>
+<p>Remix (ныне React Router 7) — отличная альтернатива с похожей философией. Next.js даёт больше «из коробки»: image optimization, ISR, edge functions. Remix фокусируется на веб-стандартах. Для большинства проектов Next.js — безопасный выбор.</p>
+
+<h3 id="section-13">Как быстро стартовать с Next.js 15?</h3>
+<p>Одной командой: npx create-next-app@latest my-app. Получишь готовый проект на App Router, TypeScript, Tailwind. Дальше — документация nextjs.org, она очень качественная. Через час сделаешь первую страницу.</p>
+
+<h2 id="section-14">Краткий вывод</h2>
+<p>Next.js 15 — это не революция, а эволюция: App Router стал стабильным, Turbopack быстрым, Server Components — нормой. Если ты на Pages Router — не обязательно перепрыгивать сегодня, но новые страницы лучше делать на App. Если начинаешь новый проект — бери 15-ю версию и не сомневайся.</p>
+<p>Главное — не пытайся сразу использовать все возможности. Начни с базового роутинга и серверных компонентов, освой data fetching и кеширование, и только потом добавляй Server Actions, Streaming и Edge-функции. Эволюционный подход к изучению Next.js окупается: ты будешь понимать, что и зачем работает, а не копировать код из доки.</p>
+</article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">App Router против Pages Router</a><a href="#section-1" class="lvl-2">Server Components: серверный рендеринг нового поколения</a><a href="#section-2" class="lvl-2">Data fetching: теперь проще</a><a href="#section-3" class="lvl-2">Turbopack: быстрая разработка</a><a href="#section-4" class="lvl-2">Что ещё важного</a><a href="#section-5" class="lvl-2">Грабли и что не сделать так</a><a href="#section-6" class="lvl-2">Деплой и хостинг: где крутить</a><a href="#section-7" class="lvl-2">FAQ</a><a href="#section-8" class="lvl-3">Стоит ли мигрировать старый проект с Pages на App Router?</a><a href="#section-9" class="lvl-3">Server Components заменят обычные React-компоненты?</a><a href="#section-10" class="lvl-3">Нужен ли Next.js, если у меня обычный SPA?</a><a href="#section-11" class="lvl-3">Turbopack заменит Webpack полностью?</a><a href="#section-12" class="lvl-3">Что лучше — Next.js или Remix?</a><a href="#section-13" class="lvl-3">Как быстро стартовать с Next.js 15?</a><a href="#section-14" class="lvl-2">Краткий вывод</a></aside>
+      </div>
+
+      
+    <aside class="donate-block" aria-label="Поддержать проект">
+      <div class="donate-block__title">Поддержи проект</div>
+      <p class="donate-block__text">Сайт живёт на энтузиазме. Если статья оказалась полезной — поблагодари автора. Любая сумма идёт на хостинг, домен и новые статьи.</p>
+      <div class="donate-block__buttons">
+        <a href="https://boosty.to/itbase" target="_blank" rel="noopener nofollow" class="donate-btn donate-boosty">☕ Boosty</a><a href="https://t.me/itbase_bot" target="_blank" rel="noopener nofollow" class="donate-btn donate-tg">✈️ Telegram</a>
+      </div>
+      <p class="donate-block__hint">Также можно подписаться на <a href="https://t.me/itbase" target="_blank" rel="noopener">Telegram-канал</a> — там анонсы новых статей.</p>
+    </aside>
+    
+
+      <div class="ad-slot ad-slot--ad-bottom" data-slot="ad-bottom"></div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/cookie-localstorage-sessionstorage.html"><img src="/img/storage.svg" alt="Cookie, localStorage и sessionStorage — что выбрать" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Веб</span><span class="tag">JavaScript</span><span class="tag">Безопасность</span></div>
+    <a href="/articles/cookie-localstorage-sessionstorage.html"><h2 class="card__title">Cookie, localStorage и sessionStorage — что выбрать</h2></a>
+    <p class="card__excerpt">Три способа хранить данные в браузере. Разбираем разницу, лимиты, безопасность и когда что использовать — на конкретных примерах.</p>
+    <div class="card__meta">
+      <span>22 апреля 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="cookie-localstorage-sessionstorage" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/asinhronnost-v-javascript.html"><img src="/img/async-cover.svg" alt="Асинхронность в JavaScript: промисы и async/await" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">JavaScript</span><span class="tag">Веб</span></div>
+    <a href="/articles/asinhronnost-v-javascript.html"><h2 class="card__title">Асинхронность в JavaScript: промисы и async/await</h2></a>
+    <p class="card__excerpt">Почему JavaScript не может просто подождать, что такое промисы, как работает async/await и почему fetch — асинхронный.</p>
+    <div class="card__meta">
+      <span>11 марта 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="asinhronnost-v-javascript" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/javascript-massivy-i-obekty.html"><img src="/img/arrays-cover.svg" alt="Массивы и объекты в JavaScript: полный разбор с примерами" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">JavaScript</span><span class="tag">Веб</span></div>
+    <a href="/articles/javascript-massivy-i-obekty.html"><h2 class="card__title">Массивы и объекты в JavaScript: полный разбор с примерами</h2></a>
+    <p class="card__excerpt">Как хранить списки и структурированные данные, какие методы массивов нужны в реальной работе и чем объект отличается от массива.</p>
+    <div class="card__meta">
+      <span>9 марта 2026</span><span class="dot">•</span><span>12 мин</span>
+      <button class="card__bm" data-slug="javascript-massivy-i-obekty" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/support.html">Поддержать ★</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+  
+</body>
+</html>

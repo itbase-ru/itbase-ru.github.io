@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tailwind CSS vs Bootstrap: что лучше в 2026 — IT·База</title>
+  <meta name="description" content="Сравнение Tailwind и Bootstrap простыми словами: философия, размер бандла, кривая обучения, экосистема. Поможем выбрать фреймворк под проект.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/tailwind-css-vs-bootstrap.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Tailwind CSS vs Bootstrap: что лучше в 2026">
+  <meta property="og:description" content="Сравнение Tailwind и Bootstrap простыми словами: философия, размер бандла, кривая обучения, экосистема. Поможем выбрать фреймворк под проект.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/tailwind-css-vs-bootstrap.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/tailwind-css-vs-bootstrap.html">
+  <meta property="article:published_time" content="2026-11-30">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tailwind CSS vs Bootstrap: что лучше в 2026">
+  <meta name="twitter:description" content="Сравнение Tailwind и Bootstrap простыми словами: философия, размер бандла, кривая обучения, экосистема. Поможем выбрать фреймворк под проект.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/tailwind-css-vs-bootstrap.png">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Tailwind CSS vs Bootstrap: что лучше в 2026", "description": "Сравнение Tailwind и Bootstrap простыми словами: философия, размер бандла, кривая обучения, экосистема. Поможем выбрать фреймворк под проект.", "image": ["https://itbase-ru.github.io/img/og/tailwind-css-vs-bootstrap.png"], "datePublished": "2026-11-30", "dateModified": "2026-11-30", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/", "logo": {"@type": "ImageObject", "url": "https://itbase-ru.github.io/favicon.svg"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/tailwind-css-vs-bootstrap.html"}, "articleSection": "Веб", "keywords": "Веб, CSS"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Веб", "item": "https://itbase-ru.github.io/?tag=Веб"}, {"@type": "ListItem", "position": 3, "name": "Tailwind CSS vs Bootstrap: что лучше в 2026", "item": "https://itbase-ru.github.io/articles/tailwind-css-vs-bootstrap.html"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Tailwind медленнее писать?", "acceptedAnswer": {"@type": "Answer", "text": "Сначала — да, потому что привыкаешь к утилитам. Через неделю — нет. Опытные разработчики на Tailwind верстают быстрее, потому что не переключаются между HTML и CSS-файлами, и не придумывают имена классам."}}, {"@type": "Question", "name": "Bootstrap умер?", "acceptedAnswer": {"@type": "Answer", "text": "Нет. На нём работают миллионы сайтов, в том числе новых. Он просто перестал быть «дефолтным выбором» в 2026 году. Большинство новых проектов с кастомным дизайном выбирают Tailwind, но для админок и прототипов Bootstrap всё ещё хорош."}}, {"@type": "Question", "name": "Что лучше для React?", "acceptedAnswer": {"@type": "Answer", "text": "Tailwind + shadcn/ui. Это современный стандарт: ты получаешь поведение из Radix, стилизацию через Tailwind, полный контроль над кодом. На Bootstrap есть react-bootstrap, но он менее популярен."}}, {"@type": "Question", "name": "Можно ли использовать оба вместе?", "acceptedAnswer": {"@type": "Answer", "text": "Технически — да, но это плохая идея. Ты получишь два набора reset-стилей, дублирование классов, путаницу в голове. Выбери один и держи."}}, {"@type": "Question", "name": "Что выбрать новичку?", "acceptedAnswer": {"@type": "Answer", "text": "Bootstrap — если ты вообще не знаешь CSS и хочешь быстро получить результат. Tailwind — если готов учить CSS вместе с фреймворком. В долгосрочной перспективе Tailwind выгоднее, потому что он прокачивает знание CSS."}}, {"@type": "Question", "name": "Tailwind делает CSS ненужным?", "acceptedAnswer": {"@type": "Answer", "text": "Нет. Tailwind — это надстройка над CSS, он генерирует обычный CSS. Знание CSS важно для понимания, что делают классы Tailwind. Также для сложных вещей (анимации, кастомные свойства) ты всё равно будешь писать обычный CSS."}}]}</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="tailwind-css-vs-bootstrap">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Веб">Веб</a>
+        <span class="sep">/</span>
+        <span>Tailwind CSS vs Bootstrap: что лучше в 2026</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Веб</span><span class="tag">CSS</span></div>
+        <h1>Tailwind CSS vs Bootstrap: что лучше в 2026</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-11-30">30 ноября 2026</time>
+          <span class="dot">•</span>
+          <span>11 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/tailwind-cover.svg" alt="Tailwind CSS vs Bootstrap: что лучше в 2026">
+      </figure>
+
+      <div class="ad-slot ad-slot--ad-inline" data-slot="ad-inline"></div>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+<p>Bootstrap и Tailwind — два самых популярных CSS-фреймворка в мире, но философия у них принципиально разная. Bootstrap даёт готовые компоненты, Tailwind — набор утилит, из которых ты строишь сам. В 2026 году в новых проектах Tailwind встречается чаще, но Bootstrap тоже не умер. Разберём, что и когда выбирать.</p>
+<p>Если ты только знакомишься с CSS — загляни в <a href="/articles/css-flexbox-vs-grid.html">статью про Flexbox и Grid</a> и <a href="/articles/html-s-nulya.html">основы HTML</a>. Без воды — только то, что влияет на выбор в реальном проекте.</p>
+
+<h2 id="section-0">Философия фреймворков</h2>
+<p>Bootstrap родился в 2011 году в Twitter как способ быстро верстать админки. Внутри — готовые компоненты: кнопки, карточки, модалки, навбары. Пишешь <code>class="btn btn-primary"</code> — получаешь красивую синюю кнопку. Дизайн-система Bootstrap задаёт тон, и если тебя устраивает — ты верстаешь быстро и единообразно.</p>
+<p>Tailwind родился в 2017 году как ответ на «вот ещё один фреймворк с другим дизайном». Идея простая: вместо готовых компонентов — набор атомарных утилит. Пишешь <code>class="bg-blue-500 text-white px-4 py-2 rounded"</code> — получаешь ту же кнопку, но собранную из мелких классов. Дизайн-системы нет — ты её создаёшь.</p>
+<p>Простое правило: Bootstrap — для быстрого старта с готовым дизайном. Tailwind — для кастомного дизайна с нуля.</p>
+
+<h2 id="section-1">Сравнение по ключевым параметрам</h2>
+<p>Разложим по полочкам.</p>
+
+<div class="table-scroll"><table>
+  <thead><tr><th>Параметр</th><th>Bootstrap</th><th>Tailwind</th></tr></thead>
+  <tbody>
+    <tr><td>Подход</td><td>Готовые компоненты</td><td>Утилитарные классы</td></tr>
+    <tr><td>Кастомизация</td><td>Ограниченная темой</td><td>Полная</td></tr>
+    <tr><td>Размер CSS</td><td>Фиксированный (большой)</td><td>Только нужное (маленький)</td></tr>
+    <tr><td>Кривая обучения</td><td>Низкая</td><td>Средняя</td></tr>
+    <tr><td>Дизайн</td><td>Единый, узнаваемый</td><td>Любой</td></tr>
+    <tr><td>Адаптивность</td><td>Через breakpoint-классы</td><td>Через breakpoint-классы</td></tr>
+    <tr><td>JS-компоненты</td><td>Есть (модалки, дропдауны)</td><td>Нет (используй сторонние)</td></tr>
+    <tr><td>Идеально для</td><td>Прототипов, админок</td><td>Кастомных сайтов</td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="section-2">Как выглядит код: сравнение</h2>
+<p>Давай сделаем одну и ту же карточку товара на обоих фреймворках. Это даст наглядное сравнение подходов.</p>
+
+<pre><code class="language-html">&lt;!-- Bootstrap --&gt;
+&lt;div class="card" style="width: 18rem;"&gt;
+  &lt;img src="photo.jpg" class="card-img-top" alt="..."&gt;
+  &lt;div class="card-body"&gt;
+    &lt;h5 class="card-title"&gt;Товар&lt;/h5&gt;
+    &lt;p class="card-text"&gt;Описание товара.&lt;/p&gt;
+    &lt;a href="#" class="btn btn-primary"&gt;Купить&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+<pre><code class="language-html">&lt;!-- Tailwind --&gt;
+&lt;div class="max-w-sm rounded-lg border border-gray-200 bg-white shadow"&gt;
+  &lt;img src="photo.jpg" class="w-full rounded-t-lg" alt="..."&gt;
+  &lt;div class="p-5"&gt;
+    &lt;h5 class="text-lg font-bold text-gray-900"&gt;Товар&lt;/h5&gt;
+    &lt;p class="mt-2 text-sm text-gray-600"&gt;Описание товара.&lt;/p&gt;
+    &lt;a href="#" class="mt-4 inline-block rounded bg-blue-500
+      px-4 py-2 text-white hover:bg-blue-600"&gt;Купить&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+<p>В Bootstrap HTML короче, но ты получаешь дизайн «как в Bootstrap». В Tailwind HTML длиннее, но ты контролируешь каждую деталь: тень, цвет, отступы, поведение при наведении. Со временем Tailwind-классы читаются так же быстро, как Bootstrap-компоненты.</p>
+
+<h2 id="section-3">Кастомизация и размер бандла</h2>
+<p>Bootstrap подключается одним CSS-файлом — порядка 200 КБ. Ты получаешь весь фреймворк, даже если используешь 10% классов. Можно урезать через сборку Sass, но это требует настройки.</p>
+<p>Tailwind работает по-другому: в dev-режиме ты пишешь классы, а в продакшн-сборке Tailwind (через PostCSS) вырезает все неиспользуемые. На выходе у тебя в бандле только те классы, что реально встречаются в HTML. Итоговый CSS часто весит 10-30 КБ.</p>
+<p>Кастомизация: в Bootstrap ты переопределяешь Sass-переменные перед сборкой, или пишешь свои стили поверх. В Tailwind — правишь конфиг tailwind.config.js, и эти цвета/шрифты становятся доступны как классы. Это даёт единый источник правды для дизайн-системы.</p>
+
+<h2 id="section-4">Что быстрее в освоении</h2>
+<p>Bootstrap выигрывает по входному порогу. За пару часов новичок верстает первую страницу, потому что компоненты готовы: бери class из доки — получай результат. Не нужно знать CSS глубоко.</p>
+<p>Tailwind требует понимания CSS: ты должен знать, что такое flex, padding, border-radius, и зачем каждый класс. Если ты знаешь CSS — Tailwind становится естественным продолжением. Если не знаешь — будет больно.</p>
+<p>Совет новичкам: начни с Bootstrap, чтобы понять, как выглядит «правильная» вёрстка. Когда начнёшь чувствовать ограничения — переходи на Tailwind и прокачивай CSS.</p>
+
+<h2 id="section-5">Когда выбирать Bootstrap</h2>
+<p>Выбирай Bootstrap, если: тебе надо быстро поднять прототип, ты делаешь внутреннюю админку, в команде есть джуны без опыта в CSS, ты не хочешь тратить время на дизайн. Большая часть корпоративных дашбордов до сих пор делается на Bootstrap — и это разумный выбор.</p>
+<p>Также Bootstrap удобен для проектов с Legacy-кодом, где он уже используется. Не переписывай ради моды: если работает — пусть работает.</p>
+<p>Bootstrap — частый выбор образовательных проектов. В университетах и онлайн-курсах его используют, чтобы не тонуть в CSS, пока ученик учит программирование. Если ты учишься — Bootstrap даёт быстрый результат и поднимает мотивацию. Когда созреешь — переходи на Tailwind, потому что индустрия идёт именно туда. Оба фреймворка полезно знать на базовом уровне: Bootstrap чаще встречается в старых проектах, Tailwind — в новых.</p>
+
+<h2 id="section-6">Когда выбирать Tailwind</h2>
+<p>Выбирай Tailwind, если: делаешь кастомный дизайн, у тебя есть дизайн-система, важна производительность (минимальный CSS), работаешь в современной экосистеме (Next.js, Vite, React). Большинство новых SaaS-продуктов в 2026 году — на Tailwind.</p>
+<p>Tailwind особенно хорош с компонентным подходом: ты определяешь один раз <code>Button</code> как React-компонент с Tailwind-классами внутри, и переиспользуешь. Это снимает главный аргумент против Tailwind — «длинные class-строки в HTML».</p>
+<p>С Tailwind удобно работать в команде: один человек настраивает дизайн-систему в <code>tailwind.config.js</code>, остальные просто используют классы. Если поменялся основной цвет — правишь одну строку в конфиге, и весь проект обновляется. В Bootstrap такие изменения требуют переборки Sass-переменных и компиляции, что усложняет CI/CD.</p>
+
+<blockquote>Bootstrap — это обед в столовой: быстро, сытно, одинаково. Tailwind — это кухня: дольше, но то, что захочешь.</blockquote>
+
+<h2 id="section-7">Экосистема и инструменты</h2>
+<p>У Bootstrap есть официальный набор JS-компонентов на базе Popper.js: модалки, тосты, дропдауны, карусели. Это удобно: подключил — работает. Но в 2026 году всё это заменяют на headless-библиотеки (Radix, Headless UI) — там нет стилей, только логика, и ты стилизуешь под свой дизайн.</p>
+<p>У Tailwind нет официальных JS-компонентов — это философски. Зато есть headless-библиотеки, которые идут с ним рука об руку: Headless UI (от команды Tailwind), Radix UI, shadcn/ui. Они дают поведение, ты — стилизацию.</p>
+<p>UI-киты: на Tailwind очень популярен shadcn/ui — это не пакет, а генератор компонентов. Ты копируешь исходники в свой проект и меняешь как хочешь. Это идеально для команд, которые хотят полного контроля.</p>
+
+<h2 id="section-8">Performance и Developer Experience</h2>
+<p>Между фреймворками разница не только в подходе, но и в том, как они влияют на ежедневную работу. Скорость сборки, дев-сервер, отладка, размер бандла — всё это реально влияет на настроение и продуктивность.</p>
+<p><strong>Скорость дев-сервера.</strong> Bootstrap подключается одним CSS-файлом — изменения видны мгновенно, без сборки. Tailwind требует сборки через PostCSS, но современные инструменты (Vite, Tailwind CLI) делают это за миллисекунды. На проекте из 50 компонентов ты не заметишь разницы.</p>
+<p><strong>Размер продакшн-бандла.</strong> Bootstrap даёт ~200 КБ CSS независимо от того, что ты используешь. Tailwind генерирует только нужные классы — обычно 10-30 КБ. На мобильном интернете это разница между «сайт тормозит» и «сайт летает».</p>
+<p><strong>DevTools и отладка.</strong> В Bootstrap элементы имеют семантичные классы: «btn-primary», «card». Легко искать в DevTools. В Tailwind классы выглядят как «bg-blue-500 text-white px-4» — сначала непривычно, но через неделю мозг перестраивается, и ты читаешь их как обычный CSS.</p>
+<p><strong>JIT-режим Tailwind.</strong> В современном Tailwind (3.0+) компилятор работает on-demand: генерирует только те классы, которые реально встречаются в коде. Это даёт три плюса: маленький бандл, мгновенная сборка, поддержка любых значений через square brackets: <code>text-[14px]</code>, <code>top-[117px]</code>.</p>
+<div class="table-scroll"><table>
+  <thead><tr><th>Параметр</th><th>Bootstrap</th><th>Tailwind</th></tr></thead>
+  <tbody>
+    <tr><td>Размер CSS в проде</td><td>~200 КБ</td><td>10-30 КБ</td></tr>
+    <tr><td>Скорость сборки</td><td>Мгновенно (без сборки)</td><td>Миллисекунды (JIT)</td></tr>
+    <tr><td>Кастомные значения</td><td>Только через свой CSS</td><td>Через square brackets</td></tr>
+    <tr><td>Dark mode</td><td>Через data-theme</td><td>Встроенный dark: класс</td></tr>
+    <tr><td>Tree-shaking</td><td>Не нужен (всё есть)</td><td>Автоматический</td></tr>
+  </tbody>
+</table></div>
+<p><strong>Dark mode.</strong> В Bootstrap надо настраивать через data-theme или переопределять Sass-переменные. В Tailwind встроен dark-вариант: <code>dark:bg-gray-900 dark:text-white</code>. Это настолько просто, что dark mode делается за час на весь проект.</p>
+<p><strong>Изоляция и компоненты.</strong> В Bootstrap стили глобальные — любая кнопка с <code>btn-primary</code> выглядит одинаково. Это плюс для единообразия, но минус для гибкости. В Tailwind стили не «глобальные» в этом смысле — каждый компонент явно описан, и можно сделать десять разных кнопок без конфликтов.</p>
+<p><strong>TypeScript и intellisense.</strong> Tailwind имеет официальный плагин для VS Code: автодополнение классов, превью цветов при наведении. Это ускоряет работу в разы — не надо помнить все классы наизусть. У Bootstrap тоже есть плагины, но из-за готовых компонентов они менее нужны.</p>
+
+<h2 id="section-9">FAQ</h2>
+
+<h3 id="section-10">Tailwind медленнее писать?</h3>
+<p>Сначала — да, потому что привыкаешь к утилитам. Через неделю — нет. Опытные разработчики на Tailwind верстают быстрее, потому что не переключаются между HTML и CSS-файлами, и не придумывают имена классам.</p>
+
+<h3 id="section-11">Bootstrap умер?</h3>
+<p>Нет. На нём работают миллионы сайтов, в том числе новых. Он просто перестал быть «дефолтным выбором» в 2026 году. Большинство новых проектов с кастомным дизайном выбирают Tailwind, но для админок и прототипов Bootstrap всё ещё хорош.</p>
+
+<h3 id="section-12">Что лучше для React?</h3>
+<p>Tailwind + shadcn/ui. Это современный стандарт: ты получаешь поведение из Radix, стилизацию через Tailwind, полный контроль над кодом. На Bootstrap есть react-bootstrap, но он менее популярен.</p>
+
+<h3 id="section-13">Можно ли использовать оба вместе?</h3>
+<p>Технически — да, но это плохая идея. Ты получишь два набора reset-стилей, дублирование классов, путаницу в голове. Выбери один и держи.</p>
+
+<h3 id="section-14">Что выбрать новичку?</h3>
+<p>Bootstrap — если ты вообще не знаешь CSS и хочешь быстро получить результат. Tailwind — если готов учить CSS вместе с фреймворком. В долгосрочной перспективе Tailwind выгоднее, потому что он прокачивает знание CSS.</p>
+
+<h3 id="section-15">Tailwind делает CSS ненужным?</h3>
+<p>Нет. Tailwind — это надстройка над CSS, он генерирует обычный CSS. Знание CSS важно для понимания, что делают классы Tailwind. Также для сложных вещей (анимации, кастомные свойства) ты всё равно будешь писать обычный CSS.</p>
+
+<h2 id="section-16">Краткий вывод</h2>
+<p>Выбор между Bootstrap и Tailwind в 2026 году — это выбор между скоростью старта и гибкостью. Bootstrap быстрее даёт готовый результат, Tailwind даёт контроль над каждой деталью. Если ты делаешь админку или прототип — Bootstrap. Если делаешь кастомный продукт с дизайн-системой — Tailwind. И не забывай, что фреймворк — это инструмент, а не религия.</p>
+<p>Опытный фронтендер в 2026 году знает оба фреймворка: Tailwind — для новых проектов, Bootstrap — для legacy и быстрых прототипов. Это даёт гибкость: ты не завязан на один подход и можешь выбрать правильный инструмент под конкретную задачу. Учись чувствовать, когда какой подходит — и будешь ценным специалистом.</p>
+</article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Философия фреймворков</a><a href="#section-1" class="lvl-2">Сравнение по ключевым параметрам</a><a href="#section-2" class="lvl-2">Как выглядит код: сравнение</a><a href="#section-3" class="lvl-2">Кастомизация и размер бандла</a><a href="#section-4" class="lvl-2">Что быстрее в освоении</a><a href="#section-5" class="lvl-2">Когда выбирать Bootstrap</a><a href="#section-6" class="lvl-2">Когда выбирать Tailwind</a><a href="#section-7" class="lvl-2">Экосистема и инструменты</a><a href="#section-8" class="lvl-2">Performance и Developer Experience</a><a href="#section-9" class="lvl-2">FAQ</a><a href="#section-10" class="lvl-3">Tailwind медленнее писать?</a><a href="#section-11" class="lvl-3">Bootstrap умер?</a><a href="#section-12" class="lvl-3">Что лучше для React?</a><a href="#section-13" class="lvl-3">Можно ли использовать оба вместе?</a><a href="#section-14" class="lvl-3">Что выбрать новичку?</a><a href="#section-15" class="lvl-3">Tailwind делает CSS ненужным?</a><a href="#section-16" class="lvl-2">Краткий вывод</a></aside>
+      </div>
+
+      
+    <aside class="donate-block" aria-label="Поддержать проект">
+      <div class="donate-block__title">Поддержи проект</div>
+      <p class="donate-block__text">Сайт живёт на энтузиазме. Если статья оказалась полезной — поблагодари автора. Любая сумма идёт на хостинг, домен и новые статьи.</p>
+      <div class="donate-block__buttons">
+        <a href="https://boosty.to/itbase" target="_blank" rel="noopener nofollow" class="donate-btn donate-boosty">☕ Boosty</a><a href="https://t.me/itbase_bot" target="_blank" rel="noopener nofollow" class="donate-btn donate-tg">✈️ Telegram</a>
+      </div>
+      <p class="donate-block__hint">Также можно подписаться на <a href="https://t.me/itbase" target="_blank" rel="noopener">Telegram-канал</a> — там анонсы новых статей.</p>
+    </aside>
+    
+
+      <div class="ad-slot ad-slot--ad-bottom" data-slot="ad-bottom"></div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/css-flexbox-vs-grid.html"><img src="/img/css-cover.svg" alt="CSS: Flexbox против Grid — когда что использовать" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Веб</span><span class="tag">CSS</span></div>
+    <a href="/articles/css-flexbox-vs-grid.html"><h2 class="card__title">CSS: Flexbox против Grid — когда что использовать</h2></a>
+    <p class="card__excerpt">Два инструмента для раскладки элементов. Объясняю разницу, показываю примеры и говорю прямо: бери это, а не то.</p>
+    <div class="card__meta">
+      <span>22 февраля 2026</span><span class="dot">•</span><span>8 мин</span>
+      <button class="card__bm" data-slug="css-flexbox-vs-grid" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/websocket-vs-sse-vs-polling.html"><img src="/img/ws-sse-cover.svg" alt="WebSocket vs Server-Sent Events vs Long Polling: что когда использовать" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Веб</span><span class="tag">Сети</span><span class="tag">Разработка</span></div>
+    <a href="/articles/websocket-vs-sse-vs-polling.html"><h2 class="card__title">WebSocket vs Server-Sent Events vs Long Polling: что когда использовать</h2></a>
+    <p class="card__excerpt">Сравнение трёх технологий real-time в вебе: long polling, SSE и WebSocket. Разбираем, что выбрать для чата, уведомлений, ленты и игр. С примерами кода.</p>
+    <div class="card__meta">
+      <span>28 ноября 2026</span><span class="dot">•</span><span>10 мин</span>
+      <button class="card__bm" data-slug="websocket-vs-sse-vs-polling" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/nextjs-15-chto-novogo.html"><img src="/img/nextjs-cover.svg" alt="Next.js 15: что нового, App Router, Server Components" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Веб</span><span class="tag">JavaScript</span></div>
+    <a href="/articles/nextjs-15-chto-novogo.html"><h2 class="card__title">Next.js 15: что нового, App Router, Server Components</h2></a>
+    <p class="card__excerpt">Обзор Next.js 15 простыми словами: чем App Router отличается от Pages, как работают Server Components, зачем Turbopack и где лежат грабли при миграции.</p>
+    <div class="card__meta">
+      <span>20 ноября 2026</span><span class="dot">•</span><span>13 мин</span>
+      <button class="card__bm" data-slug="nextjs-15-chto-novogo" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/support.html">Поддержать ★</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+  
+</body>
+</html>

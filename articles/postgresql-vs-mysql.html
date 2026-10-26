@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PostgreSQL vs MySQL: что выбрать в 2026 — IT·База</title>
+  <meta name="description" content="Сравнение PostgreSQL и MySQL простыми словами: философия, производительность, JSON, индексы и расширения. Поможем выбрать БД под твой проект.">
+  <link rel="canonical" href="https://itbase-ru.github.io/articles/postgresql-vs-mysql.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="IT·База">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="PostgreSQL vs MySQL: что выбрать в 2026">
+  <meta property="og:description" content="Сравнение PostgreSQL и MySQL простыми словами: философия, производительность, JSON, индексы и расширения. Поможем выбрать БД под твой проект.">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og/postgresql-vs-mysql.png">
+  <meta property="og:url" content="https://itbase-ru.github.io/articles/postgresql-vs-mysql.html">
+  <meta property="article:published_time" content="2026-11-25">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PostgreSQL vs MySQL: что выбрать в 2026">
+  <meta name="twitter:description" content="Сравнение PostgreSQL и MySQL простыми словами: философия, производительность, JSON, индексы и расширения. Поможем выбрать БД под твой проект.">
+  <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/postgresql-vs-mysql.png">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "PostgreSQL vs MySQL: что выбрать в 2026", "description": "Сравнение PostgreSQL и MySQL простыми словами: философия, производительность, JSON, индексы и расширения. Поможем выбрать БД под твой проект.", "image": ["https://itbase-ru.github.io/img/og/postgresql-vs-mysql.png"], "datePublished": "2026-11-25", "dateModified": "2026-11-25", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/", "logo": {"@type": "ImageObject", "url": "https://itbase-ru.github.io/favicon.svg"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/postgresql-vs-mysql.html"}, "articleSection": "Базы данных", "keywords": "Базы данных, SQL"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Базы данных", "item": "https://itbase-ru.github.io/?tag=Базы данных"}, {"@type": "ListItem", "position": 3, "name": "PostgreSQL vs MySQL: что выбрать в 2026", "item": "https://itbase-ru.github.io/articles/postgresql-vs-mysql.html"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Что быстрее — MySQL или PostgreSQL?", "acceptedAnswer": {"@type": "Answer", "text": "На простых SELECT и UPDATE MySQL обычно чуть быстрее. На сложных запросах с JOIN и оконными функциями — Postgres. Если тебе важна скорость — измеряй на своих данных, универсального ответа нет."}}, {"@type": "Question", "name": "Что лучше для новичка?", "acceptedAnswer": {"@type": "Answer", "text": "MySQL — чуть проще в установке и эксплуатации. Если ты впервые ставишь базу и не знаешь, с чего начать — начни с MySQL. Postgres чуть требовательнее к настройке, но ничего непреодолимого."}}, {"@type": "Question", "name": "Можно ли хранить JSON в MySQL и Postgres?", "acceptedAnswer": {"@type": "Answer", "text": "Да, в обеих БД есть тип JSON. Но в Postgres есть JSONB с GIN-индексами, что даёт быстрый поиск по полям внутри JSON. В MySQL JSON без индексов — работает, но на больших объёмах тормозит."}}, {"@type": "Question", "name": "Что выбрать для приложения с AI?", "acceptedAnswer": {"@type": "Answer", "text": "PostgreSQL с расширением pgvector — почти стандарт для RAG-приложений. Можно хранить векторные представления и искать по ним быстро, без отдельной векторной базы. У MySQL таких расширений пока нет."}}, {"@type": "Question", "name": "Подходит ли MySQL для аналитики?", "acceptedAnswer": {"@type": "Answer", "text": "Для простой аналитики — да. Для сложной (многомерные таблицы, OLAP) — лучше Postgres или специализированные решения вроде ClickHouse. MySQL оптимизирована под OLTP, а не под OLAP."}}, {"@type": "Question", "name": "Какая БД лучше для Django/Rails?", "acceptedAnswer": {"@type": "Answer", "text": "Обе ORM работают с обеими БД. Django и Rails традиционно тяготеют к Postgres, потому что там используются JSONB, массивы и другие продвинутые фичи. Если сомневаешься — бери Postgres, не прогадаешь."}}]}</script>
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="article-view" class="wrap" data-slug="postgresql-vs-mysql">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a>
+        <span class="sep">/</span>
+        <a href="/?tag=Базы данных">Базы данных</a>
+        <span class="sep">/</span>
+        <span>PostgreSQL vs MySQL: что выбрать в 2026</span>
+      </nav>
+
+      <div class="article-head">
+        <div class="card__tags"><span class="tag">Базы данных</span><span class="tag">SQL</span></div>
+        <h1>PostgreSQL vs MySQL: что выбрать в 2026</h1>
+        <div class="article-head__meta">
+          <time datetime="2026-11-25">25 ноября 2026</time>
+          <span class="dot">•</span>
+          <span>14 мин чтения</span>
+          <button class="btn-bm" id="bmBtn">★ В закладки</button>
+          <div class="share">
+            <span class="share__label">Поделиться:</span>
+            <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
+            <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
+            <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+          </div>
+        </div>
+      </div>
+
+      <figure class="article-cover">
+        <img src="/img/pg-mysql-cover.svg" alt="PostgreSQL vs MySQL: что выбрать в 2026">
+      </figure>
+
+      <div class="ad-slot ad-slot--ad-inline" data-slot="ad-inline"></div>
+
+      <div class="article-layout">
+        <article class="article-body" id="article-body">
+<p>PostgreSQL и MySQL — две самые популярные реляционные базы данных в мире. Вместе они закрывают 80% рынка open-source СУБД. Но выбрать между ними бывает непросто: оба бесплатны, оба зрелые, оба работают в продакшне у гигантов. В этой статье разберём, чем они отличаются и что выбрать в 2026 году под конкретную задачу.</p>
+<p>Если базы данных для тебя вновинку — загляни в <a href="/articles/sql-zaprosy-s-nulya.html">основы SQL</a> и <a href="/articles/sql-vs-nosql.html">SQL vs NoSQL</a>, чтобы понимать контекст. Без воды — только то, что реально влияет на выбор.</p>
+
+<h2 id="section-0">Философия баз данных</h2>
+<p>MySQL создавалась в 1995 году для скорости и простоты. Её девиз — «быстро и достаточно надёжно». С MariaDB (форком) её используют WordPress, Wikipedia, Facebook — огромные проекты, где чтение важнее сложной аналитики. MySQL традиционно быстрее на простых SELECT, но слабее в сложных JOIN и аналитике.</p>
+<p>PostgreSQL создавалась в 1996 в Berkeley как академический проект с фокусом на правильность, соответствие стандартам SQL и расширенность. Её девиз — «правильно и мощно». В Postgres есть вещи, которых нет в MySQL: оконные функции, CTE (WITH), материализованные представления, JSONB с индексами, гео-данные через PostGIS. Postgres любят аналитики и разработчики сложных систем.</p>
+<p>Простое правило: MySQL — для простых CRUD-приложений и сайтов. Postgres — для сложных сущностей, аналитики и нестандартных типов данных.</p>
+
+<h2 id="section-1">Сравнение по ключевым параметрам</h2>
+<p>Давай разложим по полочкам.</p>
+
+<div class="table-scroll"><table>
+  <thead><tr><th>Параметр</th><th>MySQL</th><th>PostgreSQL</th></tr></thead>
+  <tbody>
+    <tr><td>Соответствие SQL-стандарту</td><td>Частичное</td><td>Очень высокое</td></tr>
+    <tr><td>Скорость на простых SELECT</td><td>Быстрее</td><td>Чуть медленнее</td></tr>
+    <tr><td>Сложные запросы и JOIN</td><td>Базовые</td><td>Очень сильные</td></tr>
+    <tr><td>JSON</td><td>Есть, без индексов</td><td>JSONB с GIN-индексами</td></tr>
+    <tr><td>Транзакции</td><td>InnoDB поддерживает</td><td>Все движки</td></tr>
+    <tr><td>Расширяемость</td><td>Слабая</td><td>Сильная (PostGIS, pgvector)</td></tr>
+    <tr><td>Репликация</td><td>Простая</td><td>Богатая (логическая, физическая)</td></tr>
+    <tr><td>Хранимые процедуры</td><td>Простой язык</td><td>PL/pgSQL, Python, Lua</td></tr>
+    <tr><td>Полный текстовый поиск</td><td>Базовый</td><td>Очень мощный</td></tr>
+    <tr><td>Девиз</td><td>Fast and simple</td><td>Powerful and correct</td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="section-2">JSON и работа с неструктурированными данными</h2>
+<p>В 2026 году почти в каждом проекте есть JSON-данные: настройки, события, гибкие поля. В MySQL есть тип JSON, но работа с ним ограничена: можно извлекать значения, но индексы работают плохо. На больших объёмах начинаются тормоза.</p>
+<p>В Postgres есть тип JSONB — бинарное представление JSON с поддержкой GIN-индексов. Можно создать индекс по конкретному полю внутри JSON и искать очень быстро. Это делает Postgres реальной альтернативой MongoDB для части задач. Сравни: <a href="/articles/sql-vs-nosql.html">SQL vs NoSQL</a>.</p>
+
+<pre><code class="language-sql">-- Postgres: создание таблицы с JSONB
+CREATE TABLE events (
+    id SERIAL PRIMARY KEY,
+    data JSONB
+);
+
+-- Индекс по конкретному полю
+CREATE INDEX idx_events_user
+ON events USING GIN ((data-&gt;'user_id'));
+
+-- Быстрый поиск по JSON
+SELECT * FROM events
+WHERE data-&gt;&gt;'user_id' = '42';</code></pre>
+
+<h2 id="section-3">Производительность и оптимизация</h2>
+<p>На простых запросах (SELECT по primary key) MySQL обычно чуть быстрее — движок оптимизирован под это. На сложных аналитических запросах с JOIN по нескольким таблицам и оконными функциями — Postgres стабильно выигрывает, потому что его planner умнее.</p>
+<p>Индексы в Postgres мощнее: B-tree, Hash, GIN, GiST, BRIN, partial, expression. Можно создать индекс на результат функции или на часть таблицы по условию. Это даёт гибкость, которой у MySQL просто нет.</p>
+<p>Про индексы подробно — в <a href="/articles/indeksy-v-bazah-dannyh.html">отдельной статье про индексы</a>. Если коротко: в Postgres можно проиндексировать почти всё.</p>
+
+<h2 id="section-4">Где использовать MySQL</h2>
+<p>MySQL выбирают, когда: проект простой (CRUD, блог, форум), нужна максимальная простота в эксплуатации, команда привыкла и не хочет переучиваться. Большая часть контентных сайтов на WordPress работает на MySQL — и это нормальная связка.</p>
+<p>Также MySQL часто берут в стартапах на ранней стадии: быстро поднять, быстро написать, не задумываться о тонкостях. Когда проект вырастает — иногда мигрируют на Postgres, иногда остаются.</p>
+
+<h2 id="section-5">Где использовать PostgreSQL</h2>
+<p>Postgres выбирают, когда: данные сложные (связи, иерархии, много типов), важна точность транзакций, есть аналитика, нужны гео-данные (PostGIS), нужен full-text поиск на русском, нужны JSON с индексами. Большинство современных SaaS-сервисов выбирают Postgres именно за гибкость.</p>
+<p>Также Postgres — выбор для AI-приложений. Расширение pgvector позволяет хранить векторные представления (embeddings) прямо в БД и искать по ним быстро. Это стало must-have в RAG-приложениях, и Postgres там часто выигрывает у специализированных векторных баз.</p>
+
+<blockquote>MySQL — это Toyota Corolla: всегда работает, всегда довезёт. Postgres — это комбайн с навесным оборудованием: если умеешь — сделает всё.</blockquote>
+
+<h2 id="section-6">Эксплуатация и сообщество</h2>
+<p>MySQL исторически проще в эксплуатации: установка тривиальная, настройки по умолчанию разумные, панель phpMyAdmin знает каждый. Это делает MySQL популярной в маленьких проектах и на хостингах.</p>
+<p>Postgres требует чуть больше знаний для настройки: vacuum, параметры shared_buffers, work_mem, WAL. Зато когда настроен правильно — работает стабильнее под нагрузкой. Сообщество Postgres очень активное и выпускает мажорные версии каждый год.</p>
+<p>В 2026 году обе БД отлично работают в облаке: Amazon RDS, Google Cloud SQL, Supabase, Neon. Управляемый Postgres стал особенно популярен через Supabase — это «open-source Firebase на Postgres».</p>
+<p>Важный нюанс эксплуатации — мониторинг. И MySQL, и Postgres имеют богатый набор метрик, но их надо настроить: настройки сбора статистики, расширения вроде pg_stat_statements для Postgres или performance_schema для MySQL. Без мониторинга ты узнаешь о проблемах, когда уже поздно. Минимум — следи за CPU, памятью, числом одновременных подключений и временем медленных запросов. Cloud-провайдеры дают это из коробки.</p>
+
+<h2 id="section-7">Миграция между ними</h2>
+<p>Перейти с MySQL на Postgres сложнее, чем кажется. Синтаксис SQL немного отличается, типы данных называются по-разному, автоинкремент устроен иначе. Лучше использовать специализированные инструменты вроде pgLoader — он делает большую часть работы автоматически.</p>
+<p>В обратную сторону — ещё сложнее: ты потеряешь JSONB-индексы, частичные индексы, генерируемые столбцы, оконные функции (частично). Если у тебя сложное приложение на Postgres — миграция на MySQL скорее всего будет болезненной.</p>
+<p>Совет: выбирай БД под задачу с самого начала. Миграция между ними возможна, но не бесплатна. Если сомневаешься — бери Postgres, он «сверху» покрывает почти все сценарии.</p>
+
+<h2 id="section-8">Репликация, бэкапы и надёжность</h2>
+<p>База данных в продакшне — это не один сервер, а система. Важно понимать, как данные дублируются, как делаются бэкапы и что делать, когда главный сервер упал. У MySQL и Postgres подходы похожи, но детали разные.</p>
+<p><strong>Репликация в MySQL</strong> — простая: master-slave (или source-replica в новых версиях). Все пишут в master, slaves тянут binary log и применяют у себя. Это даёт read-реплики для аналитики и отказоустойчивость: master упал — промотируешь slave. Минус — асинхронность, на slave возможна задержка.</p>
+<p><strong>Репликация в PostgreSQL</strong> — богаче. Есть physical replication (как в MySQL) и logical replication (на уровне таблиц и схем). Logical даёт гибкость: можно реплицировать только часть таблиц, разные схемы на master и slave. Это удобно для микросервисов и шеринга данных между командами.</p>
+<p><strong>Бэкапы</strong> — критично. В MySQL чаще всего используют mysqldump для логических бэкапов или Percona XtraBackup для горячих физических. У Postgres аналог — pg_dump и pg_basebackup. И там и там важно тестировать восстановление: бэкап, который не восстанавливается — не бэкап.</p>
+<div class="table-scroll"><table>
+  <thead><tr><th>Параметр</th><th>MySQL</th><th>PostgreSQL</th></tr></thead>
+  <tbody>
+    <tr><td>Типы репликации</td><td>Async, semi-sync</td><td>Async, sync, logical</td></tr>
+    <tr><td>Логические бэкапы</td><td>mysqldump</td><td>pg_dump</td></tr>
+    <tr><td>Физические бэкапы</td><td>XtraBackup</td><td>pg_basebackup</td></tr>
+    <tr><td>Point-in-time recovery</td><td>Через binlog</td><td>Через WAL archive</td></tr>
+    <tr><td>Failover-инструменты</td><td>Orchestrator, MHA</td><td>Patroni, repmgr</td></tr>
+  </tbody>
+</table></div>
+<p><strong>Point-in-time recovery (PITR)</strong> — восстановление на любую секунду в прошлом. В MySQL это делается через binlog, в Postgres через WAL-архив. Это страховка от человеческих ошибок: кто-то случайно удалил таблицу — восстанавливаешь на момент до удаления, не теряя данные с момента бэкапа.</p>
+<p><strong>High Availability (HA)</strong> — автоматический failover. У MySQL популярен Orchestrator и MHA, у Postgres — Patroni и repmgr. Эти инструменты следят за кластером и автоматически промотируют реплику, если master упал. Без HA будет даунтайм при сбое, с HA — обычно незаметно.</p>
+<p>В облаке (RDS, Cloud SQL, Supabase) HA включается одним чекбоксом, но платишь сверху. Для маленьких проектов это часто разумнее, чем поднимать свою инфраструктуру: инженеры cloud-провайдера занимаются бэкапами, репликацией и патчами безопасности. Подробнее про транзакции — в <a href="/articles/tranzakcii-i-acid.html">отдельной статье</a>.</p>
+<p>Главное правило про бэкапы — правило 3-2-1: 3 копии, на 2 разных носителях, 1 копия off-site. Это относится к любой БД, не только к Postgres и MySQL.</p>
+
+<h2 id="section-9">FAQ</h2>
+
+<h3 id="section-10">Что быстрее — MySQL или PostgreSQL?</h3>
+<p>На простых SELECT и UPDATE MySQL обычно чуть быстрее. На сложных запросах с JOIN и оконными функциями — Postgres. Если тебе важна скорость — измеряй на своих данных, универсального ответа нет.</p>
+
+<h3 id="section-11">Что лучше для новичка?</h3>
+<p>MySQL — чуть проще в установке и эксплуатации. Если ты впервые ставишь базу и не знаешь, с чего начать — начни с MySQL. Postgres чуть требовательнее к настройке, но ничего непреодолимого.</p>
+
+<h3 id="section-12">Можно ли хранить JSON в MySQL и Postgres?</h3>
+<p>Да, в обеих БД есть тип JSON. Но в Postgres есть JSONB с GIN-индексами, что даёт быстрый поиск по полям внутри JSON. В MySQL JSON без индексов — работает, но на больших объёмах тормозит.</p>
+
+<h3 id="section-13">Что выбрать для приложения с AI?</h3>
+<p>PostgreSQL с расширением pgvector — почти стандарт для RAG-приложений. Можно хранить векторные представления и искать по ним быстро, без отдельной векторной базы. У MySQL таких расширений пока нет.</p>
+
+<h3 id="section-14">Подходит ли MySQL для аналитики?</h3>
+<p>Для простой аналитики — да. Для сложной (многомерные таблицы, OLAP) — лучше Postgres или специализированные решения вроде ClickHouse. MySQL оптимизирована под OLTP, а не под OLAP.</p>
+
+<h3 id="section-15">Какая БД лучше для Django/Rails?</h3>
+<p>Обе ORM работают с обеими БД. Django и Rails традиционно тяготеют к Postgres, потому что там используются JSONB, массивы и другие продвинутые фичи. Если сомневаешься — бери Postgres, не прогадаешь.</p>
+
+<h2 id="section-16">Краткий вывод</h2>
+<p>Выбор между MySQL и PostgreSQL в 2026 году — это вопрос сложности твоего проекта. Для простого CRUD-сайта или блога — MySQL отлично подходит. Для сложного SaaS с аналитикой, JSON и AI — Postgres. Если сомневаешься — бери Postgres: он покрывает почти все сценарии, в том числе MySQL-style простые. И не бойся: обе базы зрелые, оба варианта нормальные.</p>
+<p>И последнее: не меняй БД на ходу, потому что «Postgres моднее» или «MySQL быстрее». Это серьёзное архитектурное решение, и обратный путь бывает болезненным. Сделай выбор осознанно, изучив требования проекта — и проживёшь с ним счастливо годы.</p>
+</article>
+        <aside class="toc" id="toc"><div class="toc__title">Содержание</div><a href="#section-0" class="lvl-2">Философия баз данных</a><a href="#section-1" class="lvl-2">Сравнение по ключевым параметрам</a><a href="#section-2" class="lvl-2">JSON и работа с неструктурированными данными</a><a href="#section-3" class="lvl-2">Производительность и оптимизация</a><a href="#section-4" class="lvl-2">Где использовать MySQL</a><a href="#section-5" class="lvl-2">Где использовать PostgreSQL</a><a href="#section-6" class="lvl-2">Эксплуатация и сообщество</a><a href="#section-7" class="lvl-2">Миграция между ними</a><a href="#section-8" class="lvl-2">Репликация, бэкапы и надёжность</a><a href="#section-9" class="lvl-2">FAQ</a><a href="#section-10" class="lvl-3">Что быстрее — MySQL или PostgreSQL?</a><a href="#section-11" class="lvl-3">Что лучше для новичка?</a><a href="#section-12" class="lvl-3">Можно ли хранить JSON в MySQL и Postgres?</a><a href="#section-13" class="lvl-3">Что выбрать для приложения с AI?</a><a href="#section-14" class="lvl-3">Подходит ли MySQL для аналитики?</a><a href="#section-15" class="lvl-3">Какая БД лучше для Django/Rails?</a><a href="#section-16" class="lvl-2">Краткий вывод</a></aside>
+      </div>
+
+      
+    <aside class="donate-block" aria-label="Поддержать проект">
+      <div class="donate-block__title">Поддержи проект</div>
+      <p class="donate-block__text">Сайт живёт на энтузиазме. Если статья оказалась полезной — поблагодари автора. Любая сумма идёт на хостинг, домен и новые статьи.</p>
+      <div class="donate-block__buttons">
+        <a href="https://boosty.to/itbase" target="_blank" rel="noopener nofollow" class="donate-btn donate-boosty">☕ Boosty</a><a href="https://t.me/itbase_bot" target="_blank" rel="noopener nofollow" class="donate-btn donate-tg">✈️ Telegram</a>
+      </div>
+      <p class="donate-block__hint">Также можно подписаться на <a href="https://t.me/itbase" target="_blank" rel="noopener">Telegram-канал</a> — там анонсы новых статей.</p>
+    </aside>
+    
+
+      <div class="ad-slot ad-slot--ad-bottom" data-slot="ad-bottom"></div>
+
+      <section class="wrap" style="padding-bottom:70px">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:24px 0 20px">Читай дальше</h2>
+        <div class="grid" id="related">
+<article class="card">
+  <a class="card__cover" href="/articles/tranzakcii-i-acid.html"><img src="/img/tranzakcii.svg" alt="Транзакции в базах данных — ACID простыми словами" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Базы данных</span><span class="tag">SQL</span><span class="tag">Теория</span></div>
+    <a href="/articles/tranzakcii-i-acid.html"><h2 class="card__title">Транзакции в базах данных — ACID простыми словами</h2></a>
+    <p class="card__excerpt">Почему при переводе денег нельзя потерять ни копейки. Разбираем транзакции и четыре их свойства: атомарность, согласованность, изоляцию, надёжность.</p>
+    <div class="card__meta">
+      <span>21 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="tranzakcii-i-acid" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/indeksy-v-bazah-dannyh.html"><img src="/img/indeksy.svg" alt="Индексы в базах данных — зачем и как работают" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Базы данных</span><span class="tag">SQL</span><span class="tag">Разработка</span></div>
+    <a href="/articles/indeksy-v-bazah-dannyh.html"><h2 class="card__title">Индексы в базах данных — зачем и как работают</h2></a>
+    <p class="card__excerpt">Почему один и тот же SQL-запрос может выполняться 10 мс или 10 секунд. Разбираем индексы: B-tree, составные, покрывающие и когда они вредят.</p>
+    <div class="card__meta">
+      <span>9 апреля 2026</span><span class="dot">•</span><span>11 мин</span>
+      <button class="card__bm" data-slug="indeksy-v-bazah-dannyh" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+<article class="card">
+  <a class="card__cover" href="/articles/sql-zaprosy-s-nulya.html"><img src="/img/sql.svg" alt="SQL-запросы с нуля — SELECT, WHERE, JOIN" loading="lazy"></a>
+  <div class="card__body">
+    <div class="card__tags"><span class="tag">Базы данных</span><span class="tag">SQL</span><span class="tag">Разработка</span></div>
+    <a href="/articles/sql-zaprosy-s-nulya.html"><h2 class="card__title">SQL-запросы с нуля — SELECT, WHERE, JOIN</h2></a>
+    <p class="card__excerpt">Разбираем SQL на практике: как выбрать данные, отфильтровать, отсортировать, соединить таблицы. С примерами на реальных задачах интернет-магазина.</p>
+    <div class="card__meta">
+      <span>7 апреля 2026</span><span class="dot">•</span><span>12 мин</span>
+      <button class="card__bm" data-slug="sql-zaprosy-s-nulya" title="В закладки" aria-label="В закладки">★</button>
+    </div>
+  </div>
+</article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/contacts.html">Контакты</a>
+    <a href="/support.html">Поддержать ★</a>
+    <a href="/privacy.html">Политика</a>
+    <a href="/terms.html">Условия</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="/app.js"></script>
+  
+</body>
+</html>
