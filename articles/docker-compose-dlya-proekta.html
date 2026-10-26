@@ -20,6 +20,7 @@
   <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/docker-compose-dlya-proekta.png">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Docker Compose — несколько контейнеров одной командой", "description": "Когда одного Dockerfile мало: как описать приложение, базу и кэш в одном файле и запускать всё одной командой docker compose up.", "image": ["https://itbase-ru.github.io/img/og/docker-compose-dlya-proekta.png"], "datePublished": "2026-04-18", "dateModified": "2026-04-18", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/", "logo": {"@type": "ImageObject", "url": "https://itbase-ru.github.io/favicon.svg"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/docker-compose-dlya-proekta.html"}, "articleSection": "DevOps", "keywords": "DevOps, Инструменты, Разработка"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "DevOps", "item": "https://itbase-ru.github.io/?tag=DevOps"}, {"@type": "ListItem", "position": 3, "name": "Docker Compose — несколько контейнеров одной командой", "item": "https://itbase-ru.github.io/articles/docker-compose-dlya-proekta.html"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "Docker Compose — несколько контейнеров одной командой", "description": "Когда одного Dockerfile мало: как описать приложение, базу и кэш в одном файле и запускать всё одной командой docker compose up.", "image": "https://itbase-ru.github.io/img/og/docker-compose-dlya-proekta.png", "inLanguage": "ru-RU", "totalTime": "PT10M", "step": [{"@type": "HowToStep", "text": "Именованные тома (pgdata:/path) — живут на хосте, переживают перезапуск. Данные базы."}, {"@type": "HowToStep", "text": "Bind mounts (./src:/app/src) — прямая связь с локальной папкой. Изменения в коде сразу видны в контейнере. Для разработки."}, {"@type": "HowToStep", "text": "Хранить пароли прямо в файле. Через .env — правильно."}, {"@type": "HowToStep", "text": "Открывать порт базы наружу. Только если правда надо для отладки."}, {"@type": "HowToStep", "text": "Использовать latest в теге образа. Завтра обновится — сломается. Указывай конкретную версию: postgres:16."}, {"@type": "HowToStep", "text": "Писать все сервисы в один. Если можно разделить — разделяй. Это и есть смысл Compose."}]}</script>
   <script>
     (function(){
       try{
@@ -39,6 +40,9 @@
   <header class="site-header">
     <div class="site-header__inner">
       <a href="/" class="logo">IT<span>·</span>База</a>
+      <a href="/search.html" class="header-search" title="Поиск" aria-label="Поиск по сайту">🔍</a>
+      <button class="font-toggle" id="fontSmaller" title="Уменьшить шрифт" aria-label="Уменьшить шрифт">A−</button>
+      <button class="font-toggle" id="fontLarger" title="Увеличить шрифт" aria-label="Увеличить шрифт">A+</button>
       <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
     </div>
   </header>
@@ -66,6 +70,7 @@
             <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
             <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
             <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+            <button class="share__btn" id="sharePrint" title="Распечатать или сохранить в PDF">Печать</button>
           </div>
         </div>
       </div>
@@ -448,9 +453,10 @@ volumes:
     <a href="/about.html">О сайте</a>
     <a href="/top.html">Лучшее</a>
     <a href="/archive.html">Архив</a>
-    <a href="/sitemap.html">Карта</a>
+    <a href="/glossary.html">Глоссарий</a>
+    <a href="/roadmaps.html">Карьера</a>
+    <a href="/cheatsheets.html">Шпаргалки</a>
     <a href="/support.html">Поддержать ★</a>
-    <a href="/privacy.html">Политика</a>
     <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
   </div>
 </footer>

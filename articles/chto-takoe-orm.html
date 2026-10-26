@@ -20,6 +20,7 @@
   <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/chto-takoe-orm.png">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Что такое ORM — работа с базой через объекты", "description": "Зачем писать SQL, если можно работать с базой как с обычными объектами. Разбираем ORM: как работает, плюсы и минусы, примеры на SQLAlchemy.", "image": ["https://itbase-ru.github.io/img/og/chto-takoe-orm.png"], "datePublished": "2026-04-13", "dateModified": "2026-04-13", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/", "logo": {"@type": "ImageObject", "url": "https://itbase-ru.github.io/favicon.svg"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/chto-takoe-orm.html"}, "articleSection": "Базы данных", "keywords": "Базы данных, Разработка, Python"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Базы данных", "item": "https://itbase-ru.github.io/?tag=Базы данных"}, {"@type": "ListItem", "position": 3, "name": "Что такое ORM — работа с базой через объекты", "item": "https://itbase-ru.github.io/articles/chto-takoe-orm.html"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "Что такое ORM — работа с базой через объекты", "description": "Зачем писать SQL, если можно работать с базой как с обычными объектами. Разбираем ORM: как работает, плюсы и минусы, примеры на SQLAlchemy.", "image": "https://itbase-ru.github.io/img/og/chto-takoe-orm.png", "inLanguage": "ru-RU", "totalTime": "PT10M", "step": [{"@type": "HowToStep", "text": "Меньше кода. Не пишешь SQL руками — просто работаешь с объектами."}, {"@type": "HowToStep", "text": "Защита от инъекций. ORM экранирует значения автоматически."}, {"@type": "HowToStep", "text": "Не зависишь от СУБД. Один и тот же код работает с Postgres, MySQL, SQLite. Меняешь базу — код остаётся."}, {"@type": "HowToStep", "text": "Типы и автодополнение. В редакторе видно поля модели."}, {"@type": "HowToStep", "text": "Миграции. Многие ORM умеют обновлять схему базы автоматически."}, {"@type": "HowToStep", "text": "Сложные запросы — боль. Аналитика с десятком JOIN на ORM превращается в кашу."}, {"@type": "HowToStep", "text": "Проблема N+1. Если наивно пройтись по списку и обратиться к связанным объектам, ORM сделает отдельный запрос на каждого — сотни SQL-запросов вместо двух."}, {"@type": "HowToStep", "text": "Скрытая магия. Не всегда понятно, какой SQL уходит в базу. Приходится включать логи."}, {"@type": "HowToStep", "text": "Производительность. Иногда ORM-запрос в разы медленнее написанного вручную."}, {"@type": "HowToStep", "text": "Порог входа. SQLAlchemy с её сессиями и relationships пугает новичков."}]}</script>
   <script>
     (function(){
       try{
@@ -39,6 +40,9 @@
   <header class="site-header">
     <div class="site-header__inner">
       <a href="/" class="logo">IT<span>·</span>База</a>
+      <a href="/search.html" class="header-search" title="Поиск" aria-label="Поиск по сайту">🔍</a>
+      <button class="font-toggle" id="fontSmaller" title="Уменьшить шрифт" aria-label="Уменьшить шрифт">A−</button>
+      <button class="font-toggle" id="fontLarger" title="Увеличить шрифт" aria-label="Увеличить шрифт">A+</button>
       <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
     </div>
   </header>
@@ -66,6 +70,7 @@
             <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
             <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
             <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+            <button class="share__btn" id="sharePrint" title="Распечатать или сохранить в PDF">Печать</button>
           </div>
         </div>
       </div>
@@ -375,9 +380,10 @@ for order in orders:
     <a href="/about.html">О сайте</a>
     <a href="/top.html">Лучшее</a>
     <a href="/archive.html">Архив</a>
-    <a href="/sitemap.html">Карта</a>
+    <a href="/glossary.html">Глоссарий</a>
+    <a href="/roadmaps.html">Карьера</a>
+    <a href="/cheatsheets.html">Шпаргалки</a>
     <a href="/support.html">Поддержать ★</a>
-    <a href="/privacy.html">Политика</a>
     <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
   </div>
 </footer>

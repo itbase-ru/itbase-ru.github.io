@@ -20,6 +20,7 @@
   <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/zachem-nuzhen-typescript.png">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Зачем нужен TypeScript, если есть JavaScript", "description": "Типы, интерфейсы, компиляция — разбираем, что даёт TypeScript, кому он нужен и почему крупные проекты уходят на него.", "image": ["https://itbase-ru.github.io/img/og/zachem-nuzhen-typescript.png"], "datePublished": "2026-04-11", "dateModified": "2026-04-11", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/", "logo": {"@type": "ImageObject", "url": "https://itbase-ru.github.io/favicon.svg"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/zachem-nuzhen-typescript.html"}, "articleSection": "TypeScript", "keywords": "TypeScript, JavaScript, Разработка"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "TypeScript", "item": "https://itbase-ru.github.io/?tag=TypeScript"}, {"@type": "ListItem", "position": 3, "name": "Зачем нужен TypeScript, если есть JavaScript", "item": "https://itbase-ru.github.io/articles/zachem-nuzhen-typescript.html"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "Зачем нужен TypeScript, если есть JavaScript", "description": "Типы, интерфейсы, компиляция — разбираем, что даёт TypeScript, кому он нужен и почему крупные проекты уходят на него.", "image": "https://itbase-ru.github.io/img/og/zachem-nuzhen-typescript.png", "inLanguage": "ru-RU", "totalTime": "PT10M", "step": [{"@type": "HowToStep", "text": "Автодополнение в редакторе. Пишешь user. — редактор показывает список полей. Работает точно, а не наугад."}, {"@type": "HowToStep", "text": "Рефакторинг без страха. Переименовал поле — редактор покажет все места, где его нужно поправить."}, {"@type": "HowToStep", "text": "Ошибки до продакшена. Опечатки и несоответствия типов ловятся в момент написания кода."}, {"@type": "HowToStep", "text": "Документация из коробки. Интерфейсы — это живая документация, которая не устаревает."}, {"@type": "HowToStep", "text": "Уверенность при командной работе. Ты точно знаешь, что функция принимает и возвращает."}, {"@type": "HowToStep", "text": "Не ускоряет код. Это надстройка для разработки, а не оптимизация."}, {"@type": "HowToStep", "text": "Не защищает от всех ошибок. Типы — не серебряная пуля. Логические ошибки он не поймает."}, {"@type": "HowToStep", "text": "Не работает в браузере напрямую. Только через компиляцию в JS."}, {"@type": "HowToStep", "text": "Фронтенд-разработчикам. Почти все крупные проекты на React, Angular и Vue используют TS."}, {"@type": "HowToStep", "text": "Node.js-разработчикам. NestJS, tRPC и большинство современных фреймворков — на TypeScript."}]}</script>
   <script>
     (function(){
       try{
@@ -39,6 +40,9 @@
   <header class="site-header">
     <div class="site-header__inner">
       <a href="/" class="logo">IT<span>·</span>База</a>
+      <a href="/search.html" class="header-search" title="Поиск" aria-label="Поиск по сайту">🔍</a>
+      <button class="font-toggle" id="fontSmaller" title="Уменьшить шрифт" aria-label="Уменьшить шрифт">A−</button>
+      <button class="font-toggle" id="fontLarger" title="Увеличить шрифт" aria-label="Увеличить шрифт">A+</button>
       <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
     </div>
   </header>
@@ -66,6 +70,7 @@
             <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
             <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
             <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+            <button class="share__btn" id="sharePrint" title="Распечатать или сохранить в PDF">Печать</button>
           </div>
         </div>
       </div>
@@ -396,9 +401,10 @@ npx tsc app.ts</code></pre>
     <a href="/about.html">О сайте</a>
     <a href="/top.html">Лучшее</a>
     <a href="/archive.html">Архив</a>
-    <a href="/sitemap.html">Карта</a>
+    <a href="/glossary.html">Глоссарий</a>
+    <a href="/roadmaps.html">Карьера</a>
+    <a href="/cheatsheets.html">Шпаргалки</a>
     <a href="/support.html">Поддержать ★</a>
-    <a href="/privacy.html">Политика</a>
     <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
   </div>
 </footer>

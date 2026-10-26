@@ -21,6 +21,7 @@
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Rust vs Go: какой язык учить в 2026", "description": "Сравнение Rust и Go простыми словами: философия, управление памятью, параллелизм, где использовать каждый язык. Поможем выбрать под твою задачу и карьеру.", "image": ["https://itbase-ru.github.io/img/og/rust-vs-go-sravnenie.png"], "datePublished": "2026-11-18", "dateModified": "2026-11-18", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/", "logo": {"@type": "ImageObject", "url": "https://itbase-ru.github.io/favicon.svg"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/rust-vs-go-sravnenie.html"}, "articleSection": "Разработка", "keywords": "Разработка, Карьера"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Разработка", "item": "https://itbase-ru.github.io/?tag=Разработка"}, {"@type": "ListItem", "position": 3, "name": "Rust vs Go: какой язык учить в 2026", "item": "https://itbase-ru.github.io/articles/rust-vs-go-sravnenie.html"}]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Что быстрее — Rust или Go?", "acceptedAnswer": {"@type": "Answer", "text": "В чистых benchmark Rust обычно на 20-50% быстрее, потому что нет GC и overhead на runtime. Но разница часто не критична: для большинства задач быстрее тот язык, на котором ты быстрее напишешь. Скорость разработки обычно важнее скорости исполнения."}}, {"@type": "Question", "name": "Какой язык легче выучить?", "acceptedAnswer": {"@type": "Answer", "text": "Go намного легче. Синтаксис помещается в голову, стандартная библиотека богатая, концепций мало. Rust требует понять ownership, lifetimes, traits — это недели активного обучения до первого полезного проекта."}}, {"@type": "Question", "name": "На каком языке больше вакансий?", "acceptedAnswer": {"@type": "Answer", "text": "Go — стандарт в DevOps и backend в больших компаниях. Вакансий много, особенно в финтехе, телекоме и cloud. Rust — вакансий меньше, но они обычно более интересные и выше оплачиваются, особенно в системном программировании и блокчейне."}}, {"@type": "Question", "name": "Можно ли писать веб на Rust?", "acceptedAnswer": {"@type": "Answer", "text": "Да, есть фреймворки — Actix, Axum, Rocket. Они быстрые и надёжные, но написание типичного CRUD-сервиса занимает больше времени, чем на Go или Node.js. Для обычного веба Rust — overkill, но для высоконагруженных API — хороший выбор."}}, {"@type": "Question", "name": "Стоит ли учить оба языка?", "acceptedAnswer": {"@type": "Answer", "text": "Если ты уже знаешь один — изучать второй имеет смысл. Они взаимодополняемы: Go для быстрых прототипов и продакшна, Rust для глубокого понимания систем. Если ты новичок — выбери один и прокачай его до middle-уровня, потом уже расширяй."}}, {"@type": "Question", "name": "Какой язык выбирают в больших компаниях?", "acceptedAnswer": {"@type": "Answer", "text": "Зависит от задачи. Cloudflare, Dropbox, Discord активно юзают Rust для критичных компонентов. Uber, Twitch, большинство финтехов — Go для backend. Google использует оба. Если сомневаешься — посмотри вакансии в твоём регионе и выбирай по рынку."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "Rust vs Go: какой язык учить в 2026", "description": "Сравнение Rust и Go простыми словами: философия, управление памятью, параллелизм, где использовать каждый язык. Поможем выбрать под твою задачу и карьеру.", "image": "https://itbase-ru.github.io/img/og/rust-vs-go-sravnenie.png", "inLanguage": "ru-RU", "totalTime": "PT12M", "step": [{"@type": "HowToStep", "text": "Микросервисы с типичной CRUD-нагрузкой."}, {"@type": "HowToStep", "text": "CLI-утилиты, где важна скорость разработки."}, {"@type": "HowToStep", "text": "Команды из 10+ человек — простота Go делает код читаемым для всех."}, {"@type": "HowToStep", "text": "Сетевые сервисы с большим числом соединений (goroutines)."}, {"@type": "HowToStep", "text": "Системное программирование: ОС, драйверы, kernel-модули."}, {"@type": "HowToStep", "text": "Проекты, где важна realtime-производительность (аудио, видео, игры)."}, {"@type": "HowToStep", "text": "Безопасные библиотеки, которые вызываются из других языков."}, {"@type": "HowToStep", "text": "WebAssembly — Rust де-факто стандарт."}]}</script>
   <script>
     (function(){
       try{
@@ -40,6 +41,9 @@
   <header class="site-header">
     <div class="site-header__inner">
       <a href="/" class="logo">IT<span>·</span>База</a>
+      <a href="/search.html" class="header-search" title="Поиск" aria-label="Поиск по сайту">🔍</a>
+      <button class="font-toggle" id="fontSmaller" title="Уменьшить шрифт" aria-label="Уменьшить шрифт">A−</button>
+      <button class="font-toggle" id="fontLarger" title="Увеличить шрифт" aria-label="Увеличить шрифт">A+</button>
       <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
     </div>
   </header>
@@ -67,6 +71,7 @@
             <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
             <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
             <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+            <button class="share__btn" id="sharePrint" title="Распечатать или сохранить в PDF">Печать</button>
           </div>
         </div>
       </div>
@@ -290,9 +295,10 @@
     <a href="/about.html">О сайте</a>
     <a href="/top.html">Лучшее</a>
     <a href="/archive.html">Архив</a>
-    <a href="/sitemap.html">Карта</a>
+    <a href="/glossary.html">Глоссарий</a>
+    <a href="/roadmaps.html">Карьера</a>
+    <a href="/cheatsheets.html">Шпаргалки</a>
     <a href="/support.html">Поддержать ★</a>
-    <a href="/privacy.html">Политика</a>
     <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
   </div>
 </footer>

@@ -47,6 +47,26 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://itbase-ru.github.io/glossary.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/search.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/roadmaps.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/cheatsheets.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://itbase-ru.github.io/articles/kak-napisat-rezyume-programmista.html</loc>
     <lastmod>2026-12-02</lastmod>
     <changefreq>weekly</changefreq>

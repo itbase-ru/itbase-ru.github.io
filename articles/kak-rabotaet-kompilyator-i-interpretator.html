@@ -20,6 +20,7 @@
   <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/kak-rabotaet-kompilyator-i-interpretator.png">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Как работает компилятор и интерпретатор", "description": "Почему Python медленнее C, а JavaScript работает в браузере, хотя он интерпретируемый. Разбираем компиляцию, интерпретацию и JIT.", "image": ["https://itbase-ru.github.io/img/og/kak-rabotaet-kompilyator-i-interpretator.png"], "datePublished": "2026-04-01", "dateModified": "2026-04-01", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/", "logo": {"@type": "ImageObject", "url": "https://itbase-ru.github.io/favicon.svg"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/kak-rabotaet-kompilyator-i-interpretator.html"}, "articleSection": "Разработка", "keywords": "Разработка, Теория, Инструменты"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Разработка", "item": "https://itbase-ru.github.io/?tag=Разработка"}, {"@type": "ListItem", "position": 3, "name": "Как работает компилятор и интерпретатор", "item": "https://itbase-ru.github.io/articles/kak-rabotaet-kompilyator-i-interpretator.html"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "Как работает компилятор и интерпретатор", "description": "Почему Python медленнее C, а JavaScript работает в браузере, хотя он интерпретируемый. Разбираем компиляцию, интерпретацию и JIT.", "image": "https://itbase-ru.github.io/img/og/kak-rabotaet-kompilyator-i-interpretator.png", "inLanguage": "ru-RU", "totalTime": "PT10M", "step": [{"@type": "HowToStep", "text": "Компилятор: «Прочитаю всё, переведу, потом запустим»."}, {"@type": "HowToStep", "text": "Интерпретатор: «Читаю строку — выполняю, читаю следующую — выполняю»."}, {"@type": "HowToStep", "text": "Препроцессинг — обрабатываются директивы типа #include."}, {"@type": "HowToStep", "text": "Компиляция в объектный файл — код превращается в машинные инструкции."}, {"@type": "HowToStep", "text": "Линковка — несколько объектных файлов собираются в один исполняемый."}, {"@type": "HowToStep", "text": "Запуск — готовая программа исполняется процессором напрямую."}, {"@type": "HowToStep", "text": "Быстрый запуск и выполнение."}, {"@type": "HowToStep", "text": "Ошибки ловятся на этапе компиляции, а не в рантайме."}, {"@type": "HowToStep", "text": "Можно оптимизировать код на уровне процессора."}, {"@type": "HowToStep", "text": "Нужно компилировать под каждую платформу (Windows, Linux, macOS)."}]}</script>
   <script>
     (function(){
       try{
@@ -39,6 +40,9 @@
   <header class="site-header">
     <div class="site-header__inner">
       <a href="/" class="logo">IT<span>·</span>База</a>
+      <a href="/search.html" class="header-search" title="Поиск" aria-label="Поиск по сайту">🔍</a>
+      <button class="font-toggle" id="fontSmaller" title="Уменьшить шрифт" aria-label="Уменьшить шрифт">A−</button>
+      <button class="font-toggle" id="fontLarger" title="Увеличить шрифт" aria-label="Увеличить шрифт">A+</button>
       <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
     </div>
   </header>
@@ -66,6 +70,7 @@
             <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
             <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
             <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+            <button class="share__btn" id="sharePrint" title="Распечатать или сохранить в PDF">Печать</button>
           </div>
         </div>
       </div>
@@ -339,9 +344,10 @@
     <a href="/about.html">О сайте</a>
     <a href="/top.html">Лучшее</a>
     <a href="/archive.html">Архив</a>
-    <a href="/sitemap.html">Карта</a>
+    <a href="/glossary.html">Глоссарий</a>
+    <a href="/roadmaps.html">Карьера</a>
+    <a href="/cheatsheets.html">Шпаргалки</a>
     <a href="/support.html">Поддержать ★</a>
-    <a href="/privacy.html">Политика</a>
     <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
   </div>
 </footer>

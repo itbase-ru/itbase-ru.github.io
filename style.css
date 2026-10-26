@@ -611,3 +611,56 @@ main{flex:1}
 .more-from-topic__meta{
   color:var(--muted);font-size:13px;white-space:nowrap;
 }
+
+/* ==================== Кнопки в шапке ==================== */
+.header-search{
+  color:var(--muted);text-decoration:none;font-size:20px;
+  padding:4px 8px;border-radius:6px;transition:color .15s;
+}
+.header-search:hover{color:var(--accent)}
+.font-toggle{
+  background:var(--card);border:1px solid var(--border);
+  color:var(--muted);font-size:12px;font-weight:700;
+  padding:4px 8px;border-radius:6px;cursor:pointer;
+  transition:color .15s,border-color .15s;
+}
+.font-toggle:hover{color:var(--accent);border-color:var(--accent)}
+
+/* ==================== Печать / PDF ==================== */
+@media print{
+  .site-header,.site-footer,.cookie-banner,#progress,.share,.btn-bm,
+  .toc,.ad-slot,.donate-block,.card__bm,.header-search,.font-toggle,
+  .theme-toggle,#related{
+    display:none !important;
+  }
+  body{background:#fff;color:#000}
+  .article-body{font-size:12pt;line-height:1.5;max-width:100%}
+  .article-cover img{max-width:100%;height:auto}
+  a{color:#000;text-decoration:none}
+  a[href]:after{content:" (" attr(href) ")";font-size:10pt;color:#666}
+  h1,h2,h3{page-break-after:avoid}
+  pre,blockquote,table{page-break-inside:avoid}
+  pre{white-space:pre-wrap;word-wrap:break-word;background:#f5f5f5;padding:10px;border:1px solid #ddd}
+  pre code{color:#000}
+  .crumbs{font-size:10pt;color:#666}
+  .wrap{max-width:100%;padding:0;margin:0}
+  main{padding:20px 0}
+}
+
+/* ==================== Уведомление о сохранённой позиции чтения ==================== */
+.read-progress-notice{
+  position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+  background:var(--card);border:1px solid var(--accent);
+  padding:12px 18px;border-radius:10px;
+  color:var(--text);font-size:14px;
+  box-shadow:0 4px 16px rgba(0,0,0,.25);
+  z-index:1000;display:none;align-items:center;gap:10px;
+  max-width:90vw;
+}
+.read-progress-notice.is-visible{display:flex;animation:slideUp .3s ease-out}
+@keyframes slideUp{from{opacity:0;transform:translate(-50%,20px)}to{opacity:1;transform:translate(-50%,0)}}
+.read-progress-notice a{color:var(--accent);text-decoration:none;font-weight:600}
+.read-progress-notice button{
+  background:transparent;border:none;color:var(--muted);
+  cursor:pointer;font-size:18px;padding:0 0 0 8px;
+}

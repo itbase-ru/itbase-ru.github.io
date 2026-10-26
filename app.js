@@ -489,3 +489,142 @@ function init404(){
     setTimeout(() => banner.remove(), 350);
   });
 })();
+
+/* ==========================================================
+   РАЗМЕР ШРИФТА (доступность)
+   ========================================================== */
+(function initFontSize() {
+  const KEY = 'itbase_font_scale';
+  let scale = 1;
+  try { scale = parseFloat(localStorage.getItem(KEY)) || 1; } catch (e) {}
+  // Ограничения: 0.85 (меньше) — 1.4 (больше)
+  scale = Math.max(0.85, Math.min(1.4, scale));
+  document.documentElement.style.setProperty('--font-scale', scale);
+  // Применяем масштаб к body через CSS-переменную
+  function applyScale() {
+    // Увеличиваем базовый шрифт article-body, заголовков, etc.
+    document.documentElement.style.fontSize = (16 * scale) + 'px';
+  }
+  applyScale();
+
+  const smaller = document.getElementById('fontSmaller');
+  const larger = document.getElementById('fontLarger');
+  if (smaller) smaller.addEventListener('click', () => {
+    scale = Math.max(0.85, scale - 0.1);
+    try { localStorage.setItem(KEY, scale.toFixed(2)); } catch (e) {}
+    applyScale();
+  });
+  if (larger) larger.addEventListener('click', () => {
+    scale = Math.min(1.4, scale + 0.1);
+    try { localStorage.setItem(KEY, scale.toFixed(2)); } catch (e) {}
+    applyScale();
+  });
+})();
+
+/* ==========================================================
+   КНОПКА ПЕЧАТЬ / PDF
+   ========================================================== */
+(function initPrintButton() {
+  const btn = document.getElementById('sharePrint');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    // Удаляем ad-слоты перед печатью
+    document.querySelectorAll('.ad-slot').forEach(el => el.style.display = 'none');
+    setTimeout(() => window.print(), 100);
+  });
+})();
+
+/* ==========================================================
+   ЗАПОМИНАНИЕ ПОЗИЦИИ ЧТЕНИЯ
+   ========================================================== */
+(function initReadingProgress() {
+  const articleView = document.getElementById('article-view');
+  if (!articleView) return;
+  // Получаем slug из data-slug или из URL
+  const slug = articleView.dataset.slug ||
+               new URLSearchParams(location.search).get('a') ||
+               (location.pathname.match(/\/articles\/([^.]+)\.html/) || [])[1];
+  if (!slug) return;
+
+  const KEY = 'itbase_read_pos_' + slug;
+  const NOTICE_KEY = 'itbase_read_notice_' + slug;
+
+  // Восстанавливаем позицию
+  let savedPos = 0;
+  try { savedPos = parseInt(localStorage.getItem(KEY) || '0', 10); } catch (e) {}
+  if (savedPos > 500) {
+    // Показываем уведомление, продолжить ли
+    let noticeDismissed = false;
+    try { noticeDismissed = localStorage.getItem(NOTICE_KEY) === '1'; } catch (e) {}
+    if (!noticeDismissed) {
+      const notice = document.createElement('div');
+      notice.className = 'read-progress-notice is-visible';
+      notice.innerHTML = `
+        <span>Ты остановился на ${Math.round(savedPos / window.innerHeight * 100)}% статьи.</span>
+        <a href="#" id="resumeReading">Продолжить →</a>
+        <button id="dismissNotice" aria-label="Закрыть">×</button>
+      `;
+      document.body.appendChild(notice);
+
+      const resume = notice.querySelector('#resumeReading');
+      const dismiss = notice.querySelector('#dismissNotice');
+
+      resume.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: savedPos, behavior: 'smooth' });
+        notice.remove();
+      });
+
+      dismiss.addEventListener('click', () => {
+        notice.remove();
+        try { localStorage.setItem(NOTICE_KEY, '1'); } catch (e) {}
+      });
+
+      // Автоскрытие через 15 секунд
+      setTimeout(() => {
+        if (notice.parentNode) {
+          notice.classList.remove('is-visible');
+          setTimeout(() => notice.remove(), 300);
+        }
+      }, 15000);
+    }
+  }
+
+  // Сохранение при скролле (debounced)
+  let ticking = false;
+  let lastSave = 0;
+  function savePos() {
+    const y = window.scrollY;
+    // Сохраняем только если прокрутил значительно
+    if (y > 500) {
+      try { localStorage.setItem(KEY, String(y)); } catch (e) {}
+    }
+    ticking = false;
+  }
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      ticking = true;
+      // Не чаще раза в 3 секунды
+      const now = Date.now();
+      if (now - lastSave > 3000) {
+        lastSave = now;
+        requestAnimationFrame(savePos);
+      } else {
+        ticking = false;
+      }
+    }
+  }, { passive: true });
+  // Финальное сохранение при уходе со страницы
+  window.addEventListener('beforeunload', savePos);
+})();
+
+/* ==========================================================
+   SERVICE WORKER (PWA офлайн)
+   ========================================================== */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {
+      // Тихо: SW — приятный бонус, не должен ломать сайт
+    });
+  });
+}

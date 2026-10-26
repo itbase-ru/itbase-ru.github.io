@@ -20,6 +20,7 @@
   <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/kak-rabotaet-websocket.png">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Как работает WebSocket — real-time связь между браузером и сервером", "description": "Почему обычный HTTP плохо подходит для чатов, игр и бирж. Разбираем WebSocket: handshake, кадры, когда нужен и какие есть альтернативы.", "image": ["https://itbase-ru.github.io/img/og/kak-rabotaet-websocket.png"], "datePublished": "2026-04-14", "dateModified": "2026-04-14", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/", "logo": {"@type": "ImageObject", "url": "https://itbase-ru.github.io/favicon.svg"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/kak-rabotaet-websocket.html"}, "articleSection": "Веб", "keywords": "Веб, Сети, Разработка"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Веб", "item": "https://itbase-ru.github.io/?tag=Веб"}, {"@type": "ListItem", "position": 3, "name": "Как работает WebSocket — real-time связь между браузером и сервером", "item": "https://itbase-ru.github.io/articles/kak-rabotaet-websocket.html"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "Как работает WebSocket — real-time связь между браузером и сервером", "description": "Почему обычный HTTP плохо подходит для чатов, игр и бирж. Разбираем WebSocket: handshake, кадры, когда нужен и какие есть альтернативы.", "image": "https://itbase-ru.github.io/img/og/kak-rabotaet-websocket.png", "inLanguage": "ru-RU", "totalTime": "PT10M", "step": [{"@type": "HowToStep", "text": "Клиент отправляет HTTP-запрос со специальным заголовком Upgrade: websocket."}, {"@type": "HowToStep", "text": "Сервер отвечает кодом 101 Switching Protocols — «согласен, переключаемся»."}, {"@type": "HowToStep", "text": "Дальше то же TCP-соединение используется для общения по правилам WebSocket."}, {"@type": "HowToStep", "text": "Чаты и мессенджеры. Мгновенная доставка сообщений."}, {"@type": "HowToStep", "text": "Онлайн-игры. Позиции игроков обновляются десятки раз в секунду."}, {"@type": "HowToStep", "text": "Биржевые терминалы. Курсы акций в реальном времени."}, {"@type": "HowToStep", "text": "Совместное редактирование. Google Docs, Figma — все изменения сразу видны."}, {"@type": "HowToStep", "text": "Уведомления. Push-сообщения без перезагрузки страницы."}, {"@type": "HowToStep", "text": "Стриминг данных. Логи, метрики, телеметрия."}, {"@type": "HowToStep", "text": "Socket.IO. Библиотека поверх WebSocket с автоматическим fallback на long polling, если WebSocket не работает. Удобна, но добавляет вес."}]}</script>
   <script>
     (function(){
       try{
@@ -39,6 +40,9 @@
   <header class="site-header">
     <div class="site-header__inner">
       <a href="/" class="logo">IT<span>·</span>База</a>
+      <a href="/search.html" class="header-search" title="Поиск" aria-label="Поиск по сайту">🔍</a>
+      <button class="font-toggle" id="fontSmaller" title="Уменьшить шрифт" aria-label="Уменьшить шрифт">A−</button>
+      <button class="font-toggle" id="fontLarger" title="Увеличить шрифт" aria-label="Увеличить шрифт">A+</button>
       <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
     </div>
   </header>
@@ -66,6 +70,7 @@
             <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
             <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
             <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+            <button class="share__btn" id="sharePrint" title="Распечатать или сохранить в PDF">Печать</button>
           </div>
         </div>
       </div>
@@ -395,9 +400,10 @@ setInterval(function() {
     <a href="/about.html">О сайте</a>
     <a href="/top.html">Лучшее</a>
     <a href="/archive.html">Архив</a>
-    <a href="/sitemap.html">Карта</a>
+    <a href="/glossary.html">Глоссарий</a>
+    <a href="/roadmaps.html">Карьера</a>
+    <a href="/cheatsheets.html">Шпаргалки</a>
     <a href="/support.html">Поддержать ★</a>
-    <a href="/privacy.html">Политика</a>
     <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
   </div>
 </footer>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Поиск по статьям — IT·База</title>
+  <meta name="description" content="Поиск по всем статьям IT·База: 67 материалов про программирование, ИИ, DevOps, базы данных.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://itbase-ru.github.io/search.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Поиск по статьям — IT·База">
+  <meta property="og:description" content="Найди нужную статью на IT·База.">
+  <meta property="og:url" content="https://itbase-ru.github.io/search.html">
+  <meta property="og:image" content="https://itbase-ru.github.io/img/og-default.png">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "IT·База", "url": "https://itbase-ru.github.io/", "description": "Понятные статьи про ИИ, программирование и IT", "inLanguage": "ru-RU", "potentialAction": {"@type": "SearchAction", "target": {"@type": "EntryPoint", "urlTemplate": "https://itbase-ru.github.io/search.html?q={search_term_string}"}, "query-input": "required name=search_term_string"}}</script>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="/manifest.json">
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('itbase_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      }catch(e){}
+    })();
+  </script>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .search-wrap{max-width:920px;margin:0 auto;padding:30px 20px 80px;}
+    .search-input-wrap{position:relative;margin-bottom:30px;}
+    .search-input{
+      width:100%;padding:18px 24px 18px 56px;
+      font-size:18px;
+      border:2px solid var(--border);border-radius:12px;
+      background:var(--card);color:var(--text);
+      transition:border-color .15s;
+    }
+    .search-input:focus{outline:none;border-color:var(--accent);}
+    .search-icon{position:absolute;left:20px;top:50%;transform:translateY(-50%);font-size:22px;color:var(--muted);pointer-events:none;}
+    .search-results{display:grid;gap:18px;}
+    .search-empty{text-align:center;padding:60px 20px;color:var(--muted);}
+    .search-meta{color:var(--muted);font-size:14px;margin-bottom:20px;}
+  </style>
+</head>
+<body>
+  <div id="progress"></div>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">IT<span>·</span>База</a>
+      <a href="/search.html" class="header-search" title="Поиск" aria-label="Поиск по сайту">🔍</a>
+      <button class="font-toggle" id="fontSmaller" title="Уменьшить шрифт" aria-label="Уменьшить шрифт">A−</button>
+      <button class="font-toggle" id="fontLarger" title="Увеличить шрифт" aria-label="Увеличить шрифт">A+</button>
+      <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
+    </div>
+  </header>
+  <main>
+    <section class="hero wrap">
+      <h1>Поиск по статьям</h1>
+      <p>Найди нужное среди 67 статей IT·База.</p>
+    </section>
+    <div class="search-wrap">
+      <div class="search-input-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="search" id="searchInput" class="search-input"
+               placeholder="Например: Docker, Python, регулярки, как работает HTTPS…"
+               aria-label="Поиск по статьям"
+               autofocus>
+      </div>
+      <div class="search-meta" id="searchMeta"></div>
+      <div class="search-results" id="searchResults"></div>
+    </div>
+  </main>
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© <span id="year">2026</span> IT·База</span>
+    <a href="/about.html">О сайте</a>
+    <a href="/top.html">Лучшее</a>
+    <a href="/archive.html">Архив</a>
+    <a href="/glossary.html">Глоссарий</a>
+    <a href="/roadmaps.html">Карьера</a>
+    <a href="/cheatsheets.html">Шпаргалки</a>
+    <a href="/support.html">Поддержать ★</a>
+    <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
+  </div>
+</footer>
+  <script src="/data/index.js"></script>
+  <script src="/app.js"></script>
+  <script>
+    (function(){
+      const input = document.getElementById('searchInput');
+      const results = document.getElementById('searchResults');
+      const meta = document.getElementById('searchMeta');
+      if (!input || !results || !window.ARTICLES) return;
+
+      function search(q){
+        q = q.trim().toLowerCase();
+        if (!q){
+          results.innerHTML = '';
+          meta.textContent = '';
+          return;
+        }
+        const scored = window.ARTICLES.map(a => {
+          const hay = (a.title + ' ' + a.excerpt + ' ' + a.tags.join(' ')).toLowerCase();
+          let score = 0;
+          if (a.title.toLowerCase().includes(q)) score += 5;
+          if (a.excerpt.toLowerCase().includes(q)) score += 2;
+          if (a.tags.some(t => t.toLowerCase().includes(q))) score += 3;
+          if (hay.includes(q)) score += 1;
+          return {a, score};
+        }).filter(x => x.score > 0).sort((a,b) => b.score - a.score);
+
+        meta.textContent = 'Найдено: ' + scored.length;
+        if (scored.length === 0){
+          results.innerHTML = '<div class="search-empty"><b>Ничего не найдено</b><p>Попробуй другие слова или посмотри <a href="/sitemap.html" style="color:var(--accent)">карту сайта</a>.</p></div>';
+          return;
+        }
+        results.innerHTML = scored.map(x => {
+          const a = x.a;
+          const url = '/' + a.url;
+          const tags = a.tags.map(t => '<span class="tag">' + t + '</span>').join('');
+          return '<article class="card"><a class="card__cover" href="' + url + '"><img src="/' + a.cover + '" alt="' + a.title + '" loading="lazy"></a><div class="card__body"><div class="card__tags">' + tags + '</div><a href="' + url + '"><h2 class="card__title">' + a.title + '</h2></a><p class="card__excerpt">' + a.excerpt + '</p><div class="card__meta"><span>' + a.date + '</span><span class="dot">·</span><span>' + a.readTime + ' мин</span></div></div></article>';
+        }).join('');
+      }
+
+      // Из URL ?q=...
+      const url = new URL(location.href);
+      const initial = url.searchParams.get('q') || '';
+      if (initial){
+        input.value = initial;
+        search(initial);
+      }
+      input.addEventListener('input', e => search(e.target.value));
+    })();
+  </script>
+  
+</body>
+</html>

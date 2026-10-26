@@ -20,6 +20,7 @@
   <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/paginaciya-i-versirovanie-api.png">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Пагинация и версионирование API — как не сломать клиентов", "description": "Как отдавать тысячи записей постранично и что делать, когда API меняется. Разбираем offset/limit, cursor-пагинацию и версионирование.", "image": ["https://itbase-ru.github.io/img/og/paginaciya-i-versirovanie-api.png"], "datePublished": "2026-04-27", "dateModified": "2026-04-27", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/", "logo": {"@type": "ImageObject", "url": "https://itbase-ru.github.io/favicon.svg"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/paginaciya-i-versirovanie-api.html"}, "articleSection": "API", "keywords": "API, Веб, Разработка"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "API", "item": "https://itbase-ru.github.io/?tag=API"}, {"@type": "ListItem", "position": 3, "name": "Пагинация и версионирование API — как не сломать клиентов", "item": "https://itbase-ru.github.io/articles/paginaciya-i-versirovanie-api.html"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "Пагинация и версионирование API — как не сломать клиентов", "description": "Как отдавать тысячи записей постранично и что делать, когда API меняется. Разбираем offset/limit, cursor-пагинацию и версионирование.", "image": "https://itbase-ru.github.io/img/og/paginaciya-i-versirovanie-api.png", "inLanguage": "ru-RU", "totalTime": "PT11M", "step": [{"@type": "HowToStep", "text": "Большой объём. Клиент получит мегабайты данных вместо нужных десяти."}, {"@type": "HowToStep", "text": "Медленный запрос. База выполняет тяжёлый SELECT, сервер рендерит огромный JSON."}, {"@type": "HowToStep", "text": "Плохой UX. Никто не читает все 10 000 записей сразу — пользователю нужна первая страница."}, {"@type": "HowToStep", "text": "Быстро. База сразу идёт по индексу к нужному месту — не считает пропущенные."}, {"@type": "HowToStep", "text": "Стабильно. Новые записи не сдвигают старые. Ничего не пропустишь и не увидишь дважды."}, {"@type": "HowToStep", "text": "Нельзя прыгнуть на страницу 42. Только листать вперёд."}, {"@type": "HowToStep", "text": "Нельзя отсортировать как угодно. Курсор привязан к конкретной сортировке."}, {"@type": "HowToStep", "text": "Просто и понятно. Видно сразу в браузере."}, {"@type": "HowToStep", "text": "Легко тестировать — меняешь v1 на v2 в URL."}, {"@type": "HowToStep", "text": "Легко кэшировать — URL разные."}]}</script>
   <script>
     (function(){
       try{
@@ -39,6 +40,9 @@
   <header class="site-header">
     <div class="site-header__inner">
       <a href="/" class="logo">IT<span>·</span>База</a>
+      <a href="/search.html" class="header-search" title="Поиск" aria-label="Поиск по сайту">🔍</a>
+      <button class="font-toggle" id="fontSmaller" title="Уменьшить шрифт" aria-label="Уменьшить шрифт">A−</button>
+      <button class="font-toggle" id="fontLarger" title="Увеличить шрифт" aria-label="Увеличить шрифт">A+</button>
       <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
     </div>
   </header>
@@ -66,6 +70,7 @@
             <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
             <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
             <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+            <button class="share__btn" id="sharePrint" title="Распечатать или сохранить в PDF">Печать</button>
           </div>
         </div>
       </div>
@@ -444,9 +449,10 @@ def articles(version: str):
     <a href="/about.html">О сайте</a>
     <a href="/top.html">Лучшее</a>
     <a href="/archive.html">Архив</a>
-    <a href="/sitemap.html">Карта</a>
+    <a href="/glossary.html">Глоссарий</a>
+    <a href="/roadmaps.html">Карьера</a>
+    <a href="/cheatsheets.html">Шпаргалки</a>
     <a href="/support.html">Поддержать ★</a>
-    <a href="/privacy.html">Политика</a>
     <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
   </div>
 </footer>

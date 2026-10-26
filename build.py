@@ -61,6 +61,9 @@ ICONS = """<link rel="icon" href="/favicon.ico" sizes="any">
 HEADER = """<header class="site-header">
     <div class="site-header__inner">
       <a href="/" class="logo">IT<span>·</span>База</a>
+      <a href="/search.html" class="header-search" title="Поиск" aria-label="Поиск по сайту">🔍</a>
+      <button class="font-toggle" id="fontSmaller" title="Уменьшить шрифт" aria-label="Уменьшить шрифт">A−</button>
+      <button class="font-toggle" id="fontLarger" title="Увеличить шрифт" aria-label="Увеличить шрифт">A+</button>
       <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
     </div>
   </header>"""
@@ -71,9 +74,10 @@ FOOTER = f"""<footer class="site-footer">
     <a href="/about.html">О сайте</a>
     <a href="/top.html">Лучшее</a>
     <a href="/archive.html">Архив</a>
-    <a href="/sitemap.html">Карта</a>
+    <a href="/glossary.html">Глоссарий</a>
+    <a href="/roadmaps.html">Карьера</a>
+    <a href="/cheatsheets.html">Шпаргалки</a>
     <a href="/support.html">Поддержать ★</a>
-    <a href="/privacy.html">Политика</a>
     <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
   </div>
 </footer>"""
@@ -491,6 +495,28 @@ def build_article_page(a, arts):
     if faq:
         ld.append(faq)
 
+    # HowTo JSON-LD — если статья имеет тег «Инструменты» или «Туториал»
+    # и содержит нумерованные списки <ol> с шагами
+    howto_tags = {"Инструменты", "Туториал", "Разработка"}
+    if any(t in howto_tags for t in a["tags"]):
+        steps = re.findall(r"<li[^>]*>(.*?)</li>", a["content"], re.S)[:10]
+        if len(steps) >= 3:
+            howto = {
+                "@context": "https://schema.org",
+                "@type": "HowTo",
+                "name": a["title"],
+                "description": a["excerpt"],
+                "image": img,
+                "inLanguage": "ru-RU",
+                "totalTime": f"PT{a['readTime']}M",
+                "step": [
+                    {"@type": "HowToStep",
+                     "text": strip_tags(s).strip()[:300]}
+                    for s in steps if strip_tags(s).strip()
+                ]
+            }
+            ld.append(howto)
+
     # Склеиваем все LD в один тег
     ld_inline = "\n".join(
         f'<script type="application/ld+json">{ld_json(item)}</script>'
@@ -566,6 +592,7 @@ def build_article_page(a, arts):
             <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
             <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
             <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+            <button class="share__btn" id="sharePrint" title="Распечатать или сохранить в PDF">Печать</button>
           </div>
         </div>
       </div>
@@ -642,6 +669,10 @@ def write_sitemap(arts):
         ("sitemap.html", "weekly", "0.7"),
         ("archive.html", "weekly", "0.7"),
         ("top.html", "weekly", "0.8"),
+        ("glossary.html", "weekly", "0.8"),
+        ("search.html", "monthly", "0.5"),
+        ("roadmaps.html", "monthly", "0.7"),
+        ("cheatsheets.html", "weekly", "0.7"),
     ]
     for page, freq, prio in static_pages:
         urls.append((f"{SITE}/{page}", None, freq, prio))
@@ -1463,6 +1494,606 @@ def write_tag_rss(arts):
         (rss_dir / f"{slug}.xml").write_text(xml, encoding="utf-8")
 
 
+# ----------------------------- ГЛОССАРИЙ ТЕРМИНОВ ---------------------------
+GLOSSARY_STOPWORDS = {
+    # Служебные и не-термины
+    "и", "или", "но", "что", "это", "так", "как", "для", "при", "над",
+    "под", "из", "от", "до", "по", "в", "на", "с", "у", "о", "к",
+    "же", "ли", "бы", "то", "не", "ни", "да", "или", "тоже",
+    "если", "когда", "где", "куда", "откуда", "почему", "зачем",
+    "их", "его", "её", "ею", "ими", "вас", "нас", "них", "тебя", "меня",
+    "ты", "вы", "мы", "он", "она", "оно", "они",
+    "год", "года", "лет", "день", "дня", "минут", "минуты", "раз",
+    "раза", "первый", "второй", "третий", "последний",
+    "новый", "новая", "новые", "старый", "большой", "маленький",
+    "хороший", "плохой", "простой", "сложный",
+    "чтобы", "после", "перед", "сейчас", "тогда", "тоже", "также",
+    "ещё", "уже", "всё", "это", "этот", "эта", "эти", "такой", "такая",
+    "такие", "который", "которая", "которые",
+    "можно", "нужно", "надо", "должен", "должны",
+    "может", "могут", "будет", "будут", "был", "была", "были",
+    "каждый", "каждая", "каждое", "каждые",
+    "один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять",
+    "десять", "сто", "тысяча", "тысячи", "миллион", "миллиона",
+    # Технические не-термины
+    "статья", "статьи", "статью", "пример", "примеры", "примере",
+    "случай", "случаи", "случае", "случаях",
+    "штука", "штуки", "штук",
+    "контент", "контента", "сайт", "сайта", "сайты",
+    "автор", "автора", "читатель", "читателя",
+    "картинка", "картинки", "картинку", "таблица", "таблицы",
+    "программа", "программы", "программу", "программ",
+    "пример", "примеры",
+    # Короткие слова
+    "ее", "ёё", "ая", "ое", "ые", "ий", "ый", "ая", "ое",
+}
+
+
+def extract_glossary_terms(arts):
+    """Извлекает термины из статей: H2/H3 заголовки + ключевые слова.
+    Возвращает dict: term → [{article, url, definition}]"""
+    glossary = {}
+
+    # Регулярки для заголовков
+    H_RE = re.compile(r"<h[23][^>]*>(.*?)</h[23]>", re.I | re.S)
+
+    for a in arts:
+        url = f"/{a['url']}"
+
+        # 1. Из H2/H3 заголовков
+        for m in H_RE.finditer(a["content"]):
+            term = strip_tags(m.group(1)).strip()
+            # Убираем знаки препинания в конце
+            term = re.sub(r'[\.\,\?\!\:\;\-\—\(\)\[\]]+$', '', term).strip()
+            term = re.sub(r'^[\-\—\(\)\[\]]+', '', term).strip()
+            if not term or len(term) < 4 or len(term) > 80:
+                continue
+            # Берем только первый «смысловой токен» (до тире/двоеточия)
+            first_token = re.split(r'[\—\-–:]', term)[0].strip()
+            if first_token and len(first_token) >= 4:
+                term = first_token
+            # Пропускаем стоп-слова
+            words = term.split()
+            if len(words) == 1 and words[0].lower() in GLOSSARY_STOPWORDS:
+                continue
+            # Если все слова — стоп-слова, пропускаем
+            if all(w.lower() in GLOSSARY_STOPWORDS for w in words):
+                continue
+            # Пропускаем те, что начинаются с цифры
+            if term[0].isdigit():
+                continue
+
+            glossary.setdefault(term, []).append({
+                "article": a["title"],
+                "url": url,
+                "excerpt": a["excerpt"],
+            })
+
+        # 2. Из тегов
+        for tag in a["tags"]:
+            if len(tag) >= 3:
+                glossary.setdefault(tag, []).append({
+                    "article": a["title"],
+                    "url": url,
+                    "excerpt": a["excerpt"],
+                    "is_tag": True,
+                })
+
+    return glossary
+
+
+def write_glossary(arts):
+    """/glossary.html — алфавитный глоссарий IT-терминов из всех статей."""
+    glossary = extract_glossary_terms(arts)
+
+    # Уникальные термины (без дубликатов по разному регистру)
+    # Ключ — lowercase, значение — первый встретившийся
+    seen = {}
+    for term, refs in glossary.items():
+        key = term.lower()
+        if key not in seen:
+            seen[key] = (term, refs)
+    glossary = seen
+
+    # Группировка по первой букве
+    by_letter = {}
+    for term, (display_term, refs) in glossary.items():
+        # Для сортировки — транслитерируем для русских + латиница
+        first = display_term[0].upper()
+        by_letter.setdefault(first, []).append((display_term, refs))
+
+    # Сортировка букв
+    sorted_letters = sorted(by_letter.keys(),
+                            key=lambda x: (not x.isascii(), x))
+
+    # Алфавитный навигатор
+    letters_html = " ".join(
+        f'<a href="#letter-{esc(L)}" class="chip">{esc(L)}</a>'
+        for L in sorted_letters
+    )
+
+    # Группы по буквам
+    sections = []
+    for L in sorted_letters:
+        items = sorted(by_letter[L], key=lambda x: x[0].lower())
+        items_html = []
+        for term, refs in items:
+            # Уникальные статьи для этого термина (макс 5)
+            unique_urls = {}
+            for ref in refs:
+                if ref["url"] not in unique_urls:
+                    unique_urls[ref["url"]] = ref
+            unique_refs = list(unique_urls.values())[:5]
+
+            articles_links = ", ".join(
+                f'<a href="{esc(r["url"])}">{esc(r["article"])}</a>'
+                for r in unique_refs
+            )
+            items_html.append(
+                f'    <li class="glossary-item">\n'
+                f'      <span class="glossary-term">{esc(term)}</span>\n'
+                f'      <span class="glossary-refs">→ {articles_links}</span>\n'
+                f'    </li>'
+            )
+        items_str = "\n".join(items_html)
+        sections.append(
+            f'    <section class="glossary-letter" id="letter-{esc(L)}">\n'
+            f'      <h2>{esc(L)} <span class="sitemap-count">({len(items)})</span></h2>\n'
+            f'      <ul class="glossary-list">\n{items_str}\n      </ul>\n'
+            f'    </section>'
+        )
+    sections_str = "\n\n".join(sections)
+
+    # JSON-LD: DefinedTermSet
+    ld = {
+        "@context": "https://schema.org",
+        "@type": "DefinedTermSet",
+        "name": f"Глоссарий IT-терминов — {SITE_NAME}",
+        "description": f"Алфавитный словарь {len(glossary)} IT-терминов: от API до Zero Trust. Все термины со ссылками на статьи.",
+        "inLanguage": "ru-RU",
+        "url": f"{SITE}/glossary.html",
+    }
+
+    today = datetime.date.today().isoformat()
+
+    html_out = f'''<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Глоссарий IT-терминов — {esc(SITE_NAME)}</title>
+  <meta name="description" content="Алфавитный словарь {len(glossary)} IT-терминов: от API до Zero Trust. Все термины с ссылками на подробные статьи IT·База.">
+  <meta name="keywords" content="глоссарий IT, словарь программирования, IT-термины, программирование простыми словами">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="{SITE}/glossary.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{esc(SITE_NAME)}">
+  <meta property="og:title" content="Глоссарий IT-терминов — {esc(SITE_NAME)}">
+  <meta property="og:description" content="Алфавитный словарь {len(glossary)} IT-терминов с ссылками на статьи.">
+  <meta property="og:url" content="{SITE}/glossary.html">
+  <meta property="og:image" content="{default_og()}">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">{ld_json(ld)}</script>
+  {ICONS}
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0d1117">
+  {THEME_SCRIPT}
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .glossary-wrap{{max-width:1000px;margin:0 auto;padding:30px 20px 80px;}}
+    .glossary-intro{{color:var(--muted);font-size:15px;line-height:1.6;margin:20px 0 30px;}}
+    .glossary-letters{{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:40px;padding:16px;background:var(--card);border:1px solid var(--border);border-radius:10px;position:sticky;top:0;z-index:10;}}
+    .glossary-letter{{margin-bottom:50px;}}
+    .glossary-letter h2{{font-family:Georgia,serif;font-size:32px;color:var(--accent);margin:0 0 18px;border-bottom:2px solid var(--accent);padding-bottom:8px;}}
+    .glossary-list{{list-style:none;padding:0;margin:0;display:grid;gap:8px;}}
+    .glossary-item{{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;padding:10px 14px;border:1px solid var(--border);border-radius:8px;background:var(--card);}}
+    .glossary-term{{font-weight:600;color:var(--text);font-size:16px;min-width:200px;}}
+    .glossary-refs{{color:var(--muted);font-size:14px;flex:1;}}
+    .glossary-refs a{{color:var(--accent);text-decoration:none;}}
+    .glossary-refs a:hover{{text-decoration:underline;}}
+    .sitemap-count{{color:var(--muted);font-size:14px;font-weight:normal;}}
+    .chip{{display:inline-block;padding:6px 14px;border:1px solid var(--border);border-radius:16px;background:var(--card);color:var(--text);text-decoration:none;font-size:14px;}}
+    .chip:hover{{border-color:var(--accent);color:var(--accent);}}
+    @media(max-width:640px){{
+      .glossary-item{{flex-direction:column;align-items:flex-start;}}
+      .glossary-term{{min-width:0;}}
+    }}
+  </style>
+</head>
+<body>
+  <div id="progress"></div>
+  {HEADER}
+  <main>
+    <section class="hero wrap">
+      <h1>Глоссарий IT-терминов</h1>
+      <p>{len(glossary)} терминов с ссылками на статьи. Алфавитный указатель.</p>
+    </section>
+    <div class="glossary-wrap">
+      <p class="glossary-intro">
+        Словарь всех ключевых терминов, упомянутых в статьях IT·База.
+        Кликни на букву, чтобы перейти к разделу. Каждый термин ведёт к статье,
+        где он разбирается подробно. Если термина нет — это повод написать новую
+        статью, спроси через <a href="/contacts.html" style="color:var(--accent)">контакты</a>.
+        Обновлено: {today}.
+      </p>
+      <nav class="glossary-letters" aria-label="Алфавитный указатель">
+        {letters_html}
+      </nav>
+{sections_str}
+    </div>
+  </main>
+  {FOOTER}
+  <script src="/app.js"></script>
+  {analytics_snippet()}
+</body>
+</html>
+'''
+    (ROOT / "glossary.html").write_text(html_out, encoding="utf-8")
+
+
+# ----------------------------- СТРАНИЦА ПОИСКА -------------------------------
+def write_search_page(arts):
+    """/search.html — отдельная страница поиска для индексации."""
+    canon = f"{SITE}/search.html"
+    today = datetime.date.today().isoformat()
+
+    # JSON-LD: WebSite с SearchAction (Google rich results)
+    ld = {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": SITE_NAME,
+        "url": SITE + "/",
+        "description": "Понятные статьи про ИИ, программирование и IT",
+        "inLanguage": "ru-RU",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": f"{SITE}/search.html?q={"{search_term_string}"}"
+            },
+            "query-input": "required name=search_term_string"
+        }
+    }
+
+    html_out = f'''<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Поиск по статьям — {esc(SITE_NAME)}</title>
+  <meta name="description" content="Поиск по всем статьям IT·База: {len(arts)} материалов про программирование, ИИ, DevOps, базы данных.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="{canon}">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Поиск по статьям — {esc(SITE_NAME)}">
+  <meta property="og:description" content="Найди нужную статью на IT·База.">
+  <meta property="og:url" content="{canon}">
+  <meta property="og:image" content="{default_og()}">
+  <script type="application/ld+json">{ld_json(ld)}</script>
+  {ICONS}
+  <link rel="manifest" href="/manifest.json">
+  {THEME_SCRIPT}
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .search-wrap{{max-width:920px;margin:0 auto;padding:30px 20px 80px;}}
+    .search-input-wrap{{position:relative;margin-bottom:30px;}}
+    .search-input{{
+      width:100%;padding:18px 24px 18px 56px;
+      font-size:18px;
+      border:2px solid var(--border);border-radius:12px;
+      background:var(--card);color:var(--text);
+      transition:border-color .15s;
+    }}
+    .search-input:focus{{outline:none;border-color:var(--accent);}}
+    .search-icon{{position:absolute;left:20px;top:50%;transform:translateY(-50%);font-size:22px;color:var(--muted);pointer-events:none;}}
+    .search-results{{display:grid;gap:18px;}}
+    .search-empty{{text-align:center;padding:60px 20px;color:var(--muted);}}
+    .search-meta{{color:var(--muted);font-size:14px;margin-bottom:20px;}}
+  </style>
+</head>
+<body>
+  <div id="progress"></div>
+  {HEADER}
+  <main>
+    <section class="hero wrap">
+      <h1>Поиск по статьям</h1>
+      <p>Найди нужное среди {len(arts)} статей IT·База.</p>
+    </section>
+    <div class="search-wrap">
+      <div class="search-input-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="search" id="searchInput" class="search-input"
+               placeholder="Например: Docker, Python, регулярки, как работает HTTPS…"
+               aria-label="Поиск по статьям"
+               autofocus>
+      </div>
+      <div class="search-meta" id="searchMeta"></div>
+      <div class="search-results" id="searchResults"></div>
+    </div>
+  </main>
+  {FOOTER}
+  <script src="/data/index.js"></script>
+  <script src="/app.js"></script>
+  <script>
+    (function(){{
+      const input = document.getElementById('searchInput');
+      const results = document.getElementById('searchResults');
+      const meta = document.getElementById('searchMeta');
+      if (!input || !results || !window.ARTICLES) return;
+
+      function search(q){{
+        q = q.trim().toLowerCase();
+        if (!q){{
+          results.innerHTML = '';
+          meta.textContent = '';
+          return;
+        }}
+        const scored = window.ARTICLES.map(a => {{
+          const hay = (a.title + ' ' + a.excerpt + ' ' + a.tags.join(' ')).toLowerCase();
+          let score = 0;
+          if (a.title.toLowerCase().includes(q)) score += 5;
+          if (a.excerpt.toLowerCase().includes(q)) score += 2;
+          if (a.tags.some(t => t.toLowerCase().includes(q))) score += 3;
+          if (hay.includes(q)) score += 1;
+          return {{a, score}};
+        }}).filter(x => x.score > 0).sort((a,b) => b.score - a.score);
+
+        meta.textContent = 'Найдено: ' + scored.length;
+        if (scored.length === 0){{
+          results.innerHTML = '<div class="search-empty"><b>Ничего не найдено</b><p>Попробуй другие слова или посмотри <a href="/sitemap.html" style="color:var(--accent)">карту сайта</a>.</p></div>';
+          return;
+        }}
+        results.innerHTML = scored.map(x => {{
+          const a = x.a;
+          const url = '/' + a.url;
+          const tags = a.tags.map(t => '<span class="tag">' + t + '</span>').join('');
+          return '<article class="card"><a class="card__cover" href="' + url + '"><img src="/' + a.cover + '" alt="' + a.title + '" loading="lazy"></a><div class="card__body"><div class="card__tags">' + tags + '</div><a href="' + url + '"><h2 class="card__title">' + a.title + '</h2></a><p class="card__excerpt">' + a.excerpt + '</p><div class="card__meta"><span>' + a.date + '</span><span class="dot">·</span><span>' + a.readTime + ' мин</span></div></div></article>';
+        }}).join('');
+      }}
+
+      // Из URL ?q=...
+      const url = new URL(location.href);
+      const initial = url.searchParams.get('q') || '';
+      if (initial){{
+        input.value = initial;
+        search(initial);
+      }}
+      input.addEventListener('input', e => search(e.target.value));
+    }})();
+  </script>
+  {analytics_snippet()}
+</body>
+</html>
+'''
+    (ROOT / "search.html").write_text(html_out, encoding="utf-8")
+
+
+# ----------------------------- ДОРОЖНЫЕ КАРТЫ --------------------------------
+def write_roadmaps_page(arts):
+    """/roadmaps.html — карьерные пути (статьи с тегом 'Карьера'/'Теория')."""
+    career_tags = ["Карьера", "Теория", "Разработка"]
+    career_arts = sorted(
+        [a for a in arts if any(t in a["tags"] for t in career_tags)],
+        key=lambda x: x["date"], reverse=True
+    )
+
+    cards = "\n".join(card(a) for a in career_arts)
+
+    # Дорожные карты по категориям
+    categories = [
+        ("Frontend-разработчик", ["HTML", "CSS", "JavaScript", "Веб"]),
+        ("Backend-разработчик", ["Python", "SQL", "API", "Базы данных"]),
+        ("DevOps инженер", ["DevOps", "Docker", "Linux", "Инструменты"]),
+        ("AI/ML инженер", ["ИИ", "Python", "Теория"]),
+        ("Mobile разработчик", ["JavaScript", "Разработка"]),
+    ]
+
+    blocks = []
+    for name, tags in categories:
+        matching = sorted(
+            [a for a in arts if any(t in a["tags"] for t in tags)],
+            key=lambda x: x["date"], reverse=True
+        )[:5]
+        if not matching:
+            continue
+        cards_cat = "\n".join(card(a) for a in matching)
+        blocks.append(
+            f'    <section class="roadmap-category">\n'
+            f'      <h2>{esc(name)} <span class="sitemap-count">({len(matching)})</span></h2>\n'
+            f'      <div class="grid">\n{cards_cat}\n      </div>\n'
+            f'    </section>'
+        )
+    blocks_str = "\n\n".join(blocks)
+
+    today = datetime.date.today().isoformat()
+
+    html_out = f'''<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Дорожные карты IT-карьеры — {esc(SITE_NAME)}</title>
+  <meta name="description" content="Дорожные карты для IT-карьеры: Frontend, Backend, DevOps, AI/ML. Списки статей по каждой специализации для последовательного обучения.">
+  <meta name="keywords" content="дорожная карта, roadmap, IT карьера, frontend, backend, devops, AI">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="{SITE}/roadmaps.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Дорожные карты IT-карьеры — {esc(SITE_NAME)}">
+  <meta property="og:description" content="Карьерные пути для Frontend, Backend, DevOps, AI/ML с порядком изучения.">
+  <meta property="og:url" content="{SITE}/roadmaps.html">
+  <meta property="og:image" content="{default_og()}">
+  {ICONS}
+  <link rel="manifest" href="/manifest.json">
+  {THEME_SCRIPT}
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .roadmaps-wrap{{max-width:1100px;margin:0 auto;padding:30px 20px 80px;}}
+    .roadmap-category{{margin-bottom:60px;}}
+    .roadmap-category h2{{font-family:Georgia,serif;font-size:28px;color:var(--accent);margin:0 0 22px;border-bottom:1px solid var(--border);padding-bottom:10px;}}
+    .sitemap-count{{color:var(--muted);font-size:14px;font-weight:normal;}}
+    .roadmaps-intro{{color:var(--muted);font-size:15px;line-height:1.6;margin:20px 0 40px;}}
+  </style>
+</head>
+<body>
+  <div id="progress"></div>
+  {HEADER}
+  <main>
+    <section class="hero wrap">
+      <h1>Дорожные карты</h1>
+      <p>Карьерные пути для IT: статьи по специализациям в логическом порядке.</p>
+    </section>
+    <div class="roadmaps-wrap">
+      <p class="roadmaps-intro">
+        Выбери направление — ниже собраны статьи по каждой специализации.
+        Проходи по порядку: первые статьи — базовые понятия, дальше — глубже.
+        Каждую статью можно пометить в закладки (★), чтобы не потерять прогресс.
+        Обновлено: {today}.
+      </p>
+{blocks_str}
+    </div>
+  </main>
+  {FOOTER}
+  <script src="/data/index.js"></script>
+  <script src="/app.js"></script>
+  {analytics_snippet()}
+</body>
+</html>
+'''
+    (ROOT / "roadmaps.html").write_text(html_out, encoding="utf-8")
+
+
+# ----------------------------- ШПАРГАЛКИ ------------------------------------
+def write_cheatsheets_page(arts):
+    """/cheatsheets.html — короткие статьи (≤ 8 минут чтения)."""
+    cheats = sorted(
+        [a for a in arts if a["readTime"] <= 8],
+        key=lambda x: x["date"], reverse=True
+    )
+    cards = "\n".join(card(a) for a in cheats)
+    today = datetime.date.today().isoformat()
+
+    html_out = f'''<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Шпаргалки по программированию — {esc(SITE_NAME)}</title>
+  <meta name="description" content="Короткие статьи-шпаргалки по программированию: {len(cheats)} материалов для быстрого освежения знаний.">
+  <meta name="keywords" content="шпаргалки, cheatsheets, программирование, шпаргалка, IT">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="{SITE}/cheatsheets.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Шпаргалки по программированию — {esc(SITE_NAME)}">
+  <meta property="og:description" content="Короткие статьи до 8 минут чтения — для быстрого освежения знаний.">
+  <meta property="og:url" content="{SITE}/cheatsheets.html">
+  <meta property="og:image" content="{default_og()}">
+  {ICONS}
+  <link rel="manifest" href="/manifest.json">
+  {THEME_SCRIPT}
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .cheats-wrap{{max-width:1100px;margin:0 auto;padding:30px 20px 80px;}}
+    .cheats-intro{{color:var(--muted);font-size:15px;line-height:1.6;margin:20px 0 30px;}}
+  </style>
+</head>
+<body>
+  <div id="progress"></div>
+  {HEADER}
+  <main>
+    <section class="hero wrap">
+      <h1>Шпаргалки</h1>
+      <p>{len(cheats)} коротких статей до 8 минут. Быстро прочитать — быстро вспомнить.</p>
+    </section>
+    <div class="cheats-wrap">
+      <p class="cheats-intro">
+        Короткие материалы для тех, кто уже что-то знает и хочет быстро
+        освежить в памяти. Подходит для подготовки к собеседованию или
+        ежедневного чтения в метро. Обновлено: {today}.
+      </p>
+      <div class="grid" id="grid">
+{cards}
+      </div>
+    </div>
+  </main>
+  {FOOTER}
+  <script src="/data/index.js"></script>
+  <script src="/app.js"></script>
+  {analytics_snippet()}
+</body>
+</html>
+'''
+    (ROOT / "cheatsheets.html").write_text(html_out, encoding="utf-8")
+
+
+# ----------------------------- SERVICE WORKER --------------------------------
+def write_service_worker(arts):
+    """/sw.js — Service Worker для офлайн-доступа к статьям (PWA)."""
+    # Список статей для кэша (всё articles + главные страницы)
+    cache_urls = ["/", "/about.html", "/contacts.html", "/support.html",
+                  "/sitemap.html", "/archive.html", "/top.html",
+                  "/glossary.html", "/search.html", "/roadmaps.html",
+                  "/cheatsheets.html", "/style.css", "/app.js",
+                  "/data/articles.js", "/data/index.js",
+                  "/favicon.svg", "/favicon.ico", "/manifest.json",
+                  "/rss.xml", "/sitemap.xml"]
+    # Добавляем статьи (макс 50 для кэша, чтобы не разрастался)
+    for a in arts[:50]:
+        cache_urls.append("/" + a["url"])
+
+    urls_js = ",\n    ".join(f'"{u}' for u in cache_urls)
+
+    sw_js = f'''// Service Worker — IT·База (PWA офлайн-доступ)
+// Кэширует главные страницы + 50 свежих статей для чтения без интернета
+const CACHE = "itbase-v1";
+const ASSETS = [
+    {urls_js}
+];
+
+// Install: кэшируем основные ресурсы
+self.addEventListener("install", event => {{
+  event.waitUntil(
+    caches.open(CACHE).then(cache => cache.addAll(ASSETS).catch(() => {{}}))
+  );
+  self.skipWaiting();
+}});
+
+// Activate: чистим старый кэш
+self.addEventListener("activate", event => {{
+  event.waitUntil(
+    caches.keys().then(keys => Promise.all(
+      keys.filter(k => k !== CACHE).map(k => caches.delete(k))
+    ))
+  );
+  self.clients.claim();
+}});
+
+// Fetch: cache-first для статичных ресурсов, network-first для статей
+self.addEventListener("fetch", event => {{
+  const url = new URL(event.request.url);
+  // Только GET
+  if (event.request.method !== "GET") return;
+  // Пропускаем внешние запросы (Prism, GA, Метрика)
+  if (url.origin !== location.origin) return;
+
+  // Стратегия: stale-while-revalidate
+  event.respondWith(
+    caches.match(event.request).then(cached => {{
+      const fetchPromise = fetch(event.request).then(response => {{
+        // Кэшируем свежий ответ
+        if (response && response.status === 200) {{
+          const clone = response.clone();
+          caches.open(CACHE).then(cache => cache.put(event.request, clone));
+        }}
+        return response;
+      }}).catch(() => cached);
+      return cached || fetchPromise;
+    }})
+  );
+}});
+'''
+    (ROOT / "sw.js").write_text(sw_js, encoding="utf-8")
+
+
 # ----------------------------- ЗАПУСК ----------------------------------------
 def main():
     raw = load_articles()
@@ -1490,7 +2121,13 @@ def main():
     write_top_page(arts)
     write_json_feed(arts)
     write_tag_rss(arts)
-    print("Все SEO-файлы созданы: теги, архив, топ, JSON Feed, теговые RSS.")
+    # Новые страницы для роста трафика и UX
+    write_glossary(arts)
+    write_search_page(arts)
+    write_roadmaps_page(arts)
+    write_cheatsheets_page(arts)
+    write_service_worker(arts)
+    print("Все SEO-файлы созданы: теги, архив, топ, JSON Feed, теговые RSS, глоссарий, поиск, дорожные карты, шпаргалки, SW.")
     print("Готово.")
 
 

@@ -20,6 +20,7 @@
   <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/obrabotka-isklyucheniy-v-python.png">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Обработка исключений в Python — try, except, finally", "description": "Как ловить ошибки и не давать программе падать. Разбираем try/except, собственные исключения и контекстные менеджеры с примерами.", "image": ["https://itbase-ru.github.io/img/og/obrabotka-isklyucheniy-v-python.png"], "datePublished": "2026-04-24", "dateModified": "2026-04-24", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/", "logo": {"@type": "ImageObject", "url": "https://itbase-ru.github.io/favicon.svg"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/obrabotka-isklyucheniy-v-python.html"}, "articleSection": "Python", "keywords": "Python, Разработка, Теория"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Python", "item": "https://itbase-ru.github.io/?tag=Python"}, {"@type": "ListItem", "position": 3, "name": "Обработка исключений в Python — try, except, finally", "item": "https://itbase-ru.github.io/articles/obrabotka-isklyucheniy-v-python.html"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "Обработка исключений в Python — try, except, finally", "description": "Как ловить ошибки и не давать программе падать. Разбираем try/except, собственные исключения и контекстные менеджеры с примерами.", "image": "https://itbase-ru.github.io/img/og/obrabotka-isklyucheniy-v-python.png", "inLanguage": "ru-RU", "totalTime": "PT11M", "step": [{"@type": "HowToStep", "text": "try — опасный код."}, {"@type": "HowToStep", "text": "except — что делать при ошибке."}, {"@type": "HowToStep", "text": "else — что делать, если ошибки не было."}, {"@type": "HowToStep", "text": "finally — что делать в любом случае."}, {"@type": "HowToStep", "text": "Ловить всё через except Exception. Скрывает баги. Лови конкретные типы."}, {"@type": "HowToStep", "text": "Пустой except: без переменной. «Проглотить» ошибку молча — худший вариант. В логах должна остаться информация."}, {"@type": "HowToStep", "text": "Слишком широкий try. Оборачивай только опасный код, а не 50 строк вокруг."}, {"@type": "HowToStep", "text": "Не закрыть ресурс. Всегда используй with или finally."}, {"@type": "HowToStep", "text": "Игнорировать ошибку. Если не знаешь, что делать с исключением — не лови его. Пусть поднимется выше, где с ним разберутся осмысленно."}]}</script>
   <script>
     (function(){
       try{
@@ -39,6 +40,9 @@
   <header class="site-header">
     <div class="site-header__inner">
       <a href="/" class="logo">IT<span>·</span>База</a>
+      <a href="/search.html" class="header-search" title="Поиск" aria-label="Поиск по сайту">🔍</a>
+      <button class="font-toggle" id="fontSmaller" title="Уменьшить шрифт" aria-label="Уменьшить шрифт">A−</button>
+      <button class="font-toggle" id="fontLarger" title="Увеличить шрифт" aria-label="Увеличить шрифт">A+</button>
       <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
     </div>
   </header>
@@ -66,6 +70,7 @@
             <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
             <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
             <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+            <button class="share__btn" id="sharePrint" title="Распечатать или сохранить в PDF">Печать</button>
           </div>
         </div>
       </div>
@@ -393,9 +398,10 @@ KeyError: 'email'</code></pre>
     <a href="/about.html">О сайте</a>
     <a href="/top.html">Лучшее</a>
     <a href="/archive.html">Архив</a>
-    <a href="/sitemap.html">Карта</a>
+    <a href="/glossary.html">Глоссарий</a>
+    <a href="/roadmaps.html">Карьера</a>
+    <a href="/cheatsheets.html">Шпаргалки</a>
     <a href="/support.html">Поддержать ★</a>
-    <a href="/privacy.html">Политика</a>
     <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
   </div>
 </footer>

@@ -20,6 +20,7 @@
   <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/xss-csrf-sql-inekcii.png">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "XSS, CSRF, SQL-инъекции — три главные атаки на веб", "description": "Разбираем три самых частых уязвимости в веб-приложениях: как работают, чем опасны и как защититься. С примерами атак и защиты.", "image": ["https://itbase-ru.github.io/img/og/xss-csrf-sql-inekcii.png"], "datePublished": "2026-04-15", "dateModified": "2026-04-15", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/", "logo": {"@type": "ImageObject", "url": "https://itbase-ru.github.io/favicon.svg"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/xss-csrf-sql-inekcii.html"}, "articleSection": "Безопасность", "keywords": "Безопасность, Веб, Разработка"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Безопасность", "item": "https://itbase-ru.github.io/?tag=Безопасность"}, {"@type": "ListItem", "position": 3, "name": "XSS, CSRF, SQL-инъекции — три главные атаки на веб", "item": "https://itbase-ru.github.io/articles/xss-csrf-sql-inekcii.html"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "XSS, CSRF, SQL-инъекции — три главные атаки на веб", "description": "Разбираем три самых частых уязвимости в веб-приложениях: как работают, чем опасны и как защититься. С примерами атак и защиты.", "image": "https://itbase-ru.github.io/img/og/xss-csrf-sql-inekcii.png", "inLanguage": "ru-RU", "totalTime": "PT12M", "step": [{"@type": "HowToStep", "text": "Получить все данные из таблицы."}, {"@type": "HowToStep", "text": "Обойти аутентификацию (зайти без пароля)."}, {"@type": "HowToStep", "text": "Удалить таблицы (DROP TABLE users)."}, {"@type": "HowToStep", "text": "В некоторых СУБД — выполнить команды на сервере."}, {"@type": "HowToStep", "text": "Никогда не склеивай SQL-строки вручную."}, {"@type": "HowToStep", "text": "Используй ? (SQLite, MySQL) или %s (PostgreSQL) как плейсхолдеры."}, {"@type": "HowToStep", "text": "ORM делает это автоматически — ещё один плюс в её пользу."}, {"@type": "HowToStep", "text": "Украсть сессионные куки и токены."}, {"@type": "HowToStep", "text": "Читать переписку и вводимые данные."}, {"@type": "HowToStep", "text": "Перенаправлять на фишинговые сайты."}]}</script>
   <script>
     (function(){
       try{
@@ -39,6 +40,9 @@
   <header class="site-header">
     <div class="site-header__inner">
       <a href="/" class="logo">IT<span>·</span>База</a>
+      <a href="/search.html" class="header-search" title="Поиск" aria-label="Поиск по сайту">🔍</a>
+      <button class="font-toggle" id="fontSmaller" title="Уменьшить шрифт" aria-label="Уменьшить шрифт">A−</button>
+      <button class="font-toggle" id="fontLarger" title="Увеличить шрифт" aria-label="Увеличить шрифт">A+</button>
       <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
     </div>
   </header>
@@ -66,6 +70,7 @@
             <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
             <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
             <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+            <button class="share__btn" id="sharePrint" title="Распечатать или сохранить в PDF">Печать</button>
           </div>
         </div>
       </div>
@@ -364,9 +369,10 @@ html = '&lt;p&gt;' + escape_html(comment) + '&lt;/p&gt;'</code></pre>
     <a href="/about.html">О сайте</a>
     <a href="/top.html">Лучшее</a>
     <a href="/archive.html">Архив</a>
-    <a href="/sitemap.html">Карта</a>
+    <a href="/glossary.html">Глоссарий</a>
+    <a href="/roadmaps.html">Карьера</a>
+    <a href="/cheatsheets.html">Шпаргалки</a>
     <a href="/support.html">Поддержать ★</a>
-    <a href="/privacy.html">Политика</a>
     <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
   </div>
 </footer>

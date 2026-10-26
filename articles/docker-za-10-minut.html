@@ -20,6 +20,7 @@
   <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/docker-za-10-minut.png">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Docker за 10 минут: зачем нужны контейнеры", "description": "Проблема «у меня работает, а у тебя нет» и как Docker её решает. Образ, контейнер, Dockerfile — на пальцах.", "image": ["https://itbase-ru.github.io/img/og/docker-za-10-minut.png"], "datePublished": "2026-03-01", "dateModified": "2026-03-01", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/", "logo": {"@type": "ImageObject", "url": "https://itbase-ru.github.io/favicon.svg"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/docker-za-10-minut.html"}, "articleSection": "Инструменты", "keywords": "Инструменты, DevOps"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Инструменты", "item": "https://itbase-ru.github.io/?tag=Инструменты"}, {"@type": "ListItem", "position": 3, "name": "Docker за 10 минут: зачем нужны контейнеры", "item": "https://itbase-ru.github.io/articles/docker-za-10-minut.html"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "Docker за 10 минут: зачем нужны контейнеры", "description": "Проблема «у меня работает, а у тебя нет» и как Docker её решает. Образ, контейнер, Dockerfile — на пальцах.", "image": "https://itbase-ru.github.io/img/og/docker-za-10-minut.png", "inLanguage": "ru-RU", "totalTime": "PT9M", "step": [{"@type": "HowToStep", "text": "Образ (image) — шаблон, из которого создаются контейнеры. Как чертёж."}, {"@type": "HowToStep", "text": "Контейнер (container) — запущенный экземпляр образа. Как изделие по чертежу."}, {"@type": "HowToStep", "text": "Dockerfile — текстовый файл с инструкцией, как собрать образ."}, {"@type": "HowToStep", "text": "Единая среда. Все разработчики запускают одно и то же. Никаких «у меня работает»."}, {"@type": "HowToStep", "text": "Быстрый деплой. Локально собрал образ → отправил на сервер → запустил. Всё."}, {"@type": "HowToStep", "text": "Изоляция. Приложение не сломает систему хоста."}, {"@type": "HowToStep", "text": "Легко масштабировать. Нужно больше мощности — запусти ещё контейнеров."}, {"@type": "HowToStep", "text": "Docker = упаковка приложения со всем его окружением."}, {"@type": "HowToStep", "text": "Образ — шаблон, контейнер — запущенный экземпляр."}, {"@type": "HowToStep", "text": "Dockerfile описывает, как собрать образ."}]}</script>
   <script>
     (function(){
       try{
@@ -39,6 +40,9 @@
   <header class="site-header">
     <div class="site-header__inner">
       <a href="/" class="logo">IT<span>·</span>База</a>
+      <a href="/search.html" class="header-search" title="Поиск" aria-label="Поиск по сайту">🔍</a>
+      <button class="font-toggle" id="fontSmaller" title="Уменьшить шрифт" aria-label="Уменьшить шрифт">A−</button>
+      <button class="font-toggle" id="fontLarger" title="Увеличить шрифт" aria-label="Увеличить шрифт">A+</button>
       <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
     </div>
   </header>
@@ -66,6 +70,7 @@
             <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
             <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
             <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+            <button class="share__btn" id="sharePrint" title="Распечатать или сохранить в PDF">Печать</button>
           </div>
         </div>
       </div>
@@ -270,9 +275,10 @@ CMD ["python", "main.py"]
     <a href="/about.html">О сайте</a>
     <a href="/top.html">Лучшее</a>
     <a href="/archive.html">Архив</a>
-    <a href="/sitemap.html">Карта</a>
+    <a href="/glossary.html">Глоссарий</a>
+    <a href="/roadmaps.html">Карьера</a>
+    <a href="/cheatsheets.html">Шпаргалки</a>
     <a href="/support.html">Поддержать ★</a>
-    <a href="/privacy.html">Политика</a>
     <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
   </div>
 </footer>

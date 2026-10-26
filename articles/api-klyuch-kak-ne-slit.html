@@ -20,6 +20,7 @@
   <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/api-klyuch-kak-ne-slit.png">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "API-ключ: что это и как не слить его в GitHub", "description": "Что такое токены, чем они опасны и почему одна строка в публичном репозитории может стоить тысячи долларов. Правила, которые спасают.", "image": ["https://itbase-ru.github.io/img/og/api-klyuch-kak-ne-slit.png"], "datePublished": "2026-03-13", "dateModified": "2026-03-13", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/", "logo": {"@type": "ImageObject", "url": "https://itbase-ru.github.io/favicon.svg"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/api-klyuch-kak-ne-slit.html"}, "articleSection": "Безопасность", "keywords": "Безопасность, Разработка"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Безопасность", "item": "https://itbase-ru.github.io/?tag=Безопасность"}, {"@type": "ListItem", "position": 3, "name": "API-ключ: что это и как не слить его в GitHub", "item": "https://itbase-ru.github.io/articles/api-klyuch-kak-ne-slit.html"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "API-ключ: что это и как не слить его в GitHub", "description": "Что такое токены, чем они опасны и почему одна строка в публичном репозитории может стоить тысячи долларов. Правила, которые спасают.", "image": "https://itbase-ru.github.io/img/og/api-klyuch-kak-ne-slit.png", "inLanguage": "ru-RU", "totalTime": "PT9M", "step": [{"@type": "HowToStep", "text": "Ключ к OpenAI в публичном GitHub → бот находит за 30 секунд → за ночь списывают $5000."}, {"@type": "HowToStep", "text": "Ключ к AWS в истории коммитов → поднимают серверы для майнинга → счёт на десятки тысяч долларов."}, {"@type": "HowToStep", "text": "Ключ к Telegram-боту → чужие рассылки от имени твоего бота."}, {"@type": "HowToStep", "text": "Ключ к картам Google → чужие запросы маршрутов на твой аккаунт."}, {"@type": "HowToStep", "text": "Прямо в коде. const API_KEY = \"sk-123\"; — худший вариант."}, {"@type": "HowToStep", "text": "В публичном репозитории. Даже если удалил — остаётся в истории коммитов."}, {"@type": "HowToStep", "text": "В HTML на сайте. Любой может открыть исходник страницы (F12 → Sources)."}, {"@type": "HowToStep", "text": "В мобильном приложении. APK легко распаковывается, ключ извлекается за минуты."}, {"@type": "HowToStep", "text": "Отозвать ключ. В панели сервиса (OpenAI, AWS, Google Cloud) — «Revoke» или «Delete». Это первое и самое важное."}, {"@type": "HowToStep", "text": "Создать новый. Старый уже не твой."}]}</script>
   <script>
     (function(){
       try{
@@ -39,6 +40,9 @@
   <header class="site-header">
     <div class="site-header__inner">
       <a href="/" class="logo">IT<span>·</span>База</a>
+      <a href="/search.html" class="header-search" title="Поиск" aria-label="Поиск по сайту">🔍</a>
+      <button class="font-toggle" id="fontSmaller" title="Уменьшить шрифт" aria-label="Уменьшить шрифт">A−</button>
+      <button class="font-toggle" id="fontLarger" title="Увеличить шрифт" aria-label="Увеличить шрифт">A+</button>
       <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
     </div>
   </header>
@@ -66,6 +70,7 @@
             <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
             <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
             <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+            <button class="share__btn" id="sharePrint" title="Распечатать или сохранить в PDF">Печать</button>
           </div>
         </div>
       </div>
@@ -283,9 +288,10 @@ node_modules/
     <a href="/about.html">О сайте</a>
     <a href="/top.html">Лучшее</a>
     <a href="/archive.html">Архив</a>
-    <a href="/sitemap.html">Карта</a>
+    <a href="/glossary.html">Глоссарий</a>
+    <a href="/roadmaps.html">Карьера</a>
+    <a href="/cheatsheets.html">Шпаргалки</a>
     <a href="/support.html">Поддержать ★</a>
-    <a href="/privacy.html">Политика</a>
     <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
   </div>
 </footer>

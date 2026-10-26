@@ -20,6 +20,7 @@
   <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/regulyarnye-vyrazheniya-na-praktike.png">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Регулярные выражения: практический разбор с примерами", "description": "Что это такое, зачем они нужны, как читать «страшные» строки вроде ^\\d{3}-\\d{2}$ и применять в реальных задачах.", "image": ["https://itbase-ru.github.io/img/og/regulyarnye-vyrazheniya-na-praktike.png"], "datePublished": "2026-03-21", "dateModified": "2026-03-21", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/", "logo": {"@type": "ImageObject", "url": "https://itbase-ru.github.io/favicon.svg"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/regulyarnye-vyrazheniya-na-praktike.html"}, "articleSection": "Разработка", "keywords": "Разработка, Инструменты"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Разработка", "item": "https://itbase-ru.github.io/?tag=Разработка"}, {"@type": "ListItem", "position": 3, "name": "Регулярные выражения: практический разбор с примерами", "item": "https://itbase-ru.github.io/articles/regulyarnye-vyrazheniya-na-praktike.html"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "Регулярные выражения: практический разбор с примерами", "description": "Что это такое, зачем они нужны, как читать «страшные» строки вроде ^\\d{3}-\\d{2}$ и применять в реальных задачах.", "image": "https://itbase-ru.github.io/img/og/regulyarnye-vyrazheniya-na-praktike.png", "inLanguage": "ru-RU", "totalTime": "PT12M", "step": [{"@type": "HowToStep", "text": "Поиске по тексту (Ctrl+F с галочкой «regex»)."}, {"@type": "HowToStep", "text": "Валидации форм (проверка email, телефона)."}, {"@type": "HowToStep", "text": "Замене и очистке текста."}, {"@type": "HowToStep", "text": "Парсинге логов, данных, HTML."}, {"@type": "HowToStep", "text": "^ — начало строки."}, {"@type": "HowToStep", "text": "$ — конец строки."}, {"@type": "HowToStep", "text": "\\b — граница слова."}, {"@type": "HowToStep", "text": "^ — начало строки."}, {"@type": "HowToStep", "text": "\\+ — плюс (экранируем, потому что + — спецсимвол)."}, {"@type": "HowToStep", "text": "7  — цифра 7 и пробел."}]}</script>
   <script>
     (function(){
       try{
@@ -39,6 +40,9 @@
   <header class="site-header">
     <div class="site-header__inner">
       <a href="/" class="logo">IT<span>·</span>База</a>
+      <a href="/search.html" class="header-search" title="Поиск" aria-label="Поиск по сайту">🔍</a>
+      <button class="font-toggle" id="fontSmaller" title="Уменьшить шрифт" aria-label="Уменьшить шрифт">A−</button>
+      <button class="font-toggle" id="fontLarger" title="Увеличить шрифт" aria-label="Увеличить шрифт">A+</button>
       <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">☾</button>
     </div>
   </header>
@@ -66,6 +70,7 @@
             <button class="share__btn" id="shareTg" title="Telegram">Telegram</button>
             <button class="share__btn" id="shareVk" title="ВКонтакте">VK</button>
             <button class="share__btn" id="shareCopy" title="Скопировать ссылку">Копировать</button>
+            <button class="share__btn" id="sharePrint" title="Распечатать или сохранить в PDF">Печать</button>
           </div>
         </div>
       </div>
@@ -355,9 +360,10 @@ console.log(strong.test("12345678"));    // false — нет буквы
     <a href="/about.html">О сайте</a>
     <a href="/top.html">Лучшее</a>
     <a href="/archive.html">Архив</a>
-    <a href="/sitemap.html">Карта</a>
+    <a href="/glossary.html">Глоссарий</a>
+    <a href="/roadmaps.html">Карьера</a>
+    <a href="/cheatsheets.html">Шпаргалки</a>
     <a href="/support.html">Поддержать ★</a>
-    <a href="/privacy.html">Политика</a>
     <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
   </div>
 </footer>
