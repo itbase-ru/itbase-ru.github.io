@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IT·База — Сети</title>
+    <link>https://itbase-ru.github.io/tags/seti.html</link>
+    <description>Статьи с тегом Сети на IT·База</description>
+    <language>ru-ru</language>
+    <lastBuildDate>Mon, 26 Oct 2026 18:01:11 GMT</lastBuildDate>
+    <atom:link href="https://itbase-ru.github.io/rss/seti.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>WebSocket vs Server-Sent Events vs Long Polling: что когда использовать</title>
+      <link>https://itbase-ru.github.io/articles/websocket-vs-sse-vs-polling.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/websocket-vs-sse-vs-polling.html</guid>
+      <description>Сравнение трёх технологий real-time в вебе: long polling, SSE и WebSocket. Разбираем, что выбрать для чата, уведомлений, ленты и игр. С примерами кода.</description>
+      <category>Сети</category>
+      <pubDate>Sat, 28 Nov 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/ws-sse-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Как работает WebSocket — real-time связь между браузером и сервером</title>
+      <link>https://itbase-ru.github.io/articles/kak-rabotaet-websocket.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/kak-rabotaet-websocket.html</guid>
+      <description>Почему обычный HTTP плохо подходит для чатов, игр и бирж. Разбираем WebSocket: handshake, кадры, когда нужен и какие есть альтернативы.</description>
+      <category>Сети</category>
+      <pubDate>Tue, 14 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/websocket.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Что такое VPN и как он работает</title>
+      <link>https://itbase-ru.github.io/articles/chto-takoe-vpn.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/chto-takoe-vpn.html</guid>
+      <description>VPN — это не только «обход блокировок». Разбираем, как устроен туннель, что видит провайдер, какие бывают протоколы и где VPN не поможет.</description>
+      <category>Сети</category>
+      <pubDate>Sun, 29 Mar 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/vpn.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Как работает DNS — простыми словами</title>
+      <link>https://itbase-ru.github.io/articles/kak-rabotaet-dns.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/kak-rabotaet-dns.html</guid>
+      <description>Что происходит за секунду между вводом адреса в браузере и загрузкой сайта. Разбираем DNS: корневые серверы, зоны, кэш и типы записей.</description>
+      <category>Сети</category>
+      <pubDate>Fri, 27 Mar 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/dns.svg" type="image/svg+xml" length="0"/>
+    </item>
+  </channel>
+</rss>

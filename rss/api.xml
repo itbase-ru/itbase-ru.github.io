@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IT·База — API</title>
+    <link>https://itbase-ru.github.io/tags/api.html</link>
+    <description>Статьи с тегом API на IT·База</description>
+    <language>ru-ru</language>
+    <lastBuildDate>Mon, 26 Oct 2026 18:01:11 GMT</lastBuildDate>
+    <atom:link href="https://itbase-ru.github.io/rss/api.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Пагинация и версионирование API — как не сломать клиентов</title>
+      <link>https://itbase-ru.github.io/articles/paginaciya-i-versirovanie-api.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/paginaciya-i-versirovanie-api.html</guid>
+      <description>Как отдавать тысячи записей постранично и что делать, когда API меняется. Разбираем offset/limit, cursor-пагинацию и версионирование.</description>
+      <category>API</category>
+      <pubDate>Mon, 27 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/api-versioning.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Что такое CORS и почему браузер блокирует запросы</title>
+      <link>https://itbase-ru.github.io/articles/chto-takoe-cors.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/chto-takoe-cors.html</guid>
+      <description>Почему fetch с одного сайта на другой падает с ошибкой, что такое Same-Origin Policy и как правильно настроить CORS на сервере.</description>
+      <category>API</category>
+      <pubDate>Fri, 17 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/cors.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>HTTP-методы и статус-коды — шпаргалка с примерами</title>
+      <link>https://itbase-ru.github.io/articles/http-metody-i-status-kody.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/http-metody-i-status-kody.html</guid>
+      <description>GET, POST, PUT, PATCH, DELETE и что значат все эти 200, 301, 404, 500. Разбираем HTTP по-человечески, с примерами запросов и ответов.</description>
+      <category>API</category>
+      <pubDate>Sat, 04 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/http.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Что такое JWT и как работает авторизация</title>
+      <link>https://itbase-ru.github.io/articles/chto-takoe-jwt-avtorizaciya.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/chto-takoe-jwt-avtorizaciya.html</guid>
+      <description>JWT — это токен, который заменяет куки-сессии. Разбираем структуру, подпись, срок жизни и типичные ошибки при работе с токенами.</description>
+      <category>API</category>
+      <pubDate>Fri, 03 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/jwt.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>REST и GraphQL — в чём разница</title>
+      <link>https://itbase-ru.github.io/articles/chto-takoe-rest-i-graphql.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/chto-takoe-rest-i-graphql.html</guid>
+      <description>Два главных подхода к построению API. Разбираем на примерах: когда REST удобнее, а когда GraphQL решает проблемы, которые REST создаёт.</description>
+      <category>API</category>
+      <pubDate>Mon, 30 Mar 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/rest-graphql.svg" type="image/svg+xml" length="0"/>
+    </item>
+  </channel>
+</rss>

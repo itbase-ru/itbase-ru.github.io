@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IT·База — Инструменты</title>
+    <link>https://itbase-ru.github.io/tags/instrumenty.html</link>
+    <description>Статьи с тегом Инструменты на IT·База</description>
+    <language>ru-ru</language>
+    <lastBuildDate>Mon, 26 Oct 2026 18:01:11 GMT</lastBuildDate>
+    <atom:link href="https://itbase-ru.github.io/rss/instrumenty.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Claude AI от Anthropic: обзор, сравнение с ChatGPT, как пользоваться</title>
+      <link>https://itbase-ru.github.io/articles/claude-ai-obzor.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/claude-ai-obzor.html</guid>
+      <description>Обзор Claude AI в 2026 году: где он сильнее ChatGPT, тарифы, работа с длинными документами и кодом. Практический гайд без маркетингового шума.</description>
+      <category>Инструменты</category>
+      <pubDate>Sun, 22 Nov 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/claude-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Kubernetes для новичка: поды, деплойменты, сервисы за 15 минут</title>
+      <link>https://itbase-ru.github.io/articles/kubernetes-dlya-novichka.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/kubernetes-dlya-novichka.html</guid>
+      <description>Объяснение Kubernetes простыми словами: что такое поды, деплойменты и сервисы, зачем они нужны и как написать первый манифест. Без воды и без заумных терминов.</description>
+      <category>Инструменты</category>
+      <pubDate>Sun, 15 Nov 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/kubernetes-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>GitHub Copilot: обзор, цена, сравнение с альтернативами</title>
+      <link>https://itbase-ru.github.io/articles/github-copilot-obzor.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/github-copilot-obzor.html</guid>
+      <description>Что умеет GitHub Copilot в 2026 году, сколько стоит и стоит ли переключаться на Cursor, Codeium и Tabnine. Реальные сценарии, где ИИ-ассистент помогает и мешает.</description>
+      <category>Инструменты</category>
+      <pubDate>Thu, 12 Nov 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/copilot-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>ChatGPT: как пользоваться, промпты, лайфхаки</title>
+      <link>https://itbase-ru.github.io/articles/chatgpt-kak-polzovatsya.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/chatgpt-kak-polzovatsya.html</guid>
+      <description>Практический гайд по ChatGPT в 2026 году: тарифы, промпт-инжиниринг простыми словами, лайфхаки и ловушки, в которые попадают новички.</description>
+      <category>Инструменты</category>
+      <pubDate>Tue, 10 Nov 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/chatgpt-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Что такое Nginx и зачем он нужен на сервере</title>
+      <link>https://itbase-ru.github.io/articles/chto-takoe-nginx.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/chto-takoe-nginx.html</guid>
+      <description>Почему почти все сайты работают через Nginx. Разбираем: веб-сервер, reverse proxy, балансировка нагрузки, статика и конфиги.</description>
+      <category>Инструменты</category>
+      <pubDate>Sun, 26 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/nginx.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Bash-скрипты для новичка — автоматизация на Linux</title>
+      <link>https://itbase-ru.github.io/articles/bash-skripty-dlya-novichka.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/bash-skripty-dlya-novichka.html</guid>
+      <description>Как написать первый скрипт, который автоматизирует рутину: переменные, условия, циклы, функции, аргументы командной строки.</description>
+      <category>Инструменты</category>
+      <pubDate>Sat, 25 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/bash.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Docker Compose — несколько контейнеров одной командой</title>
+      <link>https://itbase-ru.github.io/articles/docker-compose-dlya-proekta.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/docker-compose-dlya-proekta.html</guid>
+      <description>Когда одного Dockerfile мало: как описать приложение, базу и кэш в одном файле и запускать всё одной командой docker compose up.</description>
+      <category>Инструменты</category>
+      <pubDate>Sat, 18 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/compose.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Git ветки и слияния — branch, merge, rebase</title>
+      <link>https://itbase-ru.github.io/articles/git-vetki-i-sliyanie.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/git-vetki-i-sliyanie.html</guid>
+      <description>Как работать с ветками в Git: создавать, переключаться, сливать, разрешать конфликты. Разбираем merge и rebase — когда что использовать.</description>
+      <category>Инструменты</category>
+      <pubDate>Wed, 08 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/git-vetki.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Основы Linux для разработчика — базовые команды</title>
+      <link>https://itbase-ru.github.io/articles/osnovy-linux-dlya-razrabotchika.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/osnovy-linux-dlya-razrabotchika.html</guid>
+      <description>Что нужно знать про Linux, чтобы работать на сервере. Разбираем навигацию по файлам, права доступа, процессы, SSH и полезные команды с примерами.</description>
+      <category>Инструменты</category>
+      <pubDate>Mon, 06 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/linux.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Как работает компилятор и интерпретатор</title>
+      <link>https://itbase-ru.github.io/articles/kak-rabotaet-kompilyator-i-interpretator.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/kak-rabotaet-kompilyator-i-interpretator.html</guid>
+      <description>Почему Python медленнее C, а JavaScript работает в браузере, хотя он интерпретируемый. Разбираем компиляцию, интерпретацию и JIT.</description>
+      <category>Инструменты</category>
+      <pubDate>Wed, 01 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/kompilyator.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Как создать Telegram-бота с кодом</title>
+      <link>https://itbase-ru.github.io/articles/kak-sozdat-telegram-bota.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/kak-sozdat-telegram-bota.html</guid>
+      <description>Пошагово: от BotFather и токена до рабочего бота на Python с командами, кнопками и запуском на сервере.</description>
+      <category>Инструменты</category>
+      <pubDate>Thu, 26 Mar 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/kak-sozdat-telegram-bota.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Что такое DevOps — CI/CD и деплой простыми словами</title>
+      <link>https://itbase-ru.github.io/articles/chto-takoe-devops-ci-cd-deploy.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/chto-takoe-devops-ci-cd-deploy.html</guid>
+      <description>Разбираем по-человечески: что такое DevOps, зачем нужны CI и CD, как выглядит pipeline и какие бывают способы деплоя.</description>
+      <category>Инструменты</category>
+      <pubDate>Wed, 25 Mar 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/chto-takoe-devops-ci-cd-deploy.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Регулярные выражения: практический разбор с примерами</title>
+      <link>https://itbase-ru.github.io/articles/regulyarnye-vyrazheniya-na-praktike.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/regulyarnye-vyrazheniya-na-praktike.html</guid>
+      <description>Что это такое, зачем они нужны, как читать «страшные» строки вроде ^\d{3}-\d{2}$ и применять в реальных задачах.</description>
+      <category>Инструменты</category>
+      <pubDate>Sat, 21 Mar 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/regex-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Docker за 10 минут: зачем нужны контейнеры</title>
+      <link>https://itbase-ru.github.io/articles/docker-za-10-minut.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/docker-za-10-minut.html</guid>
+      <description>Проблема «у меня работает, а у тебя нет» и как Docker её решает. Образ, контейнер, Dockerfile — на пальцах.</description>
+      <category>Инструменты</category>
+      <pubDate>Sun, 01 Mar 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/docker-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Терминал для новичка: 20 команд, которые нужны каждый день</title>
+      <link>https://itbase-ru.github.io/articles/terminal-dlya-novichka.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/terminal-dlya-novichka.html</guid>
+      <description>Почему программисты работают в чёрном окне с текстом и какие команды нужно знать, чтобы не бояться командной строки.</description>
+      <category>Инструменты</category>
+      <pubDate>Wed, 18 Feb 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/terminal-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+  </channel>
+</rss>

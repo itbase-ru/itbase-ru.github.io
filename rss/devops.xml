@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IT·База — DevOps</title>
+    <link>https://itbase-ru.github.io/tags/devops.html</link>
+    <description>Статьи с тегом DevOps на IT·База</description>
+    <language>ru-ru</language>
+    <lastBuildDate>Mon, 26 Oct 2026 18:01:11 GMT</lastBuildDate>
+    <atom:link href="https://itbase-ru.github.io/rss/devops.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Kubernetes для новичка: поды, деплойменты, сервисы за 15 минут</title>
+      <link>https://itbase-ru.github.io/articles/kubernetes-dlya-novichka.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/kubernetes-dlya-novichka.html</guid>
+      <description>Объяснение Kubernetes простыми словами: что такое поды, деплойменты и сервисы, зачем они нужны и как написать первый манифест. Без воды и без заумных терминов.</description>
+      <category>DevOps</category>
+      <pubDate>Sun, 15 Nov 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/kubernetes-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Что такое Nginx и зачем он нужен на сервере</title>
+      <link>https://itbase-ru.github.io/articles/chto-takoe-nginx.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/chto-takoe-nginx.html</guid>
+      <description>Почему почти все сайты работают через Nginx. Разбираем: веб-сервер, reverse proxy, балансировка нагрузки, статика и конфиги.</description>
+      <category>DevOps</category>
+      <pubDate>Sun, 26 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/nginx.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Bash-скрипты для новичка — автоматизация на Linux</title>
+      <link>https://itbase-ru.github.io/articles/bash-skripty-dlya-novichka.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/bash-skripty-dlya-novichka.html</guid>
+      <description>Как написать первый скрипт, который автоматизирует рутину: переменные, условия, циклы, функции, аргументы командной строки.</description>
+      <category>DevOps</category>
+      <pubDate>Sat, 25 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/bash.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Docker Compose — несколько контейнеров одной командой</title>
+      <link>https://itbase-ru.github.io/articles/docker-compose-dlya-proekta.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/docker-compose-dlya-proekta.html</guid>
+      <description>Когда одного Dockerfile мало: как описать приложение, базу и кэш в одном файле и запускать всё одной командой docker compose up.</description>
+      <category>DevOps</category>
+      <pubDate>Sat, 18 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/compose.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Основы Linux для разработчика — базовые команды</title>
+      <link>https://itbase-ru.github.io/articles/osnovy-linux-dlya-razrabotchika.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/osnovy-linux-dlya-razrabotchika.html</guid>
+      <description>Что нужно знать про Linux, чтобы работать на сервере. Разбираем навигацию по файлам, права доступа, процессы, SSH и полезные команды с примерами.</description>
+      <category>DevOps</category>
+      <pubDate>Mon, 06 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/linux.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Монолит и микросервисы — когда что выбирать</title>
+      <link>https://itbase-ru.github.io/articles/monolit-i-mikroservisy.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/monolit-i-mikroservisy.html</guid>
+      <description>Разбираем без хайпа: что такое монолит, микросервисы, зачем они нужны, какие проблемы решают и какие создают. Спойлер: микросервисы — не всегда лучше.</description>
+      <category>DevOps</category>
+      <pubDate>Sun, 05 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/mikroservisy.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Что такое кэширование и зачем оно нужно</title>
+      <link>https://itbase-ru.github.io/articles/chto-takoe-keshirovanie.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/chto-takoe-keshirovanie.html</guid>
+      <description>Кэш — одна из главных идей в IT. Разбираем, какие бывают уровни кэша, что такое TTL, инвалидация, и почему кэш может всё сломать.</description>
+      <category>DevOps</category>
+      <pubDate>Thu, 02 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/cache.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Что такое DevOps — CI/CD и деплой простыми словами</title>
+      <link>https://itbase-ru.github.io/articles/chto-takoe-devops-ci-cd-deploy.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/chto-takoe-devops-ci-cd-deploy.html</guid>
+      <description>Разбираем по-человечески: что такое DevOps, зачем нужны CI и CD, как выглядит pipeline и какие бывают способы деплоя.</description>
+      <category>DevOps</category>
+      <pubDate>Wed, 25 Mar 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/chto-takoe-devops-ci-cd-deploy.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Что такое облако: IaaS, PaaS, SaaS и почему это удобно</title>
+      <link>https://itbase-ru.github.io/articles/chto-takoe-oblako.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/chto-takoe-oblako.html</guid>
+      <description>Разбираю на пальцах: чем облако отличается от обычного хостинга, что такое AWS S3 и Lambda, и когда выгоднее арендовать, а не покупать.</description>
+      <category>DevOps</category>
+      <pubDate>Thu, 05 Mar 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/cloud-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Docker за 10 минут: зачем нужны контейнеры</title>
+      <link>https://itbase-ru.github.io/articles/docker-za-10-minut.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/docker-za-10-minut.html</guid>
+      <description>Проблема «у меня работает, а у тебя нет» и как Docker её решает. Образ, контейнер, Dockerfile — на пальцах.</description>
+      <category>DevOps</category>
+      <pubDate>Sun, 01 Mar 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/docker-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+  </channel>
+</rss>

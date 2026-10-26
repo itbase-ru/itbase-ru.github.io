@@ -3,285 +3,581 @@
   <url>
     <loc>https://itbase-ru.github.io/</loc>
     <lastmod>2026-12-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/about.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/contacts.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/privacy.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/terms.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/support.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/sitemap.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/archive.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/top.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/kak-napisat-rezyume-programmista.html</loc>
     <lastmod>2026-12-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/tailwind-css-vs-bootstrap.html</loc>
     <lastmod>2026-11-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/websocket-vs-sse-vs-polling.html</loc>
     <lastmod>2026-11-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/postgresql-vs-mysql.html</loc>
     <lastmod>2026-11-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/claude-ai-obzor.html</loc>
     <lastmod>2026-11-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/nextjs-15-chto-novogo.html</loc>
     <lastmod>2026-11-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/rust-vs-go-sravnenie.html</loc>
     <lastmod>2026-11-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/kubernetes-dlya-novichka.html</loc>
     <lastmod>2026-11-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/github-copilot-obzor.html</loc>
     <lastmod>2026-11-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/chatgpt-kak-polzovatsya.html</loc>
     <lastmod>2026-11-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/paginaciya-i-versirovanie-api.html</loc>
     <lastmod>2026-04-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/chto-takoe-nginx.html</loc>
     <lastmod>2026-04-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/bash-skripty-dlya-novichka.html</loc>
     <lastmod>2026-04-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/obrabotka-isklyucheniy-v-python.html</loc>
     <lastmod>2026-04-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/dizayn-patterns-singleton-factory-observer.html</loc>
     <lastmod>2026-04-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/cookie-localstorage-sessionstorage.html</loc>
     <lastmod>2026-04-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/tranzakcii-i-acid.html</loc>
     <lastmod>2026-04-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/python-s-nulya.html</loc>
     <lastmod>2026-04-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/dekoratory-v-python.html</loc>
     <lastmod>2026-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/docker-compose-dlya-proekta.html</loc>
     <lastmod>2026-04-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/chto-takoe-cors.html</loc>
     <lastmod>2026-04-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/heshirovanie-paroley.html</loc>
     <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/xss-csrf-sql-inekcii.html</loc>
     <lastmod>2026-04-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/kak-rabotaet-websocket.html</loc>
     <lastmod>2026-04-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/chto-takoe-orm.html</loc>
     <lastmod>2026-04-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/mnogopotochnost-v-python-gil.html</loc>
     <lastmod>2026-04-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/zachem-nuzhen-typescript.html</loc>
     <lastmod>2026-04-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/asinhronnost-v-python.html</loc>
     <lastmod>2026-04-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/indeksy-v-bazah-dannyh.html</loc>
     <lastmod>2026-04-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/git-vetki-i-sliyanie.html</loc>
     <lastmod>2026-04-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/sql-zaprosy-s-nulya.html</loc>
     <lastmod>2026-04-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/osnovy-linux-dlya-razrabotchika.html</loc>
     <lastmod>2026-04-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/monolit-i-mikroservisy.html</loc>
     <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/http-metody-i-status-kody.html</loc>
     <lastmod>2026-04-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/chto-takoe-jwt-avtorizaciya.html</loc>
     <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/chto-takoe-keshirovanie.html</loc>
     <lastmod>2026-04-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/kak-rabotaet-kompilyator-i-interpretator.html</loc>
     <lastmod>2026-04-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/algoritmy-i-struktury-dannyh.html</loc>
     <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/chto-takoe-rest-i-graphql.html</loc>
     <lastmod>2026-03-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/chto-takoe-vpn.html</loc>
     <lastmod>2026-03-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/oop-prostymi-slovami.html</loc>
     <lastmod>2026-03-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/kak-rabotaet-dns.html</loc>
     <lastmod>2026-03-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/kak-sozdat-telegram-bota.html</loc>
     <lastmod>2026-03-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/chto-takoe-devops-ci-cd-deploy.html</loc>
     <lastmod>2026-03-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/scrum-i-agile-prostymi-slovami.html</loc>
     <lastmod>2026-03-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/kak-vybrat-pervyy-yazyk-programmirovaniya.html</loc>
     <lastmod>2026-03-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/regulyarnye-vyrazheniya-na-praktike.html</loc>
     <lastmod>2026-03-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/kak-rabotaet-brauzer.html</loc>
     <lastmod>2026-03-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/modulnye-testy-zachem-nuzhny.html</loc>
     <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/chto-takoe-neyroset-posloyam.html</loc>
     <lastmod>2026-03-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/api-klyuch-kak-ne-slit.html</loc>
     <lastmod>2026-03-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/asinhronnost-v-javascript.html</loc>
     <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/javascript-massivy-i-obekty.html</loc>
     <lastmod>2026-03-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/kak-pisat-chistyy-kod.html</loc>
     <lastmod>2026-03-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/chto-takoe-oblako.html</loc>
     <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/kak-rabotaet-poisk-v-google.html</loc>
     <lastmod>2026-03-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/docker-za-10-minut.html</loc>
     <lastmod>2026-03-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/kak-rabotaet-https.html</loc>
     <lastmod>2026-02-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/sql-vs-nosql.html</loc>
     <lastmod>2026-02-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/javascript-peremennye-i-tipy.html</loc>
     <lastmod>2026-02-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/css-flexbox-vs-grid.html</loc>
     <lastmod>2026-02-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/html-s-nulya.html</loc>
     <lastmod>2026-02-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/terminal-dlya-novichka.html</loc>
     <lastmod>2026-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/chto-takoe-api.html</loc>
     <lastmod>2026-02-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/kak-uchitsya-programmirovaniyu-s-nulya.html</loc>
     <lastmod>2026-02-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/chto-takoe-iskusstvennyy-intellekt.html</loc>
     <lastmod>2026-02-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://itbase-ru.github.io/articles/git-dlya-novichkov.html</loc>
     <lastmod>2026-02-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/tags/karera.html</loc>
+    <lastmod>2026-12-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/tags/razrabotka.html</loc>
+    <lastmod>2026-12-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/tags/veb.html</loc>
+    <lastmod>2026-12-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/tags/css.html</loc>
+    <lastmod>2026-12-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/tags/seti.html</loc>
+    <lastmod>2026-12-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/tags/bazy-dannyh.html</loc>
+    <lastmod>2026-12-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/tags/sql.html</loc>
+    <lastmod>2026-12-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/tags/ii.html</loc>
+    <lastmod>2026-12-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/tags/instrumenty.html</loc>
+    <lastmod>2026-12-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/tags/javascript.html</loc>
+    <lastmod>2026-12-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/tags/devops.html</loc>
+    <lastmod>2026-12-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/tags/api.html</loc>
+    <lastmod>2026-12-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/tags/python.html</loc>
+    <lastmod>2026-12-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/tags/teoriya.html</loc>
+    <lastmod>2026-12-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/tags/arhitektura.html</loc>
+    <lastmod>2026-12-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/tags/bezopasnost.html</loc>
+    <lastmod>2026-12-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/tags/typescript.html</loc>
+    <lastmod>2026-12-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/tags/git.html</loc>
+    <lastmod>2026-12-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/tags/testirovanie.html</loc>
+    <lastmod>2026-12-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/tags/cloud.html</loc>
+    <lastmod>2026-12-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/tags/seo.html</loc>
+    <lastmod>2026-12-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://itbase-ru.github.io/tags/html.html</loc>
+    <lastmod>2026-12-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>

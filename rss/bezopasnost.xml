@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IT·База — Безопасность</title>
+    <link>https://itbase-ru.github.io/tags/bezopasnost.html</link>
+    <description>Статьи с тегом Безопасность на IT·База</description>
+    <language>ru-ru</language>
+    <lastBuildDate>Mon, 26 Oct 2026 18:01:11 GMT</lastBuildDate>
+    <atom:link href="https://itbase-ru.github.io/rss/bezopasnost.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Cookie, localStorage и sessionStorage — что выбрать</title>
+      <link>https://itbase-ru.github.io/articles/cookie-localstorage-sessionstorage.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/cookie-localstorage-sessionstorage.html</guid>
+      <description>Три способа хранить данные в браузере. Разбираем разницу, лимиты, безопасность и когда что использовать — на конкретных примерах.</description>
+      <category>Безопасность</category>
+      <pubDate>Wed, 22 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/storage.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Что такое CORS и почему браузер блокирует запросы</title>
+      <link>https://itbase-ru.github.io/articles/chto-takoe-cors.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/chto-takoe-cors.html</guid>
+      <description>Почему fetch с одного сайта на другой падает с ошибкой, что такое Same-Origin Policy и как правильно настроить CORS на сервере.</description>
+      <category>Безопасность</category>
+      <pubDate>Fri, 17 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/cors.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Как правильно хранить пароли — хеширование и соль</title>
+      <link>https://itbase-ru.github.io/articles/heshirovanie-paroley.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/heshirovanie-paroley.html</guid>
+      <description>Почему нельзя хранить пароли в открытом виде, чем MD5 хуже bcrypt и что такое соль. Разбираем на примерах кода.</description>
+      <category>Безопасность</category>
+      <pubDate>Thu, 16 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/passwords.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>XSS, CSRF, SQL-инъекции — три главные атаки на веб</title>
+      <link>https://itbase-ru.github.io/articles/xss-csrf-sql-inekcii.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/xss-csrf-sql-inekcii.html</guid>
+      <description>Разбираем три самых частых уязвимости в веб-приложениях: как работают, чем опасны и как защититься. С примерами атак и защиты.</description>
+      <category>Безопасность</category>
+      <pubDate>Wed, 15 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/security.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Что такое JWT и как работает авторизация</title>
+      <link>https://itbase-ru.github.io/articles/chto-takoe-jwt-avtorizaciya.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/chto-takoe-jwt-avtorizaciya.html</guid>
+      <description>JWT — это токен, который заменяет куки-сессии. Разбираем структуру, подпись, срок жизни и типичные ошибки при работе с токенами.</description>
+      <category>Безопасность</category>
+      <pubDate>Fri, 03 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/jwt.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Что такое VPN и как он работает</title>
+      <link>https://itbase-ru.github.io/articles/chto-takoe-vpn.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/chto-takoe-vpn.html</guid>
+      <description>VPN — это не только «обход блокировок». Разбираем, как устроен туннель, что видит провайдер, какие бывают протоколы и где VPN не поможет.</description>
+      <category>Безопасность</category>
+      <pubDate>Sun, 29 Mar 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/vpn.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>API-ключ: что это и как не слить его в GitHub</title>
+      <link>https://itbase-ru.github.io/articles/api-klyuch-kak-ne-slit.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/api-klyuch-kak-ne-slit.html</guid>
+      <description>Что такое токены, чем они опасны и почему одна строка в публичном репозитории может стоить тысячи долларов. Правила, которые спасают.</description>
+      <category>Безопасность</category>
+      <pubDate>Fri, 13 Mar 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/apikey-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Как работает HTTPS: шифрование простыми словами</title>
+      <link>https://itbase-ru.github.io/articles/kak-rabotaet-https.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/kak-rabotaet-https.html</guid>
+      <description>Почему сайты без HTTPS уже вне закона, что такое TLS, сертификат и почему замок в адресной строке — это не просто иконка.</description>
+      <category>Безопасность</category>
+      <pubDate>Sat, 28 Feb 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/https-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+  </channel>
+</rss>

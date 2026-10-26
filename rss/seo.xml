@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IT·База — SEO</title>
+    <link>https://itbase-ru.github.io/tags/seo.html</link>
+    <description>Статьи с тегом SEO на IT·База</description>
+    <language>ru-ru</language>
+    <lastBuildDate>Mon, 26 Oct 2026 18:01:11 GMT</lastBuildDate>
+    <atom:link href="https://itbase-ru.github.io/rss/seo.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Как работает поиск в Google: краулеры, индекс и ранжирование</title>
+      <link>https://itbase-ru.github.io/articles/kak-rabotaet-poisk-v-google.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/kak-rabotaet-poisk-v-google.html</guid>
+      <description>Что происходит за миллисекунды между нажатием Enter и списком результатов: как роботы обходят сайты, как строится индекс и почему одни страницы выше других.</description>
+      <category>SEO</category>
+      <pubDate>Tue, 03 Mar 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/google-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+  </channel>
+</rss>

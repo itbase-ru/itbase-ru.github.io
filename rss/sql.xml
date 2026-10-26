@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IT·База — SQL</title>
+    <link>https://itbase-ru.github.io/tags/sql.html</link>
+    <description>Статьи с тегом SQL на IT·База</description>
+    <language>ru-ru</language>
+    <lastBuildDate>Mon, 26 Oct 2026 18:01:11 GMT</lastBuildDate>
+    <atom:link href="https://itbase-ru.github.io/rss/sql.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>PostgreSQL vs MySQL: что выбрать в 2026</title>
+      <link>https://itbase-ru.github.io/articles/postgresql-vs-mysql.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/postgresql-vs-mysql.html</guid>
+      <description>Сравнение PostgreSQL и MySQL простыми словами: философия, производительность, JSON, индексы и расширения. Поможем выбрать БД под твой проект.</description>
+      <category>SQL</category>
+      <pubDate>Wed, 25 Nov 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/pg-mysql-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Транзакции в базах данных — ACID простыми словами</title>
+      <link>https://itbase-ru.github.io/articles/tranzakcii-i-acid.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/tranzakcii-i-acid.html</guid>
+      <description>Почему при переводе денег нельзя потерять ни копейки. Разбираем транзакции и четыре их свойства: атомарность, согласованность, изоляцию, надёжность.</description>
+      <category>SQL</category>
+      <pubDate>Tue, 21 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/tranzakcii.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Индексы в базах данных — зачем и как работают</title>
+      <link>https://itbase-ru.github.io/articles/indeksy-v-bazah-dannyh.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/indeksy-v-bazah-dannyh.html</guid>
+      <description>Почему один и тот же SQL-запрос может выполняться 10 мс или 10 секунд. Разбираем индексы: B-tree, составные, покрывающие и когда они вредят.</description>
+      <category>SQL</category>
+      <pubDate>Thu, 09 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/indeksy.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>SQL-запросы с нуля — SELECT, WHERE, JOIN</title>
+      <link>https://itbase-ru.github.io/articles/sql-zaprosy-s-nulya.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/sql-zaprosy-s-nulya.html</guid>
+      <description>Разбираем SQL на практике: как выбрать данные, отфильтровать, отсортировать, соединить таблицы. С примерами на реальных задачах интернет-магазина.</description>
+      <category>SQL</category>
+      <pubDate>Tue, 07 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/sql.svg" type="image/svg+xml" length="0"/>
+    </item>
+  </channel>
+</rss>

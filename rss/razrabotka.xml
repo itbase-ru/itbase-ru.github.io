@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IT·База — Разработка</title>
+    <link>https://itbase-ru.github.io/tags/razrabotka.html</link>
+    <description>Статьи с тегом Разработка на IT·База</description>
+    <language>ru-ru</language>
+    <lastBuildDate>Mon, 26 Oct 2026 18:01:11 GMT</lastBuildDate>
+    <atom:link href="https://itbase-ru.github.io/rss/razrabotka.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Как написать резюме программисту: шаблон + примеры 2026</title>
+      <link>https://itbase-ru.github.io/articles/kak-napisat-rezyume-programmista.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/kak-napisat-rezyume-programmista.html</guid>
+      <description>Практический гайд по резюме разработчика в 2026: структура, саммари, описание опыта с метриками, навыки, дизайн, ATS-формат и типичные ошибки.</description>
+      <category>Разработка</category>
+      <pubDate>Wed, 02 Dec 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/resume-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>WebSocket vs Server-Sent Events vs Long Polling: что когда использовать</title>
+      <link>https://itbase-ru.github.io/articles/websocket-vs-sse-vs-polling.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/websocket-vs-sse-vs-polling.html</guid>
+      <description>Сравнение трёх технологий real-time в вебе: long polling, SSE и WebSocket. Разбираем, что выбрать для чата, уведомлений, ленты и игр. С примерами кода.</description>
+      <category>Разработка</category>
+      <pubDate>Sat, 28 Nov 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/ws-sse-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Rust vs Go: какой язык учить в 2026</title>
+      <link>https://itbase-ru.github.io/articles/rust-vs-go-sravnenie.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/rust-vs-go-sravnenie.html</guid>
+      <description>Сравнение Rust и Go простыми словами: философия, управление памятью, параллелизм, где использовать каждый язык. Поможем выбрать под твою задачу и карьеру.</description>
+      <category>Разработка</category>
+      <pubDate>Wed, 18 Nov 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/rust-go-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>GitHub Copilot: обзор, цена, сравнение с альтернативами</title>
+      <link>https://itbase-ru.github.io/articles/github-copilot-obzor.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/github-copilot-obzor.html</guid>
+      <description>Что умеет GitHub Copilot в 2026 году, сколько стоит и стоит ли переключаться на Cursor, Codeium и Tabnine. Реальные сценарии, где ИИ-ассистент помогает и мешает.</description>
+      <category>Разработка</category>
+      <pubDate>Thu, 12 Nov 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/copilot-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Пагинация и версионирование API — как не сломать клиентов</title>
+      <link>https://itbase-ru.github.io/articles/paginaciya-i-versirovanie-api.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/paginaciya-i-versirovanie-api.html</guid>
+      <description>Как отдавать тысячи записей постранично и что делать, когда API меняется. Разбираем offset/limit, cursor-пагинацию и версионирование.</description>
+      <category>Разработка</category>
+      <pubDate>Mon, 27 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/api-versioning.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Bash-скрипты для новичка — автоматизация на Linux</title>
+      <link>https://itbase-ru.github.io/articles/bash-skripty-dlya-novichka.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/bash-skripty-dlya-novichka.html</guid>
+      <description>Как написать первый скрипт, который автоматизирует рутину: переменные, условия, циклы, функции, аргументы командной строки.</description>
+      <category>Разработка</category>
+      <pubDate>Sat, 25 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/bash.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Обработка исключений в Python — try, except, finally</title>
+      <link>https://itbase-ru.github.io/articles/obrabotka-isklyucheniy-v-python.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/obrabotka-isklyucheniy-v-python.html</guid>
+      <description>Как ловить ошибки и не давать программе падать. Разбираем try/except, собственные исключения и контекстные менеджеры с примерами.</description>
+      <category>Разработка</category>
+      <pubDate>Fri, 24 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/python-errors.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Дизайн-паттерны — Singleton, Factory, Observer</title>
+      <link>https://itbase-ru.github.io/articles/dizayn-patterns-singleton-factory-observer.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/dizayn-patterns-singleton-factory-observer.html</guid>
+      <description>Три самых частых паттерна проектирования. Разбираем на примерах: зачем нужны, как устроены и где применяются в реальном коде.</description>
+      <category>Разработка</category>
+      <pubDate>Thu, 23 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/patterns.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Python с нуля — базовый синтаксис за 15 минут</title>
+      <link>https://itbase-ru.github.io/articles/python-s-nulya.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/python-s-nulya.html</guid>
+      <description>Переменные, типы, условия, циклы, функции и списки. Минимальный набор, с которого начинается любой Python-проект.</description>
+      <category>Разработка</category>
+      <pubDate>Mon, 20 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/python.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Декораторы в Python — что это и зачем нужны</title>
+      <link>https://itbase-ru.github.io/articles/dekoratory-v-python.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/dekoratory-v-python.html</guid>
+      <description>Функции, которые оборачивают другие функции. Разбираем декораторы с нуля: синтаксис, как работают, где применяются на практике.</description>
+      <category>Разработка</category>
+      <pubDate>Sun, 19 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/decorators.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Docker Compose — несколько контейнеров одной командой</title>
+      <link>https://itbase-ru.github.io/articles/docker-compose-dlya-proekta.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/docker-compose-dlya-proekta.html</guid>
+      <description>Когда одного Dockerfile мало: как описать приложение, базу и кэш в одном файле и запускать всё одной командой docker compose up.</description>
+      <category>Разработка</category>
+      <pubDate>Sat, 18 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/compose.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Как правильно хранить пароли — хеширование и соль</title>
+      <link>https://itbase-ru.github.io/articles/heshirovanie-paroley.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/heshirovanie-paroley.html</guid>
+      <description>Почему нельзя хранить пароли в открытом виде, чем MD5 хуже bcrypt и что такое соль. Разбираем на примерах кода.</description>
+      <category>Разработка</category>
+      <pubDate>Thu, 16 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/passwords.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>XSS, CSRF, SQL-инъекции — три главные атаки на веб</title>
+      <link>https://itbase-ru.github.io/articles/xss-csrf-sql-inekcii.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/xss-csrf-sql-inekcii.html</guid>
+      <description>Разбираем три самых частых уязвимости в веб-приложениях: как работают, чем опасны и как защититься. С примерами атак и защиты.</description>
+      <category>Разработка</category>
+      <pubDate>Wed, 15 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/security.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Как работает WebSocket — real-time связь между браузером и сервером</title>
+      <link>https://itbase-ru.github.io/articles/kak-rabotaet-websocket.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/kak-rabotaet-websocket.html</guid>
+      <description>Почему обычный HTTP плохо подходит для чатов, игр и бирж. Разбираем WebSocket: handshake, кадры, когда нужен и какие есть альтернативы.</description>
+      <category>Разработка</category>
+      <pubDate>Tue, 14 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/websocket.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Что такое ORM — работа с базой через объекты</title>
+      <link>https://itbase-ru.github.io/articles/chto-takoe-orm.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/chto-takoe-orm.html</guid>
+      <description>Зачем писать SQL, если можно работать с базой как с обычными объектами. Разбираем ORM: как работает, плюсы и минусы, примеры на SQLAlchemy.</description>
+      <category>Разработка</category>
+      <pubDate>Mon, 13 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/orm.svg" type="image/svg+xml" length="0"/>
+    </item>
+  </channel>
+</rss>

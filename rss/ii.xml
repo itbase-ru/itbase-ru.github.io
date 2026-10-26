@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IT·База — ИИ</title>
+    <link>https://itbase-ru.github.io/tags/ii.html</link>
+    <description>Статьи с тегом ИИ на IT·База</description>
+    <language>ru-ru</language>
+    <lastBuildDate>Mon, 26 Oct 2026 18:01:11 GMT</lastBuildDate>
+    <atom:link href="https://itbase-ru.github.io/rss/ii.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Claude AI от Anthropic: обзор, сравнение с ChatGPT, как пользоваться</title>
+      <link>https://itbase-ru.github.io/articles/claude-ai-obzor.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/claude-ai-obzor.html</guid>
+      <description>Обзор Claude AI в 2026 году: где он сильнее ChatGPT, тарифы, работа с длинными документами и кодом. Практический гайд без маркетингового шума.</description>
+      <category>ИИ</category>
+      <pubDate>Sun, 22 Nov 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/claude-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>GitHub Copilot: обзор, цена, сравнение с альтернативами</title>
+      <link>https://itbase-ru.github.io/articles/github-copilot-obzor.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/github-copilot-obzor.html</guid>
+      <description>Что умеет GitHub Copilot в 2026 году, сколько стоит и стоит ли переключаться на Cursor, Codeium и Tabnine. Реальные сценарии, где ИИ-ассистент помогает и мешает.</description>
+      <category>ИИ</category>
+      <pubDate>Thu, 12 Nov 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/copilot-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>ChatGPT: как пользоваться, промпты, лайфхаки</title>
+      <link>https://itbase-ru.github.io/articles/chatgpt-kak-polzovatsya.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/chatgpt-kak-polzovatsya.html</guid>
+      <description>Практический гайд по ChatGPT в 2026 году: тарифы, промпт-инжиниринг простыми словами, лайфхаки и ловушки, в которые попадают новички.</description>
+      <category>ИИ</category>
+      <pubDate>Tue, 10 Nov 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/chatgpt-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Что такое нейросеть: разбор по слоям без формул</title>
+      <link>https://itbase-ru.github.io/articles/chto-takoe-neyroset-posloyam.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/chto-takoe-neyroset-posloyam.html</guid>
+      <description>Как устроен искусственный нейрон, зачем нужны слои, веса и функции активации. Разбираю архитектуру на пальцах и показываю мини-сеть на Python.</description>
+      <category>ИИ</category>
+      <pubDate>Sun, 15 Mar 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/neural-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Что такое искусственный интеллект: разбор с нуля</title>
+      <link>https://itbase-ru.github.io/articles/chto-takoe-iskusstvennyy-intellekt.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/chto-takoe-iskusstvennyy-intellekt.html</guid>
+      <description>Объясняю простыми словами, чем ИИ отличается от обычной программы, какие бывают типы ИИ и как он реально работает — без магии и заумных терминов.</description>
+      <category>ИИ</category>
+      <pubDate>Tue, 10 Feb 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/ai-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+  </channel>
+</rss>

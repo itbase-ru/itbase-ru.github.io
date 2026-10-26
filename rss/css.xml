@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IT·База — CSS</title>
+    <link>https://itbase-ru.github.io/tags/css.html</link>
+    <description>Статьи с тегом CSS на IT·База</description>
+    <language>ru-ru</language>
+    <lastBuildDate>Mon, 26 Oct 2026 18:01:11 GMT</lastBuildDate>
+    <atom:link href="https://itbase-ru.github.io/rss/css.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Tailwind CSS vs Bootstrap: что лучше в 2026</title>
+      <link>https://itbase-ru.github.io/articles/tailwind-css-vs-bootstrap.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/tailwind-css-vs-bootstrap.html</guid>
+      <description>Сравнение Tailwind и Bootstrap простыми словами: философия, размер бандла, кривая обучения, экосистема. Поможем выбрать фреймворк под проект.</description>
+      <category>CSS</category>
+      <pubDate>Mon, 30 Nov 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/tailwind-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>CSS: Flexbox против Grid — когда что использовать</title>
+      <link>https://itbase-ru.github.io/articles/css-flexbox-vs-grid.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/css-flexbox-vs-grid.html</guid>
+      <description>Два инструмента для раскладки элементов. Объясняю разницу, показываю примеры и говорю прямо: бери это, а не то.</description>
+      <category>CSS</category>
+      <pubDate>Sun, 22 Feb 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/css-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+  </channel>
+</rss>

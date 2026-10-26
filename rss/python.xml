@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IT·База — Python</title>
+    <link>https://itbase-ru.github.io/tags/python.html</link>
+    <description>Статьи с тегом Python на IT·База</description>
+    <language>ru-ru</language>
+    <lastBuildDate>Mon, 26 Oct 2026 18:01:11 GMT</lastBuildDate>
+    <atom:link href="https://itbase-ru.github.io/rss/python.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Обработка исключений в Python — try, except, finally</title>
+      <link>https://itbase-ru.github.io/articles/obrabotka-isklyucheniy-v-python.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/obrabotka-isklyucheniy-v-python.html</guid>
+      <description>Как ловить ошибки и не давать программе падать. Разбираем try/except, собственные исключения и контекстные менеджеры с примерами.</description>
+      <category>Python</category>
+      <pubDate>Fri, 24 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/python-errors.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Python с нуля — базовый синтаксис за 15 минут</title>
+      <link>https://itbase-ru.github.io/articles/python-s-nulya.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/python-s-nulya.html</guid>
+      <description>Переменные, типы, условия, циклы, функции и списки. Минимальный набор, с которого начинается любой Python-проект.</description>
+      <category>Python</category>
+      <pubDate>Mon, 20 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/python.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Декораторы в Python — что это и зачем нужны</title>
+      <link>https://itbase-ru.github.io/articles/dekoratory-v-python.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/dekoratory-v-python.html</guid>
+      <description>Функции, которые оборачивают другие функции. Разбираем декораторы с нуля: синтаксис, как работают, где применяются на практике.</description>
+      <category>Python</category>
+      <pubDate>Sun, 19 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/decorators.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Что такое ORM — работа с базой через объекты</title>
+      <link>https://itbase-ru.github.io/articles/chto-takoe-orm.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/chto-takoe-orm.html</guid>
+      <description>Зачем писать SQL, если можно работать с базой как с обычными объектами. Разбираем ORM: как работает, плюсы и минусы, примеры на SQLAlchemy.</description>
+      <category>Python</category>
+      <pubDate>Mon, 13 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/orm.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Многопоточность в Python — GIL и потоки</title>
+      <link>https://itbase-ru.github.io/articles/mnogopotochnost-v-python-gil.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/mnogopotochnost-v-python-gil.html</guid>
+      <description>Почему потоки в Python не ускоряют вычисления, что такое GIL и когда всё-таки стоит использовать threading, multiprocessing или asyncio.</description>
+      <category>Python</category>
+      <pubDate>Sun, 12 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/threading.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Асинхронность в Python — asyncio простыми словами</title>
+      <link>https://itbase-ru.github.io/articles/asinhronnost-v-python.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/asinhronnost-v-python.html</guid>
+      <description>async, await, event loop, задачи и корутины. Разбираем, зачем нужна асинхронность в Python, где она помогает и где только мешает.</description>
+      <category>Python</category>
+      <pubDate>Fri, 10 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/asyncio.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Как создать Telegram-бота с кодом</title>
+      <link>https://itbase-ru.github.io/articles/kak-sozdat-telegram-bota.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/kak-sozdat-telegram-bota.html</guid>
+      <description>Пошагово: от BotFather и токена до рабочего бота на Python с командами, кнопками и запуском на сервере.</description>
+      <category>Python</category>
+      <pubDate>Thu, 26 Mar 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/kak-sozdat-telegram-bota.svg" type="image/svg+xml" length="0"/>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IT·База — Веб</title>
+    <link>https://itbase-ru.github.io/tags/veb.html</link>
+    <description>Статьи с тегом Веб на IT·База</description>
+    <language>ru-ru</language>
+    <lastBuildDate>Mon, 26 Oct 2026 18:01:11 GMT</lastBuildDate>
+    <atom:link href="https://itbase-ru.github.io/rss/veb.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Tailwind CSS vs Bootstrap: что лучше в 2026</title>
+      <link>https://itbase-ru.github.io/articles/tailwind-css-vs-bootstrap.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/tailwind-css-vs-bootstrap.html</guid>
+      <description>Сравнение Tailwind и Bootstrap простыми словами: философия, размер бандла, кривая обучения, экосистема. Поможем выбрать фреймворк под проект.</description>
+      <category>Веб</category>
+      <pubDate>Mon, 30 Nov 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/tailwind-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>WebSocket vs Server-Sent Events vs Long Polling: что когда использовать</title>
+      <link>https://itbase-ru.github.io/articles/websocket-vs-sse-vs-polling.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/websocket-vs-sse-vs-polling.html</guid>
+      <description>Сравнение трёх технологий real-time в вебе: long polling, SSE и WebSocket. Разбираем, что выбрать для чата, уведомлений, ленты и игр. С примерами кода.</description>
+      <category>Веб</category>
+      <pubDate>Sat, 28 Nov 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/ws-sse-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Next.js 15: что нового, App Router, Server Components</title>
+      <link>https://itbase-ru.github.io/articles/nextjs-15-chto-novogo.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/nextjs-15-chto-novogo.html</guid>
+      <description>Обзор Next.js 15 простыми словами: чем App Router отличается от Pages, как работают Server Components, зачем Turbopack и где лежат грабли при миграции.</description>
+      <category>Веб</category>
+      <pubDate>Fri, 20 Nov 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/nextjs-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Пагинация и версионирование API — как не сломать клиентов</title>
+      <link>https://itbase-ru.github.io/articles/paginaciya-i-versirovanie-api.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/paginaciya-i-versirovanie-api.html</guid>
+      <description>Как отдавать тысячи записей постранично и что делать, когда API меняется. Разбираем offset/limit, cursor-пагинацию и версионирование.</description>
+      <category>Веб</category>
+      <pubDate>Mon, 27 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/api-versioning.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Что такое Nginx и зачем он нужен на сервере</title>
+      <link>https://itbase-ru.github.io/articles/chto-takoe-nginx.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/chto-takoe-nginx.html</guid>
+      <description>Почему почти все сайты работают через Nginx. Разбираем: веб-сервер, reverse proxy, балансировка нагрузки, статика и конфиги.</description>
+      <category>Веб</category>
+      <pubDate>Sun, 26 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/nginx.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Cookie, localStorage и sessionStorage — что выбрать</title>
+      <link>https://itbase-ru.github.io/articles/cookie-localstorage-sessionstorage.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/cookie-localstorage-sessionstorage.html</guid>
+      <description>Три способа хранить данные в браузере. Разбираем разницу, лимиты, безопасность и когда что использовать — на конкретных примерах.</description>
+      <category>Веб</category>
+      <pubDate>Wed, 22 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/storage.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Что такое CORS и почему браузер блокирует запросы</title>
+      <link>https://itbase-ru.github.io/articles/chto-takoe-cors.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/chto-takoe-cors.html</guid>
+      <description>Почему fetch с одного сайта на другой падает с ошибкой, что такое Same-Origin Policy и как правильно настроить CORS на сервере.</description>
+      <category>Веб</category>
+      <pubDate>Fri, 17 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/cors.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>XSS, CSRF, SQL-инъекции — три главные атаки на веб</title>
+      <link>https://itbase-ru.github.io/articles/xss-csrf-sql-inekcii.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/xss-csrf-sql-inekcii.html</guid>
+      <description>Разбираем три самых частых уязвимости в веб-приложениях: как работают, чем опасны и как защититься. С примерами атак и защиты.</description>
+      <category>Веб</category>
+      <pubDate>Wed, 15 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/security.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Как работает WebSocket — real-time связь между браузером и сервером</title>
+      <link>https://itbase-ru.github.io/articles/kak-rabotaet-websocket.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/kak-rabotaet-websocket.html</guid>
+      <description>Почему обычный HTTP плохо подходит для чатов, игр и бирж. Разбираем WebSocket: handshake, кадры, когда нужен и какие есть альтернативы.</description>
+      <category>Веб</category>
+      <pubDate>Tue, 14 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/websocket.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>HTTP-методы и статус-коды — шпаргалка с примерами</title>
+      <link>https://itbase-ru.github.io/articles/http-metody-i-status-kody.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/http-metody-i-status-kody.html</guid>
+      <description>GET, POST, PUT, PATCH, DELETE и что значат все эти 200, 301, 404, 500. Разбираем HTTP по-человечески, с примерами запросов и ответов.</description>
+      <category>Веб</category>
+      <pubDate>Sat, 04 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/http.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Что такое JWT и как работает авторизация</title>
+      <link>https://itbase-ru.github.io/articles/chto-takoe-jwt-avtorizaciya.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/chto-takoe-jwt-avtorizaciya.html</guid>
+      <description>JWT — это токен, который заменяет куки-сессии. Разбираем структуру, подпись, срок жизни и типичные ошибки при работе с токенами.</description>
+      <category>Веб</category>
+      <pubDate>Fri, 03 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/jwt.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Что такое кэширование и зачем оно нужно</title>
+      <link>https://itbase-ru.github.io/articles/chto-takoe-keshirovanie.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/chto-takoe-keshirovanie.html</guid>
+      <description>Кэш — одна из главных идей в IT. Разбираем, какие бывают уровни кэша, что такое TTL, инвалидация, и почему кэш может всё сломать.</description>
+      <category>Веб</category>
+      <pubDate>Thu, 02 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/cache.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>REST и GraphQL — в чём разница</title>
+      <link>https://itbase-ru.github.io/articles/chto-takoe-rest-i-graphql.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/chto-takoe-rest-i-graphql.html</guid>
+      <description>Два главных подхода к построению API. Разбираем на примерах: когда REST удобнее, а когда GraphQL решает проблемы, которые REST создаёт.</description>
+      <category>Веб</category>
+      <pubDate>Mon, 30 Mar 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/rest-graphql.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Как работает DNS — простыми словами</title>
+      <link>https://itbase-ru.github.io/articles/kak-rabotaet-dns.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/kak-rabotaet-dns.html</guid>
+      <description>Что происходит за секунду между вводом адреса в браузере и загрузкой сайта. Разбираем DNS: корневые серверы, зоны, кэш и типы записей.</description>
+      <category>Веб</category>
+      <pubDate>Fri, 27 Mar 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/dns.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Как работает браузер: DOM, парсинг и рендеринг</title>
+      <link>https://itbase-ru.github.io/articles/kak-rabotaet-brauzer.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/kak-rabotaet-brauzer.html</guid>
+      <description>Что происходит между нажатием Enter и появлением страницы. Разбираю путь: HTML → DOM → CSSOM → рендер-дерево → пиксели.</description>
+      <category>Веб</category>
+      <pubDate>Thu, 19 Mar 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/browser-cover.svg" type="image/svg+xml" length="0"/>
+    </item>
+  </channel>
+</rss>

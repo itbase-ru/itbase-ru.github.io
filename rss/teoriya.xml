@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IT·База — Теория</title>
+    <link>https://itbase-ru.github.io/tags/teoriya.html</link>
+    <description>Статьи с тегом Теория на IT·База</description>
+    <language>ru-ru</language>
+    <lastBuildDate>Mon, 26 Oct 2026 18:01:11 GMT</lastBuildDate>
+    <atom:link href="https://itbase-ru.github.io/rss/teoriya.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Обработка исключений в Python — try, except, finally</title>
+      <link>https://itbase-ru.github.io/articles/obrabotka-isklyucheniy-v-python.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/obrabotka-isklyucheniy-v-python.html</guid>
+      <description>Как ловить ошибки и не давать программе падать. Разбираем try/except, собственные исключения и контекстные менеджеры с примерами.</description>
+      <category>Теория</category>
+      <pubDate>Fri, 24 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/python-errors.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Дизайн-паттерны — Singleton, Factory, Observer</title>
+      <link>https://itbase-ru.github.io/articles/dizayn-patterns-singleton-factory-observer.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/dizayn-patterns-singleton-factory-observer.html</guid>
+      <description>Три самых частых паттерна проектирования. Разбираем на примерах: зачем нужны, как устроены и где применяются в реальном коде.</description>
+      <category>Теория</category>
+      <pubDate>Thu, 23 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/patterns.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Транзакции в базах данных — ACID простыми словами</title>
+      <link>https://itbase-ru.github.io/articles/tranzakcii-i-acid.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/tranzakcii-i-acid.html</guid>
+      <description>Почему при переводе денег нельзя потерять ни копейки. Разбираем транзакции и четыре их свойства: атомарность, согласованность, изоляцию, надёжность.</description>
+      <category>Теория</category>
+      <pubDate>Tue, 21 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/tranzakcii.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Python с нуля — базовый синтаксис за 15 минут</title>
+      <link>https://itbase-ru.github.io/articles/python-s-nulya.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/python-s-nulya.html</guid>
+      <description>Переменные, типы, условия, циклы, функции и списки. Минимальный набор, с которого начинается любой Python-проект.</description>
+      <category>Теория</category>
+      <pubDate>Mon, 20 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/python.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Декораторы в Python — что это и зачем нужны</title>
+      <link>https://itbase-ru.github.io/articles/dekoratory-v-python.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/dekoratory-v-python.html</guid>
+      <description>Функции, которые оборачивают другие функции. Разбираем декораторы с нуля: синтаксис, как работают, где применяются на практике.</description>
+      <category>Теория</category>
+      <pubDate>Sun, 19 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/decorators.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Как правильно хранить пароли — хеширование и соль</title>
+      <link>https://itbase-ru.github.io/articles/heshirovanie-paroley.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/heshirovanie-paroley.html</guid>
+      <description>Почему нельзя хранить пароли в открытом виде, чем MD5 хуже bcrypt и что такое соль. Разбираем на примерах кода.</description>
+      <category>Теория</category>
+      <pubDate>Thu, 16 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/passwords.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Многопоточность в Python — GIL и потоки</title>
+      <link>https://itbase-ru.github.io/articles/mnogopotochnost-v-python-gil.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/mnogopotochnost-v-python-gil.html</guid>
+      <description>Почему потоки в Python не ускоряют вычисления, что такое GIL и когда всё-таки стоит использовать threading, multiprocessing или asyncio.</description>
+      <category>Теория</category>
+      <pubDate>Sun, 12 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/threading.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Асинхронность в Python — asyncio простыми словами</title>
+      <link>https://itbase-ru.github.io/articles/asinhronnost-v-python.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/asinhronnost-v-python.html</guid>
+      <description>async, await, event loop, задачи и корутины. Разбираем, зачем нужна асинхронность в Python, где она помогает и где только мешает.</description>
+      <category>Теория</category>
+      <pubDate>Fri, 10 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/asyncio.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Основы Linux для разработчика — базовые команды</title>
+      <link>https://itbase-ru.github.io/articles/osnovy-linux-dlya-razrabotchika.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/osnovy-linux-dlya-razrabotchika.html</guid>
+      <description>Что нужно знать про Linux, чтобы работать на сервере. Разбираем навигацию по файлам, права доступа, процессы, SSH и полезные команды с примерами.</description>
+      <category>Теория</category>
+      <pubDate>Mon, 06 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/linux.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>HTTP-методы и статус-коды — шпаргалка с примерами</title>
+      <link>https://itbase-ru.github.io/articles/http-metody-i-status-kody.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/http-metody-i-status-kody.html</guid>
+      <description>GET, POST, PUT, PATCH, DELETE и что значат все эти 200, 301, 404, 500. Разбираем HTTP по-человечески, с примерами запросов и ответов.</description>
+      <category>Теория</category>
+      <pubDate>Sat, 04 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/http.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Как работает компилятор и интерпретатор</title>
+      <link>https://itbase-ru.github.io/articles/kak-rabotaet-kompilyator-i-interpretator.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/kak-rabotaet-kompilyator-i-interpretator.html</guid>
+      <description>Почему Python медленнее C, а JavaScript работает в браузере, хотя он интерпретируемый. Разбираем компиляцию, интерпретацию и JIT.</description>
+      <category>Теория</category>
+      <pubDate>Wed, 01 Apr 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/kompilyator.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Алгоритмы и структуры данных — с чего начать</title>
+      <link>https://itbase-ru.github.io/articles/algoritmy-i-struktury-dannyh.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/algoritmy-i-struktury-dannyh.html</guid>
+      <description>Зачем программисту знать про массивы, списки, деревья и хеш-таблицы. Разбираем базовые структуры и алгоритмы на понятных примерах.</description>
+      <category>Теория</category>
+      <pubDate>Tue, 31 Mar 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/algoritmy.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>REST и GraphQL — в чём разница</title>
+      <link>https://itbase-ru.github.io/articles/chto-takoe-rest-i-graphql.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/chto-takoe-rest-i-graphql.html</guid>
+      <description>Два главных подхода к построению API. Разбираем на примерах: когда REST удобнее, а когда GraphQL решает проблемы, которые REST создаёт.</description>
+      <category>Теория</category>
+      <pubDate>Mon, 30 Mar 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/rest-graphql.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>Что такое VPN и как он работает</title>
+      <link>https://itbase-ru.github.io/articles/chto-takoe-vpn.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/chto-takoe-vpn.html</guid>
+      <description>VPN — это не только «обход блокировок». Разбираем, как устроен туннель, что видит провайдер, какие бывают протоколы и где VPN не поможет.</description>
+      <category>Теория</category>
+      <pubDate>Sun, 29 Mar 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/vpn.svg" type="image/svg+xml" length="0"/>
+    </item>
+    <item>
+      <title>ООП простыми словами — классы, объекты, наследование</title>
+      <link>https://itbase-ru.github.io/articles/oop-prostymi-slovami.html</link>
+      <guid isPermaLink="true">https://itbase-ru.github.io/articles/oop-prostymi-slovami.html</guid>
+      <description>Инкапсуляция, наследование, полиморфизм и абстракция — четыре слова, которые пугают новичков. Разбираем на понятных примерах без умных терминов.</description>
+      <category>Теория</category>
+      <pubDate>Sat, 28 Mar 2026 00:00:00 +0300</pubDate>
+      <enclosure url="https://itbase-ru.github.io/img/oop.svg" type="image/svg+xml" length="0"/>
+    </item>
+  </channel>
+</rss>

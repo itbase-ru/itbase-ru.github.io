@@ -69,10 +69,11 @@ FOOTER = f"""<footer class="site-footer">
   <div class="site-footer__inner">
     <span>© <span id="year">{YEAR}</span> IT·База</span>
     <a href="/about.html">О сайте</a>
-    <a href="/contacts.html">Контакты</a>
+    <a href="/top.html">Лучшее</a>
+    <a href="/archive.html">Архив</a>
+    <a href="/sitemap.html">Карта</a>
     <a href="/support.html">Поддержать ★</a>
     <a href="/privacy.html">Политика</a>
-    <a href="/terms.html">Условия</a>
     <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
   </div>
 </footer>"""
@@ -492,6 +493,7 @@ def build_article_page(a, arts):
     ad_inline = ad_slot_html(slot_name="ad-inline")
     ad_bottom = ad_slot_html(slot_name="ad-bottom")
     analytics = analytics_snippet()
+    more_topic = more_from_topic_block(a, arts)
 
     toc = ""
     if len(a["heads"]) >= 2:
@@ -574,6 +576,8 @@ def build_article_page(a, arts):
 
       {donate_html}
 
+      {more_topic}
+
       {ad_bottom}
 
       <section class="wrap" style="padding-bottom:70px">
@@ -622,16 +626,40 @@ def write_index_js(arts):
 
 def write_sitemap(arts):
     newest = max(a["date"] for a in arts)
-    urls = [(SITE + "/", newest)]
-    for page in ("about", "contacts", "privacy", "terms"):
-        urls.append((f"{SITE}/{page}.html", None))
+    urls = [(SITE + "/", newest, "weekly", "1.0")]
+    # Служебные страницы
+    static_pages = [
+        ("about.html", "monthly", "0.6"),
+        ("contacts.html", "monthly", "0.5"),
+        ("privacy.html", "monthly", "0.3"),
+        ("terms.html", "monthly", "0.3"),
+        ("support.html", "monthly", "0.6"),
+        ("sitemap.html", "weekly", "0.7"),
+        ("archive.html", "weekly", "0.7"),
+        ("top.html", "weekly", "0.8"),
+    ]
+    for page, freq, prio in static_pages:
+        urls.append((f"{SITE}/{page}", None, freq, prio))
+    # Все статьи
     for a in arts:
-        urls.append((f"{SITE}/{a['url']}", a["date"]))
+        urls.append((f"{SITE}/{a['url']}", a["date"], "weekly", "0.8"))
+    # Теговые страницы
+    by_tag = {}
+    for a in arts:
+        for t in a["tags"]:
+            by_tag.setdefault(t, []).append(a)
+    for tag in by_tag:
+        urls.append((f"{SITE}/tags/{slugify_tag(tag)}.html", newest, "weekly", "0.6"))
+
     rows = []
-    for loc, last in urls:
+    for loc, last, freq, prio in urls:
         row = f"  <url>\n    <loc>{esc(loc)}</loc>\n"
         if last:
             row += f"    <lastmod>{last}</lastmod>\n"
+        if freq:
+            row += f"    <changefreq>{freq}</changefreq>\n"
+        if prio:
+            row += f"    <priority>{prio}</priority>\n"
         rows.append(row + "  </url>")
     xml = ('<?xml version="1.0" encoding="UTF-8"?>\n'
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
@@ -1075,6 +1103,395 @@ def write_support_page(arts):
     (ROOT / "support.html").write_text(html_out, encoding="utf-8")
 
 
+# ----------------------------- ТЕГОВЫЕ СТРАНИЦЫ -------------------------------
+def slugify_tag(tag):
+    """Тег → латиница для URL. Например 'Базы данных' → 'bazy-dannyh'."""
+    return clean_slug(tag)
+
+
+def write_tag_pages(arts):
+    """Создаёт /tags/{slug}.html для каждого тега — список статей с SEO."""
+    by_tag = {}
+    for a in arts:
+        for t in a["tags"]:
+            by_tag.setdefault(t, []).append(a)
+
+    out_dir = ROOT / "tags"
+    out_dir.mkdir(exist_ok=True)
+
+    # Список всех тегов для вставки в sitemap-страницы
+    all_tags = sorted(by_tag.keys(), key=lambda x: -len(by_tag[x]))
+
+    for tag, items in by_tag.items():
+        slug = slugify_tag(tag)
+        items_sorted = sorted(items, key=lambda x: x["date"], reverse=True)
+        canon = f"{SITE}/tags/{slug}.html"
+
+        # SEO-описание динамически
+        n = len(items_sorted)
+        desc = f"Все статьи с тегом «{tag}» на IT·База — {n} материалов. Понятные статьи про технологии простыми словами."
+        title = f"{tag} — {n} {'статей' if n != 1 else 'статья'} | IT·База"
+
+        # JSON-LD: ItemList
+        ld = {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "name": f"Статьи по тегу {tag}",
+            "itemListElement": [
+                {"@type": "ListItem", "position": i + 1,
+                 "name": a["title"],
+                 "url": f"{SITE}/{a['url']}"}
+                for i, a in enumerate(items_sorted[:20])
+            ]
+        }
+
+        # Список статей
+        cards = "\n".join(card(a) for a in items_sorted)
+        # Переделываем card() чтобы убрать isOn bookmarks — но card() это использует в Article
+        # Это норм — кнопка просто не выделена
+
+        # Ссылки на другие теги
+        other_tags = " ".join(
+            f'<a href="/tags/{slugify_tag(t)}.html" class="chip">{esc(t)} <span class="sitemap-count">({len(by_tag[t])})</span></a>'
+            for t in all_tags if t != tag
+        )
+
+        html_out = f'''<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{esc(title)}</title>
+  <meta name="description" content="{esc(desc)}">
+  <meta name="keywords" content="{esc(tag)}, статьи {esc(tag)}, {esc(tag)} простыми словами, IT, программирование">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="{canon}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{esc(SITE_NAME)}">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="{esc(title)}">
+  <meta property="og:description" content="{esc(desc)}">
+  <meta property="og:url" content="{canon}">
+  <meta property="og:image" content="{default_og()}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{esc(title)}">
+  <meta name="twitter:description" content="{esc(desc)}">
+  <meta name="twitter:image" content="{default_og()}">
+  <script type="application/ld+json">{ld_json(ld)}</script>
+  {ICONS}
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0d1117">
+  <link rel="alternate" type="application/rss+xml" title="{esc(SITE_NAME)} — {esc(tag)}" href="{SITE}/rss/{slug}.xml">
+  {THEME_SCRIPT}
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div id="progress"></div>
+  {HEADER}
+  <main>
+    <section class="hero wrap">
+      <h1>{esc(tag)}</h1>
+      <p>{n} материалов на сайте. Объясняю {esc(tag.lower())} простыми словами — без воды, с примерами и кодом.</p>
+    </section>
+    <div class="wrap" style="padding-bottom:80px">
+      <div class="grid" id="grid">
+{cards}
+      </div>
+      <nav class="other-tags" aria-label="Другие теги" style="margin-top:60px;padding-top:30px;border-top:2px solid var(--border)">
+        <h2 style="font-family:Georgia,serif;font-size:22px;margin:0 0 16px">Другие темы</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          {other_tags}
+        </div>
+      </nav>
+    </div>
+  </main>
+  {FOOTER}
+  <script src="/data/index.js"></script>
+  <script src="/app.js"></script>
+  {analytics_snippet()}
+</body>
+</html>
+'''
+        (out_dir / f"{slug}.html").write_text(html_out, encoding="utf-8")
+
+
+# ----------------------------- АРХИВ ПО МЕСЯЦАМ -------------------------------
+def write_archive_page(arts):
+    """/archive.html — все статьи сгруппированы по месяцам."""
+    by_month = {}
+    for a in arts:
+        ym = a["date"][:7]  # YYYY-MM
+        by_month.setdefault(ym, []).append(a)
+
+    months_sorted = sorted(by_month.keys(), reverse=True)
+    MONTH_NAMES = {
+        "01": "Январь", "02": "Февраль", "03": "Март", "04": "Апрель",
+        "05": "Май", "06": "Июнь", "07": "Июль", "08": "Август",
+        "09": "Сентябрь", "10": "Октябрь", "11": "Ноябрь", "12": "Декабрь"
+    }
+
+    sections = []
+    for ym in months_sorted:
+        items = sorted(by_month[ym], key=lambda x: x["date"], reverse=True)
+        year, month = ym.split("-")
+        title = f"{MONTH_NAMES[month]} {year}"
+        items_html = "\n".join(
+            f'        <li><time datetime="{a["date"]}">{fmt_date(a["date"])}</time> — '
+            f'<a href="/{a["url"]}">{esc(a["title"])}</a></li>'
+            for a in items
+        )
+        sections.append(
+            f'    <section class="archive-month">\n'
+            f'      <h2>{title} <span class="sitemap-count">({len(items)})</span></h2>\n'
+            f'      <ul class="archive-list">\n{items_html}\n      </ul>\n'
+            f'    </section>'
+        )
+    sections_str = "\n\n".join(sections)
+    today = datetime.date.today().isoformat()
+
+    html_out = f'''<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Архив статей — {esc(SITE_NAME)}</title>
+  <meta name="description" content="Полный архив всех статей IT·База по месяцам. {len(arts)} статей про программирование, ИИ, DevOps, базы данных простыми словами.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="{SITE}/archive.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Архив статей — {esc(SITE_NAME)}">
+  <meta property="og:description" content="Полный архив всех статей IT·База по месяцам.">
+  <meta property="og:url" content="{SITE}/archive.html">
+  <meta property="og:image" content="{default_og()}">
+  {ICONS}
+  <link rel="manifest" href="/manifest.json">
+  {THEME_SCRIPT}
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .archive-wrap{{max-width:900px;margin:0 auto;padding:30px 20px 80px;}}
+    .archive-month{{margin-bottom:50px;}}
+    .archive-month h2{{font-family:Georgia,serif;font-size:24px;color:var(--accent);margin:0 0 18px;border-bottom:1px solid var(--border);padding-bottom:10px;}}
+    .archive-list{{list-style:none;padding:0;margin:0;display:grid;gap:14px;}}
+    .archive-list li{{padding:8px 0;border-bottom:1px dotted var(--border);font-size:16px;}}
+    .archive-list time{{color:var(--muted);font-size:14px;margin-right:14px;white-space:nowrap;}}
+    .archive-list a{{color:var(--text);text-decoration:none;}}
+    .archive-list a:hover{{color:var(--accent);}}
+    .sitemap-count{{color:var(--muted);font-size:14px;font-weight:normal;}}
+  </style>
+</head>
+<body>
+  <div id="progress"></div>
+  {HEADER}
+  <main>
+    <section class="hero wrap">
+      <h1>Архив статей</h1>
+      <p>Все {len(arts)} статей сайта, отсортированы по месяцам. Обновлено: {today}.</p>
+    </section>
+    <div class="archive-wrap">
+{sections_str}
+    </div>
+  </main>
+  {FOOTER}
+  <script src="/app.js"></script>
+  {analytics_snippet()}
+</body>
+</html>
+'''
+    (ROOT / "archive.html").write_text(html_out, encoding="utf-8")
+
+
+# ----------------------------- ТОП СТАТЕЙ ------------------------------------
+def write_top_page(arts):
+    """/top.html — топ-10 статей по длине + недавние."""
+    # Топ-10 по длине контента (прокси для «самые большие статьи»)
+    by_len = sorted(arts, key=lambda a: -len(a["content"]))
+    top10 = by_len[:10]
+
+    # Топ по тегам — 5 самых популярных тегов
+    by_tag = {}
+    for a in arts:
+        for t in a["tags"]:
+            by_tag.setdefault(t, []).append(a)
+    top_tags = sorted(by_tag.items(), key=lambda x: -len(x[1]))[:5]
+
+    cards = "\n".join(card(a) for a in top10)
+    tags_html = " ".join(
+        f'<a href="/tags/{slugify_tag(t)}.html" class="chip">{esc(t)} ({len(items)})</a>'
+        for t, items in top_tags
+    )
+
+    today = datetime.date.today().isoformat()
+    total_words = sum(len(a["content"].split()) for a in arts)
+
+    html_out = f'''<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Лучшие статьи — {esc(SITE_NAME)}</title>
+  <meta name="description" content="Топ-10 статей IT·База по объёму и качеству. Самые подробные материалы про программирование, ИИ, DevOps.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="{SITE}/top.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Лучшие статьи — {esc(SITE_NAME)}">
+  <meta property="og:description" content="Топ-10 самых подробных статей IT·База.">
+  <meta property="og:url" content="{SITE}/top.html">
+  <meta property="og:image" content="{default_og()}">
+  {ICONS}
+  <link rel="manifest" href="/manifest.json">
+  {THEME_SCRIPT}
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div id="progress"></div>
+  {HEADER}
+  <main>
+    <section class="hero wrap">
+      <h1>Лучшие статьи</h1>
+      <p>Топ-10 материалов сайта по объёму и качеству. Обновлено: {today}.</p>
+    </section>
+    <div class="wrap" style="padding-bottom:60px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px;margin:30px 0 40px">
+        <div class="support-stat"><div class="support-stat__num">{len(arts)}</div><div class="support-stat__label">статей всего</div></div>
+        <div class="support-stat"><div class="support-stat__num">{total_words:,}</div><div class="support-stat__label">слов написано</div></div>
+        <div class="support-stat"><div class="support-stat__num">{len(by_tag)}</div><div class="support-stat__label">тегов</div></div>
+        <div class="support-stat"><div class="support-stat__num">{max(a['readTime'] for a in arts)}</div><div class="support-stat__label">макс. минут чтения</div></div>
+      </div>
+      <h2 style="font-family:Georgia,serif;font-size:26px;margin:30px 0 20px">Топ-10 по объёму</h2>
+      <div class="grid" id="grid">
+{cards}
+      </div>
+      <h2 style="font-family:Georgia,serif;font-size:26px;margin:50px 0 20px">Популярные теги</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:10px">
+        {tags_html}
+      </div>
+      <p style="margin-top:50px;text-align:center">
+        <a href="/archive.html" style="display:inline-block;padding:14px 28px;background:var(--accent);color:#fff;text-decoration:none;border-radius:10px;font-weight:600">Смотреть все статьи в архиве →</a>
+      </p>
+    </div>
+  </main>
+  {FOOTER}
+  <script src="/data/index.js"></script>
+  <script src="/app.js"></script>
+  {analytics_snippet()}
+</body>
+</html>
+'''
+    (ROOT / "top.html").write_text(html_out, encoding="utf-8")
+
+
+# ----------------------------- JSON FEED -------------------------------------
+def write_json_feed(arts):
+    """/feed.json — JSON Feed (современная альтернатива RSS)."""
+    items = []
+    for a in arts[:25]:
+        items.append({
+            "id": f"{SITE}/{a['url']}",
+            "url": f"{SITE}/{a['url']}",
+            "title": a["title"],
+            "content_html": a["content"],
+            "summary": a["excerpt"],
+            "date_published": f"{a['date']}T00:00:00+03:00",
+            "tags": a["tags"],
+            "image": abs_url(a["cover"]),
+        })
+    feed = {
+        "version": "https://jsonfeed.org/version/1.1",
+        "title": f"{SITE_NAME} — понятные статьи про ИИ, программирование и IT",
+        "description": "Статьи про технологии простыми словами: ИИ, программирование, веб, базы данных, DevOps.",
+        "home_page_url": SITE + "/",
+        "feed_url": SITE + "/feed.json",
+        "language": "ru-RU",
+        "authors": [{"name": AUTHOR_NAME, "url": SITE + "/"}],
+        "items": items,
+    }
+    (ROOT / "feed.json").write_text(
+        json.dumps(feed, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+
+
+# ----------------------------- ТЕГОВЫЕ RSS-каналы ----------------------------
+def write_tag_rss(arts):
+    """/rss/{tag}.xml для каждого тега — отдельный RSS-канал."""
+    by_tag = {}
+    for a in arts:
+        for t in a["tags"]:
+            by_tag.setdefault(t, []).append(a)
+
+    rss_dir = ROOT / "rss"
+    rss_dir.mkdir(exist_ok=True)
+
+    last_build = datetime.datetime.now(datetime.timezone.utc).strftime("%a, %d %b %Y %H:%M:%S GMT")
+
+    for tag, items in by_tag.items():
+        slug = slugify_tag(tag)
+        items = sorted(items, key=lambda x: x["date"], reverse=True)[:15]
+        items_xml = []
+        for a in items:
+            url = f"{SITE}/{a['url']}"
+            cover_url = abs_url(a["cover"])
+            items_xml.append(
+                "    <item>\n"
+                f"      <title>{esc(a['title'])}</title>\n"
+                f"      <link>{url}</link>\n"
+                f"      <guid isPermaLink=\"true\">{url}</guid>\n"
+                f"      <description>{esc(a['excerpt'])}</description>\n"
+                f"      <category>{esc(tag)}</category>\n"
+                f"      <pubDate>{datetime.datetime.strptime(a['date'], '%Y-%m-%d').strftime('%a, %d %b %Y %H:%M:%S +0300')}</pubDate>\n"
+                f"      <enclosure url=\"{cover_url}\" type=\"image/svg+xml\" length=\"0\"/>\n"
+                "    </item>"
+            )
+        xml = (
+            '<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n'
+            '<rss version=\"2.0\" xmlns:atom=\"http://www.w3.org/2005/Atom\">\n'
+            '  <channel>\n'
+            f'    <title>{esc(SITE_NAME)} — {esc(tag)}</title>\n'
+            f'    <link>{SITE}/tags/{slug}.html</link>\n'
+            f'    <description>Статьи с тегом {esc(tag)} на {esc(SITE_NAME)}</description>\n'
+            '    <language>ru-ru</language>\n'
+            f'    <lastBuildDate>{last_build}</lastBuildDate>\n'
+            f'    <atom:link href=\"{SITE}/rss/{slug}.xml\" rel=\"self\" type=\"application/rss+xml\"/>\n'
+            + "\n".join(items_xml) + "\n"
+            '  </channel>\n'
+            '</rss>\n'
+        )
+        (rss_dir / f"{slug}.xml").write_text(xml, encoding="utf-8")
+
+
+# ----------------------------- УЛУЧШЕННАЯ ПЕРЕЛИНКОВКА ----------------------
+def more_from_topic_block(article, arts):
+    """Блок «Ещё по теме» — 5 статей с теми же тегами, отсортированы по overlap."""
+    other = [a for a in arts if a["slug"] != article["slug"]]
+    scored = []
+    for a in other:
+        overlap = len(set(a["tags"]) & set(article["tags"]))
+        scored.append((overlap, a))
+    scored = [(o, a) for o, a in scored if o > 0]
+    scored.sort(key=lambda x: (-x[0], x[1]["date"]))
+    picked = [a for _, a in scored[:5]]
+    if len(picked) < 5:
+        used = {a["slug"] for a in picked} | {article["slug"]}
+        for a in sorted(other, key=lambda x: x["date"], reverse=True):
+            if len(picked) >= 5: break
+            if a["slug"] not in used:
+                picked.append(a); used.add(a["slug"])
+    if not picked:
+        return ''
+    items = "\n".join(
+        f'    <li><a href="/{a["url"]}">{esc(a["title"])}</a>'
+        f'<span class="dot">•</span><span class="more-from-topic__meta">{a["readTime"]} мин · {esc(", ".join(a["tags"][:2]))}</span></li>'
+        for a in picked
+    )
+    return f'''
+    <aside class="more-from-topic" aria-label="Ещё по теме">
+      <h2 class="more-from-topic__title">Ещё по теме</h2>
+      <ul class="more-from-topic__list">
+{items}
+      </ul>
+    </aside>
+    '''
+
+
 # ----------------------------- ЗАПУСК ----------------------------------------
 def main():
     raw = load_articles()
@@ -1096,7 +1513,13 @@ def main():
     write_sitemap_html(arts)
     write_sitemap_images(arts)
     write_support_page(arts)
-    print("RSS, manifest, sitemap.html, sitemap-images, support.html и улучшенный robots.txt созданы.")
+    # Новые страницы для роста трафика
+    write_tag_pages(arts)
+    write_archive_page(arts)
+    write_top_page(arts)
+    write_json_feed(arts)
+    write_tag_rss(arts)
+    print("Все SEO-файлы созданы: теги, архив, топ, JSON Feed, теговые RSS.")
     print("Готово.")
 
 
