@@ -563,11 +563,6 @@ function init404(){
     return Math.max(0, Math.min(100, pct));
   }
 
-  // Формируем текст уведомления — одна общая фраза
-  function describePosition(pos) {
-    return 'Не дочитал — продолжить с того же места?';
-  }
-
   // Восстанавливаем позицию
   let savedPos = 0;
   try { savedPos = parseInt(localStorage.getItem(KEY) || '0', 10); } catch (e) {}
@@ -586,38 +581,55 @@ function init404(){
     let noticeDismissed = false;
     try { noticeDismissed = localStorage.getItem(NOTICE_KEY) === '1'; } catch (e) {}
     if (!noticeDismissed) {
-      const notice = document.createElement('div');
-      notice.className = 'read-progress-notice is-visible';
-      const desc = describePosition(savedPos);
+      const notice = document.createElement('a');
+      notice.href = '#';
+      notice.className = 'read-progress-notice';
+      notice.setAttribute('role', 'button');
+      notice.setAttribute('aria-label', 'Продолжить чтение с прошлого места');
+      // Компактная плашка: иконка + текст + кнопка
       notice.innerHTML = `
-        <span>${desc}.</span>
-        <a href="#" id="resumeReading">Продолжить →</a>
-        <button id="dismissNotice" aria-label="Закрыть">×</button>
+        <span class="read-progress-notice__icon" aria-hidden="true">📖</span>
+        <span class="read-progress-notice__text">Продолжить чтение</span>
+        <span class="read-progress-notice__btn">Дальше →</span>
       `;
       document.body.appendChild(notice);
 
-      const resume = notice.querySelector('#resumeReading');
-      const dismiss = notice.querySelector('#dismissNotice');
+      // Анимация появления после монтирования
+      requestAnimationFrame(() => notice.classList.add('is-visible'));
 
-      resume.addEventListener('click', (e) => {
+      // Клик по всей плашке = продолжить
+      notice.addEventListener('click', (e) => {
         e.preventDefault();
         // Скроллим чуть выше сохранённой позиции (на 100px), чтобы видеть контекст
         window.scrollTo({ top: Math.max(0, savedPos - 100), behavior: 'smooth' });
-        notice.remove();
+        // Плавно скрываем
+        notice.classList.remove('is-visible');
+        setTimeout(() => notice.remove(), 280);
       });
 
-      dismiss.addEventListener('click', () => {
-        notice.remove();
-        try { localStorage.setItem(NOTICE_KEY, '1'); } catch (e) {}
+      // Долгий тап или правая кнопка = скрыть, больше не показывать
+      let pressTimer = null;
+      notice.addEventListener('touchstart', () => {
+        pressTimer = setTimeout(() => {
+          notice.classList.remove('is-visible');
+          setTimeout(() => notice.remove(), 280);
+          try { localStorage.setItem(NOTICE_KEY, '1'); } catch (e) {}
+        }, 600);
+      });
+      notice.addEventListener('touchend', () => {
+        if (pressTimer) clearTimeout(pressTimer);
+      });
+      notice.addEventListener('touchmove', () => {
+        if (pressTimer) clearTimeout(pressTimer);
       });
 
-      // Автоскрытие через 15 секунд
+      // Автоскрытие через 10 секунд
       setTimeout(() => {
         if (notice.parentNode) {
           notice.classList.remove('is-visible');
-          setTimeout(() => notice.remove(), 300);
+          setTimeout(() => notice.remove(), 280);
         }
-      }, 15000);
+      }, 10000);
     }
   }
 
