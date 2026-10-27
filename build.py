@@ -656,10 +656,35 @@ def write_index_js(arts):
     (ROOT / "data" / "index.js").write_text(text, encoding="utf-8")
 
 
+def _sitemap_urls_xml(urls):
+    """Вспомогательная: список (loc, last, freq, prio) → XML urlset."""
+    rows = []
+    for loc, last, freq, prio in urls:
+        row = f"  <url>\n    <loc>{esc(loc)}</loc>\n"
+        if last:
+            row += f"    <lastmod>{last}</lastmod>\n"
+        if freq:
+            row += f"    <changefreq>{freq}</changefreq>\n"
+        if prio:
+            row += f"    <priority>{prio}</priority>\n"
+        rows.append(row + "  </url>")
+    return ('<?xml version="1.0" encoding="UTF-8"?>\n'
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+            + "\n".join(rows) + "\n</urlset>\n")
+
+
 def write_sitemap(arts):
+    """Sitemap index + 3 подсайтмапа (страницы, статьи, теги).
+    sitemap.xml — index file, ссылается на:
+      - sitemap-pages.xml     (главная + служебные)
+      - sitemap-articles.xml  (все статьи)
+      - sitemap-tags.xml      (теговые страницы)
+    Это упрощает Google обработку и ускоряет индексацию."""
     newest = max(a["date"] for a in arts)
-    urls = [(SITE + "/", newest, "weekly", "1.0")]
-    # Служебные страницы
+    today = datetime.date.today().isoformat()
+
+    # ─── Подсайтмап 1: главная + служебные страницы ───
+    pages_urls = [(SITE + "/", newest, "weekly", "1.0")]
     static_pages = [
         ("about.html", "monthly", "0.6"),
         ("contacts.html", "monthly", "0.5"),
@@ -675,31 +700,47 @@ def write_sitemap(arts):
         ("cheatsheets.html", "weekly", "0.7"),
     ]
     for page, freq, prio in static_pages:
-        urls.append((f"{SITE}/{page}", None, freq, prio))
-    # Все статьи
-    for a in arts:
-        urls.append((f"{SITE}/{a['url']}", a["date"], "weekly", "0.8"))
-    # Теговые страницы
+        pages_urls.append((f"{SITE}/{page}", None, freq, prio))
+    (ROOT / "sitemap-pages.xml").write_text(
+        _sitemap_urls_xml(pages_urls), encoding="utf-8")
+
+    # ─── Подсайтмап 2: все статьи ───
+    articles_urls = [
+        (f"{SITE}/{a['url']}", a["date"], "weekly", "0.8")
+        for a in arts
+    ]
+    (ROOT / "sitemap-articles.xml").write_text(
+        _sitemap_urls_xml(articles_urls), encoding="utf-8")
+
+    # ─── Подсайтмап 3: теговые страницы ───
     by_tag = {}
     for a in arts:
         for t in a["tags"]:
             by_tag.setdefault(t, []).append(a)
-    for tag in by_tag:
-        urls.append((f"{SITE}/tags/{slugify_tag(tag)}.html", newest, "weekly", "0.6"))
+    tags_urls = [
+        (f"{SITE}/tags/{slugify_tag(tag)}.html", newest, "weekly", "0.6")
+        for tag in by_tag
+    ]
+    (ROOT / "sitemap-tags.xml").write_text(
+        _sitemap_urls_xml(tags_urls), encoding="utf-8")
 
+    # ─── Sitemap index: sitemap.xml ───
+    sub_sitemaps = [
+        (f"{SITE}/sitemap-pages.xml", today),
+        (f"{SITE}/sitemap-articles.xml", newest),
+        (f"{SITE}/sitemap-tags.xml", today),
+    ]
     rows = []
-    for loc, last, freq, prio in urls:
-        row = f"  <url>\n    <loc>{esc(loc)}</loc>\n"
-        if last:
-            row += f"    <lastmod>{last}</lastmod>\n"
-        if freq:
-            row += f"    <changefreq>{freq}</changefreq>\n"
-        if prio:
-            row += f"    <priority>{prio}</priority>\n"
-        rows.append(row + "  </url>")
+    for loc, last in sub_sitemaps:
+        rows.append(
+            f"  <sitemap>\n"
+            f"    <loc>{esc(loc)}</loc>\n"
+            f"    <lastmod>{last}</lastmod>\n"
+            f"  </sitemap>"
+        )
     xml = ('<?xml version="1.0" encoding="UTF-8"?>\n'
-           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-           + "\n".join(rows) + "\n</urlset>\n")
+           '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+           + "\n".join(rows) + "\n</sitemapindex>\n")
     (ROOT / "sitemap.xml").write_text(xml, encoding="utf-8")
 
 
