@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0d1117"/><stop offset="1" stop-color="#0a1424"/></linearGradient>
+<radialGradient id="glow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#4f8cff" stop-opacity="0.35"/><stop offset="1" stop-color="#4f8cff" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="1200" height="675" fill="url(#bg)"/>
+<circle cx="600" cy="340" r="300" fill="url(#glow)"/>
+<g font-family="monospace">
+<rect x="500" y="220" width="200" height="280" rx="20" fill="#1c2636" stroke="#4f8cff" stroke-width="3"/>
+<text x="600" y="290" fill="#4f8cff" font-size="40" font-weight="700" text-anchor="middle">DB</text>
+<rect x="530" y="320" width="140" height="6" rx="3" fill="#8a95a6" opacity="0.4"/>
+<rect x="530" y="340" width="140" height="6" rx="3" fill="#8a95a6" opacity="0.4"/>
+<rect x="530" y="360" width="140" height="6" rx="3" fill="#8a95a6" opacity="0.4"/>
+<rect x="530" y="380" width="140" height="6" rx="3" fill="#8a95a6" opacity="0.4"/>
+<rect x="530" y="410" width="60" height="14" rx="7" fill="#4f8cff"/>
+<text x="610" y="420" fill="#8a95a6" font-size="14">lite</text>
+<text x="600" y="470" fill="#8a95a6" font-size="18" text-anchor="middle">app.db</text>
+</g>
+<g stroke="#2ea043" stroke-width="3" stroke-linecap="round" opacity="0.7" fill="none">
+<line x1="280" y1="360" x2="500" y2="360"/>
+<polygon points="490,352 500,360 490,368" fill="#2ea043"/>
+<line x1="700" y1="360" x2="920" y2="360"/>
+<polygon points="910,352 920,360 910,368" fill="#2ea043"/>
+</g>
+<g font-family="monospace">
+<rect x="80" y="280" width="180" height="160" rx="12" fill="#12161d" stroke="#2ea043" stroke-width="2"/>
+<text x="100" y="330" fill="#2ea043" font-size="18">app</text>
+<text x="100" y="370" fill="#8a95a6" font-size="14">PRAGMA</text>
+<text x="100" y="400" fill="#8a95a6" font-size="14">WAL mode</text>
+
+<rect x="940" y="280" width="180" height="160" rx="12" fill="#12161d" stroke="#2ea043" stroke-width="2"/>
+<text x="960" y="330" fill="#2ea043" font-size="18">backups</text>
+<text x="960" y="370" fill="#8a95a6" font-size="14">.db file</text>
+<text x="960" y="400" fill="#8a95a6" font-size="14">litestream</text>
+</g>
+<text x="60" y="120" fill="#e9eef5" font-family="Georgia, serif" font-size="68" font-weight="700">SQLite</text>
+<text x="60" y="160" fill="#4f8cff" font-family="monospace" font-size="18" letter-spacing="4">// В ПРОДАКШЕНЕ</text>
+<text x="60" y="620" fill="#8a95a6" font-family="monospace" font-size="22">PRAGMA journal_mode=WAL</text>
+</svg>

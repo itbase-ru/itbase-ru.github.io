@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0d1117"/><stop offset="1" stop-color="#0a1a0e"/></linearGradient>
+</defs>
+<rect width="1200" height="675" fill="url(#bg)"/>
+<g font-family="monospace" font-size="22">
+<rect x="60" y="220" width="540" height="56" rx="8" fill="#12161d" stroke="#2ea043" stroke-width="2"/>
+<text x="80" y="256" fill="#2ea043">&lt;button hx-get="/api/like" hx-target="#box"&gt;</text>
+
+<rect x="60" y="290" width="540" height="56" rx="8" fill="#12161d" stroke="#2ea043" stroke-width="2"/>
+<text x="80" y="326" fill="#2ea043">  hx-swap="outerHTML"</text>
+
+<rect x="60" y="360" width="540" height="56" rx="8" fill="#12161d" stroke="#2ea043" stroke-width="2"/>
+<text x="80" y="396" fill="#2ea043">&lt;/button&gt;</text>
+
+<rect x="700" y="220" width="440" height="200" rx="16" fill="#12161d" stroke="#8a95a6" stroke-width="2" stroke-dasharray="6 6"/>
+<text x="720" y="260" fill="#8a95a6" font-size="18">HTML fragment</text>
+<text x="720" y="300" fill="#8a95a6" font-size="18">&lt;div id="box"&gt;</text>
+<text x="720" y="330" fill="#2ea043" font-size="18">  Liked!</text>
+<text x="720" y="390" fill="#8a95a6" font-size="18">&lt;/div&gt;</text>
+</g>
+<g stroke="#2ea043" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.7">
+<path d="M 610 320 C 650 320, 670 320, 700 320"/>
+<polygon points="690,314 700,320 690,326" fill="#2ea043"/>
+</g>
+<text x="60" y="120" fill="#e9eef5" font-family="Georgia, serif" font-size="80" font-weight="700">htmx</text>
+<text x="280" y="120" fill="#2ea043" font-family="monospace" font-size="40">/&gt;</text>
+<text x="60" y="160" fill="#2ea043" font-family="monospace" font-size="18" letter-spacing="4">// ВЕБ БЕЗ SPA</text>
+<text x="60" y="610" fill="#8a95a6" font-family="monospace" font-size="22">hypermedia as the engine</text>
+</svg>

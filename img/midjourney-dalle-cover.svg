@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0d1117"/><stop offset="1" stop-color="#1a0f1e"/></linearGradient>
+<radialGradient id="g1" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#f778ba" stop-opacity="0.35"/><stop offset="1" stop-color="#f778ba" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="1200" height="675" fill="url(#bg)"/>
+<circle cx="950" cy="340" r="320" fill="url(#g1)"/>
+<g font-family="monospace">
+<rect x="80" y="220" width="320" height="220" rx="16" fill="#12161d" stroke="#f778ba" stroke-width="2"/>
+<text x="100" y="270" fill="#f778ba" font-size="28">Midjourney</text>
+<text x="100" y="320" fill="#8a95a6" font-size="16">artist-grade</text>
+<text x="100" y="350" fill="#8a95a6" font-size="16">--ar 16:9</text>
+<text x="100" y="380" fill="#8a95a6" font-size="16">--v 6</text>
+<circle cx="320" cy="400" r="14" fill="#f778ba" opacity="0.7"/>
+
+<rect x="440" y="220" width="320" height="220" rx="16" fill="#12161d" stroke="#4f8cff" stroke-width="2"/>
+<text x="460" y="270" fill="#4f8cff" font-size="28">DALL-E 3</text>
+<text x="460" y="320" fill="#8a95a6" font-size="16">via ChatGPT</text>
+<text x="460" y="350" fill="#8a95a6" font-size="16">prompt-driven</text>
+<text x="460" y="380" fill="#8a95a6" font-size="16">text in image</text>
+<circle cx="680" cy="400" r="14" fill="#4f8cff" opacity="0.7"/>
+
+<rect x="800" y="220" width="320" height="220" rx="16" fill="#12161d" stroke="#8f52ff" stroke-width="2"/>
+<text x="820" y="270" fill="#8f52ff" font-size="28">Stable Diff.</text>
+<text x="820" y="320" fill="#8a95a6" font-size="16">open source</text>
+<text x="820" y="350" fill="#8a95a6" font-size="16">local GPU</text>
+<text x="820" y="380" fill="#8a95a6" font-size="16">fine-tune</text>
+<circle cx="1080" cy="400" r="14" fill="#8f52ff" opacity="0.7"/>
+</g>
+<g stroke="#f778ba" stroke-width="2" opacity="0.5">
+<line x1="400" y1="330" x2="440" y2="330"/>
+<line x1="760" y1="330" x2="800" y2="330"/>
+</g>
+<text x="60" y="120" fill="#e9eef5" font-family="Georgia, serif" font-size="68" font-weight="700">AI Image Gen</text>
+<text x="60" y="160" fill="#f778ba" font-family="monospace" font-size="18" letter-spacing="4">// КАКАЯ НЕЙРОСЕТЬ ЛУЧШЕ</text>
+<text x="60" y="620" fill="#8a95a6" font-family="monospace" font-size="22">Midjourney vs DALL-E 3 vs Stable Diffusion</text>
+</svg>

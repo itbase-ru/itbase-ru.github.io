@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0d1117"/><stop offset="1" stop-color="#1a130a"/></linearGradient>
+<radialGradient id="glow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#f0883e" stop-opacity="0.4"/><stop offset="1" stop-color="#f0883e" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="1200" height="675" fill="url(#bg)"/>
+<circle cx="600" cy="380" r="280" fill="url(#glow)"/>
+<g>
+<polygon points="600,180 440,460 760,460" fill="none" stroke="#f0883e" stroke-width="4"/>
+<polygon points="600,180 440,460 760,460" fill="#f0883e" opacity="0.15"/>
+<polygon points="600,180 520,320 680,320" fill="none" stroke="#8a95a6" stroke-width="2"/>
+<polygon points="520,320 680,320 760,460" fill="none" stroke="#8a95a6" stroke-width="2"/>
+<polygon points="520,320 440,460 600,460" fill="none" stroke="#8a95a6" stroke-width="2"/>
+<polygon points="680,320 600,460 760,460" fill="none" stroke="#8a95a6" stroke-width="2"/>
+<circle cx="600" cy="180" r="8" fill="#f0883e"/>
+<circle cx="440" cy="460" r="8" fill="#f0883e"/>
+<circle cx="760" cy="460" r="8" fill="#f0883e"/>
+<circle cx="520" cy="320" r="6" fill="#8a95a6"/>
+<circle cx="680" cy="320" r="6" fill="#8a95a6"/>
+<circle cx="600" cy="460" r="6" fill="#8a95a6"/>
+</g>
+<g font-family="monospace" font-size="20" fill="#8a95a6">
+<text x="170" y="200">queue.submit(() =&gt; {</text>
+<text x="195" y="230" fill="#f0883e">device.createBuffer()</text>
+<text x="195" y="260" fill="#f0883e">renderPipeline</text>
+<text x="195" y="290" fill="#f0883e">draw(3)</text>
+<text x="170" y="320">});</text>
+</g>
+<text x="60" y="120" fill="#e9eef5" font-family="Georgia, serif" font-size="72" font-weight="700">WebGPU</text>
+<text x="60" y="160" fill="#f0883e" font-family="monospace" font-size="18" letter-spacing="4">// GPU В БРАУЗЕРЕ</text>
+<text x="60" y="620" fill="#8a95a6" font-family="monospace" font-size="22">navigator.gpu.requestAdapter()</text>
+</svg>

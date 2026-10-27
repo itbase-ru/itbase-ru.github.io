@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0d1117"/><stop offset="1" stop-color="#0a1424"/></linearGradient>
+<radialGradient id="glow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#4f8cff" stop-opacity="0.4"/><stop offset="1" stop-color="#4f8cff" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="1200" height="675" fill="url(#bg)"/>
+<circle cx="950" cy="340" r="320" fill="url(#glow)"/>
+<g font-family="monospace">
+<rect x="80" y="240" width="380" height="180" rx="14" fill="#12161d" stroke="#4f8cff" stroke-width="2"/>
+<text x="100" y="290" fill="#4f8cff" font-size="22">service Greeter {</text>
+<text x="120" y="320" fill="#8a95a6" font-size="18">rpc Say (Msg) returns (Msg);</text>
+<text x="100" y="360" fill="#4f8cff" font-size="22">}</text>
+<text x="100" y="400" fill="#8a95a6" font-size="16">.proto</text>
+</g>
+<g stroke="#4f8cff" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.8">
+<line x1="470" y1="330" x2="620" y2="330"/>
+<polygon points="610,322 620,330 610,338" fill="#4f8cff"/>
+</g>
+<g font-family="monospace" fill="#8a95a6">
+<rect x="630" y="260" width="80" height="40" rx="6" fill="#1c2030" stroke="#4f8cff" stroke-width="1"/>
+<text x="650" y="288" fill="#4f8cff" font-size="16">8B</text>
+<rect x="630" y="305" width="80" height="40" rx="6" fill="#1c2030" stroke="#4f8cff" stroke-width="1"/>
+<text x="645" y="333" fill="#4f8cff" font-size="16">12B</text>
+<rect x="630" y="350" width="80" height="40" rx="6" fill="#1c2030" stroke="#4f8cff" stroke-width="1"/>
+<text x="650" y="378" fill="#4f8cff" font-size="16">4B</text>
+</g>
+<g stroke="#4f8cff" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.8">
+<line x1="710" y1="330" x2="860" y2="330"/>
+<polygon points="850,322 860,330 850,338" fill="#4f8cff"/>
+</g>
+<g font-family="monospace">
+<rect x="870" y="240" width="280" height="180" rx="14" fill="#12161d" stroke="#2ea043" stroke-width="2"/>
+<text x="890" y="290" fill="#2ea043" font-size="22">response</text>
+<text x="890" y="320" fill="#8a95a6" font-size="18">Hello, gRPC!</text>
+<text x="890" y="370" fill="#8a95a6" font-size="14">HTTP/2 + protobuf</text>
+</g>
+<text x="60" y="120" fill="#e9eef5" font-family="Georgia, serif" font-size="80" font-weight="700">gRPC</text>
+<text x="60" y="160" fill="#4f8cff" font-family="monospace" font-size="18" letter-spacing="4">// БЫСТРЫЙ RPC ПО HTTP/2</text>
+<text x="60" y="620" fill="#8a95a6" font-family="monospace" font-size="22">~10x быстрее REST</text>
+</svg>

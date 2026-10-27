@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0d1117"/><stop offset="1" stop-color="#0a1424"/></linearGradient>
+</defs>
+<rect width="1200" height="675" fill="url(#bg)"/>
+<g font-family="monospace">
+<rect x="60" y="220" width="320" height="220" rx="16" fill="#12161d" stroke="#4f8cff" stroke-width="2"/>
+<text x="80" y="270" fill="#4f8cff" font-size="32" font-weight="700">tRPC</text>
+<text x="80" y="320" fill="#8a95a6" font-size="16">type-safe</text>
+<text x="80" y="350" fill="#8a95a6" font-size="16">no schema</text>
+<text x="80" y="380" fill="#8a95a6" font-size="16">end-to-end</text>
+<rect x="80" y="400" width="200" height="6" rx="3" fill="#1c2030"/>
+<rect x="80" y="400" width="180" height="6" rx="3" fill="#4f8cff"/>
+
+<rect x="440" y="220" width="320" height="220" rx="16" fill="#12161d" stroke="#f778ba" stroke-width="2"/>
+<text x="460" y="270" fill="#f778ba" font-size="32" font-weight="700">GraphQL</text>
+<text x="460" y="320" fill="#8a95a6" font-size="16">schema-driven</text>
+<text x="460" y="350" fill="#8a95a6" font-size="16">query language</text>
+<text x="460" y="380" fill="#8a95a6" font-size="16">any client</text>
+<rect x="460" y="400" width="200" height="6" rx="3" fill="#1c2030"/>
+<rect x="460" y="400" width="120" height="6" rx="3" fill="#f778ba"/>
+
+<rect x="820" y="220" width="320" height="220" rx="16" fill="#12161d" stroke="#2ea043" stroke-width="2"/>
+<text x="840" y="270" fill="#2ea043" font-size="32" font-weight="700">REST</text>
+<text x="840" y="320" fill="#8a95a6" font-size="16">resources</text>
+<text x="840" y="350" fill="#8a95a6" font-size="16">HTTP verbs</text>
+<text x="840" y="380" fill="#8a95a6" font-size="16">universal</text>
+<rect x="840" y="400" width="200" height="6" rx="3" fill="#1c2030"/>
+<rect x="840" y="400" width="200" height="6" rx="3" fill="#2ea043"/>
+</g>
+<g stroke="#4f8cff" stroke-width="2" opacity="0.4" stroke-dasharray="6 6">
+<line x1="380" y1="330" x2="440" y2="330"/>
+<line x1="760" y1="330" x2="820" y2="330"/>
+</g>
+<text x="60" y="120" fill="#e9eef5" font-family="Georgia, serif" font-size="64" font-weight="700">API Showdown</text>
+<text x="60" y="160" fill="#4f8cff" font-family="monospace" font-size="18" letter-spacing="4">// ЧТО ВЫБРАТЬ В 2026</text>
+<text x="60" y="620" fill="#8a95a6" font-family="monospace" font-size="22">tRPC vs GraphQL vs REST</text>
+</svg>

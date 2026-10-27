@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0d1117"/><stop offset="1" stop-color="#15102a"/></linearGradient>
+<radialGradient id="glow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#8f52ff" stop-opacity="0.4"/><stop offset="1" stop-color="#8f52ff" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="1200" height="675" fill="url(#bg)"/>
+<circle cx="600" cy="340" r="320" fill="url(#glow)"/>
+<g>
+<rect x="200" y="200" width="800" height="380" rx="20" fill="#15161d" stroke="#8f52ff" stroke-width="3"/>
+<rect x="220" y="220" width="760" height="340" rx="8" fill="#0a0b10"/>
+<text x="600" y="430" fill="#8f52ff" font-family="Georgia, serif" font-size="180" font-weight="700" text-anchor="middle">SD</text>
+<text x="600" y="510" fill="#8a95a6" font-family="monospace" font-size="22" text-anchor="middle">stable-diffusion-webui</text>
+<rect x="500" y="580" width="200" height="14" rx="7" fill="#1c2030"/>
+<rect x="500" y="580" width="60" height="14" rx="7" fill="#8f52ff"/>
+</g>
+<g fill="#8f52ff" opacity="0.8">
+<circle cx="180" cy="120" r="6"/>
+<circle cx="220" cy="120" r="6"/>
+<circle cx="260" cy="120" r="6"/>
+</g>
+<text x="290" y="128" fill="#8a95a6" font-family="monospace" font-size="16">localhost:7860</text>
+<text x="60" y="120" fill="#e9eef5" font-family="Georgia, serif" font-size="60" font-weight="700">SD Local</text>
+<text x="60" y="160" fill="#8f52ff" font-family="monospace" font-size="18" letter-spacing="4">// СВОЯ ГЕНЕРАЦИЯ КАРТИНОК</text>
+</svg>

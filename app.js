@@ -549,18 +549,53 @@ function init404(){
   const KEY = 'itbase_read_pos_' + slug;
   const NOTICE_KEY = 'itbase_read_notice_' + slug;
 
+  // Полная прокручиваемая высота (минус один экран)
+  function getScrollableHeight() {
+    const doc = document.documentElement;
+    return Math.max(1, doc.scrollHeight - window.innerHeight);
+  }
+
+  // Считаем корректный процент прогресса (от 0% до 100%)
+  function getProgressPercent(pos) {
+    if (pos <= 0) return 0;
+    const scrollable = getScrollableHeight();
+    const pct = Math.round((pos / scrollable) * 100);
+    return Math.max(0, Math.min(100, pct));
+  }
+
+  // Формируем человекочитаемое описание позиции (без процентов)
+  function describePosition(pos) {
+    const pct = getProgressPercent(pos);
+    if (pct >= 95) return 'Ты дочитал почти до конца';
+    if (pct >= 70) return 'Ты был на финальной трети статьи';
+    if (pct >= 40) return 'Ты остановился на середине статьи';
+    if (pct >= 15) return 'Ты только начал читать';
+    return 'Ты был в начале статьи';
+  }
+
   // Восстанавливаем позицию
   let savedPos = 0;
   try { savedPos = parseInt(localStorage.getItem(KEY) || '0', 10); } catch (e) {}
-  if (savedPos > 500) {
-    // Показываем уведомление, продолжить ли
+  if (!isFinite(savedPos)) savedPos = 0;
+
+  // Проверяем что сохранённая позиция валидна для текущей высоты страницы
+  // (если статья обновилась и стала длиннее/короче — позиция может быть больше высоты)
+  const scrollable = getScrollableHeight();
+  if (savedPos > scrollable) {
+    savedPos = Math.round(scrollable * 0.9);  // обрезаем до 90% страницы
+    try { localStorage.setItem(KEY, String(savedPos)); } catch (e) {}
+  }
+
+  // Показываем уведомление только если прокрутил достаточно (от 15%)
+  if (savedPos > window.innerHeight * 0.5 && getProgressPercent(savedPos) >= 15) {
     let noticeDismissed = false;
     try { noticeDismissed = localStorage.getItem(NOTICE_KEY) === '1'; } catch (e) {}
     if (!noticeDismissed) {
       const notice = document.createElement('div');
       notice.className = 'read-progress-notice is-visible';
+      const desc = describePosition(savedPos);
       notice.innerHTML = `
-        <span>Ты остановился на ${Math.round(savedPos / window.innerHeight * 100)}% статьи.</span>
+        <span>${desc}.</span>
         <a href="#" id="resumeReading">Продолжить →</a>
         <button id="dismissNotice" aria-label="Закрыть">×</button>
       `;
@@ -571,7 +606,8 @@ function init404(){
 
       resume.addEventListener('click', (e) => {
         e.preventDefault();
-        window.scrollTo({ top: savedPos, behavior: 'smooth' });
+        // Скроллим чуть выше сохранённой позиции (на 100px), чтобы видеть контекст
+        window.scrollTo({ top: Math.max(0, savedPos - 100), behavior: 'smooth' });
         notice.remove();
       });
 
@@ -590,21 +626,23 @@ function init404(){
     }
   }
 
-  // Сохранение при скролле (debounced)
+  // Сохранение при скролле (debounced, не чаще раза в 3 секунды)
   let ticking = false;
   let lastSave = 0;
   function savePos() {
     const y = window.scrollY;
-    // Сохраняем только если прокрутил значительно
-    if (y > 500) {
-      try { localStorage.setItem(KEY, String(y)); } catch (e) {}
+    // Сохраняем только если прокрутил больше одного экрана
+    if (y > window.innerHeight * 0.5) {
+      // Проверяем что позиция валидна
+      const max = getScrollableHeight();
+      const safeY = Math.max(0, Math.min(y, max));
+      try { localStorage.setItem(KEY, String(safeY)); } catch (e) {}
     }
     ticking = false;
   }
   window.addEventListener('scroll', () => {
     if (!ticking) {
       ticking = true;
-      // Не чаще раза в 3 секунды
       const now = Date.now();
       if (now - lastSave > 3000) {
         lastSave = now;
