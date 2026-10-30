@@ -13,12 +13,12 @@
   <meta property="og:description" content="Сравнение PostgreSQL и MySQL простыми словами: философия, производительность, JSON, индексы и расширения. Поможем выбрать БД под твой проект.">
   <meta property="og:image" content="https://itbase-ru.github.io/img/og/postgresql-vs-mysql.png">
   <meta property="og:url" content="https://itbase-ru.github.io/articles/postgresql-vs-mysql.html">
-  <meta property="article:published_time" content="2026-11-25">
+  <meta property="article:published_time" content="2026-10-26">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="PostgreSQL vs MySQL: что выбрать в 2026">
   <meta name="twitter:description" content="Сравнение PostgreSQL и MySQL простыми словами: философия, производительность, JSON, индексы и расширения. Поможем выбрать БД под твой проект.">
   <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/postgresql-vs-mysql.png">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "PostgreSQL vs MySQL: что выбрать в 2026", "description": "Сравнение PostgreSQL и MySQL простыми словами: философия, производительность, JSON, индексы и расширения. Поможем выбрать БД под твой проект.", "image": ["https://itbase-ru.github.io/img/og/postgresql-vs-mysql.png"], "datePublished": "2026-11-25", "dateModified": "2026-11-25", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/", "logo": {"@type": "ImageObject", "url": "https://itbase-ru.github.io/favicon.svg"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/postgresql-vs-mysql.html"}, "articleSection": "Базы данных", "keywords": "Базы данных, SQL"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "PostgreSQL vs MySQL: что выбрать в 2026", "description": "Сравнение PostgreSQL и MySQL простыми словами: философия, производительность, JSON, индексы и расширения. Поможем выбрать БД под твой проект.", "image": ["https://itbase-ru.github.io/img/og/postgresql-vs-mysql.png"], "datePublished": "2026-10-26", "dateModified": "2026-10-26", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/", "logo": {"@type": "ImageObject", "url": "https://itbase-ru.github.io/favicon.svg"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/postgresql-vs-mysql.html"}, "articleSection": "Базы данных", "keywords": "Базы данных, SQL"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Базы данных", "item": "https://itbase-ru.github.io/?tag=Базы данных"}, {"@type": "ListItem", "position": 3, "name": "PostgreSQL vs MySQL: что выбрать в 2026", "item": "https://itbase-ru.github.io/articles/postgresql-vs-mysql.html"}]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Что быстрее — MySQL или PostgreSQL?", "acceptedAnswer": {"@type": "Answer", "text": "На простых SELECT и UPDATE MySQL обычно чуть быстрее. На сложных запросах с JOIN и оконными функциями — Postgres. Если тебе важна скорость — измеряй на своих данных, универсального ответа нет."}}, {"@type": "Question", "name": "Что лучше для новичка?", "acceptedAnswer": {"@type": "Answer", "text": "MySQL — чуть проще в установке и эксплуатации. Если ты впервые ставишь базу и не знаешь, с чего начать — начни с MySQL. Postgres чуть требовательнее к настройке, но ничего непреодолимого."}}, {"@type": "Question", "name": "Можно ли хранить JSON в MySQL и Postgres?", "acceptedAnswer": {"@type": "Answer", "text": "Да, в обеих БД есть тип JSON. Но в Postgres есть JSONB с GIN-индексами, что даёт быстрый поиск по полям внутри JSON. В MySQL JSON без индексов — работает, но на больших объёмах тормозит."}}, {"@type": "Question", "name": "Что выбрать для приложения с AI?", "acceptedAnswer": {"@type": "Answer", "text": "PostgreSQL с расширением pgvector — почти стандарт для RAG-приложений. Можно хранить векторные представления и искать по ним быстро, без отдельной векторной базы. У MySQL таких расширений пока нет."}}, {"@type": "Question", "name": "Подходит ли MySQL для аналитики?", "acceptedAnswer": {"@type": "Answer", "text": "Для простой аналитики — да. Для сложной (многомерные таблицы, OLAP) — лучше Postgres или специализированные решения вроде ClickHouse. MySQL оптимизирована под OLTP, а не под OLAP."}}, {"@type": "Question", "name": "Какая БД лучше для Django/Rails?", "acceptedAnswer": {"@type": "Answer", "text": "Обе ORM работают с обеими БД. Django и Rails традиционно тяготеют к Postgres, потому что там используются JSONB, массивы и другие продвинутые фичи. Если сомневаешься — бери Postgres, не прогадаешь."}}]}</script>
   <script>
@@ -61,7 +61,7 @@
         <div class="card__tags"><span class="tag">Базы данных</span><span class="tag">SQL</span></div>
         <h1>PostgreSQL vs MySQL: что выбрать в 2026</h1>
         <div class="article-head__meta">
-          <time datetime="2026-11-25">25 ноября 2026</time>
+          <time datetime="2026-10-26">26 октября 2026</time>
           <span class="dot">•</span>
           <span>14 мин чтения</span>
           <button class="btn-bm" id="bmBtn">★ В закладки</button>
@@ -206,9 +206,9 @@ WHERE data-&gt;&gt;'user_id' = '42';</code></pre>
       <div class="donate-block__title">Поддержи проект</div>
       <p class="donate-block__text">Сайт живёт на энтузиазме. Если статья оказалась полезной — поблагодари автора. Любая сумма идёт на хостинг, домен и новые статьи.</p>
       <div class="donate-block__buttons">
-        <a href="https://t.me/itbase_bot" target="_blank" rel="noopener nofollow" class="donate-btn donate-tg">✈️ Telegram</a>
+        <a href="https://t.me/IT_BASE_RU" target="_blank" rel="noopener nofollow" class="donate-btn donate-tg">✈️ Telegram</a>
       </div>
-      <p class="donate-block__hint">Также можно подписаться на <a href="https://t.me/itbase" target="_blank" rel="noopener">Telegram-канал</a> — там анонсы новых статей.</p>
+      <p class="donate-block__hint">Также можно подписаться на <a href="https://t.me/IT_BASE_RU" target="_blank" rel="noopener">Telegram-канал</a> и <a href="https://vk.ru/club201974515" target="_blank" rel="noopener">ВК-группу</a> — там анонсы новых статей.</p>
     </aside>
     
 
@@ -284,7 +284,7 @@ WHERE data-&gt;&gt;'user_id' = '42';</code></pre>
     <a href="/articles/kak-napisat-rezyume-programmista.html"><h2 class="card__title">Как написать резюме программисту: шаблон + примеры 2026</h2></a>
     <p class="card__excerpt">Практический гайд по резюме разработчика в 2026: структура, саммари, описание опыта с метриками, навыки, дизайн, ATS-формат и типичные ошибки.</p>
     <div class="card__meta">
-      <span>2 декабря 2026</span><span class="dot">•</span><span>12 мин</span>
+      <span>29 октября 2026</span><span class="dot">•</span><span>12 мин</span>
       <button class="card__bm" data-slug="kak-napisat-rezyume-programmista" title="В закладки" aria-label="В закладки">★</button>
     </div>
   </div>
@@ -304,6 +304,8 @@ WHERE data-&gt;&gt;'user_id' = '42';</code></pre>
     <a href="/roadmaps.html">Карьера</a>
     <a href="/cheatsheets.html">Шпаргалки</a>
     <a href="/support.html">Поддержать ★</a>
+    <a href="https://t.me/IT_BASE_RU" target="_blank" rel="noopener" class="footer-social">Telegram</a>
+    <a href="https://vk.ru/club201974515" target="_blank" rel="noopener" class="footer-social">ВКонтакте</a>
     <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
   </div>
 </footer>

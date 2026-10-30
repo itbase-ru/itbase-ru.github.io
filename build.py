@@ -38,9 +38,10 @@ YANDEX_METRIKA_ID = os.environ.get("YANDEX_METRIKA_ID", "")  # например 
 GOOGLE_ANALYTICS_ID = os.environ.get("GOOGLE_ANALYTICS_ID", "")  # например "G-XXXXXXX"
 YANDEX_RSY_BLOCK_ID = os.environ.get("YANDEX_RSY_BLOCK_ID", "")  # ID блока РСЯ, напр. "R-A-123456-1"
 DONATE_BOOSTY_URL  = os.environ.get("DONATE_BOOSTY_URL", "")  # пусто — кнопка не показывается
-DONATE_TG_URL      = os.environ.get("DONATE_TG_URL", "https://t.me/itbase_bot")
+DONATE_TG_URL      = os.environ.get("DONATE_TG_URL", "https://t.me/IT_BASE_RU")
 DONATE_YOOMONEY    = os.environ.get("DONATE_YOOMONEY", "")  # напр. "https://yoomoney.ru/to/4100123456789"
-TG_CHANNEL_URL     = os.environ.get("TG_CHANNEL_URL", "https://t.me/itbase")  # для кнопки в шапке/футере
+TG_CHANNEL_URL     = os.environ.get("TG_CHANNEL_URL", "https://t.me/IT_BASE_RU")  # TG-канал
+VK_GROUP_URL       = os.environ.get("VK_GROUP_URL", "https://vk.ru/club201974515")  # ВК-группа
 # -----------------------------------------------------------------------------
 
 ROOT = Path(__file__).resolve().parent
@@ -78,6 +79,8 @@ FOOTER = f"""<footer class="site-footer">
     <a href="/roadmaps.html">Карьера</a>
     <a href="/cheatsheets.html">Шпаргалки</a>
     <a href="/support.html">Поддержать ★</a>
+    <a href="{TG_CHANNEL_URL}" target="_blank" rel="noopener" class="footer-social">Telegram</a>
+    <a href="{VK_GROUP_URL}" target="_blank" rel="noopener" class="footer-social">ВКонтакте</a>
     <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
   </div>
 </footer>"""
@@ -160,7 +163,7 @@ def donate_block_html():
       <div class="donate-block__buttons">
         {''.join(buttons)}
       </div>
-      <p class="donate-block__hint">Также можно подписаться на <a href="{TG_CHANNEL_URL}" target="_blank" rel="noopener">Telegram-канал</a> — там анонсы новых статей.</p>
+      <p class="donate-block__hint">Также можно подписаться на <a href="{TG_CHANNEL_URL}" target="_blank" rel="noopener">Telegram-канал</a> и <a href="{VK_GROUP_URL}" target="_blank" rel="noopener">ВК-группу</a> — там анонсы новых статей.</p>
     </aside>
     '''
 
@@ -1065,13 +1068,13 @@ def write_support_page(arts):
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Поддержать проект — {esc(SITE_NAME)}</title>
-  <meta name="description" content="Поддержка проекта IT·База: Telegram, ЮMoney. Любая сумма идёт на хостинг, домен и создание новых статей.">
+  <meta name="description" content="Поддержка проекта IT·База: Telegram, ВКонтакте, ЮMoney. Любая сумма идёт на хостинг, домен и создание новых статей.">
   <link rel="canonical" href="{SITE}/support.html">
   <meta name="robots" content="index, follow">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="{esc(SITE_NAME)}">
   <meta property="og:title" content="Поддержать проект — {esc(SITE_NAME)}">
-  <meta property="og:description" content="Поддержка проекта IT·База: Telegram, ЮMoney.">
+  <meta property="og:description" content="Поддержка проекта IT·База: Telegram, ВКонтакте, ЮMoney.">
   <meta property="og:url" content="{SITE}/support.html">
   <meta property="og:image" content="{default_og()}">
   {ICONS}
@@ -1165,7 +1168,8 @@ def write_support_page(arts):
         <details>
           <summary>Что если я не могу финансово помочь?</summary>
           <p>Поделись ссылкой на статью с другом — это тоже поддержка. Можно подписаться
-          на <a href="{TG_CHANNEL_URL}" target="_blank" rel="noopener">Telegram-канал</a>,
+          на <a href="{TG_CHANNEL_URL}" target="_blank" rel="noopener">Telegram-канал</a>
+          и <a href="{VK_GROUP_URL}" target="_blank" rel="noopener">ВК-группу</a>,
           поставить звёздочку в закладки и рассказать о проекте в своём окружении.</p>
         </details>
       </section>

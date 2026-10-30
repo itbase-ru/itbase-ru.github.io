@@ -5,7 +5,7 @@
     <link>https://itbase-ru.github.io/</link>
     <description>Статьи про технологии простыми словами: ИИ, программирование, веб, базы данных, DevOps.</description>
     <language>ru-ru</language>
-    <lastBuildDate>Tue, 27 Oct 2026 18:05:49 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 30 Oct 2026 18:24:19 GMT</lastBuildDate>
     <atom:link href="https://itbase-ru.github.io/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://itbase-ru.github.io/favicon.svg</url>
@@ -18,7 +18,7 @@
       <guid isPermaLink="true">https://itbase-ru.github.io/articles/kak-napisat-rezyume-programmista.html</guid>
       <description>Практический гайд по резюме разработчика в 2026: структура, саммари, описание опыта с метриками, навыки, дизайн, ATS-формат и типичные ошибки.</description>
       <category>Карьера</category>
-      <pubDate>Wed, 02 Dec 2026 00:00:00 +0300</pubDate>
+      <pubDate>Thu, 29 Oct 2026 00:00:00 +0300</pubDate>
       <enclosure url="https://itbase-ru.github.io/img/resume-cover.svg" type="image/svg+xml" length="0"/>
     </item>
     <item>
@@ -27,7 +27,7 @@
       <guid isPermaLink="true">https://itbase-ru.github.io/articles/tailwind-css-vs-bootstrap.html</guid>
       <description>Сравнение Tailwind и Bootstrap простыми словами: философия, размер бандла, кривая обучения, экосистема. Поможем выбрать фреймворк под проект.</description>
       <category>Веб</category>
-      <pubDate>Mon, 30 Nov 2026 00:00:00 +0300</pubDate>
+      <pubDate>Wed, 28 Oct 2026 00:00:00 +0300</pubDate>
       <enclosure url="https://itbase-ru.github.io/img/tailwind-cover.svg" type="image/svg+xml" length="0"/>
     </item>
     <item>
@@ -36,7 +36,7 @@
       <guid isPermaLink="true">https://itbase-ru.github.io/articles/websocket-vs-sse-vs-polling.html</guid>
       <description>Сравнение трёх технологий real-time в вебе: long polling, SSE и WebSocket. Разбираем, что выбрать для чата, уведомлений, ленты и игр. С примерами кода.</description>
       <category>Веб</category>
-      <pubDate>Sat, 28 Nov 2026 00:00:00 +0300</pubDate>
+      <pubDate>Tue, 27 Oct 2026 00:00:00 +0300</pubDate>
       <enclosure url="https://itbase-ru.github.io/img/ws-sse-cover.svg" type="image/svg+xml" length="0"/>
     </item>
     <item>
@@ -45,7 +45,7 @@
       <guid isPermaLink="true">https://itbase-ru.github.io/articles/postgresql-vs-mysql.html</guid>
       <description>Сравнение PostgreSQL и MySQL простыми словами: философия, производительность, JSON, индексы и расширения. Поможем выбрать БД под твой проект.</description>
       <category>Базы данных</category>
-      <pubDate>Wed, 25 Nov 2026 00:00:00 +0300</pubDate>
+      <pubDate>Mon, 26 Oct 2026 00:00:00 +0300</pubDate>
       <enclosure url="https://itbase-ru.github.io/img/pg-mysql-cover.svg" type="image/svg+xml" length="0"/>
     </item>
     <item>
@@ -54,7 +54,7 @@
       <guid isPermaLink="true">https://itbase-ru.github.io/articles/claude-ai-obzor.html</guid>
       <description>Обзор Claude AI в 2026 году: где он сильнее ChatGPT, тарифы, работа с длинными документами и кодом. Практический гайд без маркетингового шума.</description>
       <category>ИИ</category>
-      <pubDate>Sun, 22 Nov 2026 00:00:00 +0300</pubDate>
+      <pubDate>Sun, 25 Oct 2026 00:00:00 +0300</pubDate>
       <enclosure url="https://itbase-ru.github.io/img/claude-cover.svg" type="image/svg+xml" length="0"/>
     </item>
     <item>
@@ -63,7 +63,7 @@
       <guid isPermaLink="true">https://itbase-ru.github.io/articles/nextjs-15-chto-novogo.html</guid>
       <description>Обзор Next.js 15 простыми словами: чем App Router отличается от Pages, как работают Server Components, зачем Turbopack и где лежат грабли при миграции.</description>
       <category>Веб</category>
-      <pubDate>Fri, 20 Nov 2026 00:00:00 +0300</pubDate>
+      <pubDate>Sat, 24 Oct 2026 00:00:00 +0300</pubDate>
       <enclosure url="https://itbase-ru.github.io/img/nextjs-cover.svg" type="image/svg+xml" length="0"/>
     </item>
     <item>
@@ -72,7 +72,7 @@
       <guid isPermaLink="true">https://itbase-ru.github.io/articles/rust-vs-go-sravnenie.html</guid>
       <description>Сравнение Rust и Go простыми словами: философия, управление памятью, параллелизм, где использовать каждый язык. Поможем выбрать под твою задачу и карьеру.</description>
       <category>Разработка</category>
-      <pubDate>Wed, 18 Nov 2026 00:00:00 +0300</pubDate>
+      <pubDate>Fri, 23 Oct 2026 00:00:00 +0300</pubDate>
       <enclosure url="https://itbase-ru.github.io/img/rust-go-cover.svg" type="image/svg+xml" length="0"/>
     </item>
     <item>
@@ -81,7 +81,7 @@
       <guid isPermaLink="true">https://itbase-ru.github.io/articles/kubernetes-dlya-novichka.html</guid>
       <description>Объяснение Kubernetes простыми словами: что такое поды, деплойменты и сервисы, зачем они нужны и как написать первый манифест. Без воды и без заумных терминов.</description>
       <category>DevOps</category>
-      <pubDate>Sun, 15 Nov 2026 00:00:00 +0300</pubDate>
+      <pubDate>Thu, 22 Oct 2026 00:00:00 +0300</pubDate>
       <enclosure url="https://itbase-ru.github.io/img/kubernetes-cover.svg" type="image/svg+xml" length="0"/>
     </item>
     <item>
@@ -90,7 +90,7 @@
       <guid isPermaLink="true">https://itbase-ru.github.io/articles/github-copilot-obzor.html</guid>
       <description>Что умеет GitHub Copilot в 2026 году, сколько стоит и стоит ли переключаться на Cursor, Codeium и Tabnine. Реальные сценарии, где ИИ-ассистент помогает и мешает.</description>
       <category>ИИ</category>
-      <pubDate>Thu, 12 Nov 2026 00:00:00 +0300</pubDate>
+      <pubDate>Wed, 21 Oct 2026 00:00:00 +0300</pubDate>
       <enclosure url="https://itbase-ru.github.io/img/copilot-cover.svg" type="image/svg+xml" length="0"/>
     </item>
     <item>
@@ -99,7 +99,7 @@
       <guid isPermaLink="true">https://itbase-ru.github.io/articles/chatgpt-kak-polzovatsya.html</guid>
       <description>Практический гайд по ChatGPT в 2026 году: тарифы, промпт-инжиниринг простыми словами, лайфхаки и ловушки, в которые попадают новички.</description>
       <category>ИИ</category>
-      <pubDate>Tue, 10 Nov 2026 00:00:00 +0300</pubDate>
+      <pubDate>Tue, 20 Oct 2026 00:00:00 +0300</pubDate>
       <enclosure url="https://itbase-ru.github.io/img/chatgpt-cover.svg" type="image/svg+xml" length="0"/>
     </item>
     <item>

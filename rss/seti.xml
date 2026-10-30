@@ -5,7 +5,7 @@
     <link>https://itbase-ru.github.io/tags/seti.html</link>
     <description>Статьи с тегом Сети на IT·База</description>
     <language>ru-ru</language>
-    <lastBuildDate>Tue, 27 Oct 2026 18:05:49 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 30 Oct 2026 18:24:19 GMT</lastBuildDate>
     <atom:link href="https://itbase-ru.github.io/rss/seti.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>WebSocket vs Server-Sent Events vs Long Polling: что когда использовать</title>
@@ -13,7 +13,7 @@
       <guid isPermaLink="true">https://itbase-ru.github.io/articles/websocket-vs-sse-vs-polling.html</guid>
       <description>Сравнение трёх технологий real-time в вебе: long polling, SSE и WebSocket. Разбираем, что выбрать для чата, уведомлений, ленты и игр. С примерами кода.</description>
       <category>Сети</category>
-      <pubDate>Sat, 28 Nov 2026 00:00:00 +0300</pubDate>
+      <pubDate>Tue, 27 Oct 2026 00:00:00 +0300</pubDate>
       <enclosure url="https://itbase-ru.github.io/img/ws-sse-cover.svg" type="image/svg+xml" length="0"/>
     </item>
     <item>

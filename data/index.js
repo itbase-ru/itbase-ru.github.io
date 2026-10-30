@@ -9,7 +9,7 @@ const ARTICLES = [
    "Карьера",
    "Разработка"
   ],
-  "date": "2026-12-02",
+  "date": "2026-10-29",
   "readTime": 12,
   "url": "articles/kak-napisat-rezyume-programmista.html"
  },
@@ -22,7 +22,7 @@ const ARTICLES = [
    "Веб",
    "CSS"
   ],
-  "date": "2026-11-30",
+  "date": "2026-10-28",
   "readTime": 11,
   "url": "articles/tailwind-css-vs-bootstrap.html"
  },
@@ -36,7 +36,7 @@ const ARTICLES = [
    "Сети",
    "Разработка"
   ],
-  "date": "2026-11-28",
+  "date": "2026-10-27",
   "readTime": 10,
   "url": "articles/websocket-vs-sse-vs-polling.html"
  },
@@ -49,7 +49,7 @@ const ARTICLES = [
    "Базы данных",
    "SQL"
   ],
-  "date": "2026-11-25",
+  "date": "2026-10-26",
   "readTime": 14,
   "url": "articles/postgresql-vs-mysql.html"
  },
@@ -62,7 +62,7 @@ const ARTICLES = [
    "ИИ",
    "Инструменты"
   ],
-  "date": "2026-11-22",
+  "date": "2026-10-25",
   "readTime": 11,
   "url": "articles/claude-ai-obzor.html"
  },
@@ -75,7 +75,7 @@ const ARTICLES = [
    "Веб",
    "JavaScript"
   ],
-  "date": "2026-11-20",
+  "date": "2026-10-24",
   "readTime": 13,
   "url": "articles/nextjs-15-chto-novogo.html"
  },
@@ -88,7 +88,7 @@ const ARTICLES = [
    "Разработка",
    "Карьера"
   ],
-  "date": "2026-11-18",
+  "date": "2026-10-23",
   "readTime": 12,
   "url": "articles/rust-vs-go-sravnenie.html"
  },
@@ -101,7 +101,7 @@ const ARTICLES = [
    "DevOps",
    "Инструменты"
   ],
-  "date": "2026-11-15",
+  "date": "2026-10-22",
   "readTime": 15,
   "url": "articles/kubernetes-dlya-novichka.html"
  },
@@ -115,7 +115,7 @@ const ARTICLES = [
    "Инструменты",
    "Разработка"
   ],
-  "date": "2026-11-12",
+  "date": "2026-10-21",
   "readTime": 10,
   "url": "articles/github-copilot-obzor.html"
  },
@@ -128,7 +128,7 @@ const ARTICLES = [
    "ИИ",
    "Инструменты"
   ],
-  "date": "2026-11-10",
+  "date": "2026-10-20",
   "readTime": 12,
   "url": "articles/chatgpt-kak-polzovatsya.html"
  },

@@ -5,7 +5,7 @@
     <link>https://itbase-ru.github.io/tags/css.html</link>
     <description>Статьи с тегом CSS на IT·База</description>
     <language>ru-ru</language>
-    <lastBuildDate>Tue, 27 Oct 2026 18:05:49 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 30 Oct 2026 18:24:19 GMT</lastBuildDate>
     <atom:link href="https://itbase-ru.github.io/rss/css.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>Tailwind CSS vs Bootstrap: что лучше в 2026</title>
@@ -13,7 +13,7 @@
       <guid isPermaLink="true">https://itbase-ru.github.io/articles/tailwind-css-vs-bootstrap.html</guid>
       <description>Сравнение Tailwind и Bootstrap простыми словами: философия, размер бандла, кривая обучения, экосистема. Поможем выбрать фреймворк под проект.</description>
       <category>CSS</category>
-      <pubDate>Mon, 30 Nov 2026 00:00:00 +0300</pubDate>
+      <pubDate>Wed, 28 Oct 2026 00:00:00 +0300</pubDate>
       <enclosure url="https://itbase-ru.github.io/img/tailwind-cover.svg" type="image/svg+xml" length="0"/>
     </item>
     <item>

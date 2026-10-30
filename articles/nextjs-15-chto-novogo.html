@@ -13,12 +13,12 @@
   <meta property="og:description" content="Обзор Next.js 15 простыми словами: чем App Router отличается от Pages, как работают Server Components, зачем Turbopack и где лежат грабли при миграции.">
   <meta property="og:image" content="https://itbase-ru.github.io/img/og/nextjs-15-chto-novogo.png">
   <meta property="og:url" content="https://itbase-ru.github.io/articles/nextjs-15-chto-novogo.html">
-  <meta property="article:published_time" content="2026-11-20">
+  <meta property="article:published_time" content="2026-10-24">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Next.js 15: что нового, App Router, Server Components">
   <meta name="twitter:description" content="Обзор Next.js 15 простыми словами: чем App Router отличается от Pages, как работают Server Components, зачем Turbopack и где лежат грабли при миграции.">
   <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/nextjs-15-chto-novogo.png">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Next.js 15: что нового, App Router, Server Components", "description": "Обзор Next.js 15 простыми словами: чем App Router отличается от Pages, как работают Server Components, зачем Turbopack и где лежат грабли при миграции.", "image": ["https://itbase-ru.github.io/img/og/nextjs-15-chto-novogo.png"], "datePublished": "2026-11-20", "dateModified": "2026-11-20", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/", "logo": {"@type": "ImageObject", "url": "https://itbase-ru.github.io/favicon.svg"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/nextjs-15-chto-novogo.html"}, "articleSection": "Веб", "keywords": "Веб, JavaScript"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Next.js 15: что нового, App Router, Server Components", "description": "Обзор Next.js 15 простыми словами: чем App Router отличается от Pages, как работают Server Components, зачем Turbopack и где лежат грабли при миграции.", "image": ["https://itbase-ru.github.io/img/og/nextjs-15-chto-novogo.png"], "datePublished": "2026-10-24", "dateModified": "2026-10-24", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/", "logo": {"@type": "ImageObject", "url": "https://itbase-ru.github.io/favicon.svg"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/nextjs-15-chto-novogo.html"}, "articleSection": "Веб", "keywords": "Веб, JavaScript"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Веб", "item": "https://itbase-ru.github.io/?tag=Веб"}, {"@type": "ListItem", "position": 3, "name": "Next.js 15: что нового, App Router, Server Components", "item": "https://itbase-ru.github.io/articles/nextjs-15-chto-novogo.html"}]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Стоит ли мигрировать старый проект с Pages на App Router?", "acceptedAnswer": {"@type": "Answer", "text": "Если проект маленький — да, миграция займёт пару дней. Если большой — лучше начать новые страницы на App Router, а старые оставить. Vercel обещает поддержку Pages ещё долго, так что спешки нет."}}, {"@type": "Question", "name": "Server Components заменят обычные React-компоненты?", "acceptedAnswer": {"@type": "Answer", "text": "Нет, они их дополняют. Server Components работают только в серверной среде (Next.js), а обычные React-компоненты — везде, включая SPA. Это просто новый инструмент, а не замена экосистемы."}}, {"@type": "Question", "name": "Нужен ли Next.js, если у меня обычный SPA?", "acceptedAnswer": {"@type": "Answer", "text": "Если у тебя сложное приложение с SEO-страницами, блогом, лендингами — Next.js подходит идеально. Если у тебя админка без SEO — хватит Vite + React. Next.js — это про гибрид: можно часть страниц делать статичными, часть — серверными, часть — клиентскими."}}, {"@type": "Question", "name": "Turbopack заменит Webpack полностью?", "acceptedAnswer": {"@type": "Answer", "text": "Со временем — да, но пока Turbopack стабилен только для dev. Для продакшн-бандла всё ещё рекомендуют Webpack. Vercel обещает полную стабильность Turbopack для prod в ближайших версиях."}}, {"@type": "Question", "name": "Что лучше — Next.js или Remix?", "acceptedAnswer": {"@type": "Answer", "text": "Remix (ныне React Router 7) — отличная альтернатива с похожей философией. Next.js даёт больше «из коробки»: image optimization, ISR, edge functions. Remix фокусируется на веб-стандартах. Для большинства проектов Next.js — безопасный выбор."}}, {"@type": "Question", "name": "Как быстро стартовать с Next.js 15?", "acceptedAnswer": {"@type": "Answer", "text": "Одной командой: npx create-next-app@latest my-app. Получишь готовый проект на App Router, TypeScript, Tailwind. Дальше — документация nextjs.org, она очень качественная. Через час сделаешь первую страницу."}}]}</script>
   <script>
@@ -61,7 +61,7 @@
         <div class="card__tags"><span class="tag">Веб</span><span class="tag">JavaScript</span></div>
         <h1>Next.js 15: что нового, App Router, Server Components</h1>
         <div class="article-head__meta">
-          <time datetime="2026-11-20">20 ноября 2026</time>
+          <time datetime="2026-10-24">24 октября 2026</time>
           <span class="dot">•</span>
           <span>13 мин чтения</span>
           <button class="btn-bm" id="bmBtn">★ В закладки</button>
@@ -203,9 +203,9 @@ CMD ["npm", "start"]</code></pre>
       <div class="donate-block__title">Поддержи проект</div>
       <p class="donate-block__text">Сайт живёт на энтузиазме. Если статья оказалась полезной — поблагодари автора. Любая сумма идёт на хостинг, домен и новые статьи.</p>
       <div class="donate-block__buttons">
-        <a href="https://t.me/itbase_bot" target="_blank" rel="noopener nofollow" class="donate-btn donate-tg">✈️ Telegram</a>
+        <a href="https://t.me/IT_BASE_RU" target="_blank" rel="noopener nofollow" class="donate-btn donate-tg">✈️ Telegram</a>
       </div>
-      <p class="donate-block__hint">Также можно подписаться на <a href="https://t.me/itbase" target="_blank" rel="noopener">Telegram-канал</a> — там анонсы новых статей.</p>
+      <p class="donate-block__hint">Также можно подписаться на <a href="https://t.me/IT_BASE_RU" target="_blank" rel="noopener">Telegram-канал</a> и <a href="https://vk.ru/club201974515" target="_blank" rel="noopener">ВК-группу</a> — там анонсы новых статей.</p>
     </aside>
     
 
@@ -301,6 +301,8 @@ CMD ["npm", "start"]</code></pre>
     <a href="/roadmaps.html">Карьера</a>
     <a href="/cheatsheets.html">Шпаргалки</a>
     <a href="/support.html">Поддержать ★</a>
+    <a href="https://t.me/IT_BASE_RU" target="_blank" rel="noopener" class="footer-social">Telegram</a>
+    <a href="https://vk.ru/club201974515" target="_blank" rel="noopener" class="footer-social">ВКонтакте</a>
     <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
   </div>
 </footer>

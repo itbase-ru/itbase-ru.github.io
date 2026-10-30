@@ -13,12 +13,12 @@
   <meta property="og:description" content="Сравнение трёх технологий real-time в вебе: long polling, SSE и WebSocket. Разбираем, что выбрать для чата, уведомлений, ленты и игр. С примерами кода.">
   <meta property="og:image" content="https://itbase-ru.github.io/img/og/websocket-vs-sse-vs-polling.png">
   <meta property="og:url" content="https://itbase-ru.github.io/articles/websocket-vs-sse-vs-polling.html">
-  <meta property="article:published_time" content="2026-11-28">
+  <meta property="article:published_time" content="2026-10-27">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="WebSocket vs Server-Sent Events vs Long Polling: что когда использовать">
   <meta name="twitter:description" content="Сравнение трёх технологий real-time в вебе: long polling, SSE и WebSocket. Разбираем, что выбрать для чата, уведомлений, ленты и игр. С примерами кода.">
   <meta name="twitter:image" content="https://itbase-ru.github.io/img/og/websocket-vs-sse-vs-polling.png">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "WebSocket vs Server-Sent Events vs Long Polling: что когда использовать", "description": "Сравнение трёх технологий real-time в вебе: long polling, SSE и WebSocket. Разбираем, что выбрать для чата, уведомлений, ленты и игр. С примерами кода.", "image": ["https://itbase-ru.github.io/img/og/websocket-vs-sse-vs-polling.png"], "datePublished": "2026-11-28", "dateModified": "2026-11-28", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/", "logo": {"@type": "ImageObject", "url": "https://itbase-ru.github.io/favicon.svg"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/websocket-vs-sse-vs-polling.html"}, "articleSection": "Веб", "keywords": "Веб, Сети, Разработка"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "WebSocket vs Server-Sent Events vs Long Polling: что когда использовать", "description": "Сравнение трёх технологий real-time в вебе: long polling, SSE и WebSocket. Разбираем, что выбрать для чата, уведомлений, ленты и игр. С примерами кода.", "image": ["https://itbase-ru.github.io/img/og/websocket-vs-sse-vs-polling.png"], "datePublished": "2026-10-27", "dateModified": "2026-10-27", "inLanguage": "ru", "author": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/"}, "publisher": {"@type": "Organization", "name": "IT·База", "url": "https://itbase-ru.github.io/", "logo": {"@type": "ImageObject", "url": "https://itbase-ru.github.io/favicon.svg"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://itbase-ru.github.io/articles/websocket-vs-sse-vs-polling.html"}, "articleSection": "Веб", "keywords": "Веб, Сети, Разработка"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://itbase-ru.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Веб", "item": "https://itbase-ru.github.io/?tag=Веб"}, {"@type": "ListItem", "position": 3, "name": "WebSocket vs Server-Sent Events vs Long Polling: что когда использовать", "item": "https://itbase-ru.github.io/articles/websocket-vs-sse-vs-polling.html"}]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Что выбрать для чата?", "acceptedAnswer": {"@type": "Answer", "text": "WebSocket. Чат — двунаправленная коммуникация: пользователь шлёт сообщения и получает от других. SSE не подходит, потому что не может принимать данные от клиента."}}, {"@type": "Question", "name": "Что выбрать для уведомлений?", "acceptedAnswer": {"@type": "Answer", "text": "SSE. Это односторонний сценарий: сервер шлёт уведомления, клиент их слушает. Реализуется в 20 строк кода, работает без библиотек."}}, {"@type": "Question", "name": "SSE работает с HTTPS?", "acceptedAnswer": {"@type": "Answer", "text": "Да, идеально. Если страница открыта по HTTPS, EventSource автоматически использует защиту. Просто указывай относительный URL — браузер всё сделает."}}, {"@type": "Question", "name": "WebSocket работает через Nginx?", "acceptedAnswer": {"@type": "Answer", "text": "Да, с правильной конфигурацией. Nginx поддерживает WebSocket через upgrade-заголовки. Подробнее — в статье про Nginx."}}, {"@type": "Question", "name": "Что быстрее — WebSocket или SSE?", "acceptedAnswer": {"@type": "Answer", "text": "По накладным расходам WebSocket чуть быстрее для частых мелких сообщений, потому что нет HTTP-overhead на каждом сообщении. Для редких событий (раз в секунду и реже) — разница незаметна. SSE компактнее на уровне кода."}}, {"@type": "Question", "name": "Что лучше для стриминга видео?", "acceptedAnswer": {"@type": "Answer", "text": "Ни одно из этого. Для видео используют другие протоколы: HLS, WebRTC, RTMP. WebSocket и SSE — для коротких событий и текстовых сообщений, не для медиа-стримов."}}]}</script>
   <script>
@@ -61,7 +61,7 @@
         <div class="card__tags"><span class="tag">Веб</span><span class="tag">Сети</span><span class="tag">Разработка</span></div>
         <h1>WebSocket vs Server-Sent Events vs Long Polling: что когда использовать</h1>
         <div class="article-head__meta">
-          <time datetime="2026-11-28">28 ноября 2026</time>
+          <time datetime="2026-10-27">27 октября 2026</time>
           <span class="dot">•</span>
           <span>10 мин чтения</span>
           <button class="btn-bm" id="bmBtn">★ В закладки</button>
@@ -238,9 +238,9 @@ ws.onmessage = (e) =&gt; {
       <div class="donate-block__title">Поддержи проект</div>
       <p class="donate-block__text">Сайт живёт на энтузиазме. Если статья оказалась полезной — поблагодари автора. Любая сумма идёт на хостинг, домен и новые статьи.</p>
       <div class="donate-block__buttons">
-        <a href="https://t.me/itbase_bot" target="_blank" rel="noopener nofollow" class="donate-btn donate-tg">✈️ Telegram</a>
+        <a href="https://t.me/IT_BASE_RU" target="_blank" rel="noopener nofollow" class="donate-btn donate-tg">✈️ Telegram</a>
       </div>
-      <p class="donate-block__hint">Также можно подписаться на <a href="https://t.me/itbase" target="_blank" rel="noopener">Telegram-канал</a> — там анонсы новых статей.</p>
+      <p class="donate-block__hint">Также можно подписаться на <a href="https://t.me/IT_BASE_RU" target="_blank" rel="noopener">Telegram-канал</a> и <a href="https://vk.ru/club201974515" target="_blank" rel="noopener">ВК-группу</a> — там анонсы новых статей.</p>
     </aside>
     
 
@@ -336,6 +336,8 @@ ws.onmessage = (e) =&gt; {
     <a href="/roadmaps.html">Карьера</a>
     <a href="/cheatsheets.html">Шпаргалки</a>
     <a href="/support.html">Поддержать ★</a>
+    <a href="https://t.me/IT_BASE_RU" target="_blank" rel="noopener" class="footer-social">Telegram</a>
+    <a href="https://vk.ru/club201974515" target="_blank" rel="noopener" class="footer-social">ВКонтакте</a>
     <a href="/bookmarks.html" style="margin-left:auto;color:var(--accent)">★ Закладки</a>
   </div>
 </footer>

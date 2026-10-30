@@ -319,6 +319,13 @@ main{flex:1}
 }
 .site-footer__inner a{transition:color .2s}
 .site-footer__inner a:hover{color:var(--accent)}
+.site-footer__inner a.footer-social{
+  padding:6px 12px;border:1px solid var(--border);border-radius:8px;
+  font-size:13px;font-weight:500;
+}
+.site-footer__inner a.footer-social:hover{
+  border-color:var(--accent);background:var(--card);
+}
 
 /* --- Пустое состояние --- */
 .empty{padding:70px 0;text-align:center;color:var(--muted)}
